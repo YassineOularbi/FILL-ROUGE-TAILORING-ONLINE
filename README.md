@@ -95,6 +95,12 @@ Ce projet est réalisé dans le cadre de la formation chez ENAA, comme Projet Fi
 3. **Simplifier la Gestion des Commandes :** Outils pour gestion des stocks et commandes.
 4. **Promouvoir la Couture Traditionnelle :** Améliorer la visibilité internationale.
 
+## État Actuel du Projet
+
+Je suis actuellement dans la phase de **Conception UML**. En ce moment, je travaille précisément sur le **diagramme de classes** qui décrit la structure logique de l'application. Cette étape est essentielle pour assurer une architecture solide avant de passer au développement.
+
+
+
 ## Contact
 
 Pour toute question ou demande d'informations supplémentaires, veuillez contacter : [yassineoularbi4@gmail.com]
