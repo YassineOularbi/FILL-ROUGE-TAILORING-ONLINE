@@ -97,7 +97,7 @@ Ce projet est réalisé dans le cadre de la formation chez ENAA, comme Projet Fi
 
 ## État Actuel du Projet
 
-Je suis actuellement dans la phase de **Conception UML**. En ce moment, je travaille précisément sur le **diagramme de classes** qui décrit la structure logique de l'application. Cette étape est essentielle pour assurer une architecture solide avant de passer au développement.
+Je suis actuellement dans la phase de **Conception UML**. En ce moment, je travaille précisément sur le **diagramme de cas d'utilisation** qui décrit la structure logique de l'application. Cette étape est essentielle pour assurer une architecture solide avant de passer au développement.
 
 
 
