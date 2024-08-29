@@ -1,22 +1,22 @@
 # Plateforme de Tailleur en Ligne
 
 <div align="center">
-  <img align="center" src="./maquettes/logo/1.png" alt="Logo" width="200"/>
+  <img align="center" src="./maquettes/logo/1.png" alt="Logo" width="150"/>
   &nbsp;
   &nbsp;
   &nbsp;
   &nbsp;
-  <img align="center" src="https://enaa.ma/images/icon/enaa-logo-white.svg" alt="Logo" width="200"/>
+  <img align="center" src="https://enaa.ma/images/icon/enaa-logo-white.svg" alt="Logo" width="150"/>
   &nbsp;
   &nbsp;
   &nbsp;
   &nbsp;
-  <img align="center" src="https://atomrace.com/blog/wp-content/uploads/2018/05/spring-boot-logo.png" alt="Logo" width="200"/>
+  <img align="center" src="https://atomrace.com/blog/wp-content/uploads/2018/05/spring-boot-logo.png" alt="Logo" width="150"/>
   &nbsp;
   &nbsp;
   &nbsp;
   &nbsp;
-  <img align="center" src="https://angular.dev/assets/images/press-kit/angular_wordmark_gradient.png" alt="Logo" width="200"/>
+  <img align="center" src="https://angular.dev/assets/images/press-kit/angular_wordmark_gradient.png" alt="Logo" width="150"/>
 </div>
 
 ## Description du Projet
