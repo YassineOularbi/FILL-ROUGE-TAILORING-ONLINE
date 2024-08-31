@@ -1,6 +1,6 @@
 package com.user_management_service.model;
 
-import com.user_management_service.enums.Role;
+import com.user_management_service.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -60,19 +60,19 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private String status;
+    private Status status;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "language_preference", nullable = false)
-    private String languagePreference;
+    private LanguagePreference languagePreference;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
-    private String gender;
+    private Gender gender;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "notification_preference", nullable = false)
-    private String notificationPreference;
+    private NotificationPreference notificationPreference;
 
     @Column(name = "email_verified", nullable = false, columnDefinition="false")
     private Boolean emailVerified;
