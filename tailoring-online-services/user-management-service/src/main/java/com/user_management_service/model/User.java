@@ -17,6 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "user")
 public class User implements UserDetails {
 
     @Id
@@ -43,8 +45,9 @@ public class User implements UserDetails {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-//    @Column(name = "role", nullable = false)
-//    private String address;
+    @OneToOne
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;

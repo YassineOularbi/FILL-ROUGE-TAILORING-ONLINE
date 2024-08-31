@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/Admin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/Tailor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/Bank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailoring-online-services/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/Tailor.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/Tailor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/model/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/model/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/model/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/model/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/model/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/model/Bank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/model/Customer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/model/Tailor.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/model/Tailor.java" afterDir="false" />
     </list>
@@ -95,7 +103,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1725137295874</updated>
-      <workItem from="1725137560987" duration="5125000" />
+      <workItem from="1725137560987" duration="6776000" />
     </task>
     <servers />
   </component>
