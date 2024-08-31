@@ -5,13 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/enums/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tailoring-online-services/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/UserManagementServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/UserManagementServiceApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,6 +47,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.EurekaServerApplication.executor": "Run",
+    "Spring Boot.UserManagementServiceApplication.executor": "Run",
     "git-widget-placeholder": "<unknown>",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services",
@@ -47,6 +57,11 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -79,7 +94,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1725137295874</updated>
-      <workItem from="1725137560987" duration="2234000" />
+      <workItem from="1725137560987" duration="4003000" />
     </task>
     <servers />
   </component>
