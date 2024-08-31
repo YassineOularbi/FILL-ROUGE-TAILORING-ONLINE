@@ -20,7 +20,7 @@
   <description>Parent project for Tailoring Online Services</description>
 
   <modules>
-
+    <module>eureka-server</module>
   </modules>
 
   <properties>
