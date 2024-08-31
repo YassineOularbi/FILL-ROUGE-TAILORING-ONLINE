@@ -21,6 +21,7 @@
 
   <modules>
     <module>eureka-server</module>
+    <module>user-management-service</module>
   </modules>
 
   <properties>
@@ -122,6 +123,7 @@
     </dependency>
 
     <!-- JUnit 5 Dependencies -->
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -140,6 +142,14 @@
       <version>${junit.jupiter.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+
   </dependencies>
 
   <build>
