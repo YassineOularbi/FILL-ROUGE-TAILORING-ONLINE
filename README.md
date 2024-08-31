@@ -1,5 +1,24 @@
 # Plateforme de Tailleur en Ligne
 
+<div align="center">
+  <img align="center" src="./maquettes/logo/1.png" alt="Logo" width="150"/>
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  <img align="center" src="https://enaa.ma/images/icon/enaa-logo-white.svg" alt="Logo" width="150"/>
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  <img align="center" src="https://atomrace.com/blog/wp-content/uploads/2018/05/spring-boot-logo.png" alt="Logo" width="150"/>
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  <img align="center" src="https://angular.dev/assets/images/press-kit/angular_wordmark_gradient.png" alt="Logo" width="150"/>
+</div>
+
 ## Description du Projet
 
 La **Plateforme de Tailleur en Ligne** est une application web conçue pour moderniser le secteur de la couture traditionnelle marocaine. Elle permet aux tailleurs locaux de vendre leurs vêtements traditionnels directement aux consommateurs, offrant ainsi une solution pour étendre leur marché et améliorer la visibilité de leurs produits.
@@ -97,7 +116,7 @@ Ce projet est réalisé dans le cadre de la formation chez ENAA, comme Projet Fi
 
 ## État Actuel du Projet
 
-Je suis actuellement dans la phase de **Conception UML**. En ce moment, je travaille précisément sur le **diagramme de cas d'utilisation** qui décrit la structure logique de l'application. Cette étape est essentielle pour assurer une architecture solide avant de passer au développement.
+Je suis actuellement dans la phase de **Conception UML**. En ce moment, je travaille précisément sur le **design des maqquettes figma** qui décrit le UI/UXde l'application. Cette étape est essentielle pour assurer une User interface et User experience solide avant de passer au développement.
 
 
 
