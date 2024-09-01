@@ -8,6 +8,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class TailorDto extends UserDto {
 
     private String bio;
