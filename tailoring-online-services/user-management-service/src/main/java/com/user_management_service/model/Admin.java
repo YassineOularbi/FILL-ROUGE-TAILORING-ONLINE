@@ -10,7 +10,6 @@ import java.sql.Date;
 @Getter
 @Setter
 @Builder
-@EqualsAndHashCode(callSuper = true)
 @Table(name = "admin")
 public class Admin extends User{
 

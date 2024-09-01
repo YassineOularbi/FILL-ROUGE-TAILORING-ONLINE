@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@EqualsAndHashCode(callSuper = true)
 @Table(name = "customer")
 public class Customer extends User {
 
@@ -19,11 +18,10 @@ public class Customer extends User {
     @JoinColumn(name = "shipping_address_id")
     private Address shippingAddress;
 
-    @OneToMany
-    @JoinColumn(name = "bank_id", nullable = false)
+    @OneToMany(mappedBy = "customer")
     private List<Bank> banks;
 
-    @Column(name = "loyalty_points", nullable = false, columnDefinition = "0")
+    @Column(name = "loyalty_points", nullable = false, columnDefinition = "integer default 0")
     private Integer loyaltyPoints;
 
     public Customer(Long id, String username, String password, String email, Role role, String firstName, String lastName, Address address, String phoneNumber, String profilePicture, Date dateOfBirth, Date lastLogin, Status status, LanguagePreference languagePreference, Gender gender, NotificationPreference notificationPreference, Boolean emailVerified, Boolean phoneVerified, Boolean OAuth2, Boolean is2FAuth, Boolean hasFingerprint, Boolean hasFaceId, Boolean isVerified, Address shippingAddress, List<Bank> banks, Integer loyaltyPoints) {

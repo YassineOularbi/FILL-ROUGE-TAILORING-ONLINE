@@ -16,10 +16,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "user")
-public class User implements UserDetails {
+public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,25 +76,25 @@ public class User implements UserDetails {
     @Column(name = "notification_preference", nullable = false)
     private NotificationPreference notificationPreference;
 
-    @Column(name = "email_verified", nullable = false, columnDefinition="false")
+    @Column(name = "email_verified", nullable = false, columnDefinition="boolean default false")
     private Boolean emailVerified;
 
-    @Column(name = "phone_verified", nullable = false, columnDefinition="false")
+    @Column(name = "phone_verified", nullable = false, columnDefinition="boolean default false")
     private Boolean phoneVerified;
 
-    @Column(name = "o_auth_2", nullable = false, columnDefinition="false")
+    @Column(name = "o_auth_2", nullable = false, columnDefinition="boolean default false")
     private Boolean OAuth2;
 
-    @Column(name = "is_2f_auth", nullable = false, columnDefinition="false")
+    @Column(name = "is_2f_auth", nullable = false, columnDefinition="boolean default false")
     private Boolean is2FAuth;
 
-    @Column(name = "has_fingerprint", nullable = false, columnDefinition="false")
+    @Column(name = "has_fingerprint", nullable = false, columnDefinition="boolean default false")
     private Boolean hasFingerprint;
 
-    @Column(name = "has_face_id", nullable = false, columnDefinition="false")
+    @Column(name = "has_face_id", nullable = false, columnDefinition="boolean default false")
     private Boolean hasFaceId;
 
-    @Column(name = "is_verified", nullable = false, columnDefinition="false")
+    @Column(name = "is_verified", nullable = false, columnDefinition="boolean default false")
     private Boolean isVerified;
 
     @Override

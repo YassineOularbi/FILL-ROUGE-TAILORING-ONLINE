@@ -37,10 +37,17 @@ public class Address {
     @Column(name = "zip_code", nullable = false)
     private String zipCode;
 
-    @Column(name = "is_default", nullable = false, columnDefinition = "false")
+    @Column(name = "is_default", nullable = false, columnDefinition = "boolean default false")
     private Boolean isDefault;
 
-    @OneToMany
-    @JoinColumn(name = "bank_id", nullable = false)
+    @OneToMany(mappedBy = "billingAddress")
     private List<Bank> banks;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @OneToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 }
