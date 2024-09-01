@@ -18,8 +18,8 @@ public class CustomerDto extends UserDto {
     private List<BankDto> banks;
     private Integer loyaltyPoints;
 
-    public CustomerDto(String username, String email, String firstName, String lastName, AddressDto address, String phoneNumber, String profilePicture, Date dateOfBirth, Date lastLogin, Status status, LanguagePreference languagePreference, Gender gender, NotificationPreference notificationPreference, Boolean emailVerified, Boolean phoneVerified, Boolean OAuth2, Boolean is2FAuth, Boolean hasFingerprint, Boolean hasFaceId, Boolean isVerified, AddressDto shippingAddress, List<BankDto> banks, Integer loyaltyPoints) {
-        super(username, email, firstName, lastName, address, phoneNumber, profilePicture, dateOfBirth, lastLogin, status, languagePreference, gender, notificationPreference, emailVerified, phoneVerified, OAuth2, is2FAuth, hasFingerprint, hasFaceId, isVerified);
+    public CustomerDto(String username, String password, String email, String firstName, String lastName, AddressDto address, String phoneNumber, String profilePicture, Date dateOfBirth, Date lastLogin, Status status, LanguagePreference languagePreference, Gender gender, NotificationPreference notificationPreference, Boolean emailVerified, Boolean phoneVerified, Boolean OAuth2, Boolean is2FAuth, Boolean hasFingerprint, Boolean hasFaceId, Boolean isVerified, AddressDto shippingAddress, List<BankDto> banks, Integer loyaltyPoints) {
+        super(username, password, email, firstName, lastName, address, phoneNumber, profilePicture, dateOfBirth, lastLogin, status, languagePreference, gender, notificationPreference, emailVerified, phoneVerified, OAuth2, is2FAuth, hasFingerprint, hasFaceId, isVerified);
         this.shippingAddress = shippingAddress;
         this.banks = banks;
         this.loyaltyPoints = loyaltyPoints;

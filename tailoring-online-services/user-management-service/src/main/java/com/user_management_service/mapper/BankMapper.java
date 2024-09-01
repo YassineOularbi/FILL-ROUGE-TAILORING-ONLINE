@@ -3,6 +3,7 @@ package com.user_management_service.mapper;
 import com.user_management_service.dto.BankDto;
 import com.user_management_service.model.Bank;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface BankMapper {
     BankDto toDto(Bank bank);
     List<Bank> toEntities(List<BankDto> bankDtoList);
     List<BankDto> toDtoList(List<Bank> banks);
+    Bank partialUpdate(BankDto bankDto, @MappingTarget Bank bank);
 }
