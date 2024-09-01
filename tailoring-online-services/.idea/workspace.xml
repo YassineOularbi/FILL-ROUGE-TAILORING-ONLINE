@@ -5,25 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/service/AdminService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/service/BankService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/service/CustomerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/service/TailorService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailoring-online-services/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/dto/AdminDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/dto/AdminDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/dto/CustomerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/dto/CustomerDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/dto/TailorDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/dto/TailorDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/mapper/AdminMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/mapper/AdminMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/mapper/BankMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/mapper/BankMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/mapper/CustomerMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/mapper/CustomerMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/mapper/TailorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/mapper/TailorMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/mapper/AddressMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/mapper/AddressMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/service/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/service/BankService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/service/BankService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/controller/AdminController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/controller/TailorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/controller/TailorController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +100,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1725137295874</updated>
-      <workItem from="1725137560987" duration="19620000" />
+      <workItem from="1725137560987" duration="19948000" />
     </task>
     <servers />
   </component>
