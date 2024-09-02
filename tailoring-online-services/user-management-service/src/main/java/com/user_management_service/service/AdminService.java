@@ -1,11 +1,11 @@
 package com.user_management_service.service;
 
 import com.user_management_service.dto.AdminDto;
-import com.user_management_service.mapper.AdminMapper;
+import com.user_management_service.mapper.UserMapper;
+import com.user_management_service.model.Admin;
 import com.user_management_service.repository.AdminRepository;
-import com.user_management_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,46 +18,76 @@ import java.util.List;
 public class AdminService {
 
     private final AdminRepository adminRepository;
-    private final AdminMapper adminMapper;
+    private final UserMapper adminMapper;
     private final PasswordEncoder passwordEncoder;
-//    private final KeycloakService keycloakService;
-    private final UserRepository userRepository;
+    private final KeycloakService keycloakService;
+    private final UserService userService;
 
-    public List<AdminDto> getAllAdmins() {
-        var admins = adminRepository.findAll();
-        return adminMapper.toDtoList(admins);
+    public List<Admin> getAllAdmins() {
+        return adminRepository.findAll();
     }
 
-    public AdminDto getAdminById(Long id) {
-        var admin = adminRepository.findById(id).orElseThrow(() -> new RuntimeException("Admin not found"));
-        return adminMapper.toDto(admin);
+    public Admin getAdminById(String id) {
+        return adminRepository.findById(id).orElseThrow(() -> new RuntimeException("Admin not found"));
     }
 
     public AdminDto register(AdminDto adminDto) {
-        System.out.println(adminDto.getOAuth2());
-        if (userRepository.findByUsername(adminDto.getUsername()).isPresent()) {
-            throw new RuntimeException("Username already exists!");
+        try {
+            userService.getUserByUsername(adminDto.getUsername());
+        } catch (UsernameNotFoundException e) {
+            throw new UsernameNotFoundException(e.getMessage());
         }
-        var admin = adminMapper.toEntity(adminDto);
+        String keycloakUserId;
+        try {
+            keycloakUserId = keycloakService.addUser(adminDto);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create admin in Keycloak", e);
+        }
+        if (keycloakUserId == null || keycloakUserId.isEmpty()) {
+            throw new RuntimeException("Failed to retrieve user ID from Keycloak");
+        }
+        var admin = (Admin) adminMapper.toEntity(adminDto);
         admin.setPassword(passwordEncoder.encode(adminDto.getPassword()));
-        System.out.println(admin.getOAuth2());
-        System.out.println(admin.getUsername());
-        var savedAdmin = adminRepository.save(admin);
-//        keycloakService.createUserInKeycloak(savedAdmin.getId(), savedAdmin.getUsername(), savedAdmin.getEmail(), savedAdmin.getFirstName(), savedAdmin.getLastName());
-        return adminMapper.toDto(savedAdmin);
+        admin.setId(keycloakUserId);
+        try {
+            var savedAdmin= adminRepository.save(admin);
+            return (AdminDto) adminMapper.toDto(savedAdmin);
+        } catch (Exception e) {
+            keycloakService.deleteUser(keycloakUserId);
+            throw new RuntimeException("Failed to save admin in local repository", e);
+        }
     }
 
 
-    public AdminDto updateAdmin(Long id, AdminDto adminDto) {
+    public AdminDto updateAdmin(String id, AdminDto adminDto) {
         var existingAdmin = adminRepository.findById(id).orElseThrow(() -> new RuntimeException("Admin not found"));
-        var updatedAdmin = adminMapper.partialUpdate(adminDto, existingAdmin);
-        updatedAdmin.setPassword(passwordEncoder.encode(adminDto.getPassword()));
-        var savedAdmin = adminRepository.save(updatedAdmin);
-        return adminMapper.toDto(savedAdmin);
+        var updatedAdmin = (Admin) adminMapper.partialUpdate(adminDto, existingAdmin);
+        try {
+            keycloakService.updateUser(id, adminDto);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to update admin in Keycloak", e);
+        }
+        try {
+            updatedAdmin.setPassword(passwordEncoder.encode(adminDto.getPassword()));
+            var savedAdmin = adminRepository.save(updatedAdmin);
+            return (AdminDto) adminMapper.toDto(savedAdmin);
+        } catch (Exception e) {
+            keycloakService.deleteUser(id);
+            throw new RuntimeException("Failed to update admin in local repository", e);
+        }
     }
 
-    public void deleteAdmin(Long id) {
+    public void deleteAdmin(String id) {
         var admin = adminRepository.findById(id).orElseThrow(() -> new RuntimeException("Admin not found"));
-        adminRepository.delete(admin);
+        try {
+            keycloakService.deleteUser(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete admin in keycloak", e);
+        }
+        try {
+            adminRepository.delete(admin);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete admin in local repository", e);
+        }
     }
 }

@@ -2,7 +2,9 @@ package com.user_management_service.service;
 
 import com.user_management_service.dto.BankDto;
 import com.user_management_service.mapper.BankMapper;
+import com.user_management_service.model.Bank;
 import com.user_management_service.repository.BankRepository;
+import com.user_management_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,19 +18,20 @@ public class BankService {
 
     private final BankRepository bankRepository;
     private final BankMapper bankMapper;
+    private final UserRepository userRepository;
 
-    public List<BankDto> getAllBanks() {
-        var banks = bankRepository.findAll();
-        return bankMapper.toDtoList(banks);
+    public List<Bank> getAllBanks() {
+        return bankRepository.findAll();
     }
 
-    public BankDto getBankById(Long id) {
-        var bank = bankRepository.findById(id).orElseThrow(() -> new RuntimeException("Bank not found"));
-        return bankMapper.toDto(bank);
+    public Bank getBankById(Long id) {
+        return bankRepository.findById(id).orElseThrow(() -> new RuntimeException("Bank not found"));
     }
 
-    public BankDto addBank(BankDto bankDto) {
+    public BankDto addBank(BankDto bankDto, String id) {
+        var user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found !"));
         var bank = bankMapper.toEntity(bankDto);
+        bank.setUser(user);
         var savedBank = bankRepository.save(bank);
         return bankMapper.toDto(savedBank);
     }

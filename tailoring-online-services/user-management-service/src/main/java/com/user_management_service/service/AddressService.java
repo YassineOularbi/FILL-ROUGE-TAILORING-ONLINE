@@ -2,7 +2,9 @@ package com.user_management_service.service;
 
 import com.user_management_service.dto.AddressDto;
 import com.user_management_service.mapper.AddressMapper;
+import com.user_management_service.model.Address;
 import com.user_management_service.repository.AddressRepository;
+import com.user_management_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,20 +18,23 @@ public class AddressService {
 
     private final AddressRepository addressRepository;
     private final AddressMapper addressMapper;
+    private final UserRepository userRepository;
 
-    public List<AddressDto> getAllAddresses() {
-        var addresses = addressRepository.findAll();
-        return addressMapper.toDtoList(addresses);
+    public List<Address> getAllAddresses() {
+        return addressRepository.findAll();
     }
 
-    public AddressDto getAddressById(Long id) {
-        var address = addressRepository.findById(id).orElseThrow(() -> new RuntimeException("Address not found"));
-        return addressMapper.toDto(address);
+    public Address getAddressById(Long id) {
+        return addressRepository.findById(id).orElseThrow(() -> new RuntimeException("Address not found"));
     }
 
-    public AddressDto addAddress(AddressDto addressDto) {
+    public AddressDto addAddress(AddressDto addressDto, String id) {
+        var user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
         var address = addressMapper.toEntity(addressDto);
+        address.setUser(user);
         var savedAddress = addressRepository.save(address);
+        user.setAddress(savedAddress);
+        userRepository.save(user);
         return addressMapper.toDto(savedAddress);
     }
 

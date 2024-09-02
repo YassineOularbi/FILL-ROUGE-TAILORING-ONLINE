@@ -35,10 +35,10 @@ public class AddressController {
         }
     }
 
-    @PostMapping("/add-address")
-    public ResponseEntity<?> addAddress(@RequestBody AddressDto addressDto) {
+    @PostMapping("/add-address/{id}")
+    public ResponseEntity<?> addAddress(@RequestBody AddressDto addressDto, @PathVariable("id") String id) {
         try {
-            var addedAddress = addressService.addAddress(addressDto);
+            var addedAddress = addressService.addAddress(addressDto, id);
             return ResponseEntity.ok(addedAddress);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

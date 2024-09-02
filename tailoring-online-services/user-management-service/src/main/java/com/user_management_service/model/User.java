@@ -1,6 +1,7 @@
 package com.user_management_service.model;
 
 import com.user_management_service.enums.*;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,9 +23,8 @@ import java.util.List;
 public class User implements UserDetails, Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
-    private Long id;
+    private String id;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -48,6 +48,9 @@ public class User implements UserDetails, Serializable {
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
+
+    @OneToMany(mappedBy = "user")
+    private List<Bank> banks;
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;

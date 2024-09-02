@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Value;
 @KeycloakConfiguration
 public class KeycloakConfig {
 
-    Keycloak keycloak;
+    private Keycloak keycloak;
 
     @Value("${keycloak.auth-server-url}")
-    private  String serverUrl;
+    private String serverUrl;
 
     @Value("${keycloak.realm}")
     private String realm;
@@ -22,15 +22,15 @@ public class KeycloakConfig {
     private String clientId;
 
 
-    public Keycloak getInstance(){
+    public Keycloak getInstance(String username, String password){
         if(keycloak == null){
 
             keycloak = KeycloakBuilder.builder()
                     .serverUrl(serverUrl)
                     .realm(realm)
                     .clientId(clientId)
-                    .username("admin")
-                    .password("1234")
+                    .username(username)
+                    .password(password)
                     .grantType(OAuth2Constants.PASSWORD)
                     .build();
         }

@@ -16,6 +16,5 @@ public class BankDto implements Serializable {
     private Date expirationDate;
     private String cvc;
 //    private AddressDto billingAddress;
-//    private TailorDto tailor;
-//    private CustomerDto customer;
+//    private UserDto user;
 }

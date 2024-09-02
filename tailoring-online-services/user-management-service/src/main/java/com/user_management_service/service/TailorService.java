@@ -1,9 +1,11 @@
 package com.user_management_service.service;
 
 import com.user_management_service.dto.TailorDto;
-import com.user_management_service.mapper.TailorMapper;
+import com.user_management_service.mapper.UserMapper;
+import com.user_management_service.model.Tailor;
 import com.user_management_service.repository.TailorRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,36 +18,75 @@ import java.util.List;
 public class TailorService {
 
     private final TailorRepository tailorRepository;
-    private final TailorMapper tailorMapper;
+    private final UserMapper tailorMapper;
     private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
+    private final KeycloakService keycloakService;
 
-    public List<TailorDto> getAllTailors() {
-        var tailors = tailorRepository.findAll();
-        return tailorMapper.toDtoList(tailors);
+    public List<Tailor> getAllTailors() {
+        return tailorRepository.findAll();
     }
 
-    public TailorDto getTailorById(Long id) {
-        var tailor = tailorRepository.findById(id).orElseThrow(() -> new RuntimeException("Tailor not found"));
-        return tailorMapper.toDto(tailor);
+    public Tailor getTailorById(String id) {
+        return tailorRepository.findById(id).orElseThrow(() -> new RuntimeException("Tailor not found"));
     }
 
     public TailorDto register(TailorDto tailorDto) {
-        var tailor = tailorMapper.toEntity(tailorDto);
+        try {
+            userService.getUserByUsername(tailorDto.getUsername());
+        } catch (UsernameNotFoundException e) {
+            throw new UsernameNotFoundException(e.getMessage());
+        }
+        String keycloakUserId;
+        try {
+            keycloakUserId = keycloakService.addUser(tailorDto);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create tailor in Keycloak", e);
+        }
+        if (keycloakUserId == null || keycloakUserId.isEmpty()) {
+            throw new RuntimeException("Failed to retrieve user ID from Keycloak");
+        }
+        var tailor = (Tailor) tailorMapper.toEntity(tailorDto);
         tailor.setPassword(passwordEncoder.encode(tailorDto.getPassword()));
-        var savedTailor = tailorRepository.save(tailor);
-        return tailorMapper.toDto(savedTailor);
+        tailor.setId(keycloakUserId);
+        try {
+            var savedTailor= tailorRepository.save(tailor);
+            return (TailorDto) tailorMapper.toDto(savedTailor);
+        } catch (Exception e) {
+            keycloakService.deleteUser(keycloakUserId);
+            throw new RuntimeException("Failed to save tailor in local repository", e);
+        }
     }
 
-    public TailorDto updateTailor(Long id, TailorDto tailorDto) {
-        var existingTailor = tailorRepository.findById(id).orElseThrow(() -> new RuntimeException("Tailor not found"));
-        var updatedTailor = tailorMapper.partialUpdate(tailorDto, existingTailor);
-        updatedTailor.setPassword(passwordEncoder.encode(tailorDto.getPassword()));
-        var savedTailor = tailorRepository.save(updatedTailor);
-        return tailorMapper.toDto(updatedTailor);
+    public TailorDto updateTailor(String id, TailorDto tailorDto) {
+        var existingTailor = tailorRepository.findById(id).orElseThrow(() -> new RuntimeException("tailor not found"));
+        var updatedTailor = (Tailor) tailorMapper.partialUpdate(tailorDto, existingTailor);
+        try {
+            keycloakService.updateUser(id, tailorDto);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to update tailor in Keycloak", e);
+        }
+        try {
+            updatedTailor.setPassword(passwordEncoder.encode(tailorDto.getPassword()));
+            var savedtailor = tailorRepository.save(updatedTailor);
+            return (TailorDto) tailorMapper.toDto(savedtailor);
+        } catch (Exception e) {
+            keycloakService.deleteUser(id);
+            throw new RuntimeException("Failed to update tailor in local repository", e);
+        }
     }
 
-    public void deleteTailor(Long id) {
-        var tailor = tailorRepository.findById(id).orElseThrow(() -> new RuntimeException("Tailor not found"));
-        tailorRepository.delete(tailor);
+    public void deleteTailor(String id) {
+        var tailor = tailorRepository.findById(id).orElseThrow(() -> new RuntimeException("tailor not found"));
+        try {
+            keycloakService.deleteUser(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete tailor in keycloak", e);
+        }
+        try {
+            tailorRepository.delete(tailor);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete tailor in local repository", e);
+        }
     }
 }

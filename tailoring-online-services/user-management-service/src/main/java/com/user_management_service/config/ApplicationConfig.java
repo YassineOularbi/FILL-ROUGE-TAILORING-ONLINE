@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
 @Configuration
 @RequiredArgsConstructor
-public class AppConfig {
+public class ApplicationConfig {
 
     private final UserRepository userRepository;
 

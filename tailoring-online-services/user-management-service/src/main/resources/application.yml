@@ -49,4 +49,5 @@ keycloak:
   auth-server-url: http://localhost:8080
   resource: user-management-app
   public-client: true
-
+  username: admin
+  password: 1234

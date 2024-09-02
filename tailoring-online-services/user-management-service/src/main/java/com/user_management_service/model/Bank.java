@@ -32,10 +32,6 @@ public class Bank implements Serializable {
     private Address billingAddress;
 
     @ManyToOne
-    @JoinColumn(name = "tailor_id", nullable = false)
-    private Tailor tailor;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

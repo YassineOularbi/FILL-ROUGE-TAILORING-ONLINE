@@ -21,5 +21,4 @@ public class AddressDto implements Serializable {
     private Boolean isDefault;
 //    private List<BankDto> banks;
 //    private UserDto user;
-//    private CustomerDto customer;
 }
