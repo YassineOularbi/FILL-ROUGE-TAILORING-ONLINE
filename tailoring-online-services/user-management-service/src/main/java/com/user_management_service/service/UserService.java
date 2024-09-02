@@ -18,6 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+//    private final KeycloakService keycloakService;
 
     public List<UserDto> getAllUsers() {
         var users = userRepository.findAll();
@@ -30,10 +31,16 @@ public class UserService {
     }
 
     public UserDto register(UserDto userDto) {
+        System.out.println(userDto.getUsername());
+//        if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
+//            throw new RuntimeException("Username already exist !");
+//        }
         var user = userMapper.toEntity(userDto);
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        var savedUser = userRepository.save(user);
-        return userMapper.toDto(savedUser);
+        System.out.println(user.getUsername());
+//        var savedUser = userRepository.save(user);
+//        keycloakService.createUserInKeycloak(user.getId(), user.getUsername(), user.getEmail(), user.getFirstName(), user.getLastName());
+        return userMapper.toDto(user);
     }
 
     public UserDto updateUser(Long id, UserDto userDto) {

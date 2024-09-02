@@ -4,6 +4,7 @@ import com.user_management_service.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @Setter
 @Builder
 @Table(name = "customer")
-public class Customer extends User {
+public class Customer extends User implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "shipping_address_id")

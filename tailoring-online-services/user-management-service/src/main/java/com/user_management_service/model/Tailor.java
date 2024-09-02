@@ -4,6 +4,7 @@ import com.user_management_service.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @Setter
 @Builder
 @Table(name = "tailor")
-public class Tailor extends User {
+public class Tailor extends User implements Serializable {
 
     @Column(name = "bio", nullable = false)
     private String bio;

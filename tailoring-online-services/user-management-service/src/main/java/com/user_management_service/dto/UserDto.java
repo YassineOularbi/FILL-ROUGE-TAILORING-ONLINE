@@ -3,24 +3,26 @@ package com.user_management_service.dto;
 import com.user_management_service.enums.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class UserDto implements Serializable {
 
     private String username;
     private String password;
     private String email;
     private String firstName;
     private String lastName;
-    private AddressDto address;
+//    private AddressDto address;
     private String phoneNumber;
     private String profilePicture;
     private Date dateOfBirth;
     private Date lastLogin;
+    private Role role;
     private Status status;
     private LanguagePreference languagePreference;
     private Gender gender;

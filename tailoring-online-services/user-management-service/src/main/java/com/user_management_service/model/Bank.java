@@ -3,6 +3,7 @@ package com.user_management_service.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.sql.Date;
 @Entity
 @Getter
@@ -11,7 +12,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Builder
 @Table(name = "bank")
-public class Bank {
+public class Bank implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
