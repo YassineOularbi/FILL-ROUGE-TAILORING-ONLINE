@@ -22,7 +22,7 @@ spring:
     password: 1234
 
 server:
-  port: 8083
+  port: 8086
 
 eureka:
   client:

@@ -1,4 +1,4 @@
-package com.notification_mailing_service;
+package com.social_management_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class NotificationMailingServiceApplication {
+public class SocialManagementServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NotificationMailingServiceApplication.class, args);
+		SpringApplication.run(SocialManagementServiceApplication.class, args);
 	}
 
 }

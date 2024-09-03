@@ -1,8 +1,8 @@
 spring:
   application:
-    name: product-management-service
+    name: review-management-service
   datasource:
-    url: jdbc:mysql://localhost:3306/tailoring_product_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/tailoring_review_db?createDatabaseIfNotExist=true
     username: root
     password: 1234
   jpa:
@@ -17,12 +17,12 @@ spring:
     locations: classpath:db/migration
     table: flyway_schema_history
     enabled: true
-    url: jdbc:mysql://localhost:3306/tailoring_product_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/tailoring_review_db?createDatabaseIfNotExist=true
     user: root
     password: 1234
 
 server:
-  port: 8087
+  port: 8089
 
 eureka:
   client:
