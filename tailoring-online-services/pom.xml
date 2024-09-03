@@ -22,6 +22,13 @@
   <modules>
     <module>eureka-server</module>
     <module>api-gateway-service</module>
+    <module>localization-shipping-service</module>
+    <module>loyalty-program-service</module>
+    <module>notification-mailing-service</module>
+    <module>order-management-service</module>
+    <module>payment-banking-service</module>
+    <module>product-management-service</module>
+    <module>promotion-management-service</module>
     <module>user-management-service</module>
     <module>store-management-service</module>
   </modules>

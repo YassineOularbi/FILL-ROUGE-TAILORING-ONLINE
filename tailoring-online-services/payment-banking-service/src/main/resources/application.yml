@@ -1,8 +1,8 @@
 spring:
   application:
-    name: store-management-service
+    name: payment-banking-service
   datasource:
-    url: jdbc:mysql://localhost:3306/tailoring_store_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/tailoring_payment_banking_db?createDatabaseIfNotExist=true
     username: root
     password: 1234
   jpa:
@@ -17,12 +17,12 @@ spring:
     locations: classpath:db/migration
     table: flyway_schema_history
     enabled: true
-    url: jdbc:mysql://localhost:3306/tailoring_store_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/tailoring_payment_banking_db?createDatabaseIfNotExist=true
     user: root
     password: 1234
 
 server:
-  port: 8084
+  port: 8083
 
 eureka:
   client:
