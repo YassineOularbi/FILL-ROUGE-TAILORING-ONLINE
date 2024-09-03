@@ -50,14 +50,10 @@ public class AdminService {
         }
         admin.setPassword(passwordEncoder.encode(adminDto.getPassword()));
         admin.setId(keycloakUserId);
-        try {
+
             System.out.println(admin.getUsername() + admin.getEmail() + admin.getPhoneNumber());
             var savedAdmin= adminRepository.save(admin);
             return (AdminDto) adminMapper.toDto(savedAdmin);
-        } catch (Exception e) {
-            keycloakService.deleteUser(keycloakUserId);
-            throw new RuntimeException("Failed to save admin in local repository", e);
-        }
     }
 
 

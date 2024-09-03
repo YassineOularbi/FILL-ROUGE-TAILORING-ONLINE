@@ -28,6 +28,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/tailor/**").hasAnyAuthority(Role.TAILOR.name(), Role.ADMIN.name())
                                 .requestMatchers("/api/customer/**").hasAnyAuthority(Role.CUSTOMER.name(), Role.ADMIN.name())
                                 .requestMatchers("api/user/**").hasAuthority(Role.ADMIN.name())
+                                .requestMatchers("/api/address/**", "/api/bank/**").authenticated()
                                 .anyRequest().permitAll());
         http.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(jwtAuthenticationConverter)));
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
