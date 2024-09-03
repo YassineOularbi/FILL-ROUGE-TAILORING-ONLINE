@@ -22,6 +22,7 @@
   <modules>
     <module>eureka-server</module>
     <module>user-management-service</module>
+    <module>store_management_service</module>
   </modules>
 
   <properties>
