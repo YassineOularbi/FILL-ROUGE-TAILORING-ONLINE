@@ -23,7 +23,6 @@ public class UserDto implements Serializable {
     private String profilePicture;
     private Date dateOfBirth;
     private Date lastLogin;
-    private Role role;
     private Status status;
     private LanguagePreference languagePreference;
     private Gender gender;

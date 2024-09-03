@@ -37,19 +37,21 @@ public class AdminService {
         } catch (UsernameNotFoundException e) {
             throw new UsernameNotFoundException(e.getMessage());
         }
+
+        var admin = (Admin) adminMapper.toEntity(adminDto);
         String keycloakUserId;
         try {
-            keycloakUserId = keycloakService.addUser(adminDto);
+            keycloakUserId = keycloakService.addUser(admin);
         } catch (Exception e) {
             throw new RuntimeException("Failed to create admin in Keycloak", e);
         }
         if (keycloakUserId == null || keycloakUserId.isEmpty()) {
             throw new RuntimeException("Failed to retrieve user ID from Keycloak");
         }
-        var admin = (Admin) adminMapper.toEntity(adminDto);
         admin.setPassword(passwordEncoder.encode(adminDto.getPassword()));
         admin.setId(keycloakUserId);
         try {
+            System.out.println(admin.getUsername() + admin.getEmail() + admin.getPhoneNumber());
             var savedAdmin= adminRepository.save(admin);
             return (AdminDto) adminMapper.toDto(savedAdmin);
         } catch (Exception e) {
