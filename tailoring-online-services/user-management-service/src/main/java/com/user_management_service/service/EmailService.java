@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EmailService {
 
@@ -89,8 +91,8 @@ public class EmailService {
     private String getOtpLoginEmailTemplate(String otp) {
         return String.format(
                 "<div style=\"font-family:Arial,sans-serif;line-height:1.5;padding:10px;\">"
-                        + "<h2>Email Verification</h2>"
-                        + "<p>Your verification code is: <strong>%s</strong></p>"
+                        + "<h2>OTP Verification</h2>"
+                        + "<p>Your OTP code is: <strong>%s</strong></p>"
                         + "<p>This code is valid for 10 minutes.</p>"
                         + "</div>", otp);
     }

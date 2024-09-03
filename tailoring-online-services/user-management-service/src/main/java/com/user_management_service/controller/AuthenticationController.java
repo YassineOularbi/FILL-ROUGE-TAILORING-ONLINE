@@ -1,7 +1,6 @@
 package com.user_management_service.controller;
 
 import com.user_management_service.dto.AuthenticationRequest;
-import com.user_management_service.model.User;
 import com.user_management_service.service.AuthenticationKeycloakService;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
@@ -36,7 +35,7 @@ public class AuthenticationController {
             var email = keycloakService.sendVerificationCode(id);
             return ResponseEntity.ok(STR."Verification code sent to the registered email address :\{email}");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(STR."Failed to send verification code: \{e.getMessage()}");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
@@ -46,7 +45,7 @@ public class AuthenticationController {
             var email = keycloakService.verifyEmail(id, code);
             return ResponseEntity.ok(STR."Email verified :\{email}");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(STR."Failed to send verify email: \{e.getMessage()}");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
@@ -61,17 +60,17 @@ public class AuthenticationController {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"message\": \"Failed to send OTP\"}");
             }
         } catch (InterruptedException | ExecutionException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(STR."{\"message\": \"Failed to send OTP\"}\{e.getMessage()}");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
-    @PostMapping("/verify-otp/{id}")
-    public ResponseEntity<?> verifyOtpCode(@PathVariable("id") String id, @RequestParam("code") String code) {
+    @PostMapping("/verify-otp/{id}&{code}")
+    public ResponseEntity<?> verifyOtpCode(@PathVariable("id") String id, @PathVariable("code") String code) {
         try {
             String email = keycloakService.verifyOtpCode(id, code);
             return ResponseEntity.ok().body(STR."{\"message\": \"OTP verified successfully\", \"email\": \"\{email}\"}");
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(STR."{\"message\": \"\{e.getMessage()}\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 

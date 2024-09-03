@@ -1,13 +1,7 @@
 package com.user_management_service.mapper;
 
-import com.user_management_service.dto.AdminDto;
-import com.user_management_service.dto.CustomerDto;
-import com.user_management_service.dto.TailorDto;
-import com.user_management_service.dto.UserDto;
-import com.user_management_service.model.Admin;
-import com.user_management_service.model.Customer;
-import com.user_management_service.model.Tailor;
-import com.user_management_service.model.User;
+import com.user_management_service.dto.*;
+import com.user_management_service.model.*;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring", unmappedSourcePolicy = ReportingPolicy.IGNORE, subclassExhaustiveStrategy = SubclassExhaustiveStrategy.RUNTIME_EXCEPTION)

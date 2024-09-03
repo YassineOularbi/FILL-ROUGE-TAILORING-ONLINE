@@ -47,9 +47,11 @@ public class User implements UserDetails, Serializable {
 
     @OneToOne
     @JoinColumn(name = "address_id")
+    @Nullable
     private Address address;
 
     @OneToMany(mappedBy = "user")
+    @Nullable
     private List<Bank> banks;
 
     @Column(name = "phone_number", nullable = false)

@@ -3,6 +3,10 @@ package com.user_management_service.service;
 import com.user_management_service.config.KeycloakConfig;
 import com.user_management_service.dto.AuthenticationRequest;
 import com.user_management_service.dto.UserDto;
+import com.user_management_service.exception.AuthenticationException;
+import com.user_management_service.exception.EmailVerificationException;
+import com.user_management_service.exception.KeycloakServiceException;
+import com.user_management_service.exception.UserNotFoundException;
 import com.user_management_service.model.User;
 import com.user_management_service.repository.UserRepository;
 import jakarta.mail.MessagingException;
@@ -17,6 +21,7 @@ import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
@@ -25,13 +30,12 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AuthenticationKeycloakService {
 
     private final KeycloakConfig keycloakConfig;
-
     private final EmailService emailService;
-
     private final UserRepository userRepository;
 
     @Value("${keycloak.realm}")
@@ -74,15 +78,12 @@ public class AuthenticationKeycloakService {
 
             return userId;
         } else {
-            throw new RuntimeException("Failed to create user. HTTP Status: " + status);
+            throw new KeycloakServiceException(STR."Failed to create user in Keycloak. HTTP Status: \{status}");
         }
     }
 
-
-
-    public List<UserRepresentation> getUser(String userName){
+    public List<UserRepresentation> getUser(String userName) {
         return keycloakConfig.getInstance(username, password).realm(realm).users().search(userName, true);
-
     }
 
     public String getUserEmailById(String userId) {
@@ -91,7 +92,7 @@ public class AuthenticationKeycloakService {
         return user.getEmail();
     }
 
-    public void updateUser(String userId, UserDto user){
+    public void updateUser(String userId, UserDto user) {
         UsersResource usersResource = keycloakConfig.getInstance(username, password).realm(realm).users();
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setUsername(user.getUsername());
@@ -105,68 +106,80 @@ public class AuthenticationKeycloakService {
         usersResource.get(userId).update(userRepresentation);
     }
 
-    public void deleteUser(String userId){
-        keycloakConfig.getInstance(username, password).realm(realm).users().get(userId).remove();
+    public void deleteUser(String userId) {
+        try {
+            keycloakConfig.getInstance(username, password).realm(realm).users().get(userId).remove();
+        } catch (Exception e) {
+            throw new KeycloakServiceException("Failed to delete user in Keycloak", e);
+        }
     }
 
     public String sendVerificationCode(String id) throws MessagingException, UnsupportedEncodingException {
-        var localUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found !"));
+        var localUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         var email = getUserEmailById(id);
-        if (!email.isEmpty() & Objects.equals(localUser.getEmail(), email)){
+        if (!email.isEmpty() && Objects.equals(localUser.getEmail(), email)) {
             emailService.sendVerificationEmail(email);
         } else {
-            throw new RuntimeException("Error during email");
+            throw new EmailVerificationException("Error during email verification");
         }
         return email;
     }
 
-    public String verifyEmail(String id, String code){
-        var localUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found !"));
+    public String verifyEmail(String id, String code) {
+        var localUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
         var email = getUserEmailById(id);
-        if (!email.isEmpty() & Objects.equals(localUser.getEmail(), email)){
-            if (emailService.verifyCode(email, code)){
+        if (!email.isEmpty() && Objects.equals(localUser.getEmail(), email)) {
+            if (emailService.verifyCode(email, code)) {
                 UsersResource usersResource = keycloakConfig.getInstance(username, password).realm(realm).users();
                 UserRepresentation userRepresentation = new UserRepresentation();
                 userRepresentation.setEnabled(true);
                 userRepresentation.setEmailVerified(true);
                 usersResource.get(id).update(userRepresentation);
-                var user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found !"));
-                user.setEmailVerified(true);
-                user.setIsVerified(true);
-                userRepository.save(user);
+                localUser.setEmailVerified(true);
+                localUser.setIsVerified(true);
+                userRepository.save(localUser);
                 emailService.clearCode(email);
+            } else {
+                throw new EmailVerificationException("Invalid verification code");
             }
         } else {
-            throw new RuntimeException("Error during email");
+            throw new EmailVerificationException("Error during email verification");
         }
         return email;
     }
 
     public void sendResetPassword(String userId) throws MessagingException, UnsupportedEncodingException {
-        Keycloak keycloak = keycloakConfig.getInstance(username, password);
-        String email = keycloak.realm(realm).users().get(userId).toRepresentation().getEmail();
-        keycloak.realm(realm).users().get(userId).executeActionsEmail(List.of("UPDATE_PASSWORD"));
-        emailService.sendVerificationEmail(email);
-    }
-
-    public AccessTokenResponse login(AuthenticationRequest authenticationRequest) {
-        var keycloak = keycloakConfig.getInstance(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-        return keycloak.tokenManager().getAccessToken();
-    }
-
-    public CompletableFuture<Boolean> sendOtpVerification(String id) throws MessagingException, UnsupportedEncodingException {
-        var localUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
-        var email = getUserEmailById(id);
-        if (!email.isEmpty() && Objects.equals(localUser.getEmail(), email)) {
-            return  emailService.sendOTPByEmail(email);
-        } else {
-            throw new RuntimeException("Error during email verification");
+        try {
+            Keycloak keycloak = keycloakConfig.getInstance(username, password);
+            String email = keycloak.realm(realm).users().get(userId).toRepresentation().getEmail();
+            keycloak.realm(realm).users().get(userId).executeActionsEmail(List.of("UPDATE_PASSWORD"));
+            emailService.sendVerificationEmail(email);
+        } catch (Exception e) {
+            throw new KeycloakServiceException("Failed to send reset password email", e);
         }
     }
 
+    public AccessTokenResponse login(AuthenticationRequest authenticationRequest) {
+        try {
+            var keycloak = keycloakConfig.getInstance(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+            return keycloak.tokenManager().getAccessToken();
+        } catch (Exception e) {
+            throw new AuthenticationException("Failed to authenticate user");
+        }
+    }
+
+    public CompletableFuture<Boolean> sendOtpVerification(String id) throws MessagingException, UnsupportedEncodingException {
+        var localUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
+        var email = getUserEmailById(id);
+        if (!email.isEmpty() && Objects.equals(localUser.getEmail(), email)) {
+            return emailService.sendOTPByEmail(email);
+        } else {
+            throw new EmailVerificationException("Error during email verification");
+        }
+    }
 
     public String verifyOtpCode(String id, String code) {
-        var localUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
+        var localUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
         var email = getUserEmailById(id);
         if (!email.isEmpty() && Objects.equals(localUser.getEmail(), email)) {
             if (emailService.verifyCode(email, code)) {
@@ -175,10 +188,10 @@ public class AuthenticationKeycloakService {
                 emailService.clearCode(email);
                 return email;
             } else {
-                throw new RuntimeException("Invalid OTP code");
+                throw new EmailVerificationException("Invalid OTP code");
             }
         } else {
-            throw new RuntimeException("Error during email verification");
+            throw new EmailVerificationException("Error during OTP verification");
         }
     }
 
