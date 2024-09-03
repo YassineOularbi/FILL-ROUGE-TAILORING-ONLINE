@@ -116,9 +116,43 @@ Ce projet est réalisé dans le cadre de la formation chez ENAA, comme Projet Fi
 
 ## État Actuel du Projet
 
-Je suis actuellement dans la phase de **Conception UML**. En ce moment, je travaille précisément sur le **design des maqquettes figma** qui décrit le UI/UXde l'application. Cette étape est essentielle pour assurer une User interface et User experience solide avant de passer au développement.
+Je suis actuellement dans la phase de **Backend**. En ce moment, je travaille précisément sur le **microservices**.
 
+## Structure du projet
 
+```bash
+social-management-service/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/com/socialmanagementservice/
+│   │   │   ├── controller/
+│   │   │   │   ├── FollowController.java
+│   │   │   │   ├── WishlistController.java
+│   │   │   │   └── FavoritesController.java
+│   │   │   ├── service/
+│   │   │   │   ├── FollowService.java
+│   │   │   │   ├── WishlistService.java
+│   │   │   │   └── FavoritesService.java
+│   │   │   ├── model/
+│   │   │   │   ├── Follow.java
+│   │   │   │   ├── Wishlist.java
+│   │   │   │   └── Favorites.java
+│   │   │   ├── repository/
+│   │   │   │   ├── FollowRepository.java
+│   │   │   │   ├── WishlistRepository.java
+│   │   │   │   └── FavoritesRepository.java
+│   │   │   ├── dto/
+│   │   │   │   ├── FollowDto.java
+│   │   │   │   ├── WishlistDto.java
+│   │   │   │   └── FavoritesDto.java
+│   │   │   └── SocialManagementServiceApplication.java
+│   └── test/
+│       └── java/com/socialmanagementservice/
+│           └── SocialManagementServiceApplicationTests.java
+├── pom.xml
+└── README.md
+```
 
 ## Contact
 
