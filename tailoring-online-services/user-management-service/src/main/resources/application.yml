@@ -1,4 +1,15 @@
 spring:
+  mail:
+    host: smtp-mail.outlook.com
+    port: 587
+    username: Tailoring-online@outlook.com
+    password: stfgteraylizelqh
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   application:
     name: user-management-service
   datasource:
