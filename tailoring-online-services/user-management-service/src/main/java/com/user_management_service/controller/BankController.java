@@ -35,10 +35,10 @@ public class BankController {
         }
     }
 
-    @PostMapping("/add-bank")
-    public ResponseEntity<?> addBank(@RequestBody BankDto bankDto) {
+    @PostMapping("/add-bank/{id}")
+    public ResponseEntity<?> addBank(@RequestBody BankDto bankDto, @PathVariable("id") String id) {
         try {
-            var addedBank = bankService.addBank(bankDto);
+            var addedBank = bankService.addBank(bankDto, id);
             return ResponseEntity.ok(addedBank);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

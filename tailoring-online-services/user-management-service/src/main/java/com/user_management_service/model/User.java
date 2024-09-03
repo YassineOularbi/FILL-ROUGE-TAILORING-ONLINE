@@ -1,12 +1,14 @@
 package com.user_management_service.model;
 
 import com.user_management_service.enums.*;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
@@ -18,12 +20,11 @@ import java.util.List;
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "user")
-public class User implements UserDetails{
+public class User implements UserDetails, Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
-    private Long id;
+    private String id;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -45,8 +46,11 @@ public class User implements UserDetails{
     private String lastName;
 
     @OneToOne
-    @JoinColumn(name = "address_id", nullable = false)
+    @JoinColumn(name = "address_id")
     private Address address;
+
+    @OneToMany(mappedBy = "user")
+    private List<Bank> banks;
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;

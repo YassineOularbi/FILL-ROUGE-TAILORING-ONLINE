@@ -2,6 +2,7 @@ package com.user_management_service.dto;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -9,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AddressDto {
+public class AddressDto implements Serializable {
 
     private String address;
     private String suite;
@@ -18,7 +19,6 @@ public class AddressDto {
     private String country;
     private String zipCode;
     private Boolean isDefault;
-    private List<BankDto> banks;
-    private UserDto user;
-    private CustomerDto customer;
+//    private List<BankDto> banks;
+//    private UserDto user;
 }

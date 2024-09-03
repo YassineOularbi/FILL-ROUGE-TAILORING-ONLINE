@@ -2,6 +2,7 @@ package com.user_management_service.dto;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 @Getter
@@ -9,13 +10,11 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BankDto {
+public class BankDto implements Serializable {
 
-    private Long id;
     private String cardNumber;
     private Date expirationDate;
     private String cvc;
-    private AddressDto billingAddress;
-    private TailorDto tailor;
-    private CustomerDto customer;
+//    private AddressDto billingAddress;
+//    private UserDto user;
 }

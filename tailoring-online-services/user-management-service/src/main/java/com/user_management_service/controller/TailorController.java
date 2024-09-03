@@ -26,7 +26,7 @@ public class TailorController {
     }
 
     @GetMapping("/get-tailor-by-id/{id}")
-    public ResponseEntity<?> getTailorById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getTailorById(@PathVariable("id") String id) {
         try {
             var tailor = tailorService.getTailorById(id);
             return ResponseEntity.ok(tailor);
@@ -46,7 +46,7 @@ public class TailorController {
     }
 
     @PutMapping("/update-tailor/{id}")
-    public ResponseEntity<?> updateTailor(@PathVariable("id") Long id, @RequestBody TailorDto tailorDto) {
+    public ResponseEntity<?> updateTailor(@PathVariable("id") String id, @RequestBody TailorDto tailorDto) {
         try {
             var updatedTailor = tailorService.updateTailor(id, tailorDto);
             return ResponseEntity.ok(updatedTailor);
@@ -56,7 +56,7 @@ public class TailorController {
     }
 
     @DeleteMapping("/delete-tailor/{id}")
-    public ResponseEntity<?> deleteTailor(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteTailor(@PathVariable("id") String id) {
         try {
             tailorService.deleteTailor(id);
             return ResponseEntity.noContent().build();

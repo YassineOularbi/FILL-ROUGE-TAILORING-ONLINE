@@ -3,6 +3,7 @@ package com.user_management_service.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Table(name = "address")
-public class Address {
+public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,10 +45,10 @@ public class Address {
     private List<Bank> banks;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
     @OneToOne
-    @JoinColumn(name = "customer_id", nullable = false)
+    @JoinColumn(name = "customer_id", nullable = true)
     private Customer customer;
 }

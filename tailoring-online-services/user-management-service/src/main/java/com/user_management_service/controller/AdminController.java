@@ -26,7 +26,7 @@ public class AdminController {
     }
 
     @GetMapping("/get-admin-by-id/{id}")
-    public ResponseEntity<?> getAdminById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getAdminById(@PathVariable("id") String id) {
         try {
             var admin = adminService.getAdminById(id);
             return ResponseEntity.ok(admin);
@@ -46,7 +46,7 @@ public class AdminController {
     }
 
     @PutMapping("/update-admin/{id}")
-    public ResponseEntity<?> updateAdmin(@PathVariable("id") Long id, @RequestBody AdminDto adminDto) {
+    public ResponseEntity<?> updateAdmin(@PathVariable("id") String id, @RequestBody AdminDto adminDto) {
         try {
             var updatedAdmin = adminService.updateAdmin(id, adminDto);
             return ResponseEntity.ok(updatedAdmin);
@@ -56,7 +56,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/delete-admin/{id}")
-    public ResponseEntity<?> deleteAdmin(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteAdmin(@PathVariable("id") String id) {
         try {
             adminService.deleteAdmin(id);
             return ResponseEntity.noContent().build();
