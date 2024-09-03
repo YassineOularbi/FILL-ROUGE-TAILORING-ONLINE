@@ -30,6 +30,8 @@ public class KeycloakService {
 
     private final KeycloakConfig keycloakConfig;
 
+    private final EmailService emailService;
+
     @Value("${keycloak.realm}")
     private String realm;
 
@@ -99,12 +101,18 @@ public class KeycloakService {
         keycloakConfig.getInstance(username, password).realm(realm).users().get(userId).remove();
     }
 
-    public void sendVerificationLink(String userId){
-        keycloakConfig.getInstance(username, password).realm(realm).users().get(userId).sendVerifyEmail();
+    public void sendVerificationLink(String userId) {
+        Keycloak keycloak = keycloakConfig.getInstance(username, password);
+//        String email = keycloak.realm(realm).users().get(userId).toRepresentation().getEmail();
+//        keycloak.realm(realm).users().get(userId).sendVerifyEmail();
+        emailService.sendEmail("Tailoring-online@outlook.com", "Verify Your Email", "Click the link to verify your email: [verification link]");
     }
 
-    public void sendResetPassword(String userId){
-        keycloakConfig.getInstance(username, password).realm(realm).users().get(userId).executeActionsEmail(List.of("UPDATE_PASSWORD"));
+    public void sendResetPassword(String userId) {
+        Keycloak keycloak = keycloakConfig.getInstance(username, password);
+        String email = keycloak.realm(realm).users().get(userId).toRepresentation().getEmail();
+        keycloak.realm(realm).users().get(userId).executeActionsEmail(List.of("UPDATE_PASSWORD"));
+        emailService.sendEmail(email, "Reset Your Password", "Click the link to reset your password: [reset password link]");
     }
 
     public AccessTokenResponse login(AuthenticationRequest authenticationRequest) {
