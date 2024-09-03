@@ -2,14 +2,19 @@ package com.user_management_service.service;
 
 import com.user_management_service.config.KeycloakConfig;
 import com.user_management_service.dto.AuthenticationRequest;
-import com.user_management_service.dto.AuthenticationResponse;
 import com.user_management_service.dto.UserDto;
+import com.user_management_service.model.User;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.resource.ClientResource;
+import org.keycloak.admin.client.resource.RoleMappingResource;
+import org.keycloak.admin.client.resource.RoleScopeResource;
 import org.keycloak.admin.client.resource.UsersResource;
 
 import org.keycloak.representations.AccessTokenResponse;
+import org.keycloak.representations.idm.ClientRepresentation;
+import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,17 +33,18 @@ public class KeycloakService {
     @Value("${keycloak.realm}")
     private String realm;
 
-    @Value("${keycloak.resource")
-    private String clientId;
-
     @Value("${keycloak.username}")
     private String username;
 
     @Value("${keycloak.password}")
     private String password;
 
-    public String addUser(UserDto user) {
-        UsersResource usersResource = keycloakConfig.getInstance(username, password).realm(realm).users();
+    @Value("${keycloak.resource}")
+    private String clientId;
+
+    public String addUser(User user) {
+        Keycloak keycloak = keycloakConfig.getInstance(username, password);
+        UsersResource usersResource = keycloak.realm(realm).users();
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setUsername(user.getUsername());
         userRepresentation.setFirstName(user.getFirstName());
@@ -47,17 +54,27 @@ public class KeycloakService {
         userRepresentation.setEmailVerified(false);
         userRepresentation.setCredentials(Collections.singletonList(keycloakConfig.createPasswordCredentials(user.getPassword())));
         userRepresentation.setCreatedTimestamp(System.currentTimeMillis());
-        userRepresentation.setRealmRoles(List.of(user.getRole().name()));
-        userRepresentation.setClientRoles(Map.of(clientId, List.of(user.getRole().name())));
         Response response = usersResource.create(userRepresentation);
         int status = response.getStatus();
+
         if (status == Response.Status.CREATED.getStatusCode()) {
             String locationHeader = response.getHeaderString("Location");
-            return locationHeader.substring(locationHeader.lastIndexOf('/') + 1);
+            String userId = locationHeader.substring(locationHeader.lastIndexOf('/') + 1);
+            ClientRepresentation clientRepresentation = keycloak.realm(realm).clients().findByClientId(clientId).getFirst();
+            String clientId = clientRepresentation.getId();
+            ClientResource clientResource = keycloak.realm(realm).clients().get(clientId);
+            String roleName = user.getRole().name();
+            RoleRepresentation roleRepresentation = clientResource.roles().get(roleName).toRepresentation();
+            RoleScopeResource roleMappingResource = keycloak.realm(realm).users().get(userId).roles().clientLevel(clientId);
+            roleMappingResource.add(Collections.singletonList(roleRepresentation));
+
+            return userId;
         } else {
-            throw new RuntimeException(STR."Failed to create user. HTTP Status: \{status}");
+            throw new RuntimeException("Failed to create user. HTTP Status: " + status);
         }
     }
+
+
 
     public List<UserRepresentation> getUser(String userName){
         return keycloakConfig.getInstance(username, password).realm(realm).users().search(userName, true);

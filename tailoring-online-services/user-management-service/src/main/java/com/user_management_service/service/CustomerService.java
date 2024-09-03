@@ -37,16 +37,16 @@ public class CustomerService {
         } catch (UsernameNotFoundException e) {
             throw new UsernameNotFoundException(e.getMessage());
         }
+        var customer = (Customer) customerMapper.toEntity(customerDto);
         String keycloakUserId;
         try {
-            keycloakUserId = keycloakService.addUser(customerDto);
+            keycloakUserId = keycloakService.addUser(customer);
         } catch (Exception e) {
             throw new RuntimeException("Failed to create customer in Keycloak", e);
         }
         if (keycloakUserId == null || keycloakUserId.isEmpty()) {
             throw new RuntimeException("Failed to retrieve user ID from Keycloak");
         }
-        var customer = (Customer) customerMapper.toEntity(customerDto);
         customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
         customer.setId(keycloakUserId);
         try {

@@ -23,18 +23,14 @@ public class KeycloakConfig {
 
 
     public Keycloak getInstance(String username, String password){
-        if(keycloak == null){
-
-            keycloak = KeycloakBuilder.builder()
-                    .serverUrl(serverUrl)
-                    .realm(realm)
-                    .clientId(clientId)
-                    .username(username)
-                    .password(password)
-                    .grantType(OAuth2Constants.PASSWORD)
-                    .build();
-        }
-        return keycloak;
+        return KeycloakBuilder.builder()
+                .serverUrl(serverUrl)
+                .realm(realm)
+                .clientId(clientId)
+                .username(username)
+                .password(password)
+                .grantType(OAuth2Constants.PASSWORD)
+                .build();
     }
 
     public CredentialRepresentation createPasswordCredentials(String password) {

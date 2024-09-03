@@ -37,16 +37,16 @@ public class TailorService {
         } catch (UsernameNotFoundException e) {
             throw new UsernameNotFoundException(e.getMessage());
         }
+        var tailor = (Tailor) tailorMapper.toEntity(tailorDto);
         String keycloakUserId;
         try {
-            keycloakUserId = keycloakService.addUser(tailorDto);
+            keycloakUserId = keycloakService.addUser(tailor);
         } catch (Exception e) {
             throw new RuntimeException("Failed to create tailor in Keycloak", e);
         }
         if (keycloakUserId == null || keycloakUserId.isEmpty()) {
             throw new RuntimeException("Failed to retrieve user ID from Keycloak");
         }
-        var tailor = (Tailor) tailorMapper.toEntity(tailorDto);
         tailor.setPassword(passwordEncoder.encode(tailorDto.getPassword()));
         tailor.setId(keycloakUserId);
         try {
