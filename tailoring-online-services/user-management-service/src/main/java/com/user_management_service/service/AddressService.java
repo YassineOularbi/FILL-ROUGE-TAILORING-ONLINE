@@ -1,6 +1,8 @@
 package com.user_management_service.service;
 
 import com.user_management_service.dto.AddressDto;
+import com.user_management_service.exception.AddressNotFoundException;
+import com.user_management_service.exception.UserNotFoundException;
 import com.user_management_service.mapper.AddressMapper;
 import com.user_management_service.model.Address;
 import com.user_management_service.repository.AddressRepository;
@@ -25,11 +27,11 @@ public class AddressService {
     }
 
     public Address getAddressById(Long id) {
-        return addressRepository.findById(id).orElseThrow(() -> new RuntimeException("Address not found"));
+        return addressRepository.findById(id).orElseThrow(() -> new AddressNotFoundException(id));
     }
 
     public AddressDto addAddress(AddressDto addressDto, String id) {
-        var user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
+        var user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         var address = addressMapper.toEntity(addressDto);
         address.setUser(user);
         var savedAddress = addressRepository.save(address);
@@ -39,14 +41,14 @@ public class AddressService {
     }
 
     public AddressDto updateAddress(Long id, AddressDto addressDto) {
-        var existingAddress = addressRepository.findById(id).orElseThrow(() -> new RuntimeException("Address not found"));
+        var existingAddress = addressRepository.findById(id).orElseThrow(() -> new AddressNotFoundException(id));
         var updatedAddress = addressMapper.partialUpdate(addressDto, existingAddress);
         var savedAddress = addressRepository.save(updatedAddress);
         return addressMapper.toDto(savedAddress);
     }
 
     public void deleteAddress(Long id) {
-        var address = addressRepository.findById(id).orElseThrow(() -> new RuntimeException("Address not found"));
+        var address = addressRepository.findById(id).orElseThrow(() -> new AddressNotFoundException(id));
         addressRepository.delete(address);
     }
 }

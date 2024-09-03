@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 @KeycloakConfiguration
 public class KeycloakConfig {
 
-    private Keycloak keycloak;
-
     @Value("${keycloak.auth-server-url}")
     private String serverUrl;
 

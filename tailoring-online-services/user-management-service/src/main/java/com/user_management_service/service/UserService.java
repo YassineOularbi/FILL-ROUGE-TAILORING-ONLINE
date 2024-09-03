@@ -1,5 +1,6 @@
 package com.user_management_service.service;
 
+import com.user_management_service.exception.UserNotFoundException;
 import com.user_management_service.model.User;
 import com.user_management_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final KeycloakService keycloakService;
+    private final AuthenticationKeycloakService keycloakService;
 
 
     public List<User> getAllUsers() {
@@ -23,7 +24,7 @@ public class UserService {
     }
 
     public User getUserById(String id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
     public void getUserByUsername(String username){

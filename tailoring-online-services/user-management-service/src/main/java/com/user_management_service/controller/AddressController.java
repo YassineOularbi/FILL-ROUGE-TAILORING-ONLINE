@@ -26,9 +26,9 @@ public class AddressController {
     }
 
     @GetMapping("/get-address-by-id/{id}")
-    public ResponseEntity<?> getAddressById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getAddressById(@PathVariable("id") String id) {
         try {
-            var address = addressService.getAddressById(id);
+            var address = addressService.getAddressById(Long.valueOf(id));
             return ResponseEntity.ok(address);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -46,9 +46,9 @@ public class AddressController {
     }
 
     @PutMapping("/update-address/{id}")
-    public ResponseEntity<?> updateAddress(@PathVariable("id") Long id, @RequestBody AddressDto addressDto) {
+    public ResponseEntity<?> updateAddress(@PathVariable("id") String id, @RequestBody AddressDto addressDto) {
         try {
-            var updatedAddress = addressService.updateAddress(id, addressDto);
+            var updatedAddress = addressService.updateAddress(Long.valueOf(id), addressDto);
             return ResponseEntity.ok(updatedAddress);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -56,9 +56,9 @@ public class AddressController {
     }
 
     @DeleteMapping("/delete-address/{id}")
-    public ResponseEntity<?> deleteAddress(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteAddress(@PathVariable("id") String id) {
         try {
-            addressService.deleteAddress(id);
+            addressService.deleteAddress(Long.valueOf(id));
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

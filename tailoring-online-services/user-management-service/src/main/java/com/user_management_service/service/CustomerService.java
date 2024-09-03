@@ -1,6 +1,9 @@
 package com.user_management_service.service;
 
 import com.user_management_service.dto.CustomerDto;
+import com.user_management_service.exception.CustomerNotFoundException;
+import com.user_management_service.exception.CustomerRepositoryException;
+import com.user_management_service.exception.KeycloakServiceException;
 import com.user_management_service.mapper.UserMapper;
 import com.user_management_service.model.Customer;
 import com.user_management_service.repository.CustomerRepository;
@@ -20,7 +23,7 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final UserMapper customerMapper;
     private final PasswordEncoder passwordEncoder;
-    private final KeycloakService keycloakService;
+    private final AuthenticationKeycloakService keycloakService;
     private final UserService userService;
 
     public List<Customer> getAllCustomers() {
@@ -28,7 +31,7 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(String id) {
-        return customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
+        return customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
     }
 
     public CustomerDto register(CustomerDto customerDto) {
@@ -42,10 +45,10 @@ public class CustomerService {
         try {
             keycloakUserId = keycloakService.addUser(customer);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to create customer in Keycloak", e);
+            throw new KeycloakServiceException("Failed to create customer in Keycloak", e);
         }
         if (keycloakUserId == null || keycloakUserId.isEmpty()) {
-            throw new RuntimeException("Failed to retrieve user ID from Keycloak");
+            throw new KeycloakServiceException("Failed to retrieve user ID from Keycloak");
         }
         customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
         customer.setId(keycloakUserId);
@@ -54,17 +57,17 @@ public class CustomerService {
             return (CustomerDto) customerMapper.toDto(savedCustomer);
         } catch (Exception e) {
             keycloakService.deleteUser(keycloakUserId);
-            throw new RuntimeException("Failed to save customer in local repository", e);
+            throw new CustomerRepositoryException("Failed to save customer in local repository", e);
         }
     }
 
     public CustomerDto updateCustomer(String id, CustomerDto customerDto) {
-        var existingCustomer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("customer not found"));
+        var existingCustomer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
         var updatedCustomer = (Customer) customerMapper.partialUpdate(customerDto, existingCustomer);
         try {
             keycloakService.updateUser(id, customerDto);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to update customer in keycloak", e);
+            throw new KeycloakServiceException("Failed to update customer in keycloak", e);
         }
         try {
             updatedCustomer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
@@ -72,21 +75,21 @@ public class CustomerService {
             return (CustomerDto) customerMapper.toDto(savedcustomer);
         } catch (Exception e) {
             keycloakService.deleteUser(id);
-            throw new RuntimeException("Failed to update customer in local repository", e);
+            throw new CustomerRepositoryException("Failed to update customer in local repository", e);
         }
     }
 
     public void deleteCustomer(String id) {
-        var customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("customer not found"));
+        var customer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
         try {
             keycloakService.deleteUser(id);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to delete customer in keycloak", e);
+            throw new KeycloakServiceException("Failed to delete customer in keycloak", e);
         }
         try {
             customerRepository.delete(customer);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to delete customer in local repository", e);
+            throw new CustomerRepositoryException("Failed to delete customer in local repository", e);
         }
     }
 }
