@@ -54,7 +54,9 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.ApiGatewayServiceApplication.executor": "Run",
     "Spring Boot.EurekaServerApplication.executor": "Run",
+    "Spring Boot.StoreManagementServiceApplication.executor": "Run",
     "Spring Boot.UserManagementServiceApplication.executor": "Run",
     "git-widget-placeholder": "backend-microservices",
     "kotlin-language-version-configured": "true",
@@ -87,7 +89,15 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.UserManagementServiceApplication">
+  <component name="RunManager" selected="Spring Boot.ApiGatewayServiceApplication">
+    <configuration name="ApiGatewayServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="api-gateway-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.api_gateway_service.ApiGatewayServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="eureka-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.eureka_server.EurekaServerApplication" />
@@ -123,7 +133,7 @@
       <workItem from="1725137560987" duration="32213000" />
       <workItem from="1725222488321" duration="22585000" />
       <workItem from="1725262433198" duration="19181000" />
-      <workItem from="1725324745322" duration="28672000" />
+      <workItem from="1725324745322" duration="30975000" />
     </task>
     <servers />
   </component>

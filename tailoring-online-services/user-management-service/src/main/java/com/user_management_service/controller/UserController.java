@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/users/api/user")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class UserController {

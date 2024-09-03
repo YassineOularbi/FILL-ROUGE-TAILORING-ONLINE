@@ -1,7 +1,6 @@
 package com.user_management_service.model;
 
 import com.user_management_service.enums.*;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -45,14 +44,14 @@ public class User implements UserDetails, Serializable {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @OneToOne
-    @JoinColumn(name = "address_id")
-    @Nullable
-    private Address address;
-
-    @OneToMany(mappedBy = "user")
-    @Nullable
-    private List<Bank> banks;
+//    @OneToOne
+//    @JoinColumn(name = "address_id")
+//    @Nullable
+//    private Address address;
+//
+//    @OneToMany(mappedBy = "user")
+//    @Nullable
+//    private List<Bank> banks;
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;

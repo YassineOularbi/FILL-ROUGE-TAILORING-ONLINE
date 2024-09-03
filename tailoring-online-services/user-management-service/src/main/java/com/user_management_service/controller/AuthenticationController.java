@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(path = "api/auth")
+@RequestMapping(path = "/users/api/auth")
 public class AuthenticationController {
 
     private final AuthenticationKeycloakService keycloakService;

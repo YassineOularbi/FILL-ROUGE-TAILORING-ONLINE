@@ -21,8 +21,9 @@
 
   <modules>
     <module>eureka-server</module>
+    <module>api-gateway-service</module>
     <module>user-management-service</module>
-    <module>store_management_service</module>
+    <module>store-management-service</module>
   </modules>
 
   <properties>
