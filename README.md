@@ -118,41 +118,71 @@ Ce projet est réalisé dans le cadre de la formation chez ENAA, comme Projet Fi
 
 Je suis actuellement dans la phase de **Backend**. En ce moment, je travaille précisément sur le **microservices**.
 
-## Structure du projet
+## Project Structure
 
-```bash
-social-management-service/
+```plaintext
+tailoring-online-services/
 │
-├── src/
-│   ├── main/
-│   │   ├── java/com/socialmanagementservice/
-│   │   │   ├── controller/
-│   │   │   │   ├── FollowController.java
-│   │   │   │   ├── WishlistController.java
-│   │   │   │   └── FavoritesController.java
-│   │   │   ├── service/
-│   │   │   │   ├── FollowService.java
-│   │   │   │   ├── WishlistService.java
-│   │   │   │   └── FavoritesService.java
-│   │   │   ├── model/
-│   │   │   │   ├── Follow.java
-│   │   │   │   ├── Wishlist.java
-│   │   │   │   └── Favorites.java
-│   │   │   ├── repository/
-│   │   │   │   ├── FollowRepository.java
-│   │   │   │   ├── WishlistRepository.java
-│   │   │   │   └── FavoritesRepository.java
-│   │   │   ├── dto/
-│   │   │   │   ├── FollowDto.java
-│   │   │   │   ├── WishlistDto.java
-│   │   │   │   └── FavoritesDto.java
-│   │   │   └── SocialManagementServiceApplication.java
-│   └── test/
-│       └── java/com/socialmanagementservice/
-│           └── SocialManagementServiceApplicationTests.java
-├── pom.xml
-└── README.md
-```
+├── uml-study/  # Contains all UML-related files and diagrams
+│   ├── diagrams/  # Stores all the different types of UML diagrams
+│   │   ├── class-diagram/  # Directory for class diagrams
+│   │   │   ├── class-diagram.png  # Image file for the class diagram
+│   │   │   └── class-diagram.uml  # Source file for the class diagram (if using a tool like PlantUML)
+│   │   ├── use-case-diagram/  # Directory for use-case diagrams
+│   │   │   ├── use-case-diagram.png  # Image file for the use-case diagram
+│   │   │   └── use-case-diagram.uml  # Source file for the use-case diagram
+│   │   ├── sequence-diagram/  # Directory for sequence diagrams
+│   │   │   ├── sequence-diagram.png  # Image file for the sequence diagram
+│   │   │   └── sequence-diagram.uml  # Source file for the sequence diagram
+│   │   └── architecture-diagram/  # Directory for architecture diagrams
+│   │       ├── architecture-diagram.png  # Image file for the architecture diagram
+│   │       └── architecture-diagram.uml  # Source file for the architecture diagram
+│   ├── README.md  # Documentation explaining the purpose and usage of each diagram
+│   └── assets/  # Stores additional assets such as logos or mockups used in the UML documentation
+│       ├── logo.png  # Example logo file
+│       └── [additional assets like mockups, images, etc.]
+│
+├── backend/  # Contains all backend microservices implemented with Spring Boot
+│   ├── eureka-server/  # Service Discovery Server using Netflix Eureka
+│   ├── api-gateway-service/  # API Gateway for routing requests to appropriate microservices
+│   ├── user-management-service/  # Microservice for managing users (Admins, Customers, Tailors)
+│   ├── product-management-service/  # Microservice for managing products (like clothing items, fabrics, etc.)
+│   ├── store-management-service/  # Microservice for managing store information and operations
+│   ├── order-management-service/  # Microservice for managing orders (including order tracking, status, etc.)
+│   ├── payment-banking-service/  # Microservice for managing payment and banking transactions
+│   ├── notification-mailing-service/  # Microservice for handling notifications and emails to users
+│   ├── promotion-management-service/  # Microservice for managing promotions, discounts, and special offers
+│   ├── localization-shipping-service/  # Microservice for handling localization (multi-language support) and shipping logistics
+│   ├── loyalty-program-service/  # Microservice for managing loyalty programs and customer rewards
+│   ├── Dockerfile  # Dockerfile for building the backend microservices
+│   └── docker-compose.yml  # Docker Compose file for orchestrating and running all the backend services together
+│
+├── frontend/  # Contains the frontend application implemented with Angular
+│   ├── angular-app/  # Main Angular project directory
+│   │   ├── src/  # Source files for the Angular application
+│   │   │   ├── app/  # Application modules and components
+│   │   │   │   ├── core/  # Core module containing singleton services, global guards, and interceptors
+│   │   │   │   ├── shared/  # Shared module for common components, directives, and pipes
+│   │   │   │   ├── admin/  # Module containing components and services for the Admin dashboard
+│   │   │   │   ├── customer/  # Module containing components and services for the Customer dashboard
+│   │   │   │   ├── tailor/  # Module containing components and services for the Tailor dashboard
+│   │   │   │   └── [other modules...]  # Other feature modules as needed
+│   │   │   ├── assets/  # Static assets such as images, icons, etc.
+│   │   │   │   ├── logo.png  # Example logo file
+│   │   │   │   └── [additional assets...]
+│   │   │   ├── environments/  # Environment-specific configuration files
+│   │   │   │   ├── environment.prod.ts  # Production environment settings
+│   │   │   │   └── environment.ts  # Development environment settings
+│   │   │   └── [additional Angular files...]  # Additional Angular project files (modules, components, etc.)
+│   │   ├── angular.json  # Angular project configuration file
+│   │   └── package.json  # Node.js package file for managing project dependencies
+│   ├── Dockerfile  # Dockerfile for building the Angular frontend
+│   └── nginx/  # NGINX configuration for serving the Angular application in production
+│       ├── nginx.conf  # NGINX configuration file
+│       └── Dockerfile  # Dockerfile for building the NGINX server
+│
+└── README.md  # Root README file providing an overview of the entire project, including architecture, setup instructions, and more
+
 
 ## Contact
 
