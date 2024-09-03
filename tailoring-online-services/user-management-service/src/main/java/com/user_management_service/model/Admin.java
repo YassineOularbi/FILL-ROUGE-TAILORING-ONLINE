@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Builder
 @Table(name = "admin")
 public class Admin extends User implements Serializable {
 
