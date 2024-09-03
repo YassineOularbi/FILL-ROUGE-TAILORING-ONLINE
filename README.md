@@ -182,7 +182,7 @@ tailoring-online-services/
 │       └── Dockerfile  # Dockerfile for building the NGINX server
 │
 └── README.md  # Root README file providing an overview of the entire project, including architecture, setup instructions, and more
-
+```
 
 ## Contact
 
