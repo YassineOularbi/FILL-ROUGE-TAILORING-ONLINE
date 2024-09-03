@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -11,10 +10,10 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>payment-banking-service</artifactId>
+	<artifactId>review-management-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Payment Banking Service</name>
-	<description>Payment Banking Service module for Tailoring Online Services</description>
+	<name>Review Management Service</name>
+	<description>Review Management Service module for Tailoring Online Services</description>
 
 	<properties>
 		<java.version>22</java.version>
@@ -24,7 +23,9 @@
 	</properties>
 
 	<dependencies>
+
 	</dependencies>
+
 
 	<build>
 		<plugins>
@@ -34,4 +35,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>

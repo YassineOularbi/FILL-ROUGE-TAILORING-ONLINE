@@ -1,8 +1,8 @@
 spring:
   application:
-    name: store-management-service
+    name: notification-mailing-service
   datasource:
-    url: jdbc:mysql://localhost:3306/tailoring_store_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/tailoring_notification_mailing_db?createDatabaseIfNotExist=true
     username: root
     password: 1234
   jpa:
@@ -17,12 +17,12 @@ spring:
     locations: classpath:db/migration
     table: flyway_schema_history
     enabled: true
-    url: jdbc:mysql://localhost:3306/tailoring_store_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/tailoring_notification_mailing_db?createDatabaseIfNotExist=true
     user: root
     password: 1234
 
 server:
-  port: 8091
+  port: 8084
 
 eureka:
   client:
