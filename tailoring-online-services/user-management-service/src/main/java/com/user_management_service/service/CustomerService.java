@@ -20,7 +20,7 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final UserMapper customerMapper;
     private final PasswordEncoder passwordEncoder;
-    private final KeycloakService keycloakService;
+    private final AuthenticationKeycloakService keycloakService;
     private final UserService userService;
 
     public List<Customer> getAllCustomers() {

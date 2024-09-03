@@ -21,7 +21,7 @@ public class TailorService {
     private final UserMapper tailorMapper;
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
-    private final KeycloakService keycloakService;
+    private final AuthenticationKeycloakService keycloakService;
 
     public List<Tailor> getAllTailors() {
         return tailorRepository.findAll();

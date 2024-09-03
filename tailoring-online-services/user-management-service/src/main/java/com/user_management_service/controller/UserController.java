@@ -1,6 +1,5 @@
 package com.user_management_service.controller;
 
-import com.user_management_service.dto.UserDto;
 import com.user_management_service.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

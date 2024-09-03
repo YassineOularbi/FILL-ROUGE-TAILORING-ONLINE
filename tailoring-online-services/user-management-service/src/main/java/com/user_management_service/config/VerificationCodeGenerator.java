@@ -1,6 +1,5 @@
 package com.user_management_service.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;

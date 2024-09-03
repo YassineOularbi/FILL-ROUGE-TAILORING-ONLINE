@@ -22,9 +22,6 @@ public interface UserMapper {
     @SubclassMapping(source = Customer.class, target = AdminDto.class)
     UserDto toDto(User user);
 
-    @SubclassMapping(source = AdminDto.class, target = Admin.class)
-    @SubclassMapping(source = TailorDto.class, target = Tailor.class)
-    @SubclassMapping(source = CustomerDto.class, target = Customer.class)
     User partialUpdate(UserDto userDto, @MappingTarget User user);
 
 }

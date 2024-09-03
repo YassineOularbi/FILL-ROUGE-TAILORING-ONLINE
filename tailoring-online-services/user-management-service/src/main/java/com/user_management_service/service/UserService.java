@@ -15,7 +15,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final KeycloakService keycloakService;
+    private final AuthenticationKeycloakService keycloakService;
 
 
     public List<User> getAllUsers() {

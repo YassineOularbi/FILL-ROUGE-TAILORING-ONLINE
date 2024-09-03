@@ -20,7 +20,7 @@ public class AdminService {
     private final AdminRepository adminRepository;
     private final UserMapper adminMapper;
     private final PasswordEncoder passwordEncoder;
-    private final KeycloakService keycloakService;
+    private final AuthenticationKeycloakService keycloakService;
     private final UserService userService;
 
     public List<Admin> getAllAdmins() {
