@@ -40,4 +40,7 @@ public class Address implements Serializable {
     @Column(name = "is_default", nullable = false, columnDefinition = "boolean default false")
     private Boolean isDefault;
 
+    @Column(name = "user_id", nullable = false)
+    private String userId;
+
 }
