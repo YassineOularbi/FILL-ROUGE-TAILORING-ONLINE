@@ -1,4 +1,4 @@
-package com.user_management_service.model;
+package com.notification_mailing_service.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,6 +9,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
+@Table(name = "email_verification")
 public class EmailVerification {
 
         @Id

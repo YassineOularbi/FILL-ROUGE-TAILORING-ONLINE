@@ -1,8 +1,9 @@
-package com.user_management_service.service;
+package com.notification_mailing_service.service;
 
-import com.user_management_service.config.VerificationCodeGenerator;
-import com.user_management_service.model.EmailVerification;
-import com.user_management_service.repository.EmailVerificationRepository;
+import com.notification_mailing_service.config.VerificationCodeGenerator;
+import com.notification_mailing_service.exception.EmailNotFoundException;
+import com.notification_mailing_service.model.EmailVerification;
+import com.notification_mailing_service.repository.EmailVerificationRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -28,22 +29,19 @@ public class EmailService {
     private final VerificationCodeGenerator verificationCodeGenerator;
     private final EmailVerificationRepository emailVerificationRepository;
 
-    public void sendVerificationEmail(String to) throws MessagingException, UnsupportedEncodingException {
+    @Async
+    public CompletableFuture<Boolean> sendVerificationEmail(String email) {
         String subject = "Email Verification Code";
         String code = verificationCodeGenerator.generateVerificationCode();
         String body = getVerificationEmailTemplate(code);
-        sendEmail(to, subject, body);
-        emailVerificationRepository.save(EmailVerification.builder().email(to).verificationCode(code).build());
-    }
 
-    public Boolean verifyCode(String email, String code) {
-        var userVerification = emailVerificationRepository.findByEmail(email);
-        return userVerification != null && userVerification.getVerificationCode().equals(code);
-    }
-
-    public void clearCode(String email) {
-        var emailVerification = emailVerificationRepository.findByEmail(email);
-        emailVerificationRepository.delete(emailVerification);
+        try {
+            sendEmail(email, subject, body);
+            emailVerificationRepository.save(EmailVerification.builder().email(email).verificationCode(code).build());
+            return CompletableFuture.completedFuture(true);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            return CompletableFuture.completedFuture(false);
+        }
     }
 
     @Async
@@ -58,6 +56,16 @@ public class EmailService {
             return CompletableFuture.completedFuture(true);
         } catch (MessagingException | UnsupportedEncodingException e) {
             return CompletableFuture.completedFuture(false);
+        }
+    }
+
+    public Boolean verifyCode(String email, String code) {
+        var userVerification = emailVerificationRepository.findByEmail(email).orElseThrow(EmailNotFoundException::new);
+        if (userVerification != null && userVerification.getVerificationCode().equals(code)) {
+            emailVerificationRepository.delete(userVerification);
+            return true;
+        } else {
+            return false;
         }
     }
 

@@ -23,7 +23,7 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final UserMapper customerMapper;
     private final PasswordEncoder passwordEncoder;
-    private final AuthenticationKeycloakService keycloakService;
+    private final AuthenticationService authenticationService;
     private final UserService userService;
 
     public List<Customer> getAllCustomers() {
@@ -43,7 +43,7 @@ public class CustomerService {
         var customer = (Customer) customerMapper.toEntity(customerDto);
         String keycloakUserId;
         try {
-            keycloakUserId = keycloakService.addUser(customer);
+            keycloakUserId = authenticationService.addUser(customer);
         } catch (Exception e) {
             throw new KeycloakServiceException("Failed to create customer in Keycloak", e);
         }
@@ -56,7 +56,7 @@ public class CustomerService {
             var savedCustomer= customerRepository.save(customer);
             return (CustomerDto) customerMapper.toDto(savedCustomer);
         } catch (Exception e) {
-            keycloakService.deleteUser(keycloakUserId);
+            authenticationService.deleteUser(keycloakUserId);
             throw new CustomerRepositoryException("Failed to save customer in local repository", e);
         }
     }
@@ -65,7 +65,7 @@ public class CustomerService {
         var existingCustomer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
         var updatedCustomer = (Customer) customerMapper.partialUpdate(customerDto, existingCustomer);
         try {
-            keycloakService.updateUser(id, customerDto);
+            authenticationService.updateUser(id, customerDto);
         } catch (Exception e) {
             throw new KeycloakServiceException("Failed to update customer in keycloak", e);
         }
@@ -74,7 +74,7 @@ public class CustomerService {
             var savedcustomer = customerRepository.save(updatedCustomer);
             return (CustomerDto) customerMapper.toDto(savedcustomer);
         } catch (Exception e) {
-            keycloakService.deleteUser(id);
+            authenticationService.deleteUser(id);
             throw new CustomerRepositoryException("Failed to update customer in local repository", e);
         }
     }
@@ -82,7 +82,7 @@ public class CustomerService {
     public void deleteCustomer(String id) {
         var customer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
         try {
-            keycloakService.deleteUser(id);
+            authenticationService.deleteUser(id);
         } catch (Exception e) {
             throw new KeycloakServiceException("Failed to delete customer in keycloak", e);
         }

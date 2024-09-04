@@ -16,7 +16,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final AuthenticationKeycloakService keycloakService;
+    private final AuthenticationService authenticationService;
 
 
     public List<User> getAllUsers() {
@@ -31,7 +31,7 @@ public class UserService {
         if (userRepository.findByUsername(username).isPresent()) {
             throw new UsernameNotFoundException("Username already exists!");
         }
-        if (!keycloakService.getUser(username).isEmpty()) {
+        if (!authenticationService.getUser(username).isEmpty()) {
             throw new UsernameNotFoundException("Username already exists!");
         }
     }
