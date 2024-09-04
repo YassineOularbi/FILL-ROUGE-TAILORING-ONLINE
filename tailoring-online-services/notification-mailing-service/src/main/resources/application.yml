@@ -20,6 +20,17 @@ spring:
     url: jdbc:mysql://localhost:3306/tailoring_notification_mailing_db?createDatabaseIfNotExist=true
     user: root
     password: 1234
+  mail:
+    host: smtp-mail.outlook.com
+    port: 587
+    username: Tailoring-online@outlook.com
+    password: stfgteraylizelqh
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 server:
   port: 8084

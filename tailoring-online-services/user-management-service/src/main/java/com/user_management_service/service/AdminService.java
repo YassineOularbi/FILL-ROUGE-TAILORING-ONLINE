@@ -3,7 +3,6 @@ package com.user_management_service.service;
 import com.user_management_service.dto.AdminDto;
 import com.user_management_service.exception.AdminNotFoundException;
 import com.user_management_service.exception.AdminRepositoryException;
-import com.user_management_service.exception.CustomerRepositoryException;
 import com.user_management_service.exception.KeycloakServiceException;
 import com.user_management_service.mapper.UserMapper;
 import com.user_management_service.model.Admin;
@@ -24,7 +23,7 @@ public class AdminService {
     private final AdminRepository adminRepository;
     private final UserMapper adminMapper;
     private final PasswordEncoder passwordEncoder;
-    private final AuthenticationKeycloakService keycloakService;
+    private final AuthenticationService authenticationService;
     private final UserService userService;
 
     public List<Admin> getAllAdmins() {
@@ -45,7 +44,7 @@ public class AdminService {
         var admin = (Admin) adminMapper.toEntity(adminDto);
         String keycloakUserId;
         try {
-            keycloakUserId = keycloakService.addUser(admin);
+            keycloakUserId = authenticationService.addUser(admin);
         } catch (Exception e) {
             throw new KeycloakServiceException("Failed to create admin in Keycloak", e);
         }
@@ -58,7 +57,7 @@ public class AdminService {
             var savedAdmin = adminRepository.save(admin);
             return (AdminDto) adminMapper.toDto(savedAdmin);
         } catch (Exception e) {
-            keycloakService.deleteUser(keycloakUserId);
+            authenticationService.deleteUser(keycloakUserId);
             throw new AdminRepositoryException("Failed to save admin in local repository", e);
         }
     }
@@ -69,7 +68,7 @@ public class AdminService {
         var existingAdmin = adminRepository.findById(id).orElseThrow(() -> new RuntimeException("Admin not found"));
         var updatedAdmin = (Admin) adminMapper.partialUpdate(adminDto, existingAdmin);
         try {
-            keycloakService.updateUser(id, adminDto);
+            authenticationService.updateUser(id, adminDto);
         } catch (Exception e) {
             throw new KeycloakServiceException("Failed to update admin in Keycloak", e);
         }
@@ -78,7 +77,7 @@ public class AdminService {
             var savedAdmin = adminRepository.save(updatedAdmin);
             return (AdminDto) adminMapper.toDto(savedAdmin);
         } catch (Exception e) {
-            keycloakService.deleteUser(id);
+            authenticationService.deleteUser(id);
             throw new AdminRepositoryException("Failed to update admin in local repository", e);
         }
     }
@@ -86,7 +85,7 @@ public class AdminService {
     public void deleteAdmin(String id) {
         var admin = adminRepository.findById(id).orElseThrow(() -> new AdminNotFoundException(id));
         try {
-            keycloakService.deleteUser(id);
+            authenticationService.deleteUser(id);
         } catch (Exception e) {
             throw new KeycloakServiceException("Failed to delete admin in Keycloak", e);
         }

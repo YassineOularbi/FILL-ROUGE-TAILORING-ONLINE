@@ -1,4 +1,4 @@
-package com.user_management_service.config;
+package com.notification_mailing_service.config;
 
 import org.springframework.stereotype.Component;
 
