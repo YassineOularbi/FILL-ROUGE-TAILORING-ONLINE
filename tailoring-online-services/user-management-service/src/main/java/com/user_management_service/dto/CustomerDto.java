@@ -11,7 +11,6 @@ import java.sql.Date;
 @Builder
 public class CustomerDto extends UserDto implements Serializable {
 
-//    private AddressDto shippingAddress;
     private Integer loyaltyPoints;
 
     public CustomerDto(String username, String password, String email, String firstName, String lastName, String phoneNumber, String profilePicture, Date dateOfBirth, Date lastLogin, Status status, LanguagePreference languagePreference, Gender gender, NotificationPreference notificationPreference, Boolean emailVerified, Boolean phoneVerified, Boolean OAuth2, Boolean is2FAuth, Boolean hasFingerprint, Boolean hasFaceId, Boolean isVerified, Integer loyaltyPoints) {
