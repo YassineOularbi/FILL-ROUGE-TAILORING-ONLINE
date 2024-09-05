@@ -23,12 +23,11 @@ public class SecurityConfig {
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers("/api/auth/**", "/api/customer/register/**", "/api/admin/register/**", "/api/tailor/register/**").permitAll()
+//                                .requestMatchers("/api/auth/**", "/api/customer/register/**", "/api/admin/register/**", "/api/tailor/register/**").permitAll()
                                 .requestMatchers("/api/admin/**").hasAuthority(Role.ADMIN.name())
                                 .requestMatchers("/api/tailor/**").hasAnyAuthority(Role.TAILOR.name(), Role.ADMIN.name())
                                 .requestMatchers("/api/customer/**").hasAnyAuthority(Role.CUSTOMER.name(), Role.ADMIN.name())
-                                .requestMatchers("api/user/**").hasAuthority(Role.ADMIN.name())
-                                .requestMatchers("/api/address/**", "/api/bank/**").authenticated()
+//                                .requestMatchers("/api/user/**").permitAll()
                                 .anyRequest().permitAll());
         http.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(jwtAuthenticationConverter)));
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
