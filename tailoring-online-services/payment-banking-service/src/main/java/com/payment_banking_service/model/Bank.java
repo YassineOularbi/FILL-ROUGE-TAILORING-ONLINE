@@ -28,4 +28,7 @@ public class Bank implements Serializable {
     @Column(name = "cvc", nullable = false)
     private String cvc;
 
+    @Column(name = "user_id", nullable = false)
+    private String userId;
+
 }
