@@ -1,4 +1,4 @@
-package com.localization_shipping_service.client;
+package com.payment_banking_service.client;
 
 
 import org.springframework.cloud.openfeign.FeignClient;
