@@ -44,6 +44,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.api-gateway-service [clean].executor": "Run",
+    "Maven.api-gateway-service [install].executor": "Run",
     "Maven.tailoring-online-services [clean].executor": "Run",
     "Maven.tailoring-online-services [install].executor": "Run",
     "Maven.user-management-service [clean].executor": "Run",
@@ -69,7 +71,7 @@
     "Spring Boot.UserManagementServiceApplication.executor": "Run",
     "git-widget-placeholder": "backend-microservices",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/social-management-service/src/main/resources",
+    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/BRIEF-CONSTRUCTXPERT-MICROSERVICES/constructxpert-services",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -228,7 +230,9 @@
       <workItem from="1725137560987" duration="32213000" />
       <workItem from="1725222488321" duration="22585000" />
       <workItem from="1725262433198" duration="19181000" />
-      <workItem from="1725324745322" duration="46080000" />
+      <workItem from="1725324745322" duration="52538000" />
+      <workItem from="1725491720818" duration="1503000" />
+      <workItem from="1725493924606" duration="2891000" />
     </task>
     <servers />
   </component>

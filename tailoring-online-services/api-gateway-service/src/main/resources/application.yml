@@ -4,9 +4,26 @@ spring:
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: user-management-service
+            uri: http://localhost:8081
+            predicates:
+              - Path=/user-management-service/**
+          - id: localization-shipping-service
+            uri: lb://localization-shipping-service
+            predicates:
+              - Path=/localization-shipping-service/**
 server:
-  port: 8888
+  port: 9191
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
