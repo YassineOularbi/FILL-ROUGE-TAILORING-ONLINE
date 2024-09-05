@@ -41,10 +41,26 @@ spring:
 server:
   port: 8081
 
+openapi:
+  service:
+    title: USER-MANAGEMENT-SERVICE doc
+    version: 1.0.0
+    url: http://localhost:9191
+
+springdoc:
+  api-docs:
+    path: /USER-MANAGEMENT-SERVICE/v3/api-docs
+  swagger-ui:
+    path: /USER-MANAGEMENT-SERVICE/swagger-ui.html
+
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
 
 keycloak:
   realm: tailoring-online
