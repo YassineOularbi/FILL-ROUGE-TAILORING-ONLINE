@@ -9,6 +9,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/product-management-service/pom.xml" />
         <option value="$PROJECT_DIR$/store_management_service/pom.xml" />
       </set>
     </option>

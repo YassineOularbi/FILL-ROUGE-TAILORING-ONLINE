@@ -1,4 +1,4 @@
-package com.product_management_service.enums;
+package com.store_management_service.enums;
 
 public enum Category {
     CAFTAN,

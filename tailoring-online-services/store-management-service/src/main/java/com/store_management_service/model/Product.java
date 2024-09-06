@@ -1,8 +1,11 @@
-package com.product_management_service.model;
+package com.store_management_service.model;
 
-import com.product_management_service.enums.Category;
+import com.store_management_service.enums.Category;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Map;
@@ -59,6 +62,7 @@ public class Product {
     @Column(name = "authenticity_verified", columnDefinition = "Boolean default false")
     private Boolean authenticityVerified;
 
-    @Column(name = "store_id", nullable = false)
-    private Long storeId;
+    @ManyToOne
+    @JoinColumn(name = "store_id", nullable = false)
+    private Store store;
 }

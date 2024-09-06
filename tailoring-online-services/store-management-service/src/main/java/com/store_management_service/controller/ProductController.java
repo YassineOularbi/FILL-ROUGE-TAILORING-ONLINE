@@ -1,7 +1,7 @@
-package com.product_management_service.controller;
+package com.store_management_service.controller;
 
-import com.product_management_service.dto.ProductDto;
-import com.product_management_service.service.ProductService;
+import com.store_management_service.dto.ProductDto;
+import com.store_management_service.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,16 +29,6 @@ public class ProductController {
     public ResponseEntity<?> getProductById(@PathVariable("id") String id) {
         try {
             var product = productService.getProductById(Long.valueOf(id));
-            return ResponseEntity.ok(product);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/get-product-with-details/{id}")
-    public ResponseEntity<?> getProductWithDetails(@PathVariable("id") String id) {
-        try {
-            var product = productService.getProductWithStore(Long.valueOf(id));
             return ResponseEntity.ok(product);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

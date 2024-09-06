@@ -1,4 +1,4 @@
-package com.product_management_service.dto;
+package com.store_management_service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

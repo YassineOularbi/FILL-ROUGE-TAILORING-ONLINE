@@ -1,10 +1,10 @@
-package com.product_management_service.service;
+package com.store_management_service.service;
 
-import com.product_management_service.dto.MeasurementDto;
-import com.product_management_service.exception.MeasurementNotFoundException;
-import com.product_management_service.mapper.MeasurementMapper;
-import com.product_management_service.model.Measurement;
-import com.product_management_service.repository.MeasurementRepository;
+import com.store_management_service.dto.MeasurementDto;
+import com.store_management_service.exception.MeasurementNotFoundException;
+import com.store_management_service.mapper.MeasurementMapper;
+import com.store_management_service.model.Measurement;
+import com.store_management_service.repository.MeasurementRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

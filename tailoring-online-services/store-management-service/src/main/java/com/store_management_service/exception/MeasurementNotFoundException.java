@@ -1,4 +1,4 @@
-package com.product_management_service.exception;
+package com.store_management_service.exception;
 
 public class MeasurementNotFoundException extends RuntimeException {
     public MeasurementNotFoundException(Long id) {

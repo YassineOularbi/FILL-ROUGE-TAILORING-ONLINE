@@ -1,7 +1,7 @@
-package com.product_management_service.controller;
+package com.store_management_service.controller;
 
-import com.product_management_service.dto.MeasurementDto;
-import com.product_management_service.service.MeasurementService;
+import com.store_management_service.dto.MeasurementDto;
+import com.store_management_service.service.MeasurementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

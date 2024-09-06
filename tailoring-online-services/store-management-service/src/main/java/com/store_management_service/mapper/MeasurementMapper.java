@@ -1,7 +1,7 @@
-package com.product_management_service.mapper;
+package com.store_management_service.mapper;
 
-import com.product_management_service.dto.MeasurementDto;
-import com.product_management_service.model.Measurement;
+import com.store_management_service.dto.MeasurementDto;
+import com.store_management_service.model.Measurement;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;

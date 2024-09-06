@@ -1,12 +1,12 @@
-package com.product_management_service.service;
+package com.store_management_service.service;
 
-import com.product_management_service.client.StoreManagementClient;
-import com.product_management_service.dto.ProductDto;
-import com.product_management_service.exception.ProductNotFoundException;
-import com.product_management_service.exception.StoreNotFoundException;
-import com.product_management_service.mapper.ProductMapper;
-import com.product_management_service.model.Product;
-import com.product_management_service.repository.ProductRepository;
+import com.store_management_service.dto.ProductDto;
+import com.store_management_service.exception.ProductNotFoundException;
+import com.store_management_service.exception.StoreNotFoundException;
+import com.store_management_service.mapper.ProductMapper;
+import com.store_management_service.model.Product;
+import com.store_management_service.repository.ProductRepository;
+import com.store_management_service.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +20,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
-    private final StoreManagementClient storeManagementClient;
+    private final StoreRepository storeRepository;
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -30,22 +30,14 @@ public class ProductService {
         return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
-    public ProductDto getProductWithStore(Long id) {
-        var product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
-        var store = storeManagementClient.getStoreById(product.getStoreId().toString()).orElseThrow(() -> new StoreNotFoundException(product.getStoreId()));
-        var mappedProduct = productMapper.toDto(product);
-        mappedProduct.setStore(store);
-        return mappedProduct;
-    }
-
     public ProductDto addProduct(ProductDto productDto, Long storeId) {
-        var supplier = storeManagementClient.getStoreById(storeId.toString()).orElseThrow(() -> new StoreNotFoundException(storeId));
+        var store = storeRepository.findById(storeId).orElseThrow(() -> new StoreNotFoundException(storeId));
         var existingProduct = productRepository.findByStoreId(storeId);
         if (existingProduct.isPresent()) {
             return updateProduct(existingProduct.get().getId(), productDto);
         } else {
             var mappedProduct = productMapper.toEntity(productDto);
-            mappedProduct.setStoreId(supplier.getId());
+            mappedProduct.setStoreId(store.getId());
             String sku = STR."TO-\{mappedProduct.getCategory()}-MA-\{(int) (Math.random() * 10000)}";
             mappedProduct.setCodeSKU(sku);
             var savedProduct = productRepository.save(mappedProduct);

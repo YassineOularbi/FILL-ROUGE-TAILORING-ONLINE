@@ -10,7 +10,8 @@ CREATE TABLE product (
                          rating DOUBLE DEFAULT 0.00,
                          sales INTEGER DEFAULT 0,
                          authenticity_verified BOOLEAN DEFAULT FALSE,
-                         store_id BIGINT NOT NULL
+                         store_id BIGINT NOT NULL,
+                        FOREIGN KEY (store_id) REFERENCES store(id) ON DELETE CASCADE
 );
 
 -- Table to store product images
@@ -28,4 +29,11 @@ CREATE TABLE product_details (
                                  details_value VARCHAR(255),
                                  PRIMARY KEY (product_id, details_key),
                                  FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
+);
+
+CREATE TABLE measurement (
+                                id BIGINT PRIMARY KEY NOT NULL,
+                                name VARCHAR(255) NOT NULL,
+                                description TEXT NOT NULL,
+                                logo VARCHAR(255) NOT NULL
 );
