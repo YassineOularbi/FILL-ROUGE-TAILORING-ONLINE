@@ -29,21 +29,25 @@ public class AddressService {
     public Address getAddressById(Long id) {
         return addressRepository.findById(id).orElseThrow(() -> new AddressNotFoundException(id));
     }
+
+    public AddressDto getAddressWithUser(Long id){
+        var address = addressRepository.findById(id).orElseThrow(() -> new AddressNotFoundException(id));
+        var user = userManagementClient.getUserById(address.getUserId()).orElseThrow(() -> new UserNotFoundException(address.getUserId()));
+        var mappedAddress = addressMapper.toDto(address);
+        mappedAddress.setUser(user);
+        return mappedAddress;
+    }
     
     public AddressDto addAddress(AddressDto addressDto, String id) {
-        var user = userManagementClient.getUserById(id);
-        if (user.getStatusCode().is2xxSuccessful()){
-            var address = addressRepository.findByUserId(id);
-            if (address.isPresent()){
-                 return updateAddress(address.get().getId(), addressDto);
-            } else {
-                var mappedAddress = addressMapper.toEntity(addressDto);
-                mappedAddress.setUserId(id);
-                var savedAddress = addressRepository.save(mappedAddress);
-                return addressMapper.toDto(savedAddress);
-            }
+        var user = userManagementClient.getUserById(id).orElseThrow(() -> new UserNotFoundException(id));
+        var address = addressRepository.findByUserId(id);
+        if (address.isPresent()){
+            return updateAddress(address.get().getId(), addressDto);
         } else {
-            throw new UserNotFoundException(id);
+            var mappedAddress = addressMapper.toEntity(addressDto);
+            mappedAddress.setUserId(user.getId());
+            var savedAddress = addressRepository.save(mappedAddress);
+            return addressMapper.toDto(savedAddress);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.payment_banking_service.dto;
 
+import com.payment_banking_service.model.User;
 import lombok.*;
 
 import java.io.Serializable;
@@ -14,4 +15,5 @@ public class BankDto implements Serializable {
     private String cardNumber;
     private Date expirationDate;
     private String cvc;
+    private User user;
 }

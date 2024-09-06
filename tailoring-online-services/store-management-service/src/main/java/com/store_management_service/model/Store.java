@@ -45,4 +45,7 @@ public class Store {
     @Column(name = "rating", nullable = false, columnDefinition = "Double default 0.00")
     private Double rating;
 
+    @Column(name = "tailor_id", nullable = false)
+    private String tailorId;
+
 }

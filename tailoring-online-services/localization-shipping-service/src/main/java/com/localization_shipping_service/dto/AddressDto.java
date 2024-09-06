@@ -1,5 +1,6 @@
 package com.localization_shipping_service.dto;
 
+import com.localization_shipping_service.model.User;
 import lombok.*;
 
 import java.io.Serializable;
@@ -18,4 +19,5 @@ public class AddressDto implements Serializable {
     private String country;
     private String zipCode;
     private Boolean isDefault;
+    private User user;
 }
