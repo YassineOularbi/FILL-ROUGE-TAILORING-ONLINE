@@ -56,7 +56,7 @@ public class Product {
     @Column(name = "sales", columnDefinition = "Integer default 0")
     private Integer sales;
 
-    @Column(name = "authenticityVerified", columnDefinition = "Boolean default false")
+    @Column(name = "authenticity_verified", columnDefinition = "Boolean default false")
     private Boolean authenticityVerified;
 
     @Column(name = "store_id", nullable = false)
