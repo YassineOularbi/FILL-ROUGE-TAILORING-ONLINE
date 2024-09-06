@@ -46,6 +46,9 @@
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.api-gateway-service [clean].executor": "Run",
     "Maven.api-gateway-service [install].executor": "Run",
+    "Maven.store-management-service [clean].executor": "Run",
+    "Maven.store-management-service [install].executor": "Run",
+    "Maven.store-management-service [site].executor": "Run",
     "Maven.tailoring-online-services [clean].executor": "Run",
     "Maven.tailoring-online-services [install].executor": "Run",
     "Maven.user-management-service [clean].executor": "Run",
@@ -236,7 +239,7 @@
       <workItem from="1725262433198" duration="19181000" />
       <workItem from="1725324745322" duration="52538000" />
       <workItem from="1725491720818" duration="1503000" />
-      <workItem from="1725493924606" duration="20447000" />
+      <workItem from="1725493924606" duration="24415000" />
     </task>
     <servers />
   </component>

@@ -29,11 +29,14 @@ public class Store {
     private String description;
 
     @ElementCollection
-    @Column(name = "type", nullable = false)
+    @CollectionTable(name = "store_types", joinColumns = @JoinColumn(name = "store_id"))
+    @MapKeyColumn(name = "type_key")
+    @Column(name = "type_value")
     private Map<String, String> type;
 
     @ElementCollection
-    @Column(name = "images", nullable = false)
+    @CollectionTable(name = "store_images", joinColumns = @JoinColumn(name = "store_id"))
+    @Column(name = "image_url")
     private List<String> images;
 
     @Column(name = "logo", nullable = false)
@@ -47,5 +50,8 @@ public class Store {
 
     @Column(name = "tailor_id", nullable = false)
     private String tailorId;
+
+    @OneToMany(mappedBy = "store")
+    private List<Material> materials;
 
 }

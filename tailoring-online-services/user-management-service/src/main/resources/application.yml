@@ -41,18 +41,6 @@ spring:
 server:
   port: 8081
 
-openapi:
-  service:
-    title: USER-MANAGEMENT-SERVICE doc
-    version: 1.0.0
-    url: http://localhost:9191
-
-springdoc:
-  api-docs:
-    path: /USER-MANAGEMENT-SERVICE/v3/api-docs
-  swagger-ui:
-    path: /USER-MANAGEMENT-SERVICE/swagger-ui.html
-
 eureka:
   client:
     register-with-eureka: true

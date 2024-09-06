@@ -1,5 +1,6 @@
 package com.store_management_service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.store_management_service.enums.MaterialType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,4 +35,9 @@ public class Material {
 
     @Column(name = "unit_price", nullable = false)
     private Double unitPrice;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "store_id", nullable = false)
+    private Store store;
 }

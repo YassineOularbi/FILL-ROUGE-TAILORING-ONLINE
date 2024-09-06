@@ -24,18 +24,6 @@ spring:
 server:
   port: 8082
 
-openapi:
-  service:
-    title: LOCALIZATION-SHIPPING-SERVICE doc
-    version: 1.0.0
-    url: http://localhost:9191
-
-springdoc:
-  api-docs:
-    path: /LOCALIZATION-SHIPPING-SERVICE/v3/api-docs
-  swagger-ui:
-    path: /LOCALIZATION-SHIPPING-SERVICE/swagger-ui.html
-
 eureka:
   client:
     register-with-eureka: true
