@@ -4,7 +4,6 @@ import com.store_management_service.dto.StoreDto;
 import com.store_management_service.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

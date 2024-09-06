@@ -1,4 +1,22 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/realms/tailoring-online/protocol/openid-connect/certs
+      client:
+        registration:
+          keycloak:
+            client-id: user-management-app
+            authorization-grant-type: authorization_code
+            scope:
+              - openid
+              - profile
+              - email
+            redirect-uri: http://localhost:8080/login/oauth2/code/keycloak
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/tailoring-online
   application:
     name: store-management-service
   datasource:
