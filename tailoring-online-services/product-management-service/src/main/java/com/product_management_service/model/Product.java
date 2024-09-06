@@ -58,4 +58,7 @@ public class Product {
 
     @Column(name = "authenticityVerified", columnDefinition = "Boolean default false")
     private Boolean authenticityVerified;
+
+    @Column(name = "store_id", nullable = false)
+    private Long storeId;
 }
