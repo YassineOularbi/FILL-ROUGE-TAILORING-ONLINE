@@ -35,6 +35,16 @@ public class AddressController {
         }
     }
 
+    @GetMapping("/get-address-with-user/{id}")
+    public ResponseEntity<?> getAddressWithUser(@PathVariable("id") String id) {
+        try {
+            var address = addressService.getAddressWithUser(Long.valueOf(id));
+            return ResponseEntity.ok(address);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @PostMapping("/add-address/{id}")
     public ResponseEntity<?> addAddress(@RequestBody AddressDto addressDto, @PathVariable("id") String id) {
         try {

@@ -30,20 +30,24 @@ public class BankService {
         return bankRepository.findById(id).orElseThrow(() -> new BankNotFoundException(id));
     }
 
+    public BankDto getBankWithUser(Long id){
+        var bank = bankRepository.findById(id).orElseThrow(() -> new BankNotFoundException(id));
+        var user = userManagementClient.getUserById(bank.getUserId()).orElseThrow(() -> new UserNotFoundException(bank.getUserId()));
+        var mappedBank = bankMapper.toDto(bank);
+        mappedBank.setUser(user);
+        return mappedBank;
+    }
+
     public BankDto addBank(BankDto bankDto, String id) {
-        var user = userManagementClient.getUserById(id);
-        if (user.getStatusCode().is2xxSuccessful()){
-            var bank = bankRepository.findByUserId(id);
-            if (bank.isPresent()){
-                return updateBank(bank.get().getId(), bankDto);
-            } else {
-                var mappedBank = bankMapper.toEntity(bankDto);
-                mappedBank.setUserId(id);
-                var savedBank = bankRepository.save(mappedBank);
-                return bankMapper.toDto(savedBank);
-            }
+        var user = userManagementClient.getUserById(id).orElseThrow(() -> new UserNotFoundException(id));
+        var bank = bankRepository.findByUserId(id);
+        if (bank.isPresent()){
+            return updateBank(bank.get().getId(), bankDto);
         } else {
-            throw new UserNotFoundException(id);
+            var mappedBank = bankMapper.toEntity(bankDto);
+            mappedBank.setUserId(user.getId());
+            var savedBank = bankRepository.save(mappedBank);
+            return bankMapper.toDto(savedBank);
         }
     }
 

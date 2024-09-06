@@ -35,6 +35,17 @@ public class BankController {
         }
     }
 
+    @GetMapping("/get-bank-with-user/{id}")
+    public ResponseEntity<?> getBankWithUser(@PathVariable("id") Long id) {
+        try {
+            var bank = bankService.getBankWithUser(id);
+            return ResponseEntity.ok(bank);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+
     @PostMapping("/add-bank/{id}")
     public ResponseEntity<?> addBank(@RequestBody BankDto bankDto, @PathVariable("id") String id) {
         try {
