@@ -32,17 +32,12 @@ public class ProductService {
 
     public ProductDto addProduct(ProductDto productDto, Long storeId) {
         var store = storeRepository.findById(storeId).orElseThrow(() -> new StoreNotFoundException(storeId));
-        var existingProduct = productRepository.findByStoreId(storeId);
-        if (existingProduct.isPresent()) {
-            return updateProduct(existingProduct.get().getId(), productDto);
-        } else {
-            var mappedProduct = productMapper.toEntity(productDto);
-            mappedProduct.setStoreId(store.getId());
-            String sku = STR."TO-\{mappedProduct.getCategory()}-MA-\{(int) (Math.random() * 10000)}";
-            mappedProduct.setCodeSKU(sku);
-            var savedProduct = productRepository.save(mappedProduct);
-            return productMapper.toDto(savedProduct);
-        }
+        var mappedProduct = productMapper.toEntity(productDto);
+        mappedProduct.setStore(store);
+        String sku = STR."TO-\{mappedProduct.getCategory()}-MA-\{(int) (Math.random() * 10000)}";
+        mappedProduct.setCodeSKU(sku);
+        var savedProduct = productRepository.save(mappedProduct);
+        return productMapper.toDto(savedProduct);
     }
 
     public ProductDto updateProduct(Long id, ProductDto productDto) {

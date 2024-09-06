@@ -1,6 +1,7 @@
 package com.store_management_service.model;
 
 import com.store_management_service.enums.Category;
+import com.store_management_service.enums.MaterialType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
