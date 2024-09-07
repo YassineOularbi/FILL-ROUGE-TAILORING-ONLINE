@@ -41,5 +41,6 @@ public class Material {
     private Store store;
 
     @OneToMany(mappedBy = "material", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonIgnore
     private List<MaterialOption> materials;
 }

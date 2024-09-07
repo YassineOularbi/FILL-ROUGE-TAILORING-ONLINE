@@ -1,5 +1,6 @@
 package com.store_management_service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,5 +23,6 @@ public class MaterialOption {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("optionId")
     @JoinColumn(name = "option_id", nullable = false)
+    @JsonIgnore
     private CustomizableOption option;
 }

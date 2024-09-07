@@ -1,5 +1,6 @@
 package com.store_management_service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.store_management_service.enums.MaterialType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,6 +21,7 @@ public class CustomizableOption {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "three_d_model_id", nullable = false)
+    @JsonIgnore
     private ThreeDModel threeDModel;
 
     @Enumerated(EnumType.STRING)
