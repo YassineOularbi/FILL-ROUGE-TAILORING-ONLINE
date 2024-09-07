@@ -18,7 +18,7 @@ public class CustomizableOption {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "three_d_model_id", nullable = false)
     private ThreeDModel threeDModel;
 
@@ -26,11 +26,6 @@ public class CustomizableOption {
     @Column(name = "material_type", nullable = false)
     private MaterialType materialType;
 
-    @OneToMany(mappedBy = "customizable_option")
-    @JoinTable(
-            name = "material_list",
-            joinColumns = @JoinColumn(name = "material_option_id"),
-            inverseJoinColumns = @JoinColumn(name = "material_id")
-    )
+    @OneToMany(mappedBy = "option", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<MaterialOption> materials;
 }

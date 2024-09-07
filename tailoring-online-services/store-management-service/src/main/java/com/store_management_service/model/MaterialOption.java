@@ -14,14 +14,13 @@ public class MaterialOption {
     @EmbeddedId
     private MaterialOptionKey id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("materialId")
-    @JoinColumn(name = "material_id")
+    @JoinColumn(name = "material_id", nullable = false)
     private Material material;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("optionId")
-    @JoinColumn(name = "option_id")
+    @JoinColumn(name = "option_id", nullable = false)
     private CustomizableOption option;
-
 }

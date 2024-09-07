@@ -14,13 +14,13 @@ public class CustomizableMeasurement {
     @EmbeddedId
     private CustomizableMeasurementKey id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("modelId")
-    @JoinColumn(name = "model_id")
+    @JoinColumn(name = "model_id", nullable = false)
     private ThreeDModel model;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("measurementId")
-    @JoinColumn(name = "measurement_id")
+    @JoinColumn(name = "measurement_id", nullable = false)
     private Measurement measurement;
 }

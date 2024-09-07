@@ -15,7 +15,7 @@ public class MeasurementController {
 
     private final MeasurementService measurementService;
 
-    @GetMapping
+    @GetMapping("/get-all-measurements")
     public ResponseEntity<?> getAllMeasurements() {
         try {
             var measurements = measurementService.getAllMeasurements();
@@ -25,7 +25,7 @@ public class MeasurementController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get-measurement-by-id/{id}")
     public ResponseEntity<?> getMeasurementById(@PathVariable("id") Long id) {
         try {
             var measurement = measurementService.getMeasurementById(id);
@@ -35,7 +35,7 @@ public class MeasurementController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/add-measurement")
     public ResponseEntity<?> addMeasurement(@RequestBody MeasurementDto measurementDto) {
         try {
             var addedMeasurement = measurementService.addMeasurement(measurementDto);
@@ -45,7 +45,7 @@ public class MeasurementController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update-measurement/{id}")
     public ResponseEntity<?> updateMeasurement(@PathVariable("id") Long id, @RequestBody MeasurementDto measurementDto) {
         try {
             var updatedMeasurement = measurementService.updateMeasurement(id, measurementDto);
@@ -55,7 +55,7 @@ public class MeasurementController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete-measurement/{id}")
     public ResponseEntity<?> deleteMeasurement(@PathVariable("id") Long id) {
         try {
             measurementService.deleteMeasurement(id);

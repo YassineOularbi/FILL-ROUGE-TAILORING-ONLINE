@@ -5,6 +5,8 @@ import com.store_management_service.enums.MaterialType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -37,4 +39,7 @@ public class Material {
     @JsonIgnore
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
+
+    @OneToMany(mappedBy = "material", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<MaterialOption> materials;
 }

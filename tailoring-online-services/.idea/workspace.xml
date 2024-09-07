@@ -177,14 +177,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductManagementServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="product-management-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.product_management_service.ProductManagementServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PromotionManagementServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="promotion-management-service" />
@@ -239,7 +231,7 @@
       <workItem from="1725262433198" duration="19181000" />
       <workItem from="1725324745322" duration="52538000" />
       <workItem from="1725491720818" duration="1503000" />
-      <workItem from="1725493924606" duration="40911000" />
+      <workItem from="1725493924606" duration="53148000" />
     </task>
     <servers />
   </component>

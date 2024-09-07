@@ -26,6 +26,16 @@ public class MaterialController {
         }
     }
 
+    @GetMapping("/get-all-materials-by-store/{id}")
+    public ResponseEntity<?> getAllMaterialsByStore(@PathVariable("id") String id) {
+        try {
+            var materials = materialService.getAllMaterialsByStore(Long.valueOf(id));
+            return ResponseEntity.ok(materials);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @GetMapping("/get-material-by-id/{id}")
     public ResponseEntity<?> getMaterialById(@PathVariable("id") Long id) {
         try {

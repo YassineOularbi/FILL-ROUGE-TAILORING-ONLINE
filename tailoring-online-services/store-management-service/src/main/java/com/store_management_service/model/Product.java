@@ -1,5 +1,6 @@
 package com.store_management_service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.store_management_service.enums.Category;
 import com.store_management_service.enums.MaterialType;
 import jakarta.persistence.*;
@@ -65,5 +66,11 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
+    @JsonIgnore
     private Store store;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "three_d_model_id")
+    @JsonIgnore
+    private ThreeDModel threeDModel;
 }

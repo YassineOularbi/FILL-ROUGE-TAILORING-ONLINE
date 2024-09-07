@@ -1,11 +1,10 @@
 package com.store_management_service.model;
 
-import com.store_management_service.enums.MaterialType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Getter
@@ -13,25 +12,20 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "three_d_model")
-public class ThreeDModel {
+public class ThreeDModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @ManyToMany
-    @JoinTable(
-            name = "customizable_measurements",
-            joinColumns = @JoinColumn(name = "three_d_model_id"),
-            inverseJoinColumns = @JoinColumn(name = "measurement_id")
-    )
-    private List<Measurement> measurements;
+    @OneToMany(mappedBy = "model", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CustomizableMeasurement> measurements;
 
-    @OneToMany
+    @OneToMany(mappedBy = "threeDModel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CustomizableOption> options;
 }

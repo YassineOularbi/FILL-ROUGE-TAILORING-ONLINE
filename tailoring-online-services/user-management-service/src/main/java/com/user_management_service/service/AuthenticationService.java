@@ -107,8 +107,8 @@ public class AuthenticationService {
         userRepresentation.setFirstName(user.getFirstName());
         userRepresentation.setLastName(user.getLastName());
         userRepresentation.setEmail(user.getEmail());
-        userRepresentation.setEnabled(false);
-        userRepresentation.setEmailVerified(false);
+        userRepresentation.setEnabled(true);
+        userRepresentation.setEmailVerified(user.getEmailVerified());
         userRepresentation.setCredentials(Collections.singletonList(keycloakConfig.createPasswordCredentials(user.getPassword())));
         userRepresentation.setCreatedTimestamp(System.currentTimeMillis());
         usersResource.get(userId).update(userRepresentation);
