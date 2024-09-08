@@ -15,12 +15,12 @@ public class MaterialOption {
     @EmbeddedId
     private MaterialOptionKey id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("materialId")
     @JoinColumn(name = "material_id", nullable = false)
     private Material material;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("optionId")
     @JoinColumn(name = "option_id", nullable = false)
     @JsonIgnore

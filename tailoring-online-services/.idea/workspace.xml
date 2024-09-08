@@ -74,7 +74,7 @@
     "Spring Boot.UserManagementServiceApplication.executor": "Run",
     "git-widget-placeholder": "backend-microservices",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/store-management-service/src/main/java/com/store_management_service/controller",
+    "last_opened_file_path": "C:/Users/user/Downloads/keycloak-25.0.4/keycloak-25.0.4",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -232,7 +232,7 @@
       <workItem from="1725324745322" duration="52538000" />
       <workItem from="1725491720818" duration="1503000" />
       <workItem from="1725493924606" duration="55893000" />
-      <workItem from="1725752634152" duration="4182000" />
+      <workItem from="1725752634152" duration="14899000" />
     </task>
     <servers />
   </component>

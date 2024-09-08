@@ -8,7 +8,7 @@ import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = { CustomizableMeasurementMapper.class })
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = { ProductMapper.class, CustomizableMeasurementMapper.class, CustomizableOptionMapper.class })
 public interface ThreeDModelMapper {
     @Mapping(source = "productDto", target = "product")
     @Mapping(source = "measurementDtos", target = "measurements")

@@ -1,4 +1,3 @@
--- V4
 -- Création de la table three_d_model
 CREATE TABLE three_d_model (
                                id BIGINT AUTO_INCREMENT PRIMARY KEY,

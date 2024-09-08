@@ -28,7 +28,7 @@ public class Measurement {
     @Column(name = "logo", nullable = false)
     private String logo;
 
-    @OneToMany(mappedBy = "measurement", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "measurement", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<CustomizableMeasurement> measurements;
 }

@@ -1,6 +1,7 @@
 package com.store_management_service.service;
 
 import com.store_management_service.dto.CustomizableMeasurementDto;
+import com.store_management_service.exception.CustomizableMeasurementExistException;
 import com.store_management_service.exception.CustomizableMeasurementNotFoundException;
 import com.store_management_service.exception.MeasurementNotFoundException;
 import com.store_management_service.exception.ThreeDModelNotFoundException;
@@ -46,6 +47,9 @@ public class CustomizableMeasurementService {
         var threeDModel = threeDModelRepository.findById(threeDModelId).orElseThrow(() -> new ThreeDModelNotFoundException(threeDModelId));
         var measurement = measurementRepository.findById(measurementId).orElseThrow(() -> new MeasurementNotFoundException(measurementId));
         var id = new CustomizableMeasurementKey(threeDModel.getId(), measurement.getId());
+        if (customizableMeasurementRepository.existsById(id)){
+            throw new CustomizableMeasurementExistException(id);
+        }
         var customizableMeasurement = new CustomizableMeasurement(id, threeDModel, measurement);
         var savedCustomizableMeasurement = customizableMeasurementRepository.save(customizableMeasurement);
         return customizableMeasurementMapper.toDto(savedCustomizableMeasurement);

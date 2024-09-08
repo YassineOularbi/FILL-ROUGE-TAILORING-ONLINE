@@ -69,7 +69,7 @@ public class Product {
     @JsonIgnore
     private Store store;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "three_d_model_id")
     @JsonIgnore
     private ThreeDModel threeDModel;

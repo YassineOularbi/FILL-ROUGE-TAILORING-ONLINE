@@ -19,15 +19,17 @@ public class CustomizableOption {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "three_d_model_id", nullable = false)
+    //
+    @ManyToOne
+    @JoinColumn(name = "model_id", nullable = false)
     @JsonIgnore
-    private ThreeDModel threeDModel;
+    private ThreeDModel model;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "material_type", nullable = false)
-    private MaterialType materialType;
+    //
+    @Column(name = "type", nullable = false)
+    private MaterialType type;
 
-    @OneToMany(mappedBy = "option", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "option", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MaterialOption> materials;
 }

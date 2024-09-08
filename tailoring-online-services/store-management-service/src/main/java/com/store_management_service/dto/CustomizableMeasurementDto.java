@@ -8,6 +8,5 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomizableMeasurementDto {
-    public ThreeDModelDto modelDto;
     public MeasurementDto measurementDto;
 }

@@ -8,17 +8,12 @@ import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = { MeasurementMapper.class })
 public interface CustomizableMeasurementMapper {
-    @Mapping(source = "modelDto", target = "model")
     @Mapping(source = "measurementDto", target = "measurement")
     CustomizableMeasurement toEntity(CustomizableMeasurementDto customizableMeasurementDto);
-
-    @Mapping(source = "model", target = "modelDto")
     @Mapping(source = "measurement", target = "measurementDto")
     CustomizableMeasurementDto toDto(CustomizableMeasurement customizableMeasurement);
-
-    @Mapping(source = "model", target = "modelDto")
     @Mapping(source = "measurement", target = "measurementDto")
     List<CustomizableMeasurementDto> toDtos(List<CustomizableMeasurement> customizableMeasurements);
 }
