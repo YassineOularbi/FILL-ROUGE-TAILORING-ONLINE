@@ -34,6 +34,16 @@ public class CustomizableMeasurementController {
         }
     }
 
+    @GetMapping("/get-customizable-measurement-by-id/{threeDModelId}&{measurementId}")
+    public ResponseEntity<?> getCustomizableMeasurementById(@PathVariable String threeDModelId, @PathVariable String measurementId){
+        try {
+            var customizableMeasurements = customizableMeasurementService.getCustomizableMeasurementById(Long.valueOf(threeDModelId), Long.valueOf(measurementId));
+            return ResponseEntity.ok(customizableMeasurements);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @PostMapping("/add-customizable-measurement/{threeDModelId}&{measurementId}")
     public ResponseEntity<?> addCustomizableMeasurement(@PathVariable String threeDModelId, @PathVariable String measurementId) {
         try {
@@ -41,6 +51,16 @@ public class CustomizableMeasurementController {
             return ResponseEntity.ok(customizableMeasurement);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete-customizable-measurement/{threeDModelId}&{measurementId}")
+    public ResponseEntity<?> deleteCustomizableMeasurement(@PathVariable String threeDModelId, @PathVariable String measurementId){
+        try {
+            customizableMeasurementService.deleteCustomizableMeasurement(Long.valueOf(threeDModelId), Long.valueOf(measurementId));
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }

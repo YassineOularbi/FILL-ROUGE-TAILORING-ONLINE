@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ThreeDModelDto {
-    private ProductDto product;
-    private List<CustomizableMeasurementDto> measurements;
-    private List<CustomizableOption> options;
+    private ProductDto productDto;
+    private List<CustomizableMeasurementDto> measurementDtos;
+    private List<CustomizableOption> optionDtos;
 }

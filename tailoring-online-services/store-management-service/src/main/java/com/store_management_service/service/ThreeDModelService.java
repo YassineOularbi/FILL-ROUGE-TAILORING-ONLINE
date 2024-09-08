@@ -23,8 +23,8 @@ public class ThreeDModelService {
     private final ThreeDModelMapper threeDModelMapper;
     private final ProductRepository productRepository;
 
-    public List<ThreeDModel> getAllThreeDModel(){
-        return threeDModelRepository.findAll();
+    public List<ThreeDModelDto> getAllThreeDModel(){
+        return threeDModelMapper.toDtos(threeDModelRepository.findAll());
     }
 
     public ThreeDModel getThreeDModelByProduct(Long id){
@@ -48,6 +48,11 @@ public class ThreeDModelService {
         } else {
            throw new ProductThreeDModelException(product.getId(), product.getThreeDModel().getId());
         }
+    }
+
+    public void deleteThreeDModel(Long id) {
+        var existingThreeDModel = threeDModelRepository.findById(id).orElseThrow(() -> new ThreeDModelNotFoundException(id));
+        threeDModelRepository.delete(existingThreeDModel);
     }
 
 }

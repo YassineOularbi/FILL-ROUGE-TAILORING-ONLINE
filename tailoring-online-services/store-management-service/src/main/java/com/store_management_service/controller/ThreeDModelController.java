@@ -1,6 +1,5 @@
 package com.store_management_service.controller;
 
-import com.store_management_service.dto.ThreeDModelDto;
 import com.store_management_service.service.ThreeDModelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -52,6 +51,16 @@ public class ThreeDModelController {
             return ResponseEntity.ok(addedThreeDModel);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete-three-d-model/{id}")
+    public ResponseEntity<?> deleteThreeDModel(@PathVariable("id") String id) {
+        try {
+            threeDModelService.deleteThreeDModel(Long.valueOf(id));
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }
