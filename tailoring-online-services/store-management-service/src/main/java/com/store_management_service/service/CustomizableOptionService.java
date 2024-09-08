@@ -39,7 +39,7 @@ public class CustomizableOptionService {
 
     public CustomizableOptionDto addCustomizableOption(Long id, MaterialType type) {
         var threeDModel = threeDModelRepository.findById(id).orElseThrow(() -> new ThreeDModelNotFoundException(id));
-        if (customizableOptionRepository.existsByModelAndMaterialType(threeDModel, type)){
+        if (customizableOptionRepository.existsByModelAndType(threeDModel, type)){
             throw new CustomizableOptionExistException(threeDModel.getId(), type);
         }
         var customizableOption = new CustomizableOption();

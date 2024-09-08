@@ -1,6 +1,5 @@
 package com.store_management_service.dto;
 
-import com.store_management_service.model.CustomizableOption;
 import lombok.*;
 
 import java.util.List;
@@ -12,5 +11,5 @@ import java.util.List;
 public class ThreeDModelDto {
     private ProductDto productDto;
     private List<CustomizableMeasurementDto> measurementDtos;
-    private List<CustomizableOption> optionDtos;
+    private List<CustomizableOptionDto> optionDtos;
 }

@@ -10,10 +10,10 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = { MaterialMapper.class })
 public interface MaterialOptionMapper {
-    @Mapping(source = "materialDto", target = "Material")
+    @Mapping(source = "materialDto", target = "material")
     MaterialOption toEntity(MaterialOptionDto materialOptionDto);
-    @Mapping(source = "material", target = "MaterialDto")
+    @Mapping(source = "material", target = "materialDto")
     MaterialOptionDto toDto(MaterialOption materialOption);
-    @Mapping(source = "material", target = "MaterialDto")
+    @Mapping(source = "material", target = "materialDto")
     List<MaterialOptionDto> toDtos(List<MaterialOption> materialOptions);
 }
