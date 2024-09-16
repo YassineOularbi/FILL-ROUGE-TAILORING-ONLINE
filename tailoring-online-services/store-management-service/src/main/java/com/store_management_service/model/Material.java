@@ -3,10 +3,9 @@ package com.store_management_service.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.store_management_service.enums.MaterialType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -40,4 +39,8 @@ public class Material {
     @JsonIgnore
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
+
+    @OneToMany(mappedBy = "material", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<MaterialOption> materials;
 }

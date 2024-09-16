@@ -74,7 +74,7 @@
     "Spring Boot.UserManagementServiceApplication.executor": "Run",
     "git-widget-placeholder": "backend-microservices",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/store-management-service/src/main/java/com/store_management_service/controller",
+    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/BRIEF-CONSTRUCTXPERT-MICROSERVICES/constructxpert-services",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -177,14 +177,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductManagementServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="product-management-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.product_management_service.ProductManagementServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PromotionManagementServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="promotion-management-service" />
@@ -239,7 +231,13 @@
       <workItem from="1725262433198" duration="19181000" />
       <workItem from="1725324745322" duration="52538000" />
       <workItem from="1725491720818" duration="1503000" />
-      <workItem from="1725493924606" duration="33019000" />
+      <workItem from="1725493924606" duration="55893000" />
+      <workItem from="1725752634152" duration="22249000" />
+      <workItem from="1725876739826" duration="281000" />
+      <workItem from="1725877704667" duration="625000" />
+      <workItem from="1725880792858" duration="1900000" />
+      <workItem from="1726498056611" duration="5000" />
+      <workItem from="1726498092610" duration="1840000" />
     </task>
     <servers />
   </component>

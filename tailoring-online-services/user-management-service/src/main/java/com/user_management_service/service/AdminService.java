@@ -65,7 +65,7 @@ public class AdminService {
 
 
     public AdminDto updateAdmin(String id, AdminDto adminDto) {
-        var existingAdmin = adminRepository.findById(id).orElseThrow(() -> new RuntimeException("Admin not found"));
+        var existingAdmin = adminRepository.findById(id).orElseThrow(() -> new AdminNotFoundException(id));
         var updatedAdmin = (Admin) adminMapper.partialUpdate(adminDto, existingAdmin);
         try {
             authenticationService.updateUser(id, adminDto);

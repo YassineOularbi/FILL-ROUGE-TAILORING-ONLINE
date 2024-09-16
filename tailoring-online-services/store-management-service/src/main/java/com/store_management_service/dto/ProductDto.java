@@ -15,7 +15,6 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto {
-    private Long id;
     private String name;
     private String description;
     private Category category;
@@ -27,5 +26,4 @@ public class ProductDto {
     private Double rating;
     private Integer sales;
     private Boolean authenticityVerified;
-    private Store store;
 }

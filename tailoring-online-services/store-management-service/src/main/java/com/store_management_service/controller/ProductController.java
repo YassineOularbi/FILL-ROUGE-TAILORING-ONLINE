@@ -25,6 +25,16 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/get-all-products-by-store/{id}")
+    public ResponseEntity<?> getAllProductsByStore(@PathVariable String id) {
+        try {
+            var products = productService.getAllProductsByStore(Long.valueOf(id));
+            return ResponseEntity.ok(products);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @GetMapping("/get-product-by-id/{id}")
     public ResponseEntity<?> getProductById(@PathVariable("id") String id) {
         try {

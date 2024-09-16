@@ -13,7 +13,7 @@ public interface UserMapper {
     User toEntity(UserDto userDto);
     @SubclassMapping(source = Admin.class, target = AdminDto.class)
     @SubclassMapping(source = Tailor.class, target = TailorDto.class)
-    @SubclassMapping(source = Customer.class, target = AdminDto.class)
+    @SubclassMapping(source = Customer.class, target = CustomerDto.class)
     UserDto toDto(User user);
 
     User partialUpdate(UserDto userDto, @MappingTarget User user);

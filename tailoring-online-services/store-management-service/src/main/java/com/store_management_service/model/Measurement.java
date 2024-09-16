@@ -1,10 +1,10 @@
 package com.store_management_service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,4 +27,8 @@ public class Measurement {
 
     @Column(name = "logo", nullable = false)
     private String logo;
+
+    @OneToMany(mappedBy = "measurement", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<CustomizableMeasurement> measurements;
 }

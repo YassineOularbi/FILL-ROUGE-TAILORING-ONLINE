@@ -26,6 +26,10 @@ public class MaterialService {
         return materialRepository.findAll();
     }
 
+    public List<Material> getAllMaterialsByStore(Long id){
+        return materialRepository.getAllByStoreId(id);
+    }
+
     public Material getMaterialById(Long id) {
         return materialRepository.findById(id).orElseThrow(() -> new MaterialNotFoundException(id));
     }
