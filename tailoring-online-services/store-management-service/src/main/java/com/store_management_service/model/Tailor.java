@@ -7,6 +7,5 @@ import java.io.Serializable;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Tailor extends User implements Serializable {
 }
