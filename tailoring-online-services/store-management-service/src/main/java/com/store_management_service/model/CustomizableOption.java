@@ -19,14 +19,12 @@ public class CustomizableOption {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //
     @ManyToOne
     @JoinColumn(name = "model_id", nullable = false)
     @JsonIgnore
     private ThreeDModel model;
 
     @Enumerated(EnumType.STRING)
-    //
     @Column(name = "type", nullable = false)
     private MaterialType type;
 

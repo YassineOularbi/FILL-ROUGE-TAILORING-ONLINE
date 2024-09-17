@@ -11,7 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@RequestMapping(path = "/notifications/api/email")
+@RequestMapping(path = "/api/email")
 @AllArgsConstructor
 public class EmailController {
 
