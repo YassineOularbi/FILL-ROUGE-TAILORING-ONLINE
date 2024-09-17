@@ -1,5 +1,6 @@
 package com.order_management_service.client;
 
+import com.order_management_service.model.Material;
 import com.order_management_service.model.Measurement;
 import com.order_management_service.model.Product;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -16,5 +17,7 @@ public interface StoreManagementClient {
 
     @GetMapping("/api/measurement/get-measurement-by-id/{id}")
     Optional<Measurement> getMeasurementById(@PathVariable("id") String id);
-    
+
+    @GetMapping("/api/material/get-material-by-id/{id}")
+    Optional<Material> getMaterialById(@PathVariable("id") String id);
 }
