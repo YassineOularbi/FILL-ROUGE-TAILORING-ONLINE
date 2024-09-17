@@ -15,8 +15,8 @@
       <list>
         <option value="Record" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -105,11 +105,11 @@
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.order_management_service.exceptions" />
       <recent name="com.order_management_service.enums" />
       <recent name="com.order_management_service.model" />
       <recent name="com.store_management_service.enums" />
       <recent name="com.product_management_service.model" />
-      <recent name="com.store_management_service.exception" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -237,7 +237,7 @@
       <workItem from="1725877704667" duration="625000" />
       <workItem from="1725880792858" duration="1900000" />
       <workItem from="1726498056611" duration="5000" />
-      <workItem from="1726498092610" duration="2538000" />
+      <workItem from="1726498092610" duration="7653000" />
     </task>
     <servers />
   </component>
