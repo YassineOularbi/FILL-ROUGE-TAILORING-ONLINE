@@ -7,6 +7,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class AdminDto extends UserDto implements Serializable {
-
 }

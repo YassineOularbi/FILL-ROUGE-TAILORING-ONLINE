@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/YassineOularbi/TAILORING-ONLINE-CONFIG-REPO.git
+          default-label: main
+          clone-on-start: true
+          username: yassineoularbi
+          password: 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
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: ADMIN
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
+server:
+  port: 8888
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

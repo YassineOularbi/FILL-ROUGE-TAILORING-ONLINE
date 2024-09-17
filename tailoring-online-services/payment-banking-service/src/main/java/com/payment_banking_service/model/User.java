@@ -12,7 +12,6 @@ import java.sql.Date;
 public class User {
     private String id;
     private String username;
-    private String password;
     private String email;
     private Role role;
     private String firstName;

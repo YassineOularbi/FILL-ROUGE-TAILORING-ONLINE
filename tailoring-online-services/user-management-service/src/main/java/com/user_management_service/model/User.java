@@ -1,5 +1,6 @@
 package com.user_management_service.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.user_management_service.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,6 +29,7 @@ public class User implements UserDetails, Serializable {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "password", nullable = false, unique = true)
     private String password;
 

@@ -21,7 +21,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/config-repo" />
   </component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -60,6 +60,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.ApiGatewayServiceApplication.executor": "Run",
+    "Spring Boot.ConfigServerApplication.executor": "Run",
     "Spring Boot.EurekaServerApplication.executor": "Run",
     "Spring Boot.LocalizationShippingServiceApplication.executor": "Run",
     "Spring Boot.LoyaltyProgramServiceApplication.executor": "Run",
@@ -72,9 +73,9 @@
     "Spring Boot.SocialManagementServiceApplication.executor": "Run",
     "Spring Boot.StoreManagementServiceApplication.executor": "Run",
     "Spring Boot.UserManagementServiceApplication.executor": "Run",
-    "git-widget-placeholder": "backend-microservices",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/BRIEF-CONSTRUCTXPERT-MICROSERVICES/constructxpert-services",
+    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/config-repo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -91,11 +92,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\config-repo" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\controller" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\service" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\exception" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\repository" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\enums" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\notification-mailing-service\src\main\java\com\notification_mailing_service\controller" />
@@ -121,11 +122,19 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.NotificationMailingServiceApplication">
+  <component name="RunManager" selected="Spring Boot.ConfigServerApplication">
     <configuration name="ApiGatewayServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="api-gateway-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.api_gateway_service.ApiGatewayServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="config-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.config_server.ConfigServerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -237,7 +246,7 @@
       <workItem from="1725877704667" duration="625000" />
       <workItem from="1725880792858" duration="1900000" />
       <workItem from="1726498056611" duration="5000" />
-      <workItem from="1726498092610" duration="9268000" />
+      <workItem from="1726498092610" duration="13577000" />
     </task>
     <servers />
   </component>
