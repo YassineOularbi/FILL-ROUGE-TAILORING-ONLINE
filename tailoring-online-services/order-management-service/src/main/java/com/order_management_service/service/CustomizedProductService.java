@@ -26,8 +26,7 @@ public class CustomizedProductService {
     }
 
     public CustomizedProduct getCustomizedProductById(Long id) {
-        return customizedProductRepository.findById(id)
-                .orElseThrow(() -> new CustomizedProductNotFoundException(id));
+        return customizedProductRepository.findById(id).orElseThrow(() -> new CustomizedProductNotFoundException(id));
     }
 
     public CustomizedProductDto getCustomizedProductWithProduct(Long id){
