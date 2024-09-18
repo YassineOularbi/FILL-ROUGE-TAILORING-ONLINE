@@ -1,4 +1,4 @@
-package com.localization_shipping_service.config;
+package com.store_management_service.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -18,9 +18,9 @@ import java.util.List;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "Localization Shipping Service API",
+                title = "Store Management Service API",
                 version = "v1",
-                description = "API documentation for the Localization Shipping Service",
+                description = "API documentation for the Store Management Service",
                 license = @License(name = "Apache 2.0", url = "http://springdoc.org"),
                 contact = @Contact(
                         name = "Yassine Oularbi",

@@ -106,11 +106,11 @@
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.order_management_service.exceptions" />
-      <recent name="com.order_management_service.enums" />
-      <recent name="com.order_management_service.model" />
-      <recent name="com.store_management_service.enums" />
-      <recent name="com.product_management_service.model" />
+      <recent name="com.user_management_service.config" />
+      <recent name="com.store_management_service.config" />
+      <recent name="com.payment_banking_service.config" />
+      <recent name="com.order_management_service.config" />
+      <recent name="com.localization_shipping_service.config" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -272,7 +272,7 @@
       <workItem from="1725877704667" duration="625000" />
       <workItem from="1725880792858" duration="1900000" />
       <workItem from="1726498056611" duration="5000" />
-      <workItem from="1726498092610" duration="21380000" />
+      <workItem from="1726498092610" duration="24736000" />
     </task>
     <servers />
   </component>
