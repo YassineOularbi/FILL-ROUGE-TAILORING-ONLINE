@@ -21,6 +21,7 @@ public class KeycloakConfig {
 
 
     public Keycloak getInstance(String username, String password){
+        System.out.println("keycloak instance");
         return KeycloakBuilder.builder()
                 .serverUrl(serverUrl)
                 .realm(realm)
