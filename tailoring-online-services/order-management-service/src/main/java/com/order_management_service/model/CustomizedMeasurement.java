@@ -24,11 +24,11 @@ public class CustomizedMeasurement {
     @Column(name = "value", nullable = false)
     private Double value;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "unit", nullable = false)
     private MeasurementUnit unit;
 
     @ManyToOne
-    @MapsId("productId")
     @JoinColumn(name = "product_id", nullable = false)
     @JsonIgnore
     private CustomizedProduct product;
