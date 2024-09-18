@@ -236,15 +236,15 @@
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
-      <item itemvalue="Spring Boot.LoyaltyProgramServiceApplication" />
       <item itemvalue="Spring Boot.NotificationMailingServiceApplication" />
       <item itemvalue="Spring Boot.OrderManagementServiceApplication" />
       <item itemvalue="Spring Boot.PaymentBankingServiceApplication" />
-      <item itemvalue="Spring Boot.PromotionManagementServiceApplication" />
-      <item itemvalue="Spring Boot.ReviewManagementServiceApplication" />
-      <item itemvalue="Spring Boot.SocialManagementServiceApplication" />
       <item itemvalue="Spring Boot.StoreManagementServiceApplication" />
       <item itemvalue="Spring Boot.UserManagementServiceApplication" />
+      <item itemvalue="Spring Boot.ReviewManagementServiceApplication" />
+      <item itemvalue="Spring Boot.LoyaltyProgramServiceApplication" />
+      <item itemvalue="Spring Boot.PromotionManagementServiceApplication" />
+      <item itemvalue="Spring Boot.SocialManagementServiceApplication" />
       <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
     </list>
     <recent_temporary>
@@ -272,7 +272,7 @@
       <workItem from="1725877704667" duration="625000" />
       <workItem from="1725880792858" duration="1900000" />
       <workItem from="1726498056611" duration="5000" />
-      <workItem from="1726498092610" duration="20538000" />
+      <workItem from="1726498092610" duration="21380000" />
     </task>
     <servers />
   </component>
