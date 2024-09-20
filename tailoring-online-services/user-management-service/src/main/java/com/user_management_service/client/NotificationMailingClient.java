@@ -1,11 +1,12 @@
 package com.user_management_service.client;
 
+import com.user_management_service.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "notification-mailing-service", url = "http://localhost:8084/notifications")
+@FeignClient(name = "notification-mailing-service", url = "http://localhost:9191/NOTIFICATION-MAILING-SERVICE", configuration = FeignClientConfig.class)
 public interface NotificationMailingClient {
 
     @GetMapping("/api/email/send-verification-code/{email}")
