@@ -1,0 +1,220 @@
+:host {
+    display: block;
+    width: 100%;
+    font-family: "Inter";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+    .hero-section {
+        position: relative;
+        width: 70%;
+
+        img {
+            width: 100%;
+            border-radius: 30px;
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 0;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards;
+
+            h1,
+            h2 {
+                font-family: "Inter";
+                font-weight: bold;
+                color: var(--black);
+                margin: 0 !important;
+            }
+
+            h1 {
+                font-size: 90px;
+                margin-bottom: -15px !important;
+            }
+
+            h2 {
+                font-size: 87px;
+                margin-bottom: -13px !important;
+                font-weight: 400;
+            }
+
+            .get-in-touch {
+                border-radius: 30px;
+                border: 1px solid var(--black);
+                cursor: pointer;
+                margin-bottom: 10px;
+                padding: 10px 20px;
+                display: inline-block;
+                transition: background-color 0.4s ease, transform 0.4s ease;
+
+                a {
+                    color: var(--black);
+                    text-decoration: none;
+                    font-family: "Inter";
+                    font-weight: 500;
+                    font-size: 14px;
+                    transition: color 0.4s ease;
+                }
+
+                mat-icon {
+                    rotate: -40deg;
+                    color: var(--black);
+                    transition: rotate 0.4s ease, color 0.4s ease;
+                }
+            }
+
+            .get-in-touch:hover {
+                background-color: var(--black);
+                transform: scale(1.1);
+            }
+
+            .get-in-touch:hover a {
+                color: var(--white);
+            }
+
+            .get-in-touch:hover mat-icon {
+                color: var(--white);
+                rotate: 0deg;
+            }
+        }
+    }
+
+    .cards-section {
+        width: 30%;
+        padding: 0 !important;
+
+        .card {
+            border: none;
+            margin-left: 25px;
+            position: relative;
+
+
+            img {
+                border-radius: 30px;
+                width: 97%;
+            }
+
+            mat-card {
+                position: absolute;
+                top: 0;
+                background-color: transparent;
+                border: none;
+                box-shadow: none;
+                width: 97%;
+                animation: fadeInUp 1s ease forwards;
+
+                mat-card-header {
+                    width: 95%;
+
+                    mat-card-title {
+                        width: 180px;
+                        cursor: pointer;
+                        border: 1px solid var(--white);
+                        border-radius: 30px;
+                        font-family: "Inter";
+                        font-weight: 400;
+                        font-size: 14px;
+                        color: var(--white);
+                        padding: 5px 20px;
+                        text-align: center;
+                        transition: background-color 0.5s ease, color 0.5s ease;
+                    }
+
+                    mat-card-title:hover {
+                        background-color: var(--white);
+                        color: var(--black);
+                        font-weight: bold;
+                    }
+                }
+
+                mat-card-content {
+                    p {
+                        font-family: "Inter";
+                        font-weight: 400;
+                        font-size: 20px;
+                        color: var(--white);
+                        margin-top: 10px;
+                    }
+
+                    span {
+                        font-family: "Inter";
+                        font-weight: 400;
+                        font-size: 17px;
+                        color: var(--white);
+                        margin-top: 30px;
+                    }
+
+                    div {
+                        font-family: "Inter";
+                        font-weight: 400;
+                        font-size: 17px;
+                        color: var(--white);
+                        margin-top: 20px;
+                    }
+                }
+
+                mat-card-actions {
+                    button {
+                        font-family: "Inter";
+                        font-weight: 400;
+                        font-size: 25px;
+                        color: var(--white);
+                        margin-top: 40px;
+                        background: none;
+                        border: none;
+                    }
+                }
+            }
+
+            .get-in-touch {
+                background-color: var(--white);
+                border: 2px solid var(--black);
+                border-radius: 100%;
+                width: 60px;
+                height: 60px;
+                position: absolute;
+                bottom: 0;
+                right: 20px;
+                cursor: pointer;
+                animation: fadeInUp 1s ease forwards;
+                transition: background-color 0.4s ease, transform 0.4s ease;
+
+                mat-icon {
+                    width: 60px;
+                    height: 60px;
+                    font-size: 35px;
+                    color: var(--black);
+                    rotate: -40deg;
+                    transition: color 0.4s ease, rotate 0.4s ease;
+                }
+            }
+
+            .get-in-touch:hover {
+                background-color: var(--black);
+                transform: scale(1.1);
+            }
+
+            .get-in-touch:hover mat-icon {
+                color: var(--white);
+                rotate: 0deg;
+            }
+        }
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
