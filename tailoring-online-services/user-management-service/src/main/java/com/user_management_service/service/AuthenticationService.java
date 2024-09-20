@@ -125,7 +125,6 @@ public class AuthenticationService {
     public String sendVerificationCode(String id) {
         var localUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         var email = localUser.getEmail();
-
         if (email != null && !email.isEmpty()) {
             notificationMailingClient.sendVerificationCode(email);
         }

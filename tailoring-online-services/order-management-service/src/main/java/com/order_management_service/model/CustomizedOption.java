@@ -18,6 +18,7 @@ public class CustomizedOption {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private MaterialType type;
 
@@ -25,7 +26,6 @@ public class CustomizedOption {
     private Long materialId;
 
     @ManyToOne
-    @MapsId("productId")
     @JoinColumn(name = "product_id", nullable = false)
     @JsonIgnore
     private CustomizedProduct product;

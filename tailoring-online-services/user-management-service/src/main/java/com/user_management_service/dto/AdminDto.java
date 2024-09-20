@@ -8,5 +8,4 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 public class AdminDto extends UserDto implements Serializable {
-
 }
