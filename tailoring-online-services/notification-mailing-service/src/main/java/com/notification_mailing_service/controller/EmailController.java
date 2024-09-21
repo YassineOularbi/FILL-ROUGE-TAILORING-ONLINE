@@ -54,4 +54,16 @@ public class EmailController {
             }
         });
     }
+
+    @GetMapping("/contact-us")
+    public CompletableFuture<ResponseEntity<?>> contactUs(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phone") String phone, @RequestParam("message") String message){
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                emailService.contactUs(name, email, phone, message);
+                return ResponseEntity.ok("Email sent successfully!");
+            } catch (MessagingException | UnsupportedEncodingException e) {
+                return ResponseEntity.status(500).body("Failed to send email: " + e.getMessage());
+            }
+        });
+    }
 }
