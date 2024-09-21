@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TailoringComponent } from './_components/tailoring/tailoring.component';
 import { ServicesComponent } from "./_components/services/services.component";
 import { AboutUsComponent } from "./_components/about-us/about-us.component";
+import { ContactUsComponent } from "./_components/contact-us/contact-us.component";
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ import { AboutUsComponent } from "./_components/about-us/about-us.component";
     MatIconModule,
     TailoringComponent,
     ServicesComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    ContactUsComponent
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

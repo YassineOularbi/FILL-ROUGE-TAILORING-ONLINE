@@ -247,20 +247,45 @@ main {
                     font-size: 41px;
                     margin-bottom: -6px !important;
                 }
-                .get-in-touch{
-                    width: 70px;
-                    margin: 0 !important;
-                    padding: 2px !important;
-                    margin-bottom: 3px !important;
-                    a{
-                        font-size: 8px;
-
+                .get-in-touch {
+                    background-color: var(--white);
+                    width: 140px;
+                    border-radius: 30px;
+                    border: 1px solid var(--black);
+                    cursor: pointer;
+                    margin-bottom: 10px;
+                    padding: 10px 20px;
+                    display: inline-block;
+                    transition: background-color 0.4s ease, transform 0.4s ease;
+        
+                    a {
+                        color: var(--black);
+                        text-decoration: none;
+                        font-family: "Inter";
+                        font-weight: 500;
+                        font-size: 14px;
+                        transition: color 0.4s ease;
                     }
-                    mat-icon{
-                        width: 15px;
-                        height: 15px;
-                        font-size: 15px;
+        
+                    mat-icon {
+                        rotate: -40deg;
+                        color: var(--black);
+                        transition: rotate 0.4s ease, color 0.4s ease;
                     }
+                }
+        
+                .get-in-touch:hover {
+                    background-color: var(--black);
+                    transform: scale(1.1);
+                }
+            
+                .get-in-touch:hover a {
+                    color: var(--white);
+                }
+            
+                .get-in-touch:hover mat-icon {
+                    color: var(--white);
+                    rotate: 0deg;
                 }
             }
 
