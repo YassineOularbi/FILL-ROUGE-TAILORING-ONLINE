@@ -1,10 +1,9 @@
 <mat-toolbar class="navbar">
     <div class="container-fluid">
 
-        <!-- Left Links (Visible on Medium and Up) -->
         <ul class="navbar-nav col-md-5 d-none d-md-flex flex-row justify-content-around align-items-center">
             <li class="nav-item col-md-3 d-flex justify-content-center">
-                <a class="nav-link text-center w-100" routerLink="/collections">Collections</a>
+                <a class="nav-link text-center w-100" (click)="scrollToSection('collections')">Collections</a>
             </li>
             <li class="nav-item col-md-3 d-flex justify-content-center">
                 <a class="nav-link text-center w-100" routerLink="/services">Tailoring</a>
@@ -14,7 +13,6 @@
             </li>
         </ul>
 
-        <!-- Hamburger Menu for Small Screens (Visible on Small Screens) -->
         <ul class="navbar-nav w-25 h-100 d-flex d-md-none justify-content-start">
             <li class="nav-item">
                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
@@ -24,19 +22,16 @@
             </li>
         </ul>
 
-        <!-- Logo (Always Visible) -->
         <a routerLink="/" class="col-md-2 d-flex justify-content-center">
             <img src="assets/logo.png" alt="Tailoring Logo" width="100">
         </a>
 
-        <!-- Sign In Button (Always visible on small screens) -->
         <ul class="navbar-nav w-25 h-100 d-flex d-md-none justify-content-center">
             <li class="nav-item w-100">
                 <a class="nav-link button text-center w-100 font-weight-bold" routerLink="/sign-in">Sign In</a>
             </li>
         </ul>
 
-        <!-- Right Links (Visible on Medium and Up) -->
         <ul class="navbar-nav col-md-5 d-none d-md-flex flex-row justify-content-around align-items-center">
             <li class="nav-item col-md-3 d-flex justify-content-center">
                 <a class="nav-link text-center w-100" routerLink="/about-us">About Us</a>
@@ -52,7 +47,6 @@
     </div>
 
 
-    <!-- Offcanvas Menu -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -60,10 +54,7 @@
         <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/link">Collections</a>
+                    <a class="nav-link" (click)="scrollToSection('collections')">Collections</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/link">Tailoring</a>

@@ -41,13 +41,20 @@ $tailoring-online-interfaces-theme: mat.define-theme((color: (theme-type: light,
   --black: #000;
 }
 
+:root.dark{
+  --white: #000;
+  --black: #fff;
+}
+
 html,
 body {
   width: 100%;
   height: 100%;
+  background-color: var(--white);
 }
 
 body {
   margin: 0;
   font-family: "Inter";
+  background-color: var(--white);
 }

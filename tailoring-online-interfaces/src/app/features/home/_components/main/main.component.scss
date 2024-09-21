@@ -5,6 +5,7 @@
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--white);
 }
 
 main {
@@ -88,11 +89,11 @@ main {
     .cards-section {
         width: 30%;
         padding: 0 !important;
-
         .card {
             border: none;
             margin-left: 25px;
             position: relative;
+            background-color: var(--white);
 
 
             img {
@@ -115,20 +116,20 @@ main {
                     mat-card-title {
                         width: 180px;
                         cursor: pointer;
-                        border: 1px solid var(--white);
+                        border: 1px solid white;
                         border-radius: 30px;
                         font-family: "Inter";
                         font-weight: 400;
                         font-size: 14px;
-                        color: var(--white);
+                        color: white;
                         padding: 5px 20px;
                         text-align: center;
                         transition: background-color 0.5s ease, color 0.5s ease;
                     }
 
                     mat-card-title:hover {
-                        background-color: var(--white);
-                        color: var(--black);
+                        background-color: white;
+                        color: black;
                         font-weight: bold;
                     }
                 }
@@ -138,7 +139,7 @@ main {
                         font-family: "Inter";
                         font-weight: 400;
                         font-size: 20px;
-                        color: var(--white);
+                        color: white;
                         margin-top: 10px;
                     }
 
@@ -146,7 +147,7 @@ main {
                         font-family: "Inter";
                         font-weight: 400;
                         font-size: 17px;
-                        color: var(--white);
+                        color: white;
                         margin-top: 30px;
                     }
 
@@ -154,7 +155,7 @@ main {
                         font-family: "Inter";
                         font-weight: 400;
                         font-size: 17px;
-                        color: var(--white);
+                        color: white;
                         margin-top: 20px;
                     }
                 }
@@ -164,7 +165,7 @@ main {
                         font-family: "Inter";
                         font-weight: 400;
                         font-size: 25px;
-                        color: var(--white);
+                        color: white;
                         margin-top: 40px;
                         background: none;
                         border: none;
@@ -217,5 +218,62 @@ main {
     100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    main{
+        margin-top: 20px !important;
+        width: 100%;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 0 10px !important;
+        .hero-section{
+            width: 100%;
+            height: auto;
+            margin: 0 !important;
+            padding: 0 !important;
+            .hero-image{
+                width: inherit !important;
+                object-fit: cover;
+            }
+            .hero-content{
+                width: inherit !important;
+                h1 {
+                    font-size: 43px;
+                    margin-bottom: -3px !important;
+                }
+                h2 {
+                    font-size: 41px;
+                    margin-bottom: -6px !important;
+                }
+                .get-in-touch{
+                    width: 70px;
+                    margin: 0 !important;
+                    padding: 2px !important;
+                    margin-bottom: 3px !important;
+                    a{
+                        font-size: 8px;
+
+                    }
+                    mat-icon{
+                        width: 15px;
+                        height: 15px;
+                        font-size: 15px;
+                    }
+                }
+            }
+
+        }
+        .cards-section{
+            margin-top: 15px;
+            width: 100% !important;
+            padding: 0 !important;
+            .card{
+                margin-bottom: 20px;
+                margin-left: 15px !important;
+                width: 100% !important;
+            }
+        }
     }
 }
