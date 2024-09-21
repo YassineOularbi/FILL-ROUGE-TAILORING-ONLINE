@@ -8,6 +8,7 @@ import { TailoringComponent } from './_components/tailoring/tailoring.component'
 import { ServicesComponent } from "./_components/services/services.component";
 import { AboutUsComponent } from "./_components/about-us/about-us.component";
 import { ContactUsComponent } from "./_components/contact-us/contact-us.component";
+import { FooterComponent } from "./_components/footer/footer.component";
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ import { ContactUsComponent } from "./_components/contact-us/contact-us.componen
     TailoringComponent,
     ServicesComponent,
     AboutUsComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    FooterComponent
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
