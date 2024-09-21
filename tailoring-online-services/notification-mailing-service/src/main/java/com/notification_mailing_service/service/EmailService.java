@@ -87,6 +87,32 @@ public class EmailService {
         javaMailSender.send(message);
     }
 
+    public void contactUs(String name, String email, String phone, String message) throws MessagingException, UnsupportedEncodingException {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+
+        String body = String.format(
+                "<div style=\"font-family:Arial,sans-serif;line-height:1.5;padding:10px;\">"
+                        + "<h2>Contact Us Email</h2>"
+                        + "<p>Name : <strong>%s</strong></p>"
+                        + "<p>Email : <strong>%s</strong></p>"
+                        + "<p>Phone : <strong>%s</strong></p>"
+                        + "<p>Message : <strong>%s</strong></p>"
+                        + "</div>", name, email, phone, message);
+
+        helper.setFrom("Tailoring-online@outlook.com", "Tailoring Online");
+        helper.setReplyTo("Tailoring-online@outlook.com", "Tailoring Online");
+        helper.setTo("Tailoring-online@outlook.com");
+        helper.setSubject(STR."Client with name \{name} sent a message");
+        helper.setText(body, true);
+        LocalDate currentDate = LocalDate.now();
+        LocalDateTime localDateTime = currentDate.atStartOfDay();
+        Date sentDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        mimeMessage.setSentDate(sentDate);
+        javaMailSender.send(mimeMessage);
+    }
+
+
     private String getVerificationEmailTemplate(String verificationCode) {
         return String.format(
                 "<div style=\"font-family:Arial,sans-serif;line-height:1.5;padding:10px;\">"
