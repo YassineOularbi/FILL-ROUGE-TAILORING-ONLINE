@@ -13,14 +13,19 @@
 $tailoring-online-interfaces-theme: mat.define-theme((
   color: (
     theme-type: light,
-  ),
-  typography: (
-    brand-family: "Inter",
+    primary: mat.$azure-palette,
+    tertiary: mat.$azure-palette,
   ),
   density: (
     scale: 0,
   )
 ));
+
+$theme: mat.define-theme();
+
+.tertiary-checkbox {
+  @include mat.checkbox-color($theme, $color-variant: tertiary);
+}
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -36,6 +41,21 @@ $tailoring-online-interfaces-theme: mat.define-theme((
 // Comment out the line below if you want to use the deprecated `color` inputs.
 // @include mat.color-variants-backwards-compatibility($tailoring-online-interfaces-theme);
 /* You can add global styles to this file, and also import other style files */
+
+:host {
+  $white: #fff;
+  $black: #000;
+}
+
+:root {
+  --white: #fff;
+  --black: #000;
+}
+
+:root.dark{
+  --white: #000;
+  --black: #fff;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

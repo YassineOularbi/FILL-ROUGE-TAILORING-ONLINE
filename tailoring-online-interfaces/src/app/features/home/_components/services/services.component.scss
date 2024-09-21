@@ -1,0 +1,208 @@
+:host {
+    display: block;
+    width: 100%;
+    font-family: "Inter";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 30px;
+}
+
+.ligne {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-image: linear-gradient(to right, var(--black) 33%, rgba(255, 255, 255, 0) 0%);
+    background-position: bottom;
+    background-size: 10px 1px;
+    background-repeat: repeat-x;
+    margin-top: 100px;
+
+    .circle {
+        position: absolute;
+        bottom: -75px;
+        left: calc(50% - 75px);
+        width: 150px;
+        height: 150px;
+        border: 1px dashed var(--black);
+        background-color: var(--white);
+
+        p {
+            padding: 0;
+            margin: 0;
+            font-family: "Inter";
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--black);
+        }
+    }
+}
+
+.services {
+    margin-top: 100px;
+
+    h1 {
+        font-family: "Inter";
+        font-size: 30px;
+        font-weight: bold;
+        font-style: italic;
+        color: var(--black);
+    }
+
+    .service-cards {
+        .card {
+            h3 {
+                margin: 10px 0;
+                font-family: "Inter";
+                font-size: 22px;
+                font-weight: 700;
+                color: var(--black);
+                line-height: 35px;
+            }
+
+            p {
+                margin: 10px 0;
+                font-family: "Inter";
+                font-size: 15px;
+                font-weight: 500;
+                color: var(--black);
+            }
+        }
+    }
+}
+
+.subscriptions {
+    gap: 40px;
+    margin-top: 30px;
+
+    .subscription {
+        width: 40%;
+
+        mat-card {
+            background-color: var(--white);
+            border: 1px solid var(--black);
+            border-radius: 30px;
+
+            mat-card-title {
+                font-family: "Inter";
+                font-size: 25px;
+                font-weight: bold;
+                color: var(--black);
+                padding: 5px;
+                gap: 10px;
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+
+            mat-card-content {
+                margin: 5px;
+
+                p {
+                    font-family: "Inter";
+                    font-size: 15px;
+                    font-weight: 400;
+                    color: var(--black);
+                    line-height: 35px;
+                }
+
+                .content {
+                    gap: 15px;
+
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
+
+                    p {
+                        font-family: "Inter";
+                        font-size: 17px;
+                        font-weight: bold;
+                        color: var(--black);
+                        margin: 0 !important;
+                    }
+                }
+            }
+
+            mat-card-actions {
+                button {
+                    background-color: var(--white);
+                    border: 1px solid var(--black);
+                    border-radius: 30px;
+                    width: 170px;
+                    height: 50px;
+                    font-family: "Inter";
+                    font-size: 17px;
+                    font-weight: 600;
+                    color: var(--black);
+                    transition: background-color 0.3s ease, color 0.3s ease;
+                }
+
+                button:hover {
+                    background-color: var(--black);
+                    color: var(--white);
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .services {
+        h1 {
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .service-cards {
+            flex-wrap: wrap !important;
+            flex-direction: column !important;
+
+            .card {
+                width: 100% !important;
+            }
+        }
+    }
+
+    .subscriptions {
+        flex-wrap: wrap !important;
+        flex-direction: column !important;
+
+        .subscription {
+            width: 100% !important;
+
+            mat-card {
+                mat-card-title {
+                    font-size: 20px;
+
+                    img {
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+
+                mat-card-content {
+                    p {
+                        font-size: 13px;
+                        line-height: 30px;
+                    }
+
+                    .content {
+                        padding: 0 5px !important;
+                        img {
+                            width: 17px;
+                            height: 17px;
+                        }
+
+                        p {
+                            font-family: "Inter";
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
