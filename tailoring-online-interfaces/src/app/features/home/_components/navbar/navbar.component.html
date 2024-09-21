@@ -6,10 +6,10 @@
                 <a class="nav-link text-center w-100" (click)="scrollToSection('collections')">Collections</a>
             </li>
             <li class="nav-item col-md-3 d-flex justify-content-center">
-                <a class="nav-link text-center w-100" routerLink="/services">Tailoring</a>
+                <a class="nav-link text-center w-100" (click)="scrollToSection('tailoring')">Tailoring</a>
             </li>
             <li class="nav-item col-md-3 d-flex justify-content-center">
-                <a class="nav-link text-center w-100" routerLink="/about-us">Services</a>
+                <a class="nav-link text-center w-100" (click)="scrollToSection('services')">Services</a>
             </li>
         </ul>
 
@@ -34,7 +34,7 @@
 
         <ul class="navbar-nav col-md-5 d-none d-md-flex flex-row justify-content-around align-items-center">
             <li class="nav-item col-md-3 d-flex justify-content-center">
-                <a class="nav-link text-center w-100" routerLink="/about-us">About Us</a>
+                <a class="nav-link text-center w-100" (click)="scrollToSection('about-us')">About Us</a>
             </li>
             <li class="nav-item col-md-3 d-flex justify-content-center">
                 <a class="nav-link text-center w-100" routerLink="/contact-us">Contact Us</a>
@@ -57,13 +57,13 @@
                     <a class="nav-link" (click)="scrollToSection('collections')">Collections</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/link">Tailoring</a>
+                    <a class="nav-link"(click)="scrollToSection('tailoring')">Tailoring</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/link">Services</a>
+                    <a class="nav-link" (click)="scrollToSection('services')">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/link">About Us</a>
+                    <a class="nav-link" (click)="scrollToSection('about-us')">About Us</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/link">Contact Us</a>

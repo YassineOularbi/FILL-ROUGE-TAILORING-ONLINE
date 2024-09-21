@@ -2,8 +2,8 @@
     <div class="container-fluid hero-section row">
         <div class="col-md-11 d-flex align-items-center">
             <div class="hero-content col-md-11">
-                <div class="get-in-touch col-md-2 h-100 p-2 d-flex flex-row justify-content-around align-items-center">
-                    <a href="">Get in touch</a>
+                <div class="get-in-touch col-md-2 h-100 p-2 d-flex flex-row justify-content-around align-items-center" (click)="scrollToSection('services')">
+                    <a>Get in touch</a>
                     <mat-icon>arrow_forward</mat-icon>
                 </div>
                 <h2>Tailoring</h2>
@@ -23,7 +23,7 @@
                 </div>
                 <mat-card>
                     <mat-card-header>
-                        <mat-card-title>Custom Alterations</mat-card-title>
+                        <mat-card-title (click)="scrollToSection('subscription')">Custom Alterations</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                         <p>Every stitch tells your story.</p>
@@ -34,7 +34,7 @@
                         <button color="accent">Customize</button>
                     </mat-card-actions>
                 </mat-card>
-                <div class="get-in-touch">
+                <div class="get-in-touch" (click)="scrollToSection('subscription')">
                     <mat-icon class="d-flex justify-content-center align-items-center">arrow_forward</mat-icon>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 </div>
                 <mat-card>
                     <mat-card-header>
-                        <mat-card-title>Custom Tailoring</mat-card-title>
+                        <mat-card-title (click)="scrollToSection('subscription')">Custom Tailoring</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                         <p>Every stitch is perfect,</p>
@@ -55,7 +55,7 @@
                         <button color="accent">Learn More</button>
                     </mat-card-actions>
                 </mat-card>
-                <div class="get-in-touch">
+                <div class="get-in-touch" (click)="scrollToSection('subscription')">
                     <mat-icon class="d-flex justify-content-center align-items-center">arrow_forward</mat-icon>
                 </div>
             </div>
