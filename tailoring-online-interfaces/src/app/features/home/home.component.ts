@@ -6,6 +6,7 @@ import { CommonModule, ViewportScroller } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { TailoringComponent } from './_components/tailoring/tailoring.component';
 import { ServicesComponent } from "./_components/services/services.component";
+import { AboutUsComponent } from "./_components/about-us/about-us.component";
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ import { ServicesComponent } from "./_components/services/services.component";
     CommonModule,
     MatIconModule,
     TailoringComponent,
-    ServicesComponent
+    ServicesComponent,
+    AboutUsComponent
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
