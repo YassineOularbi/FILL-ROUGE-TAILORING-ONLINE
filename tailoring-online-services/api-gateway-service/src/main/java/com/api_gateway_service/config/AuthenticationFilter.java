@@ -36,6 +36,7 @@ public class AuthenticationFilter implements GlobalFilter {
                         return exchange.getResponse().setComplete();
                     });
         } else {
+            System.out.println(BASIC_AUTH_VALUE);
             ServerHttpRequest modifiedRequest = exchange.getRequest().mutate().header(HttpHeaders.AUTHORIZATION, BASIC_AUTH_VALUE).build();
             return chain.filter(exchange.mutate().request(modifiedRequest).build());
         }

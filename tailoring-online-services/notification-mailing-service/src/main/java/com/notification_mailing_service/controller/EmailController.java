@@ -62,7 +62,7 @@ public class EmailController {
                 emailService.contactUs(name, email, phone, message);
                 return ResponseEntity.ok("Email sent successfully!");
             } catch (MessagingException | UnsupportedEncodingException e) {
-                return ResponseEntity.status(500).body("Failed to send email: " + e.getMessage());
+                return ResponseEntity.status(500).body(STR."Failed to send email: \{e.getMessage()}");
             }
         });
     }
