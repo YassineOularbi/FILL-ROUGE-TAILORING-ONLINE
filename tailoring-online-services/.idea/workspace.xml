@@ -47,7 +47,15 @@
     "JUnit.AddressControllerTests.executor": "Run",
     "JUnit.AddressControllerTests.getAddressById_NotFound.executor": "Run",
     "JUnit.AddressControllerTests.updateAddress_NotFound.executor": "Run",
+    "JUnit.AdminControllerTests.executor": "Run",
+    "JUnit.AuthenticationControllerTests.executor": "Run",
+    "JUnit.AuthenticationControllerTests.login_Unauthorized.executor": "Run",
+    "JUnit.AuthenticationControllerTests.sendOtpByEmail_Success.executor": "Run",
+    "JUnit.AuthenticationControllerTests.sendVerificationCode_Success.executor": "Run",
+    "JUnit.AuthenticationControllerTests.verifyEmail_Success.executor": "Run",
+    "JUnit.AuthenticationControllerTests.verifyOtpCode_Success.executor": "Run",
     "JUnit.BankControllerTests.executor": "Run",
+    "JUnit.CustomerControllerTests.executor": "Run",
     "JUnit.CustomizableMeasurementControllerTests.executor": "Run",
     "JUnit.CustomizableOptionControllerTests.executor": "Run",
     "JUnit.CustomizedMeasurementControllerTests.executor": "Run",
@@ -60,6 +68,9 @@
     "JUnit.MeasurementControllerTests.executor": "Run",
     "JUnit.ProductControllerTests.executor": "Run",
     "JUnit.StoreControllerTests.executor": "Run",
+    "JUnit.TailorControllerTests.executor": "Run",
+    "JUnit.ThreeDModelControllerTests.executor": "Run",
+    "JUnit.UserControllerTests.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.api-gateway-service [clean].executor": "Run",
     "Maven.api-gateway-service [install].executor": "Run",
@@ -143,77 +154,77 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ThreeDModelControllerTests">
-    <configuration name="MaterialOptionControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="store-management-service" />
+  <component name="RunManager" selected="JUnit.UserControllerTests">
+    <configuration name="AdminControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.store_management_service.*" />
+          <option name="PATTERN" value="com.user_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.store_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.store_management_service.MaterialOptionControllerTests" />
+      <option name="PACKAGE_NAME" value="com.user_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AdminControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MeasurementControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="store-management-service" />
+    <configuration name="AuthenticationControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.store_management_service.*" />
+          <option name="PATTERN" value="com.user_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.store_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.store_management_service.MeasurementControllerTests" />
+      <option name="PACKAGE_NAME" value="com.user_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AuthenticationControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="store-management-service" />
+    <configuration name="CustomerControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.store_management_service.*" />
+          <option name="PATTERN" value="com.user_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.store_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.store_management_service.ProductControllerTests" />
+      <option name="PACKAGE_NAME" value="com.user_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.user_management_service.CustomerControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StoreControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="store-management-service" />
+    <configuration name="TailorControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.store_management_service.*" />
+          <option name="PATTERN" value="com.user_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.store_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.store_management_service.StoreControllerTests" />
+      <option name="PACKAGE_NAME" value="com.user_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.user_management_service.TailorControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ThreeDModelControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="store-management-service" />
+    <configuration name="UserControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.store_management_service.*" />
+          <option name="PATTERN" value="com.user_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.store_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.store_management_service.ThreeDModelControllerTests" />
+      <option name="PACKAGE_NAME" value="com.user_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.user_management_service.UserControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -315,11 +326,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.MaterialOptionControllerTests" />
-      <item itemvalue="JUnit.MeasurementControllerTests" />
-      <item itemvalue="JUnit.ProductControllerTests" />
-      <item itemvalue="JUnit.StoreControllerTests" />
-      <item itemvalue="JUnit.ThreeDModelControllerTests" />
+      <item itemvalue="JUnit.AdminControllerTests" />
+      <item itemvalue="JUnit.AuthenticationControllerTests" />
+      <item itemvalue="JUnit.CustomerControllerTests" />
+      <item itemvalue="JUnit.TailorControllerTests" />
+      <item itemvalue="JUnit.UserControllerTests" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
@@ -335,11 +346,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ThreeDModelControllerTests" />
-        <item itemvalue="JUnit.StoreControllerTests" />
-        <item itemvalue="JUnit.ProductControllerTests" />
-        <item itemvalue="JUnit.MeasurementControllerTests" />
-        <item itemvalue="JUnit.MaterialOptionControllerTests" />
+        <item itemvalue="JUnit.UserControllerTests" />
+        <item itemvalue="JUnit.TailorControllerTests" />
+        <item itemvalue="JUnit.CustomerControllerTests" />
+        <item itemvalue="JUnit.AdminControllerTests" />
+        <item itemvalue="JUnit.AuthenticationControllerTests" />
       </list>
     </recent_temporary>
   </component>
