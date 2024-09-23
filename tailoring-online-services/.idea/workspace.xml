@@ -48,11 +48,18 @@
     "JUnit.AddressControllerTests.getAddressById_NotFound.executor": "Run",
     "JUnit.AddressControllerTests.updateAddress_NotFound.executor": "Run",
     "JUnit.BankControllerTests.executor": "Run",
+    "JUnit.CustomizableMeasurementControllerTests.executor": "Run",
+    "JUnit.CustomizableOptionControllerTests.executor": "Run",
     "JUnit.CustomizedMeasurementControllerTests.executor": "Run",
     "JUnit.CustomizedOptionControllerTests.executor": "Run",
     "JUnit.CustomizedProductControllerTests.executor": "Run",
     "JUnit.EmailControllerTests.executor": "Run",
     "JUnit.LocalizationShippingServiceApplicationTests.executor": "Run",
+    "JUnit.MaterialControllerTests.executor": "Run",
+    "JUnit.MaterialOptionControllerTests.executor": "Run",
+    "JUnit.MeasurementControllerTests.executor": "Run",
+    "JUnit.ProductControllerTests.executor": "Run",
+    "JUnit.StoreControllerTests.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.api-gateway-service [clean].executor": "Run",
     "Maven.api-gateway-service [install].executor": "Run",
@@ -136,77 +143,77 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.BankControllerTests">
-    <configuration name="BankControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="payment-banking-service" />
+  <component name="RunManager" selected="JUnit.ThreeDModelControllerTests">
+    <configuration name="MaterialOptionControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="store-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.payment_banking_service.*" />
+          <option name="PATTERN" value="com.store_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.payment_banking_service" />
-      <option name="MAIN_CLASS_NAME" value="com.payment_banking_service.BankControllerTests" />
+      <option name="PACKAGE_NAME" value="com.store_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.store_management_service.MaterialOptionControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CustomizedMeasurementControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="order-management-service" />
+    <configuration name="MeasurementControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="store-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.order_management_service.*" />
+          <option name="PATTERN" value="com.store_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.order_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.order_management_service.CustomizedMeasurementControllerTests" />
+      <option name="PACKAGE_NAME" value="com.store_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.store_management_service.MeasurementControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CustomizedOptionControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="order-management-service" />
+    <configuration name="ProductControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="store-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.order_management_service.*" />
+          <option name="PATTERN" value="com.store_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.order_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.order_management_service.CustomizedOptionControllerTests" />
+      <option name="PACKAGE_NAME" value="com.store_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.store_management_service.ProductControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CustomizedProductControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="order-management-service" />
+    <configuration name="StoreControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="store-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.order_management_service.*" />
+          <option name="PATTERN" value="com.store_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.order_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.order_management_service.CustomizedProductControllerTests" />
+      <option name="PACKAGE_NAME" value="com.store_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.store_management_service.StoreControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmailControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="notification-mailing-service" />
+    <configuration name="ThreeDModelControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="store-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.notification_mailing_service.*" />
+          <option name="PATTERN" value="com.store_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.notification_mailing_service" />
-      <option name="MAIN_CLASS_NAME" value="com.notification_mailing_service.EmailControllerTests" />
+      <option name="PACKAGE_NAME" value="com.store_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.store_management_service.ThreeDModelControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -308,11 +315,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.BankControllerTests" />
-      <item itemvalue="JUnit.CustomizedMeasurementControllerTests" />
-      <item itemvalue="JUnit.CustomizedOptionControllerTests" />
-      <item itemvalue="JUnit.CustomizedProductControllerTests" />
-      <item itemvalue="JUnit.EmailControllerTests" />
+      <item itemvalue="JUnit.MaterialOptionControllerTests" />
+      <item itemvalue="JUnit.MeasurementControllerTests" />
+      <item itemvalue="JUnit.ProductControllerTests" />
+      <item itemvalue="JUnit.StoreControllerTests" />
+      <item itemvalue="JUnit.ThreeDModelControllerTests" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
@@ -328,11 +335,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BankControllerTests" />
-        <item itemvalue="JUnit.CustomizedMeasurementControllerTests" />
-        <item itemvalue="JUnit.CustomizedOptionControllerTests" />
-        <item itemvalue="JUnit.CustomizedProductControllerTests" />
-        <item itemvalue="JUnit.EmailControllerTests" />
+        <item itemvalue="JUnit.ThreeDModelControllerTests" />
+        <item itemvalue="JUnit.StoreControllerTests" />
+        <item itemvalue="JUnit.ProductControllerTests" />
+        <item itemvalue="JUnit.MeasurementControllerTests" />
+        <item itemvalue="JUnit.MaterialOptionControllerTests" />
       </list>
     </recent_temporary>
   </component>
