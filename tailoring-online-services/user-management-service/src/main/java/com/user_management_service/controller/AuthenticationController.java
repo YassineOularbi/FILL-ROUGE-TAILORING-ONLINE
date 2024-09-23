@@ -22,7 +22,7 @@ public class AuthenticationController {
             var response = authenticationService.login(authenticationRequest);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(STR."Invalid credentials : \{e.getMessage()}");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
 
