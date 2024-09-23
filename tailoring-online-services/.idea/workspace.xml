@@ -47,6 +47,8 @@
     "JUnit.AddressControllerTests.executor": "Run",
     "JUnit.AddressControllerTests.getAddressById_NotFound.executor": "Run",
     "JUnit.AddressControllerTests.updateAddress_NotFound.executor": "Run",
+    "JUnit.CustomizedOptionControllerTests.executor": "Run",
+    "JUnit.CustomizedProductControllerTests.executor": "Run",
     "JUnit.EmailControllerTests.executor": "Run",
     "JUnit.LocalizationShippingServiceApplicationTests.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
@@ -132,7 +134,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.EmailControllerTests">
+  <component name="RunManager" selected="JUnit.CustomizedMeasurementControllerTests">
     <configuration name="AddressControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="localization-shipping-service" />
       <extension name="coverage">
@@ -148,34 +150,47 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressControllerTests.deleteAddress_NotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="localization-shipping-service" />
+    <configuration name="CustomizedMeasurementControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="order-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.localization_shipping_service.*" />
+          <option name="PATTERN" value="com.order_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
-      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
-      <option name="METHOD_NAME" value="deleteAddress_NotFound" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="com.order_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.order_management_service.CustomizedMeasurementControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressControllerTests.getAddressById_NotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="localization-shipping-service" />
+    <configuration name="CustomizedOptionControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="order-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.localization_shipping_service.*" />
+          <option name="PATTERN" value="com.order_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
-      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
-      <option name="METHOD_NAME" value="getAddressById_NotFound" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="com.order_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.order_management_service.CustomizedOptionControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomizedProductControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="order-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.order_management_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.order_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.order_management_service.CustomizedProductControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -190,21 +205,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.notification_mailing_service" />
       <option name="MAIN_CLASS_NAME" value="com.notification_mailing_service.EmailControllerTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LocalizationShippingServiceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="localization-shipping-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.localization_shipping_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
-      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.LocalizationShippingServiceApplicationTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -307,10 +307,10 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.AddressControllerTests" />
-      <item itemvalue="JUnit.AddressControllerTests.deleteAddress_NotFound" />
-      <item itemvalue="JUnit.AddressControllerTests.getAddressById_NotFound" />
+      <item itemvalue="JUnit.CustomizedMeasurementControllerTests" />
+      <item itemvalue="JUnit.CustomizedOptionControllerTests" />
+      <item itemvalue="JUnit.CustomizedProductControllerTests" />
       <item itemvalue="JUnit.EmailControllerTests" />
-      <item itemvalue="JUnit.LocalizationShippingServiceApplicationTests" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
@@ -326,11 +326,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CustomizedMeasurementControllerTests" />
+        <item itemvalue="JUnit.CustomizedOptionControllerTests" />
+        <item itemvalue="JUnit.CustomizedProductControllerTests" />
         <item itemvalue="JUnit.EmailControllerTests" />
         <item itemvalue="JUnit.AddressControllerTests" />
-        <item itemvalue="JUnit.LocalizationShippingServiceApplicationTests" />
-        <item itemvalue="JUnit.AddressControllerTests.getAddressById_NotFound" />
-        <item itemvalue="JUnit.AddressControllerTests.deleteAddress_NotFound" />
       </list>
     </recent_temporary>
   </component>
