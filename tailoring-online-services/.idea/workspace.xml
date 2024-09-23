@@ -29,6 +29,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -44,6 +47,7 @@
     "JUnit.AddressControllerTests.executor": "Run",
     "JUnit.AddressControllerTests.getAddressById_NotFound.executor": "Run",
     "JUnit.AddressControllerTests.updateAddress_NotFound.executor": "Run",
+    "JUnit.EmailControllerTests.executor": "Run",
     "JUnit.LocalizationShippingServiceApplicationTests.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.api-gateway-service [clean].executor": "Run",
@@ -128,7 +132,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AddressControllerTests">
+  <component name="RunManager" selected="JUnit.EmailControllerTests">
     <configuration name="AddressControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="localization-shipping-service" />
       <extension name="coverage">
@@ -176,18 +180,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressControllerTests.updateAddress_NotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="localization-shipping-service" />
+    <configuration name="EmailControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="notification-mailing-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.localization_shipping_service.*" />
+          <option name="PATTERN" value="com.notification_mailing_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
-      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
-      <option name="METHOD_NAME" value="updateAddress_NotFound" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="com.notification_mailing_service" />
+      <option name="MAIN_CLASS_NAME" value="com.notification_mailing_service.EmailControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -306,7 +309,7 @@
       <item itemvalue="JUnit.AddressControllerTests" />
       <item itemvalue="JUnit.AddressControllerTests.deleteAddress_NotFound" />
       <item itemvalue="JUnit.AddressControllerTests.getAddressById_NotFound" />
-      <item itemvalue="JUnit.AddressControllerTests.updateAddress_NotFound" />
+      <item itemvalue="JUnit.EmailControllerTests" />
       <item itemvalue="JUnit.LocalizationShippingServiceApplicationTests" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
@@ -323,11 +326,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EmailControllerTests" />
         <item itemvalue="JUnit.AddressControllerTests" />
         <item itemvalue="JUnit.LocalizationShippingServiceApplicationTests" />
         <item itemvalue="JUnit.AddressControllerTests.getAddressById_NotFound" />
         <item itemvalue="JUnit.AddressControllerTests.deleteAddress_NotFound" />
-        <item itemvalue="JUnit.AddressControllerTests.updateAddress_NotFound" />
       </list>
     </recent_temporary>
   </component>
