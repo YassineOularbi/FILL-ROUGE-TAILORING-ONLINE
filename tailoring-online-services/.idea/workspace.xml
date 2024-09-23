@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
-    </list>
+    <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,9 +29,6 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenRunner">
-    <option name="skipTests" value="true" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -45,11 +40,18 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.AddressControllerTests.deleteAddress_NotFound.executor": "Run",
+    "JUnit.AddressControllerTests.executor": "Run",
+    "JUnit.AddressControllerTests.getAddressById_NotFound.executor": "Run",
+    "JUnit.AddressControllerTests.updateAddress_NotFound.executor": "Run",
+    "JUnit.LocalizationShippingServiceApplicationTests.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.api-gateway-service [clean].executor": "Run",
     "Maven.api-gateway-service [install].executor": "Run",
     "Maven.config-server [clean].executor": "Run",
     "Maven.config-server [install].executor": "Run",
+    "Maven.localization-shipping-service [clean].executor": "Run",
+    "Maven.localization-shipping-service [install].executor": "Run",
     "Maven.store-management-service [clean].executor": "Run",
     "Maven.store-management-service [install].executor": "Run",
     "Maven.store-management-service [site].executor": "Run",
@@ -126,7 +128,85 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.LocalizationShippingServiceApplication">
+  <component name="RunManager" selected="JUnit.AddressControllerTests">
+    <configuration name="AddressControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="localization-shipping-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.localization_shipping_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
+      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AddressControllerTests.deleteAddress_NotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="localization-shipping-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.localization_shipping_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
+      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
+      <option name="METHOD_NAME" value="deleteAddress_NotFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AddressControllerTests.getAddressById_NotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="localization-shipping-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.localization_shipping_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
+      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
+      <option name="METHOD_NAME" value="getAddressById_NotFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AddressControllerTests.updateAddress_NotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="localization-shipping-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.localization_shipping_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
+      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
+      <option name="METHOD_NAME" value="updateAddress_NotFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LocalizationShippingServiceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="localization-shipping-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.localization_shipping_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
+      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.LocalizationShippingServiceApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ApiGatewayServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="api-gateway-service" />
@@ -146,20 +226,6 @@
     <configuration name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="eureka-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.eureka_server.EurekaServerApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LocalizationShippingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="localization-shipping-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.localization_shipping_service.LocalizationShippingServiceApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.localization_shipping_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -237,6 +303,11 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="JUnit.AddressControllerTests" />
+      <item itemvalue="JUnit.AddressControllerTests.deleteAddress_NotFound" />
+      <item itemvalue="JUnit.AddressControllerTests.getAddressById_NotFound" />
+      <item itemvalue="JUnit.AddressControllerTests.updateAddress_NotFound" />
+      <item itemvalue="JUnit.LocalizationShippingServiceApplicationTests" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
@@ -249,11 +320,14 @@
       <item itemvalue="Spring Boot.LoyaltyProgramServiceApplication" />
       <item itemvalue="Spring Boot.PromotionManagementServiceApplication" />
       <item itemvalue="Spring Boot.SocialManagementServiceApplication" />
-      <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
+        <item itemvalue="JUnit.AddressControllerTests" />
+        <item itemvalue="JUnit.LocalizationShippingServiceApplicationTests" />
+        <item itemvalue="JUnit.AddressControllerTests.getAddressById_NotFound" />
+        <item itemvalue="JUnit.AddressControllerTests.deleteAddress_NotFound" />
+        <item itemvalue="JUnit.AddressControllerTests.updateAddress_NotFound" />
       </list>
     </recent_temporary>
   </component>
