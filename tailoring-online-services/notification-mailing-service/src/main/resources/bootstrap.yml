@@ -2,11 +2,11 @@ spring:
   application:
     name: notification-mailing-service
   profiles:
-    active: local
+    active: docker
   cloud:
     config:
       enabled: true
-      uri: http://admin:admin@localhost:8888
+      uri: http://admin:admin@config-server:8888
       failFast: true
       retry:
         maxAttempts: 20
