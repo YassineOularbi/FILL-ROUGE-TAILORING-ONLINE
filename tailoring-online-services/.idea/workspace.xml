@@ -47,6 +47,8 @@
     "JUnit.AddressControllerTests.executor": "Run",
     "JUnit.AddressControllerTests.getAddressById_NotFound.executor": "Run",
     "JUnit.AddressControllerTests.updateAddress_NotFound.executor": "Run",
+    "JUnit.BankControllerTests.executor": "Run",
+    "JUnit.CustomizedMeasurementControllerTests.executor": "Run",
     "JUnit.CustomizedOptionControllerTests.executor": "Run",
     "JUnit.CustomizedProductControllerTests.executor": "Run",
     "JUnit.EmailControllerTests.executor": "Run",
@@ -134,17 +136,17 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CustomizedMeasurementControllerTests">
-    <configuration name="AddressControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="localization-shipping-service" />
+  <component name="RunManager" selected="JUnit.BankControllerTests">
+    <configuration name="BankControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="payment-banking-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.localization_shipping_service.*" />
+          <option name="PATTERN" value="com.payment_banking_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
-      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
+      <option name="PACKAGE_NAME" value="com.payment_banking_service" />
+      <option name="MAIN_CLASS_NAME" value="com.payment_banking_service.BankControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -306,7 +308,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.AddressControllerTests" />
+      <item itemvalue="JUnit.BankControllerTests" />
       <item itemvalue="JUnit.CustomizedMeasurementControllerTests" />
       <item itemvalue="JUnit.CustomizedOptionControllerTests" />
       <item itemvalue="JUnit.CustomizedProductControllerTests" />
@@ -326,11 +328,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BankControllerTests" />
         <item itemvalue="JUnit.CustomizedMeasurementControllerTests" />
         <item itemvalue="JUnit.CustomizedOptionControllerTests" />
         <item itemvalue="JUnit.CustomizedProductControllerTests" />
         <item itemvalue="JUnit.EmailControllerTests" />
-        <item itemvalue="JUnit.AddressControllerTests" />
       </list>
     </recent_temporary>
   </component>
