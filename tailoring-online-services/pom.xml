@@ -42,6 +42,17 @@
     <lombok.version>1.18.32</lombok.version>
     <junit.jupiter.version>5.9.3</junit.jupiter.version>
     <mysql.connector.version>8.0.30</mysql.connector.version>
+    <sonar.projectKey>tailoring-online</sonar.projectKey>
+    <sonar.projectName>tailoring-online</sonar.projectName>
+    <sonar.projectVersion>0.0.1-SNAPSHOT</sonar.projectVersion>
+    <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+    <sonar.java.source>21</sonar.java.source>
+    <sonar.sources>src/main/java</sonar.sources>
+    <sonar.tests>src/test/java</sonar.tests>
+    <sonar.java.binaries>target/classes</sonar.java.binaries>
+    <sonar.junit.reportsPath>**/target/surefire-reports/TEST-*.xml</sonar.junit.reportsPath>
+    <sonar.host.url>http://localhost:9000</sonar.host.url>
+    <sonar.token>sqp_3b652024b1b55c9cdb441925cc85ffb3dd35e0b4</sonar.token>
   </properties>
 
   <dependencyManagement>
@@ -289,3 +300,4 @@
     </pluginManagement>
   </build>
 </project>
+
