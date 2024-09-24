@@ -21,7 +21,7 @@ services:
       MYSQL_DATABASE: tailoring_store_db
       MYSQL_ROOT_PASSWORD: 1234
     volumes:
-      - social-management-db:/var/lib/mysql
+      - store-management-db:/var/lib/mysql
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 10s
