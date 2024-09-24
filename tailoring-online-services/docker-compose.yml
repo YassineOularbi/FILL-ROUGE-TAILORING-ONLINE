@@ -228,7 +228,6 @@ services:
       keycloak:
         condition: service_started
 
-
   loyalty-program-service:
     build: ./loyalty-program-service
     container_name: loyalty-program-service

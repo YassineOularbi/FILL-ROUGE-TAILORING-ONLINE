@@ -36,13 +36,12 @@
   </modules>
 
   <properties>
-    <java.version>22</java.version>
+    <java.version>21</java.version>
     <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
     <springdoc.version>2.5.0</springdoc.version>
     <lombok.version>1.18.32</lombok.version>
     <junit.jupiter.version>5.9.3</junit.jupiter.version>
     <mysql.connector.version>8.0.30</mysql.connector.version>
-    <jococo.version>0.8.12</jococo.version>
   </properties>
 
   <dependencyManagement>
@@ -233,12 +232,6 @@
       <version>${springdoc.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.jacoco</groupId>
-      <artifactId>jacoco-maven-plugin</artifactId>
-      <version>${jococo.version}</version>
-    </dependency>
-
   </dependencies>
 
   <build>
@@ -286,6 +279,11 @@
               </exclude>
             </excludes>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>4.0.0.4121</version>
         </plugin>
       </plugins>
     </pluginManagement>
