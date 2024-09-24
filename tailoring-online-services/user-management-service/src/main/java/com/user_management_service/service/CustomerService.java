@@ -37,8 +37,7 @@ public class CustomerService {
     public CustomerDto register(CustomerDto customerDto) {
         try {
             userService.getUserByUsername(customerDto.getUsername());
-        } catch (UsernameNotFoundException e) {
-            throw new UsernameNotFoundException("Bad credentials !");
+        } catch (UsernameNotFoundException _) {
         }
         var customer = (Customer) customerMapper.toEntity(customerDto);
         String keycloakUserId;
