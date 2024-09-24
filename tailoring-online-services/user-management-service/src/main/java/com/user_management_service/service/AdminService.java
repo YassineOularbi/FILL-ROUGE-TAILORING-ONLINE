@@ -38,7 +38,7 @@ public class AdminService {
         try {
             userService.getUserByUsername(adminDto.getUsername());
         } catch (UsernameNotFoundException e) {
-            throw new UsernameNotFoundException(e.getMessage());
+            throw new UsernameNotFoundException("Bad credentials !");
         }
 
         var admin = (Admin) adminMapper.toEntity(adminDto);

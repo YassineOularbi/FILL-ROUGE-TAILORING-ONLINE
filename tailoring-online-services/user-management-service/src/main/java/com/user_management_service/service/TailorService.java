@@ -38,7 +38,7 @@ public class TailorService {
         try {
             userService.getUserByUsername(tailorDto.getUsername());
         } catch (UsernameNotFoundException e) {
-            throw new UsernameNotFoundException(e.getMessage());
+            throw new UsernameNotFoundException("Bad credentials !");
         }
         var tailor = (Tailor) tailorMapper.toEntity(tailorDto);
         String keycloakUserId;

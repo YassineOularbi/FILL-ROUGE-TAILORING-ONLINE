@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/customizable-measurement")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class CustomizableMeasurementController {
 
     private final CustomizableMeasurementService customizableMeasurementService;

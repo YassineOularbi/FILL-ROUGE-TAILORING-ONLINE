@@ -29,10 +29,10 @@ public class UserService {
 
     public void getUserByUsername(String username){
         if (userRepository.findByUsername(username).isPresent()) {
-            throw new UsernameNotFoundException("Username already exists!");
+            throw new UsernameNotFoundException("Bad credentials !");
         }
         if (!authenticationService.getUser(username).isEmpty()) {
-            throw new UsernameNotFoundException("Username already exists!");
+            throw new UsernameNotFoundException("Bad credentials !");
         }
     }
 }

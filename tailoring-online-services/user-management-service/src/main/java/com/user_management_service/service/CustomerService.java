@@ -38,7 +38,7 @@ public class CustomerService {
         try {
             userService.getUserByUsername(customerDto.getUsername());
         } catch (UsernameNotFoundException e) {
-            throw new UsernameNotFoundException(e.getMessage());
+            throw new UsernameNotFoundException("Bad credentials !");
         }
         var customer = (Customer) customerMapper.toEntity(customerDto);
         String keycloakUserId;

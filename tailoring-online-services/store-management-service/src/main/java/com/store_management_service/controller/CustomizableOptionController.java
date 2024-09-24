@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/customizable-option")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class CustomizableOptionController {
 
     private final CustomizableOptionService customizableOptionService;

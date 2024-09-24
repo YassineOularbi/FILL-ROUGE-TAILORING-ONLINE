@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/measurement")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class MeasurementController {
 
     private final MeasurementService measurementService;

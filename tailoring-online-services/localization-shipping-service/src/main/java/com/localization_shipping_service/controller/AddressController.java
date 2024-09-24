@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/address")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class AddressController {
 
     private final AddressService addressService;
