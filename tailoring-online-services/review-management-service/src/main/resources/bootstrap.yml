@@ -1,6 +1,6 @@
 spring:
   application:
-    name: localization-shipping-service
+    name: review-management-service
   profiles:
     active: docker
   cloud:
