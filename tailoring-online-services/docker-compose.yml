@@ -1,0 +1,371 @@
+version: '3.8'
+
+services:
+  user_db:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: tailoring_user_db
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - user-management-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+
+  store_db:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: tailoring_store_db
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - social-management-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+
+  localization_shipping_db:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: tailoring_localization_shipping_db
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - localization-shipping-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+
+  loyalty_program_db:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: tailoring_loyalty_program_db
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - loyalty-program-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+
+  notification_mailing_db:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: tailoring_notification_mailing_db
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - notification-mailing-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+
+  order_db:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: tailoring_order_db
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - order-management-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+
+  payment_banking_db:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: tailoring_payment_banking_db
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - payment-banking-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+
+  promotion_db:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: tailoring_promotion_db
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - promotion-management-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+
+  review_db:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: tailoring_review_db
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - review-management-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+
+  social_db:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: tailoring_social_db
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - resource-db
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command:
+      - start-dev
+
+  config-server:
+    build: ./config-server
+    container_name: config-server
+    ports:
+      - '8888:8888'
+    expose:
+      - '8888'
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://admin:admin@config-server:8888/actuator/health" ]
+      interval: 10s
+      retries: 4
+
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - '8761:8761'
+    expose:
+      - '8761'
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://admin:admin@eureka-server:8761/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+
+  user-management-service:
+    build: ./user-management-service
+    container_name: user-management-service
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/USER-MANAGEMENT-SERVICE/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      user_db:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+  store-management-service:
+    build: ./store-management-service
+    container_name: store-management-service
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/STORE-MANAGEMENT-SERVICE/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      store_db:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+  localization-shipping-service:
+    build: ./localization-shipping-service
+    container_name: localization-shipping-service
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/LOCALIZATION-SHIPPING-SERVICE/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      localization_shipping_db:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+
+  loyalty-program-service:
+    build: ./loyalty-program-service
+    container_name: loyalty-program-service
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/LOYALTY-PROGRAM-SERVICE/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      loyalty_program_db:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+  notification-mailing-service:
+    build: ./notification-mailing-service
+    container_name: notification-mailing-service
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/NOTIFICATION-MAILING-SERVICE/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      notification_mailing_db:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+  order-management-service:
+    build: ./order-management-service
+    container_name: order-management-service
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/ORDER-MANAGEMENT-SERVICE/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      order_db:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+  payment-banking-service:
+    build: ./payment-banking-service
+    container_name: payment-banking-service
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/PAYMENT-BANKING-SERVICE/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      payment_banking_db:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+  promotion-management-service:
+    build: ./promotion-management-service
+    container_name: promotion-management-service
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/PROMOTION-MANAGEMENT-SERVICE/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      promotion_db:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+  review-management-service:
+    build: ./review-management-service
+    container_name: review-management-service
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/REVIEW-MANAGEMENT-SERVICE/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      review_db:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+  social-management-service:
+    build: ./social-management-service
+    container_name: social-management-service
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/SOCIAL-MANAGEMENT-SERVICE/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      social_db:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+  api-gateway-service:
+    build: ./api-gateway-service
+    container_name: api-gateway-service
+    ports:
+      - '9191:9191'
+    expose:
+      - '9191'
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+volumes:
+  user-management-db:
+  store-management-db:
+  localization-shipping-db:
+  loyalty-program-db:
+  notification-mailing-db:
+  order-management-db:
+  payment-banking-db:
+  promotion-management-db:
+  review-management-db:
+  social-management-db:

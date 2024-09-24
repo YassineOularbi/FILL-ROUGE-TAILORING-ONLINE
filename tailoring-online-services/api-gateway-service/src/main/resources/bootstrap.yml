@@ -13,5 +13,5 @@ spring:
       failFast: true
       retry:
         maxAttempts: 20
-      profile: local
+      profile: docker
       label: main
