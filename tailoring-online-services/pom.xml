@@ -42,6 +42,7 @@
     <lombok.version>1.18.32</lombok.version>
     <junit.jupiter.version>5.9.3</junit.jupiter.version>
     <mysql.connector.version>8.0.30</mysql.connector.version>
+    <jococo.version>0.8.12</jococo.version>
   </properties>
 
   <dependencyManagement>
@@ -230,6 +231,12 @@
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
       <version>${springdoc.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jacoco</groupId>
+      <artifactId>jacoco-maven-plugin</artifactId>
+      <version>${jococo.version}</version>
     </dependency>
 
   </dependencies>
