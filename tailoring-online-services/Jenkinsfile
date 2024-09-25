@@ -95,9 +95,7 @@ pipeline {
             script {
                 echo 'Cleaning up the workspace after the build...'
             }
-            node {
-                cleanWs()
-            }
+            cleanWs()
         }
         success {
             script {
