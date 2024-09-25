@@ -20,7 +20,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class MaterialControllerTests {
+class MaterialControllerTests {
 
     @Mock
     private MaterialService materialService;

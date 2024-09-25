@@ -21,7 +21,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class CustomizableOptionControllerTests {
+class CustomizableOptionControllerTests {
 
     @Mock
     private CustomizableOptionService customizableOptionService;

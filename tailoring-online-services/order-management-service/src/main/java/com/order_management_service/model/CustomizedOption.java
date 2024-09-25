@@ -5,13 +5,15 @@ import com.order_management_service.enums.MaterialType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "customized_option")
-public class CustomizedOption {
+public class CustomizedOption implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
