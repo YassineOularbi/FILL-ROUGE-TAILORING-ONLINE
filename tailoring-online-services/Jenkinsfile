@@ -21,15 +21,19 @@ pipeline {
 
         stage('Build and Test') {
             steps {
-                bat 'mvn clean install'
-                bat 'mvn test'
+                dir('tailoring-online-services') {
+                    bat 'mvn clean install'
+                    bat 'mvn test'
+                }
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv(SONARQUBE) {
-                    bat "mvn sonar:sonar -Dsonar.token=${SONAR_TOKEN}"
+                dir('tailoring-online-services') {
+                    withSonarQubeEnv(SONARQUBE) {
+                        bat "mvn sonar:sonar -Dsonar.token=${SONARTOKEN}"
+                    }
                 }
             }
         }
