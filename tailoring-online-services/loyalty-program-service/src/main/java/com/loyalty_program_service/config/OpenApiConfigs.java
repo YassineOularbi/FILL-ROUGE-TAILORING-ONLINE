@@ -1,4 +1,4 @@
-package com.payment_banking_service.config;
+package com.loyalty_program_service.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -18,9 +18,9 @@ import java.util.List;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "Payment Management Service API",
+                title = "Loyalty Program Service API",
                 version = "v1",
-                description = "API documentation for the Payment Management Service",
+                description = "API documentation for the Loyalty Program Service",
                 license = @License(name = "Apache 2.0", url = "http://springdoc.org"),
                 contact = @Contact(
                         name = "Yassine Oularbi",

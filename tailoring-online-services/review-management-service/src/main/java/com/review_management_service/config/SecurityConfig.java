@@ -1,4 +1,4 @@
-package com.payment_banking_service.config;
+package com.review_management_service.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
