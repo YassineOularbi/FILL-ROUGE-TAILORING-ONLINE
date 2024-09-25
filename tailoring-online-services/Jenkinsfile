@@ -57,46 +57,6 @@ pipeline {
             }
         }
 
-//         stage('Build Docker Images') {
-//             steps {
-//                 script {
-//                     dir('ConstructionXpertBackend') {
-//                         SERVICES.each { service, dockerRepo ->
-//                             dir(service) {
-//                                 bat "docker build -t ${dockerRepo}:latest ."
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//
-//         stage('Tag and Push Docker Images') {
-//             steps {
-//                 script {
-//                     docker.withRegistry("https://index.docker.io/v1/", DOCKER_CREDENTIALS_ID) {
-//                         SERVICES.each { service, dockerRepo ->
-//                             bat """
-//                                 docker tag ${dockerRepo}:latest ${dockerRepo}:latest
-//                                 docker push ${dockerRepo}:latest
-//                             """
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//
-//         stage('Run Docker Compose') {
-//             steps {
-//                 script {
-//                     dir('ConstructionXpertBackend') {
-//                         bat 'docker-compose up -d'
-//                     }
-//                 }
-//             }
-//         }
-//     }
-
     post {
         always {
             cleanWs()
