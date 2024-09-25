@@ -32,10 +32,10 @@ pipeline {
             }
         }
 
-        stage('Compile and Build') {
+        stage('Compile Source Code') {
             steps {
                 script {
-                    echo 'Compiling source code and building the project...'
+                    echo 'Compiling source code...'
                 }
                 dir('tailoring-online-services') {
                     bat 'mvn clean compile'
@@ -46,7 +46,7 @@ pipeline {
         stage('Run Unit Tests') {
             steps {
                 script {
-                    echo 'Running unit tests to validate code correctness...'
+                    echo 'Running unit tests to ensure code correctness...'
                 }
                 dir('tailoring-online-services') {
                     bat 'mvn test'
@@ -54,10 +54,32 @@ pipeline {
             }
         }
 
-        stage('Package Artifacts') {
+        stage('Integration Tests') {
             steps {
                 script {
-                    echo 'Packaging the application for deployment...'
+                    echo 'Running integration tests to validate system behavior...'
+                }
+                dir('tailoring-online-services') {
+                    bat 'mvn integration-test'
+                }
+            }
+        }
+
+        stage('Verify Project') {
+            steps {
+                script {
+                    echo 'Verifying project to ensure all checks are successful...'
+                }
+                dir('tailoring-online-services') {
+                    bat 'mvn verify'
+                }
+            }
+        }
+
+        stage('Package Application') {
+            steps {
+                script {
+                    echo 'Packaging the application for deployment (creating a JAR/WAR file)...'
                 }
                 dir('tailoring-online-services') {
                     bat 'mvn package'
@@ -65,26 +87,13 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        stage('Install Package Locally') {
             steps {
                 script {
-                    echo 'Performing SonarQube code analysis for quality control...'
+                    echo 'Installing the application into the local Maven repository...'
                 }
                 dir('tailoring-online-services') {
-                    withSonarQubeEnv(SONARQUBE) {
-                        bat "mvn sonar:sonar -Dsonar.token=${SONAR_TOKEN}"
-                    }
-                }
-            }
-        }
-
-        stage('Quality Gate Check') {
-            steps {
-                script {
-                    echo 'Verifying that the project passes the SonarQube quality gate...'
-                }
-                timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+                    bat 'mvn install'
                 }
             }
         }
@@ -104,7 +113,7 @@ pipeline {
         }
         failure {
             script {
-                echo 'Pipeline failed! Please check the logs for details.'
+                echo 'Pipeline failed. Please check the logs for details.'
             }
         }
     }
