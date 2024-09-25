@@ -1,12 +1,12 @@
 package com.store_management_service.dto;
 
 import com.store_management_service.enums.Category;
-import com.store_management_service.model.Store;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +14,7 @@ import java.util.Map;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDto {
+public class ProductDto implements Serializable {
     private String name;
     private String description;
     private Category category;

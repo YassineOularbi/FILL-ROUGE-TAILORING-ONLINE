@@ -29,9 +29,6 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenRunner">
-    <option name="skipTests" value="true" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -43,6 +40,18 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Docker.docker-compose.yml.api-gateway-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.localization-shipping-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.loyalty-program-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.notification-mailing-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.order-management-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.payment-banking-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.promotion-management-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.review-management-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.social-management-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.social_db: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.user-management-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.user_db: Compose Deployment.executor": "Run",
     "JUnit.AddressControllerTests.deleteAddress_NotFound.executor": "Run",
     "JUnit.AddressControllerTests.executor": "Run",
     "JUnit.AddressControllerTests.getAddressById_NotFound.executor": "Run",
@@ -83,8 +92,16 @@
     "Maven.store-management-service [site].executor": "Run",
     "Maven.tailoring-online-services [clean].executor": "Run",
     "Maven.tailoring-online-services [install].executor": "Run",
+    "Maven.tailoring-online-services [validate].executor": "Run",
     "Maven.user-management-service [clean].executor": "Run",
+    "Maven.user-management-service [compile].executor": "Run",
+    "Maven.user-management-service [deploy].executor": "Run",
     "Maven.user-management-service [install].executor": "Run",
+    "Maven.user-management-service [package].executor": "Run",
+    "Maven.user-management-service [site].executor": "Run",
+    "Maven.user-management-service [test].executor": "Run",
+    "Maven.user-management-service [validate].executor": "Run",
+    "Maven.user-management-service [verify].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -107,12 +124,15 @@
     "Spring Boot.UserManagementServiceApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/api-gateway-service/src/main/java/com/api_gateway_service/config",
+    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/localization-shipping-service/src/main/java/com/localization_shipping_service/config",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
     "run.configurations.included.in.services": "true",
     "vue.rearranger.settings.migration": "true"
   },
@@ -124,18 +144,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\api-gateway-service\src\main\java\com\api_gateway_service\config" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\config" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\config" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\order-management-service\src\main\java\com\order_management_service\config" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\localization-shipping-service\src\main\java\com\localization_shipping_service\config" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\loyalty-program-service\src\main\java\com\loyalty_program_service" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\notification-mailing-service\src\main\java\com\notification_mailing_service\config" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\order-management-service\src\main\java\com\order_management_service" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\user-management-service\src\main\resources" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\notification-mailing-service\src\main\java\com\notification_mailing_service\controller" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\service" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\repository" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\model" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.api_gateway_service.config" />
@@ -154,82 +174,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.UserControllerTests">
-    <configuration name="AdminControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.user_management_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.user_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AdminControllerTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AuthenticationControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.user_management_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.user_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AuthenticationControllerTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CustomerControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.user_management_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.user_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.user_management_service.CustomerControllerTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TailorControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.user_management_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.user_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.user_management_service.TailorControllerTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.user_management_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.user_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.user_management_service.UserControllerTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Docker.docker-compose.yml.api-gateway-service: Compose Deployment">
     <configuration name="ApiGatewayServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="api-gateway-service" />
@@ -249,6 +194,14 @@
     <configuration name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="eureka-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.eureka_server.EurekaServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LocalizationShippingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="localization-shipping-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.localization_shipping_service.LocalizationShippingServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -325,12 +278,82 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.api-gateway-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="api-gateway-service" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.promotion-management-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="promotion-management-service" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.review-management-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="review-management-service" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.social-management-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="social-management-service" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.social_db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="social_db" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="JUnit.AdminControllerTests" />
-      <item itemvalue="JUnit.AuthenticationControllerTests" />
-      <item itemvalue="JUnit.CustomerControllerTests" />
-      <item itemvalue="JUnit.TailorControllerTests" />
-      <item itemvalue="JUnit.UserControllerTests" />
+      <item itemvalue="Docker.docker-compose.yml.api-gateway-service: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.promotion-management-service: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.review-management-service: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.social-management-service: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.social_db: Compose Deployment" />
+      <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
@@ -346,11 +369,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UserControllerTests" />
-        <item itemvalue="JUnit.TailorControllerTests" />
-        <item itemvalue="JUnit.CustomerControllerTests" />
-        <item itemvalue="JUnit.AdminControllerTests" />
-        <item itemvalue="JUnit.AuthenticationControllerTests" />
+        <item itemvalue="Docker.docker-compose.yml.api-gateway-service: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.social_db: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.social-management-service: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.review-management-service: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.promotion-management-service: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -375,6 +398,7 @@
       <workItem from="1726498056611" duration="5000" />
       <workItem from="1726498092610" duration="45349000" />
       <workItem from="1726743533849" duration="19433000" />
+      <workItem from="1727183041514" duration="32831000" />
     </task>
     <servers />
   </component>

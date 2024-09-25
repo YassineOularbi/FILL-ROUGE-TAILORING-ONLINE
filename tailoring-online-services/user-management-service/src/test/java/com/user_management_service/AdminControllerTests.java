@@ -19,7 +19,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class AdminControllerTests {
+class AdminControllerTests {
 
     @Mock
     private AdminService adminService;

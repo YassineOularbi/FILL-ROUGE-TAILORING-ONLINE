@@ -17,13 +17,11 @@ public class JwtKeycloakConverter implements Converter<Jwt, Collection<GrantedAu
         Map<String, Map<String, Collection<String>>> resourceAccess = jwt.getClaim("resource_access");
 
         if (resourceAccess != null && !resourceAccess.isEmpty()) {
-            resourceAccess.forEach((resource, resourceClaims) -> {
-                grantedAuthorities.addAll(
-                        resourceClaims.get("roles").stream()
-                                .map(SimpleGrantedAuthority::new)
-                                .toList()
-                );
-            });
+            resourceAccess.forEach((resource, resourceClaims) -> grantedAuthorities.addAll(
+                    resourceClaims.get("roles").stream()
+                            .map(SimpleGrantedAuthority::new)
+                            .toList()
+            ));
         }
 
         return grantedAuthorities;

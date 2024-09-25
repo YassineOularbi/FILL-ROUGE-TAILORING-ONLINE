@@ -18,9 +18,9 @@ import java.util.List;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "Payment Banking Service API",
+                title = "Payment Management Service API",
                 version = "v1",
-                description = "API documentation for the Payment Banking Service",
+                description = "API documentation for the Payment Management Service",
                 license = @License(name = "Apache 2.0", url = "http://springdoc.org"),
                 contact = @Contact(
                         name = "Yassine Oularbi",

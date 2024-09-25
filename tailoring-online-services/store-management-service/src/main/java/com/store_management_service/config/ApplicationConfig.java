@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,10 +19,13 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import java.util.Collection;
+import java.util.Objects;
 
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
+
+    private final Environment environment;
 
     @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
     private String jwkSetUri;
@@ -30,9 +34,9 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
+                .username(Objects.requireNonNull(environment.getProperty("spring.security.user.name")))
+                .password(passwordEncoder().encode(Objects.requireNonNull(environment.getProperty("spring.security.user.password"))))
+                .roles(Objects.requireNonNull(environment.getProperty("spring.security.user.roles")))
                 .build();
         return new InMemoryUserDetailsManager(user);
     }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/tailor")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class TailorController {
 
     private final TailorService tailorService;

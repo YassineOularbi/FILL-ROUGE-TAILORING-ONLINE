@@ -5,13 +5,15 @@ import com.order_management_service.enums.MeasurementUnit;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "customized_measurement")
-public class CustomizedMeasurement {
+public class CustomizedMeasurement implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

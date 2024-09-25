@@ -3,6 +3,7 @@ package com.order_management_service.model;
 import com.order_management_service.enums.Category;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import java.util.Map;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class Product implements Serializable {
     private Long id;
     private String name;
     private String description;

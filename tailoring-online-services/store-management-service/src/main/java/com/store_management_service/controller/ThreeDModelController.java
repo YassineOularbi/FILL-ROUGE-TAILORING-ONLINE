@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/three-d-model")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class ThreeDModelController {
 
     private final ThreeDModelService threeDModelService;

@@ -48,7 +48,7 @@ public class MaterialOptionService {
         if (materialOptionRepository.existsById(id)){
             throw new MaterialOptionExistException(id);
         }
-        if (!(material.getType() == option.getType())){
+        if (material.getType() != option.getType()){
             throw new CustomizableOptionMaterialException(material, option);
         }
         var materialOption = new MaterialOption(id, material, option);

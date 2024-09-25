@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/material-option")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class MaterialOptionController {
     
     private final MaterialOptionService materialOptionService;

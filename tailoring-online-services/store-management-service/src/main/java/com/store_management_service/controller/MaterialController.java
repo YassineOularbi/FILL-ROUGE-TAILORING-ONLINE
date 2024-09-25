@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/material")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class MaterialController {
 
     private final MaterialService materialService;

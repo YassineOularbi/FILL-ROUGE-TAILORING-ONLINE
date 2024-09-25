@@ -35,11 +35,7 @@ public class CustomerService {
     }
 
     public CustomerDto register(CustomerDto customerDto) {
-        try {
-            userService.getUserByUsername(customerDto.getUsername());
-        } catch (UsernameNotFoundException e) {
-            throw new UsernameNotFoundException(e.getMessage());
-        }
+        userService.getUserByUsername(customerDto.getUsername());
         var customer = (Customer) customerMapper.toEntity(customerDto);
         String keycloakUserId;
         try {

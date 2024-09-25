@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface CustomizableOptionRepository extends JpaRepository<CustomizableOption, Long> {
     List<CustomizableOption> getAllByModel(ThreeDModel model);
-    Boolean existsByModelAndType(ThreeDModel model, MaterialType materialType);
+    boolean existsByModelAndType(ThreeDModel model, MaterialType materialType);
 }

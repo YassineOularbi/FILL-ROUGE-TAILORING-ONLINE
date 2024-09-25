@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class EmailControllerTests {
+class EmailControllerTests {
 
     @Mock
     private EmailService emailService;

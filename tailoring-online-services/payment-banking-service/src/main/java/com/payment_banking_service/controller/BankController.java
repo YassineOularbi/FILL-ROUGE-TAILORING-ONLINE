@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/bank")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class BankController {
 
     private final BankService bankService;

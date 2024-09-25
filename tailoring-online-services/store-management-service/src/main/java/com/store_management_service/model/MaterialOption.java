@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "material_option")
-public class MaterialOption {
+public class MaterialOption implements Serializable {
 
     @EmbeddedId
     private MaterialOptionKey id;

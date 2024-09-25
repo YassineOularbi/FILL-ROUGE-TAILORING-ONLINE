@@ -21,15 +21,11 @@ public class FeignClientConfig {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (authentication != null) {
                 if (authentication.getCredentials() instanceof Jwt jwt) {
-                    System.out.println("Token JWT pour la requête : " + jwt.getTokenValue());
                     requestTemplate.header("Authorization", STR."Bearer \{jwt.getTokenValue()}");
                 }
                 else if (authentication.getPrincipal() instanceof User) {
-                    System.out.println("Basic Auth pour la requête.");
                     requestTemplate.header("Authorization", BASIC_AUTH_VALUE);
                 }
-                System.out.println("URL Feign request: " + requestTemplate.url());
-                System.out.println("Headers: " + requestTemplate.headers());
             }
         };
     }
