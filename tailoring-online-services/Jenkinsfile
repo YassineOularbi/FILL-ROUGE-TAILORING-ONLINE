@@ -48,14 +48,16 @@ pipeline {
     }
 
     post {
-        always {
-            cleanWs()
+            always {
+                node {
+                    cleanWs()
+                }
+            }
+            success {
+                echo 'Pipeline completed successfully!'
+            }
+            failure {
+                echo 'Pipeline failed!'
+            }
         }
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
-        }
-    }
 }
