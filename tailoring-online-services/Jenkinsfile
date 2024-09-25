@@ -6,21 +6,6 @@ pipeline {
     }
 
     environment {
-        SERVICES = [
-            'config-server': 'yassineoularbi4/config-server',
-            'eureka-server': 'yassineoularbi4/eureka-server',
-            'api-gateway-service': 'yassineoularbi4/api-gateway-service',
-            'user-management-service': 'yassineoularbi4/user-management-service',
-            'store-management-service': 'yassineoularbi4/store-management-service',
-            'localization-shipping-service': 'yassineoularbi4/localization-shipping-service',
-            'loyalty-program-service': 'yassineoularbi4/loyalty-program-service',
-            'notification-mailing-service': 'yassineoularbi4/notification-mailing-service',
-            'order-management-service': 'yassineoularbi4/order-management-service',
-            'payment-banking-service': 'yassineoularbi4/payment-banking-service',
-            'promotion-management-service': 'yassineoularbi4/promotion-management-service',
-            'review-management-service': 'yassineoularbi4/review-management-service',
-            'social-management-service': 'yassineoularbi4/social-management-service'
-        ]
         DOCKER_TOKEN = credentials('docker-token')
         SONARQUBE = 'sonarqube'
         SONAR_TOKEN = credentials('sonar-token')
