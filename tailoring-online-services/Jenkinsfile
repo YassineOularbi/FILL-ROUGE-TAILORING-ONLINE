@@ -13,26 +13,66 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout Source Code') {
             steps {
+                script {
+                    echo 'Checking out the latest code from GitHub repository...'
+                }
                 git branch: 'main', credentialsId: GITHUB_TOKEN, url: 'https://github.com/YassineOularbi/FILL-ROUGE-TAILORING-ONLINE.git'
             }
         }
 
-        stage('Build and Test') {
+        stage('Prepare Environment') {
             steps {
+                script {
+                    echo 'Setting up the Maven environment and initializing project dependencies...'
+                }
+                bat 'mvn dependency:resolve'
+                bat 'mvn validate'
+            }
+        }
+
+        stage('Compile and Build') {
+            steps {
+                script {
+                    echo 'Compiling source code and building the project...'
+                }
                 dir('tailoring-online-services') {
-                    bat 'mvn clean install'
+                    bat 'mvn clean compile'
+                }
+            }
+        }
+
+        stage('Run Unit Tests') {
+            steps {
+                script {
+                    echo 'Running unit tests to validate code correctness...'
+                }
+                dir('tailoring-online-services') {
                     bat 'mvn test'
+                }
+            }
+        }
+
+        stage('Package Artifacts') {
+            steps {
+                script {
+                    echo 'Packaging the application for deployment...'
+                }
+                dir('tailoring-online-services') {
+                    bat 'mvn package'
                 }
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
+                script {
+                    echo 'Performing SonarQube code analysis for quality control...'
+                }
                 dir('tailoring-online-services') {
                     withSonarQubeEnv(SONARQUBE) {
-                        bat "mvn sonar:sonar -Dsonar.token=${SONARTOKEN}"
+                        bat "mvn sonar:sonar -Dsonar.token=${SONAR_TOKEN}"
                     }
                 }
             }
@@ -40,6 +80,9 @@ pipeline {
 
         stage('Quality Gate Check') {
             steps {
+                script {
+                    echo 'Verifying that the project passes the SonarQube quality gate...'
+                }
                 timeout(time: 5, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
@@ -48,16 +91,23 @@ pipeline {
     }
 
     post {
-            always {
-                node {
-                    cleanWs()
-                }
+        always {
+            script {
+                echo 'Cleaning up the workspace after the build...'
             }
-            success {
-                echo 'Pipeline completed successfully!'
-            }
-            failure {
-                echo 'Pipeline failed!'
+            node {
+                cleanWs()
             }
         }
+        success {
+            script {
+                echo 'Pipeline completed successfully. All stages passed.'
+            }
+        }
+        failure {
+            script {
+                echo 'Pipeline failed! Please check the logs for details.'
+            }
+        }
+    }
 }
