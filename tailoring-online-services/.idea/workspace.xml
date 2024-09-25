@@ -41,6 +41,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Docker.docker-compose.yml.api-gateway-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.jenkins: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.localization-shipping-service: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.loyalty-program-service: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.notification-mailing-service: Compose Deployment.executor": "Run",
@@ -174,7 +175,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.api-gateway-service: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yml.jenkins: Compose Deployment">
     <configuration name="ApiGatewayServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="api-gateway-service" />
@@ -295,12 +296,12 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.promotion-management-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="docker-compose.yml.jenkins: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
           <option name="services">
             <list>
-              <option value="promotion-management-service" />
+              <option value="jenkins" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
@@ -349,7 +350,7 @@
     </configuration>
     <list>
       <item itemvalue="Docker.docker-compose.yml.api-gateway-service: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.promotion-management-service: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.jenkins: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.review-management-service: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.social-management-service: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.social_db: Compose Deployment" />
@@ -369,11 +370,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.jenkins: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.api-gateway-service: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.social_db: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.social-management-service: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.review-management-service: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.promotion-management-service: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -398,7 +399,7 @@
       <workItem from="1726498056611" duration="5000" />
       <workItem from="1726498092610" duration="45349000" />
       <workItem from="1726743533849" duration="19433000" />
-      <workItem from="1727183041514" duration="32831000" />
+      <workItem from="1727183041514" duration="33890000" />
     </task>
     <servers />
   </component>

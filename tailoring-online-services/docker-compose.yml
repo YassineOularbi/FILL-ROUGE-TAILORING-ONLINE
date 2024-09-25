@@ -143,6 +143,14 @@ services:
     command:
       - start-dev
 
+  jenkins:
+    image: jenkins/jenkins:latest
+    privileged: true
+    user: root
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+
   sonarqube:
     image: sonarqube:latest
     ports:
