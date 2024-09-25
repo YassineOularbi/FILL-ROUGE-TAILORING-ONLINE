@@ -35,11 +35,7 @@ public class AdminService {
     }
 
     public AdminDto register(AdminDto adminDto) {
-        try {
-            userService.getUserByUsername(adminDto.getUsername());
-        } catch (UsernameNotFoundException _) {
-        }
-
+        userService.getUserByUsername(adminDto.getUsername());
         var admin = (Admin) adminMapper.toEntity(adminDto);
         String keycloakUserId;
         try {

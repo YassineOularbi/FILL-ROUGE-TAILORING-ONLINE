@@ -27,16 +27,15 @@ public class AuthenticationFilter implements GlobalFilter {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             return reactiveJwtDecoder.decode(token)
-                    .flatMap(jwt -> {
+                    .flatMap(_ -> {
                         ServerHttpRequest modifiedRequest = exchange.getRequest().mutate().header(HttpHeaders.AUTHORIZATION, authHeader).build();
                         return chain.filter(exchange.mutate().request(modifiedRequest).build());
                     })
-                    .onErrorResume(e -> {
+                    .onErrorResume(_ -> {
                         exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                         return exchange.getResponse().setComplete();
                     });
         } else {
-            System.out.println(BASIC_AUTH_VALUE);
             ServerHttpRequest modifiedRequest = exchange.getRequest().mutate().header(HttpHeaders.AUTHORIZATION, BASIC_AUTH_VALUE).build();
             return chain.filter(exchange.mutate().request(modifiedRequest).build());
         }
