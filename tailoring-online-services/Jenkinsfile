@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        GITHUB_CREDENTIALS = 'github-token'
+    }
+
     stages {
         stage('Checkout Source Code from Git Repository') {
             steps {
@@ -8,17 +12,14 @@ pipeline {
                     echo 'Fetching the latest source code from the Git repository...'
                 }
                 git branch: 'main',
-                    credentialsId: '8f1de731-7401-44dd-aa00-21e55ee42ab9',
+                    credentialsId: GITHUB_CREDENTIALS,
                     url: 'https://github.com/YassineOularbi/FILL-ROUGE-TAILORING-ONLINE.git'
             }
+            
         }
 
-        stage('Maven Build Pipeline') {
-            steps {
-                script {
-                    echo 'Starting the Maven build pipeline...'
-                }
-
+        stage('Maven Build') {
+            parallel {
                 stage('Resolve Dependencies and Prepare Environment') {
                     steps {
                         script {
@@ -26,7 +27,6 @@ pipeline {
                         }
                         dir('tailoring-online-services') {
                             sh 'mvn dependency:resolve'
-                            sh 'mvn validate'
                         }
                     }
                 }
@@ -131,12 +131,12 @@ pipeline {
         }
         success {
             script {
-                echo 'Build pipeline completed successfully. All stages passed.'
+                echo 'Pipeline completed successfully. All stages passed.'
             }
         }
         failure {
             script {
-                echo 'Build pipeline failed. Review logs for troubleshooting.'
+                echo 'Pipeline failed. Please check the logs for details.'
             }
         }
     }
