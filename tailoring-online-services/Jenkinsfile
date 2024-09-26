@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        GITHUB_CREDENTIALS = 'github-token'
-    }
-
     stages {
         stage('Checkout Source Code from Git Repository') {
             steps {
@@ -12,10 +8,9 @@ pipeline {
                     echo 'Fetching the latest source code from the Git repository...'
                 }
                 git branch: 'main',
-                    credentialsId: GITHUB_CREDENTIALS,
+                    credentialsId: '8f1de731-7401-44dd-aa00-21e55ee42ab9',
                     url: 'https://github.com/YassineOularbi/FILL-ROUGE-TAILORING-ONLINE.git'
             }
-            
         }
 
         stage('Maven Build') {
