@@ -9,7 +9,7 @@ pipeline {
         DOCKER_TOKEN = credentials('docker-token')
         SONARQUBE = 'sonarqube'
         SONAR_TOKEN = credentials('sonar-token')
-        GITHUB_TOKEN = credentials('github-credentials')
+        GITHUB_CREDS = credentials('github-credentials')
     }
 
     stages {
@@ -18,7 +18,9 @@ pipeline {
                 script {
                     echo 'Checking out the latest code from GitHub repository...'
                 }
-                git branch: 'main', credentialsId: 'GITHUB_TOKEN', url: 'https://github.com/YassineOularbi/FILL-ROUGE-TAILORING-ONLINE.git'
+                git branch: 'main',
+                    credentialsId: 'github-credentials',
+                    url: 'https://github.com/YassineOularbi/FILL-ROUGE-TAILORING-ONLINE.git'
             }
         }
 
