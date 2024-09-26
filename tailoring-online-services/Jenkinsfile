@@ -14,15 +14,15 @@ pipeline {
 
     stages {
         stage('Checkout Source Code') {
-            steps {
-                script {
-                    echo 'Checking out the latest code from GitHub repository...'
+                    steps {
+                        script {
+                            echo 'Checking out the latest code from GitHub repository...'
+                        }
+                        git branch: 'main',
+                            credentialsId: '8f1de731-7401-44dd-aa00-21e55ee42ab9',
+                            url: 'https://github.com/YassineOularbi/FILL-ROUGE-TAILORING-ONLINE.git'
+                    }
                 }
-                git branch: 'main',
-                    credentialsId: 'github-credentials',
-                    url: 'https://github.com/YassineOularbi/FILL-ROUGE-TAILORING-ONLINE.git'
-            }
-        }
 
         stage('Prepare Environment') {
             steps {
