@@ -42,7 +42,7 @@ pipeline {
                 }
                 parallel {
                     script {
-                        env.MICRO_SERVICES.split(',').each { service ->
+                        MICRO_SERVICES.each { service ->
                             stage("Build ${service.capitalize()}") {
                                 parallel {
                                     stage("Clean ${service.capitalize()}") {
@@ -73,7 +73,7 @@ pipeline {
                                         steps {
                                             echo "Compiling the application for ${service}..."
                                             dir("tailoring-online-services/${service}") {
-                                                sh 'mvn clean compile'
+                                                sh 'mvn compile'
                                             }
                                         }
                                     }
@@ -86,8 +86,6 @@ pipeline {
                                                 }
                                             }
                                         }
-                                    }
-                                    if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service')) {
                                         stage("Execute Unit Tests for ${service.capitalize()}") {
                                             steps {
                                                 echo "Executing unit tests for ${service}..."
@@ -96,8 +94,6 @@ pipeline {
                                                 }
                                             }
                                         }
-                                    }
-                                    if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service')) {
                                         stage("Run Integration Tests for ${service.capitalize()}") {
                                             steps {
                                                 echo "Executing integration tests for ${service}..."
