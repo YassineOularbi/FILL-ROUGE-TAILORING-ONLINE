@@ -61,7 +61,7 @@ class AuthenticationControllerTests {
         ResponseEntity<?> response = authenticationController.sendVerificationCode(userId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(STR."Verification code sent to the registered email address :\{email}", response.getBody());
+        assertEquals(String.format("Verification code sent to the registered email address :%s", email), response.getBody());
     }
 
     @Test
@@ -108,7 +108,7 @@ class AuthenticationControllerTests {
         ResponseEntity<?> response = authenticationController.sendOTPByEmail(userId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(STR."OTP code sent to the registered email address :\{email}", response.getBody());
+        assertEquals(String.format("OTP code sent to the registered email address :%s", email), response.getBody());
     }
 
     @Test
