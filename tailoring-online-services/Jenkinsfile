@@ -1,124 +1,143 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'mvn'
-    }
-
-    environment {
-        DOCKER_TOKEN = credentials('docker-token')
-        SONARQUBE = 'sonarqube'
-        SONAR_TOKEN = credentials('sonar-token')
-        GITHUB_CREDS = 'github-credentials'
-    }
-
     stages {
-        stage('Checkout Source Code') {
+        stage('Checkout Source Code from Git Repository') {
+            steps {
+                script {
+                    echo 'Fetching the latest source code from the Git repository...'
+                }
+                git branch: 'main',
+                    credentialsId: '8f1de731-7401-44dd-aa00-21e55ee42ab9',
+                    url: 'https://github.com/YassineOularbi/FILL-ROUGE-TAILORING-ONLINE.git'
+            }
+        }
+
+        stage('Maven Build Pipeline') {
+            steps {
+                script {
+                    echo 'Starting the Maven build pipeline...'
+                }
+
+                stage('Resolve Dependencies and Prepare Environment') {
                     steps {
                         script {
-                            echo 'Checking out the latest code from GitHub repository...'
+                            echo 'Resolving project dependencies and setting up the Maven environment...'
                         }
-                        git branch: 'main',
-                            credentialsId: '8f1de731-7401-44dd-aa00-21e55ee42ab9',
-                            url: 'https://github.com/YassineOularbi/FILL-ROUGE-TAILORING-ONLINE.git'
+                        dir('tailoring-online-services') {
+                            sh 'mvn dependency:resolve'
+                            sh 'mvn validate'
+                        }
                     }
                 }
 
-        stage('Prepare Environment') {
-            steps {
-                script {
-                    echo 'Setting up the Maven environment and initializing project dependencies...'
+                stage('Validate Project Configuration') {
+                    steps {
+                        script {
+                            echo 'Validating project configuration to ensure integrity...'
+                        }
+                        dir('tailoring-online-services') {
+                            sh 'mvn validate'
+                        }
+                    }
                 }
-                dir('tailoring-online-services') {
-                   sh 'mvn dependency:resolve'
-                   sh 'mvn validate'
-                }
-            }
-        }
 
-        stage('Compile Source Code') {
-            steps {
-                script {
-                    echo 'Compiling source code...'
+                stage('Compile Application Source Code') {
+                    steps {
+                        script {
+                            echo 'Compiling the source code of the application...'
+                        }
+                        dir('tailoring-online-services') {
+                            sh 'mvn clean compile'
+                        }
+                    }
                 }
-                dir('tailoring-online-services') {
-                    sh 'mvn clean compile'
-                }
-            }
-        }
 
-        stage('Run Unit Tests') {
-            steps {
-                script {
-                    echo 'Running unit tests to ensure code correctness...'
+                stage('Compile Test Classes') {
+                    steps {
+                        script {
+                            echo 'Compiling test classes for unit testing...'
+                        }
+                        dir('tailoring-online-services') {
+                            sh 'mvn test-compile'
+                        }
+                    }
                 }
-                dir('tailoring-online-services') {
-                    sh 'mvn test'
-                }
-            }
-        }
 
-        stage('Integration Tests') {
-            steps {
-                script {
-                    echo 'Running integration tests to validate system behavior...'
+                stage('Execute Unit Tests') {
+                    steps {
+                        script {
+                            echo 'Executing unit tests to verify code correctness...'
+                        }
+                        dir('tailoring-online-services') {
+                            sh 'mvn test'
+                        }
+                    }
                 }
-                dir('tailoring-online-services') {
-                    sh 'mvn integration-test'
-                }
-            }
-        }
 
-        stage('Verify Project') {
-            steps {
-                script {
-                    echo 'Verifying project to ensure all checks are successful...'
+                stage('Run Integration Tests') {
+                    steps {
+                        script {
+                            echo 'Executing integration tests to validate system behavior...'
+                        }
+                        dir('tailoring-online-services') {
+                            sh 'mvn integration-test'
+                        }
+                    }
                 }
-                dir('tailoring-online-services') {
-                    sh 'mvn verify'
-                }
-            }
-        }
 
-        stage('Package Application') {
-            steps {
-                script {
-                    echo 'Packaging the application for deployment (creating a JAR/WAR file)...'
+                stage('Perform Project Verification') {
+                    steps {
+                        script {
+                            echo 'Running Maven verification phase to ensure all checks are passed...'
+                        }
+                        dir('tailoring-online-services') {
+                            sh 'mvn verify'
+                        }
+                    }
                 }
-                dir('tailoring-online-services') {
-                    sh 'mvn package'
-                }
-            }
-        }
 
-        stage('Install Package Locally') {
-            steps {
-                script {
-                    echo 'Installing the application into the local Maven repository...'
+                stage('Package the Application') {
+                    steps {
+                        script {
+                            echo 'Packaging the application into a deployable artifact (JAR/WAR)...'
+                        }
+                        dir('tailoring-online-services') {
+                            sh 'mvn package'
+                        }
+                    }
                 }
-                dir('tailoring-online-services') {
-                    sh 'mvn install'
+
+                stage('Install Package to Local Repository') {
+                    steps {
+                        script {
+                            echo 'Installing the packaged application into the local Maven repository...'
+                        }
+                        dir('tailoring-online-services') {
+                            sh 'mvn install'
+                        }
+                    }
                 }
             }
         }
     }
 
     post {
-            always {
-                script {
-                    echo 'Cleaning up the workspace after the build...'
-                }
-                cleanWs()
+        always {
+            script {
+                echo 'Cleaning up the workspace after the build...'
             }
-            success {
-                script {
-                    echo 'Pipeline completed successfully. All stages passed.'
-                }
-            }
-            failure {
-                script {
-                    echo 'Pipeline failed. Please check the logs for details.'
-                }
+            cleanWs()
+        }
+        success {
+            script {
+                echo 'Build pipeline completed successfully. All stages passed.'
             }
         }
+        failure {
+            script {
+                echo 'Build pipeline failed. Review logs for troubleshooting.'
+            }
+        }
+    }
 }
