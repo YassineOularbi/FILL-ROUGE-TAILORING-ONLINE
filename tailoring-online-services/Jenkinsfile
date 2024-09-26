@@ -29,8 +29,10 @@ pipeline {
                 script {
                     echo 'Setting up the Maven environment and initializing project dependencies...'
                 }
-                sh 'mvn dependency:resolve'
-                sh 'mvn validate'
+                dir('tailoring-online-services') {
+                   sh 'mvn dependency:resolve'
+                   sh 'mvn validate'
+                }
             }
         }
 
