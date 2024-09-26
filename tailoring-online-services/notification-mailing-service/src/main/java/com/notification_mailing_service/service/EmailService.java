@@ -104,7 +104,7 @@ public class EmailService {
         helper.setFrom("Tailoring-online@outlook.com", "Tailoring Online");
         helper.setReplyTo("Tailoring-online@outlook.com", "Tailoring Online");
         helper.setTo("Tailoring-online@outlook.com");
-        helper.setSubject(STR."Client with name \{name} sent a message");
+        helper.setSubject(String.format("Client with name %s sent a message", name));
         helper.setText(body, true);
         LocalDate currentDate = LocalDate.now();
         LocalDateTime localDateTime = currentDate.atStartOfDay();

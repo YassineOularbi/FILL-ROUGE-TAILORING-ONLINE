@@ -18,7 +18,7 @@ import java.util.Base64;
 public class AuthenticationFilter implements GlobalFilter {
 
     private final ReactiveJwtDecoder reactiveJwtDecoder;
-    private static final String BASIC_AUTH_VALUE = STR."Basic \{Base64.getEncoder().encodeToString("admin:admin".getBytes())}";
+    private static final String BASIC_AUTH_VALUE = String.format("Basic %s", Base64.getEncoder().encodeToString("admin:admin".getBytes()));
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -27,11 +27,11 @@ public class AuthenticationFilter implements GlobalFilter {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             return reactiveJwtDecoder.decode(token)
-                    .flatMap(_ -> {
+                    .flatMap(jwt -> {
                         ServerHttpRequest modifiedRequest = exchange.getRequest().mutate().header(HttpHeaders.AUTHORIZATION, authHeader).build();
                         return chain.filter(exchange.mutate().request(modifiedRequest).build());
                     })
-                    .onErrorResume(_ -> {
+                    .onErrorResume(e -> {
                         exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                         return exchange.getResponse().setComplete();
                     });

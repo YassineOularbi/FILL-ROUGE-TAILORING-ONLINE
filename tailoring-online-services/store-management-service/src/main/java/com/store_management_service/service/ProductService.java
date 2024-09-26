@@ -38,7 +38,7 @@ public class ProductService {
         var store = storeRepository.findById(storeId).orElseThrow(() -> new StoreNotFoundException(storeId));
         var mappedProduct = productMapper.toEntity(productDto);
         mappedProduct.setStore(store);
-        String sku = STR."TO-\{mappedProduct.getCategory()}-MA-\{(int) (Math.random() * 10000)}";
+        String sku = String.format("TO-%s-MA-%d", mappedProduct.getCategory(), (int) (Math.random() * 10000));
         mappedProduct.setCodeSKU(sku);
         var savedProduct = productRepository.save(mappedProduct);
         return productMapper.toDto(savedProduct);

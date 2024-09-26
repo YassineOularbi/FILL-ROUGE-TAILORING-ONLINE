@@ -29,7 +29,7 @@ public class AuthenticationController {
     public ResponseEntity<?> sendVerificationCode(@PathVariable("id") String id) {
         try {
             var email = authenticationService.sendVerificationCode(id);
-            return ResponseEntity.ok(STR."Verification code sent to the registered email address :\{email}");
+            return ResponseEntity.ok(String.format("Verification code sent to the registered email address : %s", email));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -39,7 +39,7 @@ public class AuthenticationController {
     public ResponseEntity<String> verifyEmail(@PathVariable("id") String id, @PathVariable("code") String code) {
         try {
             var email = authenticationService.verifyEmail(id, code);
-            return ResponseEntity.ok(STR."Email verified :\{email}");
+            return ResponseEntity.ok(String.format("Email verified: %s", email));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -49,7 +49,7 @@ public class AuthenticationController {
     public ResponseEntity<?> sendOTPByEmail(@PathVariable("id") String id) {
         try {
             var email = authenticationService.sendOtpVerification(id);
-            return ResponseEntity.ok(STR."OTP code sent to the registered email address :\{email}");
+            return ResponseEntity.ok(String.format("OTP code sent to the registered email address: %s", email));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -59,7 +59,7 @@ public class AuthenticationController {
     public ResponseEntity<?> verifyOtpCode(@PathVariable("id") String id, @PathVariable("code") String code) {
         try {
             String email = authenticationService.verifyOtpCode(id, code);
-            return ResponseEntity.ok().body(STR."{\"message\": \"OTP verified successfully\", \"email\": \"\{email}\"}");
+            return ResponseEntity.ok().body(String.format("{\"message\": \"OTP verified successfully\", \"email\": \"%s\"}", email));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
