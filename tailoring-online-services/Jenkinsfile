@@ -17,115 +17,131 @@ pipeline {
             }
         }
 
-        stage('Maven Build') {
+        stage('Maven Build for MicroServices TAILORING ONLINE') {
             parallel {
+                script {
+                    def microservices = [
+                        'config-server',
+                        'eureka-server',
+                        'api-gateway-service',
+                        'user-management-service',
+                        'store-management-service',
+                        'localization-shipping-service',
+                        'loyalty-program-service',
+                        'notification-mailing-service',
+                        'order-management-service',
+                        'payment-banking-service',
+                        'promotion-management-service',
+                        'review-management-service',
+                        'social-management-service'
+                    ]
 
-                stage('Clean Project') {
-                    steps {
-                        script {
-                            echo 'Cleaning project...'
-                        }
-                        dir('tailoring-online-services') {
-                            sh 'mvn clean'
-                        }
-                    }
-                }
-
-                stage('Resolve Dependencies and Prepare Environment') {
-                    steps {
-                        script {
-                            echo 'Resolving project dependencies and setting up the Maven environment...'
-                        }
-                        dir('tailoring-online-services') {
-                            sh 'mvn dependency:resolve'
-                        }
-                    }
-                }
-
-                stage('Validate Project Configuration') {
-                    steps {
-                        script {
-                            echo 'Validating project configuration to ensure integrity...'
-                        }
-                        dir('tailoring-online-services') {
-                            sh 'mvn validate'
-                        }
-                    }
-                }
-
-                stage('Compile Application Source Code') {
-                    steps {
-                        script {
-                            echo 'Compiling the source code of the application...'
-                        }
-                        dir('tailoring-online-services') {
-                            sh 'mvn clean compile'
-                        }
-                    }
-                }
-
-                stage('Compile Test Classes') {
-                    steps {
-                        script {
-                            echo 'Compiling test classes for unit testing...'
-                        }
-                        dir('tailoring-online-services') {
-                            sh 'mvn test-compile'
-                        }
-                    }
-                }
-
-                stage('Execute Unit Tests') {
-                    steps {
-                        script {
-                            echo 'Executing unit tests to verify code correctness...'
-                        }
-                        dir('tailoring-online-services') {
-                            sh 'mvn test'
-                        }
-                    }
-                }
-
-                stage('Run Integration Tests') {
-                    steps {
-                        script {
-                            echo 'Executing integration tests to validate system behavior...'
-                        }
-                        dir('tailoring-online-services') {
-                            sh 'mvn integration-test'
-                        }
-                    }
-                }
-
-                stage('Perform Project Verification') {
-                    steps {
-                        script {
-                            echo 'Running Maven verification phase to ensure all checks are passed...'
-                        }
-                        dir('tailoring-online-services') {
-                            sh 'mvn verify'
-                        }
-                    }
-                }
-
-                stage('Package the Application') {
-                    steps {
-                        script {
-                            echo 'Packaging the application into a deployable artifact (JAR/WAR)...'
-                        }
-                        dir('tailoring-online-services') {
-                            sh 'mvn package'
-                        }
-                    }
-                }
-
-                stage('Install Package to Local Repository') {
-                    steps {
-                        script {
-                            echo 'Installing the packaged application into the local Maven repository...'
-                        }
-                        dir('tailoring-online-services') {
-                            sh 'mvn install'
+                    microservices.each { service ->
+                        stage("Build ${service.capitalize()}") {
+                            parallel {
+                                stage("Clean ${service.capitalize()}") {
+                                    steps {
+                                        script {
+                                            echo "Cleaning project ${service}..."
+                                        }
+                                        dir("tailoring-online-services/${service}") {
+                                            sh 'mvn clean'
+                                        }
+                                    }
+                                }
+                                stage("Resolve Dependencies for ${service.capitalize()}") {
+                                    steps {
+                                        script {
+                                            echo "Resolving dependencies for ${service}..."
+                                        }
+                                        dir("tailoring-online-services/${service}") {
+                                            sh 'mvn dependency:resolve'
+                                        }
+                                    }
+                                }
+                                stage("Validate ${service.capitalize()} Configuration") {
+                                    steps {
+                                        script {
+                                            echo "Validating configuration for ${service}..."
+                                        }
+                                        dir("tailoring-online-services/${service}") {
+                                            sh 'mvn validate'
+                                        }
+                                    }
+                                }
+                                stage("Compile ${service.capitalize()} Application") {
+                                    steps {
+                                        script {
+                                            echo "Compiling the application for ${service}..."
+                                        }
+                                        dir("tailoring-online-services/${service}") {
+                                            sh 'mvn clean compile'
+                                        }
+                                    }
+                                }
+                                stage("Compile Test Classes for ${service.capitalize()}") {
+                                    steps {
+                                        script {
+                                            echo "Compiling test classes for ${service}..."
+                                        }
+                                        dir("tailoring-online-services/${service}") {
+                                            sh 'mvn test-compile'
+                                        }
+                                    }
+                                }
+                                if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service')) {
+                                    stage("Execute Unit Tests for ${service.capitalize()}") {
+                                        steps {
+                                            script {
+                                                echo "Executing unit tests for ${service}..."
+                                            }
+                                            dir("tailoring-online-services/${service}") {
+                                                sh 'mvn test'
+                                            }
+                                        }
+                                    }
+                                }
+                                stage("Run Integration Tests for ${service.capitalize()}") {
+                                    steps {
+                                        script {
+                                            echo "Executing integration tests for ${service}..."
+                                        }
+                                        dir("tailoring-online-services/${service}") {
+                                            sh 'mvn integration-test'
+                                        }
+                                    }
+                                }
+                                stage("Perform Verification for ${service.capitalize()}") {
+                                    steps {
+                                        script {
+                                            echo "Verifying ${service}..."
+                                        }
+                                        dir("tailoring-online-services/${service}") {
+                                            sh 'mvn verify'
+                                        }
+                                    }
+                                }
+                                stage("Package ${service.capitalize()} Application") {
+                                    steps {
+                                        script {
+                                            echo "Packaging the application for ${service}..."
+                                        }
+                                        dir("tailoring-online-services/${service}") {
+                                            sh 'mvn package'
+                                        }
+                                    }
+                                }
+                                stage("Install Package for ${service.capitalize()}") {
+                                    steps {
+                                        script {
+                                            echo "Installing package for ${service}..."
+                                        }
+                                        dir("tailoring-online-services/${service}") {
+                                            sh 'mvn install'
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
