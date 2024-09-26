@@ -18,7 +18,7 @@ pipeline {
                 script {
                     echo 'Checking out the latest code from GitHub repository...'
                 }
-                git branch: 'main', credentialsId: GITHUB_TOKEN, url: 'https://github.com/YassineOularbi/FILL-ROUGE-TAILORING-ONLINE.git'
+                git branch: 'main', credentialsId: 'GITHUB_TOKEN', url: 'https://github.com/YassineOularbi/FILL-ROUGE-TAILORING-ONLINE.git'
             }
         }
 
@@ -27,8 +27,8 @@ pipeline {
                 script {
                     echo 'Setting up the Maven environment and initializing project dependencies...'
                 }
-                bat 'mvn dependency:resolve'
-                bat 'mvn validate'
+                sh 'mvn dependency:resolve'
+                sh 'mvn validate'
             }
         }
 
@@ -38,7 +38,7 @@ pipeline {
                     echo 'Compiling source code...'
                 }
                 dir('tailoring-online-services') {
-                    bat 'mvn clean compile'
+                    sh 'mvn clean compile'
                 }
             }
         }
@@ -49,7 +49,7 @@ pipeline {
                     echo 'Running unit tests to ensure code correctness...'
                 }
                 dir('tailoring-online-services') {
-                    bat 'mvn test'
+                    sh 'mvn test'
                 }
             }
         }
@@ -60,7 +60,7 @@ pipeline {
                     echo 'Running integration tests to validate system behavior...'
                 }
                 dir('tailoring-online-services') {
-                    bat 'mvn integration-test'
+                    sh 'mvn integration-test'
                 }
             }
         }
@@ -71,7 +71,7 @@ pipeline {
                     echo 'Verifying project to ensure all checks are successful...'
                 }
                 dir('tailoring-online-services') {
-                    bat 'mvn verify'
+                    sh 'mvn verify'
                 }
             }
         }
@@ -82,7 +82,7 @@ pipeline {
                     echo 'Packaging the application for deployment (creating a JAR/WAR file)...'
                 }
                 dir('tailoring-online-services') {
-                    bat 'mvn package'
+                    sh 'mvn package'
                 }
             }
         }
@@ -93,7 +93,7 @@ pipeline {
                     echo 'Installing the application into the local Maven repository...'
                 }
                 dir('tailoring-online-services') {
-                    bat 'mvn install'
+                    sh 'mvn install'
                 }
             }
         }
@@ -101,9 +101,7 @@ pipeline {
 
     post {
         always {
-            node {
-                cleanWs()
-            }
+            cleanWs()
         }
     }
 }
