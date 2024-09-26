@@ -4,6 +4,6 @@ import com.store_management_service.model.CustomizableMeasurementKey;
 
 public class CustomizableMeasurementExistException extends RuntimeException {
     public CustomizableMeasurementExistException(CustomizableMeasurementKey customizableMeasurementKey){
-        super(STR."Customizable measurement with id : \{customizableMeasurementKey.getModelId()} & \{customizableMeasurementKey.getMeasurementId()} already existe");
+        super(String.format("Customizable measurement with id: %s & %s already exists", customizableMeasurementKey.getModelId(), customizableMeasurementKey.getMeasurementId()));
     }
 }

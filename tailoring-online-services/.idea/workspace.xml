@@ -92,6 +92,7 @@
     "Maven.store-management-service [install].executor": "Run",
     "Maven.store-management-service [site].executor": "Run",
     "Maven.tailoring-online-services [clean].executor": "Run",
+    "Maven.tailoring-online-services [compile].executor": "Run",
     "Maven.tailoring-online-services [install].executor": "Run",
     "Maven.tailoring-online-services [validate].executor": "Run",
     "Maven.user-management-service [clean].executor": "Run",
@@ -131,9 +132,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "run.configurations.included.in.services": "true",
     "vue.rearranger.settings.migration": "true"
   },
@@ -159,11 +160,11 @@
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.api_gateway_service.config" />
       <recent name="com.user_management_service.config" />
       <recent name="com.store_management_service.config" />
-      <recent name="com.notification_mailing_service.config" />
-      <recent name="com.payment_banking_service.config" />
+      <recent name="com.social_management_service.config" />
+      <recent name="com.review_management_service.config" />
+      <recent name="com.promotion_management_service.config" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -399,7 +400,7 @@
       <workItem from="1726498056611" duration="5000" />
       <workItem from="1726498092610" duration="45349000" />
       <workItem from="1726743533849" duration="19433000" />
-      <workItem from="1727183041514" duration="45449000" />
+      <workItem from="1727183041514" duration="49507000" />
     </task>
     <servers />
   </component>

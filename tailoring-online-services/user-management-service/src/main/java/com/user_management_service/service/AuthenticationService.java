@@ -76,7 +76,7 @@ public class AuthenticationService {
         if (status == Response.Status.CREATED.getStatusCode()) {
             String locationHeader = response.getHeaderString("Location");
             String userId = locationHeader.substring(locationHeader.lastIndexOf('/') + 1);
-            ClientRepresentation clientRepresentation = keycloak.realm(realm).clients().findByClientId(clientId).getFirst();
+            ClientRepresentation clientRepresentation = keycloak.realm(realm).clients().findByClientId(clientId).get(0);
             String clientId = clientRepresentation.getId();
             ClientResource clientResource = keycloak.realm(realm).clients().get(clientId);
             String roleName = user.getRole().name();
@@ -86,7 +86,7 @@ public class AuthenticationService {
 
             return userId;
         } else {
-            throw new KeycloakServiceException(STR."Failed to create user in Keycloak. HTTP Status: \{status}");
+            throw new KeycloakServiceException(String.format("Failed to create user in Keycloak. HTTP Status: %s", status));
         }
     }
 

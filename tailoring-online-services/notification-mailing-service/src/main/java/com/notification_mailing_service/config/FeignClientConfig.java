@@ -13,7 +13,7 @@ import java.util.Base64;
 @Configuration
 public class FeignClientConfig {
 
-    String BASIC_AUTH_VALUE = STR."Basic \{Base64.getEncoder().encodeToString("admin:admin".getBytes())}";
+    String BASIC_AUTH_VALUE = String.format("Basic %s", Base64.getEncoder().encodeToString("admin:admin".getBytes()));
 
     @Bean
     public RequestInterceptor requestInterceptor() {
@@ -21,7 +21,7 @@ public class FeignClientConfig {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (authentication != null) {
                 if (authentication.getCredentials() instanceof Jwt jwt) {
-                    requestTemplate.header("Authorization", STR."Bearer \{jwt.getTokenValue()}");
+                    requestTemplate.header("Authorization", String.format("Bearer %s", jwt.getTokenValue()));
                 }
                 else if (authentication.getPrincipal() instanceof User) {
                     requestTemplate.header("Authorization", BASIC_AUTH_VALUE);
