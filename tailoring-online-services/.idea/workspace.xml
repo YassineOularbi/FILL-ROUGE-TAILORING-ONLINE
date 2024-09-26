@@ -126,7 +126,7 @@
     "Spring Boot.UserManagementServiceApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/localization-shipping-service/src/main/java/com/localization_shipping_service/config",
+    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/ITSUPPORT-JURY-BLANC/itsupport-backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -176,7 +176,70 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.jenkins: Compose Deployment">
+  <component name="RunManager" selected="JUnit.AuthenticationControllerTests.sendVerificationCode_Success">
+    <configuration name="AuthenticationControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.user_management_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.user_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AuthenticationControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthenticationControllerTests.sendOtpByEmail_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.user_management_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.user_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AuthenticationControllerTests" />
+      <option name="METHOD_NAME" value="sendOtpByEmail_Success" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthenticationControllerTests.sendVerificationCode_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.user_management_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.user_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AuthenticationControllerTests" />
+      <option name="METHOD_NAME" value="sendVerificationCode_Success" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthenticationControllerTests.verifyEmail_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.user_management_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.user_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AuthenticationControllerTests" />
+      <option name="METHOD_NAME" value="verifyEmail_Success" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ApiGatewayServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="api-gateway-service" />
@@ -284,19 +347,6 @@
       <deployment type="docker-compose.yml" />
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.api-gateway-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="api-gateway-service" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="docker-compose.yml.jenkins: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -310,51 +360,12 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.review-management-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="review-management-service" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.social-management-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="social-management-service" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.social_db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="social_db" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Docker.docker-compose.yml.api-gateway-service: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.jenkins: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.review-management-service: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.social-management-service: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.social_db: Compose Deployment" />
+      <item itemvalue="JUnit.AuthenticationControllerTests.sendOtpByEmail_Success" />
+      <item itemvalue="JUnit.AuthenticationControllerTests.sendVerificationCode_Success" />
+      <item itemvalue="JUnit.AuthenticationControllerTests.verifyEmail_Success" />
+      <item itemvalue="JUnit.AuthenticationControllerTests" />
       <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
@@ -371,11 +382,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AuthenticationControllerTests.sendVerificationCode_Success" />
+        <item itemvalue="JUnit.AuthenticationControllerTests.sendOtpByEmail_Success" />
+        <item itemvalue="JUnit.AuthenticationControllerTests.verifyEmail_Success" />
+        <item itemvalue="JUnit.AuthenticationControllerTests" />
         <item itemvalue="Docker.docker-compose.yml.jenkins: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.api-gateway-service: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.social_db: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.social-management-service: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.review-management-service: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -400,7 +411,7 @@
       <workItem from="1726498056611" duration="5000" />
       <workItem from="1726498092610" duration="45349000" />
       <workItem from="1726743533849" duration="19433000" />
-      <workItem from="1727183041514" duration="50021000" />
+      <workItem from="1727183041514" duration="51776000" />
     </task>
     <servers />
   </component>
