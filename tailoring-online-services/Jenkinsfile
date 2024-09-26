@@ -5,6 +5,24 @@ pipeline {
         maven 'mvn'
     }
 
+    environment {
+        MICRO_SERVICES = [
+            'config-server',
+            'eureka-server',
+            'api-gateway-service',
+            'user-management-service',
+            'store-management-service',
+            'localization-shipping-service',
+            'loyalty-program-service',
+            'notification-mailing-service',
+            'order-management-service',
+            'payment-banking-service',
+            'promotion-management-service',
+            'review-management-service',
+            'social-management-service'
+        ]
+    }
+
     stages {
         stage('Checkout Source Code from Git Repository') {
             steps {
@@ -23,108 +41,94 @@ pipeline {
                     echo 'Starting the build process for microservices...'
                 }
                 parallel {
-                    def microservices = [
-                        'config-server',
-                        'eureka-server',
-                        'api-gateway-service',
-                        'user-management-service',
-                        'store-management-service',
-                        'localization-shipping-service',
-                        'loyalty-program-service',
-                        'notification-mailing-service',
-                        'order-management-service',
-                        'payment-banking-service',
-                        'promotion-management-service',
-                        'review-management-service',
-                        'social-management-service'
-                    ]
-
-                    microservices.each { service ->
-                        stage("Build ${service.capitalize()}") {
-                            parallel {
-                                stage("Clean ${service.capitalize()}") {
-                                    steps {
-                                        echo "Cleaning project ${service}..."
-                                        dir("tailoring-online-services/${service}") {
-                                            sh 'mvn clean'
-                                        }
-                                    }
-                                }
-                                stage("Resolve Dependencies for ${service.capitalize()}") {
-                                    steps {
-                                        echo "Resolving dependencies for ${service}..."
-                                        dir("tailoring-online-services/${service}") {
-                                            sh 'mvn dependency:resolve'
-                                        }
-                                    }
-                                }
-                                stage("Validate ${service.capitalize()} Configuration") {
-                                    steps {
-                                        echo "Validating configuration for ${service}..."
-                                        dir("tailoring-online-services/${service}") {
-                                            sh 'mvn validate'
-                                        }
-                                    }
-                                }
-                                stage("Compile ${service.capitalize()} Application") {
-                                    steps {
-                                        echo "Compiling the application for ${service}..."
-                                        dir("tailoring-online-services/${service}") {
-                                            sh 'mvn clean compile'
-                                        }
-                                    }
-                                }
-                                if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service')) {
-                                    stage("Compile Test Classes for ${service.capitalize()}") {
+                    script {
+                        env.MICRO_SERVICES.split(',').each { service ->
+                            stage("Build ${service.capitalize()}") {
+                                parallel {
+                                    stage("Clean ${service.capitalize()}") {
                                         steps {
-                                            echo "Compiling test classes for ${service}..."
+                                            echo "Cleaning project ${service}..."
                                             dir("tailoring-online-services/${service}") {
-                                                sh 'mvn test-compile'
+                                                sh 'mvn clean'
                                             }
                                         }
                                     }
-                                }
-                                if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service')) {
-                                    stage("Execute Unit Tests for ${service.capitalize()}") {
+                                    stage("Resolve Dependencies for ${service.capitalize()}") {
                                         steps {
-                                            echo "Executing unit tests for ${service}..."
+                                            echo "Resolving dependencies for ${service}..."
                                             dir("tailoring-online-services/${service}") {
-                                                sh 'mvn test'
+                                                sh 'mvn dependency:resolve'
                                             }
                                         }
                                     }
-                                }
-                                if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service')) {
-                                    stage("Run Integration Tests for ${service.capitalize()}") {
+                                    stage("Validate ${service.capitalize()} Configuration") {
                                         steps {
-                                            echo "Executing integration tests for ${service}..."
+                                            echo "Validating configuration for ${service}..."
                                             dir("tailoring-online-services/${service}") {
-                                                sh 'mvn integration-test'
+                                                sh 'mvn validate'
                                             }
                                         }
                                     }
-                                }
-                                stage("Perform Verification for ${service.capitalize()}") {
-                                    steps {
-                                        echo "Verifying ${service}..."
-                                        dir("tailoring-online-services/${service}") {
-                                            sh 'mvn verify'
+                                    stage("Compile ${service.capitalize()} Application") {
+                                        steps {
+                                            echo "Compiling the application for ${service}..."
+                                            dir("tailoring-online-services/${service}") {
+                                                sh 'mvn clean compile'
+                                            }
                                         }
                                     }
-                                }
-                                stage("Package ${service.capitalize()} Application") {
-                                    steps {
-                                        echo "Packaging the application for ${service}..."
-                                        dir("tailoring-online-services/${service}") {
-                                            sh 'mvn package'
+                                    if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service')) {
+                                        stage("Compile Test Classes for ${service.capitalize()}") {
+                                            steps {
+                                                echo "Compiling test classes for ${service}..."
+                                                dir("tailoring-online-services/${service}") {
+                                                    sh 'mvn test-compile'
+                                                }
+                                            }
                                         }
                                     }
-                                }
-                                stage("Install Package for ${service.capitalize()}") {
-                                    steps {
-                                        echo "Installing package for ${service}..."
-                                        dir("tailoring-online-services/${service}") {
-                                            sh 'mvn install'
+                                    if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service')) {
+                                        stage("Execute Unit Tests for ${service.capitalize()}") {
+                                            steps {
+                                                echo "Executing unit tests for ${service}..."
+                                                dir("tailoring-online-services/${service}") {
+                                                    sh 'mvn test'
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service')) {
+                                        stage("Run Integration Tests for ${service.capitalize()}") {
+                                            steps {
+                                                echo "Executing integration tests for ${service}..."
+                                                dir("tailoring-online-services/${service}") {
+                                                    sh 'mvn integration-test'
+                                                }
+                                            }
+                                        }
+                                    }
+                                    stage("Perform Verification for ${service.capitalize()}") {
+                                        steps {
+                                            echo "Verifying ${service}..."
+                                            dir("tailoring-online-services/${service}") {
+                                                sh 'mvn verify'
+                                            }
+                                        }
+                                    }
+                                    stage("Package ${service.capitalize()} Application") {
+                                        steps {
+                                            echo "Packaging the application for ${service}..."
+                                            dir("tailoring-online-services/${service}") {
+                                                sh 'mvn package'
+                                            }
+                                        }
+                                    }
+                                    stage("Install Package for ${service.capitalize()}") {
+                                        steps {
+                                            echo "Installing package for ${service}..."
+                                            dir("tailoring-online-services/${service}") {
+                                                sh 'mvn install'
+                                            }
                                         }
                                     }
                                 }
