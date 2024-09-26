@@ -9,7 +9,7 @@ pipeline {
         DOCKER_TOKEN = credentials('docker-token')
         SONARQUBE = 'sonarqube'
         SONAR_TOKEN = credentials('sonar-token')
-        GITHUB_CREDS = credentials('github-credentials')
+        GITHUB_CREDS = 'github-credentials'
     }
 
     stages {
