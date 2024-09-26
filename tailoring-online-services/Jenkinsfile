@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        MICRO_SERVICES = ['config-server', 'eureka-server', 'api-gateway-service', 'user-management-service', 'store-management-service', 'localization-shipping-service', 'loyalty-program-service', 'notification-mailing-service', 'order-management-service', 'payment-banking-service', 'promotion-management-service', 'review-management-service', 'social-management-service']
+        MICRO_SERVICES = 'config-server,eureka-server,api-gateway-service,user-management-service,store-management-service,localization-shipping-service,loyalty-program-service,notification-mailing-service,order-management-service,payment-banking-service,promotion-management-service,review-management-service,social-management-service'
     }
 
     stages {
@@ -25,7 +25,7 @@ pipeline {
                     echo 'Starting the build process for microservices...'
                     def parallelStages = [:]
 
-                    MICRO_SERVICES.each { service ->
+                    env.MICRO_SERVICES.split(',').each { service ->
                         parallelStages["Build ${service.capitalize()}"] = {
                             stage("Build ${service.capitalize()}") {
                                 dir("tailoring-online-services/${service}") {
