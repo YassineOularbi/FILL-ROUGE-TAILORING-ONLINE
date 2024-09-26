@@ -15,6 +15,18 @@ pipeline {
 
         stage('Maven Build') {
             parallel {
+
+                stage('Clean Project') {
+                    steps {
+                        script {
+                            echo 'Cleaning project...'
+                        }
+                        dir('tailoring-online-services') {
+                            sh 'mvn clean'
+                        }
+                    }
+                }
+
                 stage('Resolve Dependencies and Prepare Environment') {
                     steps {
                         script {
