@@ -101,20 +101,8 @@ pipeline {
 
     post {
         always {
-            script {
-                echo 'Cleaning up the workspace after the build...'
-            }
+            // Clean up steps
             cleanWs()
-        }
-        success {
-            script {
-                echo 'Pipeline completed successfully. All stages passed.'
-            }
-        }
-        failure {
-            script {
-                echo 'Pipeline failed. Please check the logs for details.'
-            }
         }
     }
 }
