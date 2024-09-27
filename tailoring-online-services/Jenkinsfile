@@ -113,7 +113,9 @@ pipeline {
                                     sonarScannerOpts += [
                                         '-Dsonar.junit.reportsPath=',
                                         '-Dsonar.tests=',
-                                        '-DskipTests'
+                                        '-Dsonar.test.inclusions=',
+                                        '-Dsonar.java.test.binaries=',
+                                        '-DskipTests=true'
                                     ]
                                 }
                                 withSonarQubeEnv(env.SONARQUBE) {
