@@ -101,7 +101,7 @@ pipeline {
             steps {
                             dir('tailoring-online-services') {
                                 withSonarQubeEnv(SONARQUBE) {
-                                    bat "mvn sonar:sonar -Dsonar.token=${SONAR_TOKEN}"
+                                    sh "mvn sonar:sonar -Dsonar.token=${SONAR_TOKEN}"
                                 }
                             }
                         }
