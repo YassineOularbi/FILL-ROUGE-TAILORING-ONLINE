@@ -27,8 +27,8 @@
 		<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
 		<sonar.java.source>17</sonar.java.source>
 		<sonar.java.enablePreview>true</sonar.java.enablePreview>
-		<sonar.sources>src/main/java</sonar.sources>
-		<sonar.test.exclusions>src/test/**/*</sonar.test.exclusions>
+		<sonar.test.exclusions>**/test/**/*</sonar.test.exclusions>
+		<sonar.exlusions>**/test/**/*</sonar.exlusions>
 		<sonar.coverage.exclusions>**/target/**, **/src/**</sonar.coverage.exclusions>
 		<sonar.cpd.exclusions>**/target/**, **/src/**</sonar.cpd.exclusions>
 		<sonar.java.binaries>target/classes</sonar.java.binaries>
