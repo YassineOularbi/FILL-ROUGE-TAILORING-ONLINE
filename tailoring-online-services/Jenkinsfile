@@ -105,7 +105,7 @@ pipeline {
                         parallelSonarStages["SonarQube Analysis for ${service.capitalize()}"] = {
                             dir("tailoring-online-services/${service}") {
                                 withSonarQubeEnv(env.SONARQUBE) {
-                                    sh "mvn sonar:sonar -Dsonar.projectKey=${service} -Dsonar.projectName='${service}' -Dsonar.token=${SONAR_TOKEN}"
+                                    sh "mvn sonar:sonar -Dsonar.token=${SONAR_TOKEN}"
                                 }
                             }
                         }
