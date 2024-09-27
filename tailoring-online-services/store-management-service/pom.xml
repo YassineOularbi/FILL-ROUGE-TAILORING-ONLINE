@@ -20,6 +20,19 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<sonar.projectKey>store-management-service</sonar.projectKey>
+		<sonar.projectName>store-management-service</sonar.projectName>
+		<sonar.projectVersion>0.0.1-SNAPSHOT</sonar.projectVersion>
+		<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+		<sonar.java.source>17</sonar.java.source>
+		<sonar.java.enablePreview>true</sonar.java.enablePreview>
+		<sonar.sources>src/main/java</sonar.sources>
+		<sonar.tests>src/test/java</sonar.tests>
+		<sonar.coverage.exclusions>**/target/**, **/src/**</sonar.coverage.exclusions>
+		<sonar.cpd.exclusions>**/target/**, **/src/**</sonar.cpd.exclusions>
+		<sonar.java.binaries>target/classes</sonar.java.binaries>
+		<sonar.junit.reportsPath>**/target/surefire-reports/TEST-*.xml</sonar.junit.reportsPath>
+		<sonar.host.url>http://localhost:9000</sonar.host.url>
 	</properties>
 
 	<dependencies>
