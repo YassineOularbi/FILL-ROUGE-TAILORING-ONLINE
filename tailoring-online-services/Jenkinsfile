@@ -116,8 +116,9 @@ pipeline {
                                         '-DskipTests'
                                     ]
                                 }
-
-                                sh "mvn ${sonarScannerOpts.join(' ')}"
+                                withSonarQubeEnv(env.SONARQUBE) {
+                                    sh "mvn ${sonarScannerOpts.join(' ')}"
+                                }
                             }
                         }
                     }
