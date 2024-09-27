@@ -32,7 +32,6 @@
 		<sonar.cpd.exclusions>**/target/**, **/src/**</sonar.cpd.exclusions>
 		<sonar.java.binaries>target/classes</sonar.java.binaries>
 		<sonar.junit.reportsPath>**/target/surefire-reports/TEST-*.xml</sonar.junit.reportsPath>
-		<sonar.host.url>http://localhost:9000</sonar.host.url>
 	</properties>
 
 	<dependencies>
