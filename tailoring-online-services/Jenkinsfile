@@ -7,6 +7,8 @@ pipeline {
 
     environment {
         MICRO_SERVICES = 'config-server,eureka-server,api-gateway-service,user-management-service,store-management-service,localization-shipping-service,loyalty-program-service,notification-mailing-service,order-management-service,payment-banking-service,promotion-management-service,review-management-service,social-management-service'
+        SONAR_TOKEN = credentials('sonar-token')
+        SONARQUBE = 'sonarqube'
     }
 
     stages {
@@ -91,6 +93,26 @@ pipeline {
                     }
 
                     parallel parallelStages
+                }
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def parallelSonarStages = [:]
+
+                    env.MICRO_SERVICES.split(',').each { service ->
+                        parallelSonarStages["SonarQube Analysis for ${service.capitalize()}"] = {
+                            dir("tailoring-online-services/${service}") {
+                                withSonarQubeEnv(env.SONARQUBE) {
+                                    sh "mvn sonar:sonar -Dsonar.projectKey=${service} -Dsonar.projectName='${service.capitalize()}' -Dsonar.token=${SONAR_TOKEN}"
+                                }
+                           }
+                        }
+                    }
+
+                    parallel parallelSonarStages
                 }
             }
         }
