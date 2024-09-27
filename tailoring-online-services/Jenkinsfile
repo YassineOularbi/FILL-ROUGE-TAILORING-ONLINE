@@ -104,22 +104,21 @@ pipeline {
                     env.MICRO_SERVICES.split(',').each { service ->
                         parallelSonarStages["SonarQube Analysis for ${service.capitalize()}"] = {
                             dir("tailoring-online-services/${service}") {
-                                def sonarScannerOpts = [
-                                    "sonar:sonar",
-                                    "-Dsonar.token=$SONAR_TOKEN"
-                                ]
-
-                                if (service in ['config-server', 'eureka-server', 'api-gateway-service', 'social-management-service', 'review-management-service', 'promotion-management-service', 'loyalty-program-service']) {
-                                    sonarScannerOpts += [
-                                        '-Dsonar.junit.reportsPath=',
-                                        '-Dsonar.tests=',
-                                        '-Dsonar.test.inclusions=',
-                                        '-Dsonar.java.test.binaries=',
-                                        '-DskipTests=true'
-                                    ]
-                                }
-                                withSonarQubeEnv(env.SONARQUBE) {
-                                    sh "mvn ${sonarScannerOpts.join(' ')}"
+                                if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service') && !service.contains('social-management-service') && !service.contains('review-management-service') && !service.contains('promotion-management-service') && !service.contains('loyalty-program-service')) {
+                                    withSonarQubeEnv(env.SONARQUBE) {
+                                        sh """
+                                            mvn sonar:sonar \
+                                            -Dsonar.token=${SONAR_TOKEN}
+                                        """
+                                    }
+                                } else {
+                                    withSonarQubeEnv(env.SONARQUBE) {
+                                        sh """
+                                            mvn sonar:sonar \
+                                            -Dsonar.token=${SONAR_TOKEN} \
+                                            -DskipTests=true
+                                        """
+                                    }
                                 }
                             }
                         }
