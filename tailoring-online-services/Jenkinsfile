@@ -104,23 +104,23 @@ pipeline {
                     env.MICRO_SERVICES.split(',').each { service ->
                         parallelSonarStages["SonarQube Analysis for ${service.capitalize()}"] = {
                             dir("tailoring-online-services/${service}") {
-                                if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service')) {
-                                    withSonarQubeEnv(env.SONARQUBE) {
-                                        sh """
-                                            mvn sonar:sonar \
-                                            -Dsonar.token=${SONAR_TOKEN}
-                                        """
-                                    }
+                                if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service') && !service.contains('social-management-service') && !service.contains('review-management-service') && !service.contains('promotion-management-service') && !service.contains('loyalty-program-service')) {
+                                    sh([
+                                        'mvn', 'sonar:sonar',
+                                        "-Dsonar.projectKey=${service}",
+                                        "-Dsonar.projectName=${service}"
+                                        "-Dsonar.token=$SONAR_TOKEN"
+                                    ])
                                 } else {
-                                    withSonarQubeEnv(env.SONARQUBE) {
-                                        sh """
-                                            mvn sonar:sonar \
-                                            -Dsonar.token=${SONAR_TOKEN} \
-                                            -Dsonar.junit.reportsPath='' \
-                                            -Dsonar.tests='' \
-                                            -DskipTests
-                                        """
-                                    }
+                                    sh([
+                                        'mvn', 'sonar:sonar',
+                                        "-Dsonar.projectKey=${service}",
+                                        "-Dsonar.projectName=${service}"
+                                        "-Dsonar.token=$SONAR_TOKEN",
+                                        '-Dsonar.junit.reportsPath=',
+                                        '-Dsonar.tests=',
+                                        '-DskipTests'
+                                    ])
                                 }
                             }
                         }
