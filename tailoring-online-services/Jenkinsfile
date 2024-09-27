@@ -106,9 +106,7 @@ pipeline {
                             dir("tailoring-online-services/${service}") {
                                 def sonarScannerOpts = [
                                     "sonar:sonar",
-                                    "-Dsonar.projectKey=${service}",
-                                    "-Dsonar.projectName=${service}",
-                                    "-Dsonar.token=${SONAR_TOKEN}"
+                                    "-Dsonar.token=$SONAR_TOKEN"
                                 ]
 
                                 if (service in ['config-server', 'eureka-server', 'api-gateway-service', 'social-management-service', 'review-management-service', 'promotion-management-service', 'loyalty-program-service']) {
