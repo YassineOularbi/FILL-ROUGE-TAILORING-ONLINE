@@ -187,6 +187,7 @@ services:
     expose:
       - "8081"
     volumes:
+      - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
     networks:
@@ -466,6 +467,7 @@ volumes:
   promotion-management-db:
   review-management-db:
   social-management-db:
+  jenkins_home:
 
 networks:
   tailoring-online-net:
