@@ -20,8 +20,8 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sonar.projectKey>social-management-service</sonar.projectKey>
-		<sonar.projectName>social-management-service</sonar.projectName>
+		<sonar.projectKey>review-management-service</sonar.projectKey>
+		<sonar.projectName>review-management-service</sonar.projectName>
 		<sonar.projectVersion>0.0.1-SNAPSHOT</sonar.projectVersion>
 		<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
 		<sonar.java.source>17</sonar.java.source>
