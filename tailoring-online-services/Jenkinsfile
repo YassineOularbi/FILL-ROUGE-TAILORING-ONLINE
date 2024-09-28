@@ -9,6 +9,7 @@ pipeline {
         MICRO_SERVICES = 'config-server,eureka-server,api-gateway-service,user-management-service,store-management-service,localization-shipping-service,loyalty-program-service,notification-mailing-service,order-management-service,payment-banking-service,promotion-management-service,review-management-service,social-management-service'
 //         SONAR_TOKEN = credentials('sonar-token')
 //         SONARQUBE = 'sonarqube'
+        HOME = "${env.WORKSPACE}"
     }
 
     stages {
