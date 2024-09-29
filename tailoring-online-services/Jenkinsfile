@@ -136,6 +136,8 @@ pipeline {
 //                 }
 //             }
 //         }
+
+
     stage('Clean Up Docker Resources for MicroServices TAILORING ONLINE') {
         steps {
             script {
@@ -150,18 +152,18 @@ pipeline {
                         dir("tailoring-online-services/${service}") {
                             stage("Clean Containers and Images for ${serviceName}") {
                                 parallel(
-                                    "Remove Containers": {
+                                    "Force Stop and Remove Containers": {
                                         sh """
                                             if [ \$(docker ps -a -q -f name=${containerName}) ]; then
-                                                docker stop ${containerName} || true
-                                                docker rm ${containerName} || true
+                                                docker stop -t 0 ${containerName} || true
+                                                docker rm -f ${containerName} || true
                                             fi
                                         """
                                     },
-                                    "Remove Images": {
+                                    "Force Remove Images": {
                                         sh """
                                             if [ \$(docker images -q ${imageName}) ]; then
-                                                docker rmi ${imageName} || true
+                                                docker rmi -f ${imageName} || true
                                             fi
                                         """
                                     }
@@ -175,6 +177,15 @@ pipeline {
             }
         }
     }
+
+    stage('Verify Docker') {
+        steps {
+            sh 'docker ps -a'
+            sh 'docker images'
+        }
+    }
+
+
 
 //     stage('Docker Build Images for MicroServices TAILORING ONLINE') {
 //         steps {
