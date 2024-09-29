@@ -212,7 +212,7 @@ services:
 #      - xpack.security.enabled=false
 
   config-server:
-    build: ./config-server
+    image: yassineoularbi4/tailoring-online-services:config-server
     container_name: config-server
     ports:
       - '8888:8888'
@@ -226,7 +226,7 @@ services:
       - tailoring-online-net
 
   eureka-server:
-    build: ./eureka-server
+    image: yassineoularbi4/tailoring-online-services:eureka-server
     container_name: eureka-server
     ports:
       - '8761:8761'
