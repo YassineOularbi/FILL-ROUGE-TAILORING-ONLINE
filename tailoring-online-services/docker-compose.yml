@@ -243,7 +243,7 @@ services:
       - tailoring-online-net
 
   user-management-service:
-    build: ./user-management-service
+    image: yassineoularbi4/tailoring-online-services:user-management-service
     container_name: user-management-service
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/USER-MANAGEMENT-SERVICE/actuator/health" ]
@@ -262,7 +262,7 @@ services:
       - tailoring-online-net
 
   store-management-service:
-    build: ./store-management-service
+    image: yassineoularbi4/tailoring-online-services:store-management-service
     container_name: store-management-service
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/STORE-MANAGEMENT-SERVICE/actuator/health" ]
@@ -281,7 +281,7 @@ services:
       - tailoring-online-net
 
   localization-shipping-service:
-    build: ./localization-shipping-service
+    image: yassineoularbi4/tailoring-online-services:localization-shipping-service
     container_name: localization-shipping-service
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/LOCALIZATION-SHIPPING-SERVICE/actuator/health" ]
@@ -300,7 +300,7 @@ services:
       - tailoring-online-net
 
   loyalty-program-service:
-    build: ./loyalty-program-service
+    image: yassineoularbi4/tailoring-online-services:loyalty-program-service
     container_name: loyalty-program-service
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/LOYALTY-PROGRAM-SERVICE/actuator/health" ]
@@ -319,7 +319,7 @@ services:
       - tailoring-online-net
 
   notification-mailing-service:
-    build: ./notification-mailing-service
+    image: yassineoularbi4/tailoring-online-services:notification-mailing-service
     container_name: notification-mailing-service
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/NOTIFICATION-MAILING-SERVICE/actuator/health" ]
@@ -338,7 +338,7 @@ services:
       - tailoring-online-net
 
   order-management-service:
-    build: ./order-management-service
+    image: yassineoularbi4/tailoring-online-services:order-management-service
     container_name: order-management-service
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/ORDER-MANAGEMENT-SERVICE/actuator/health" ]
@@ -357,7 +357,7 @@ services:
       - tailoring-online-net
 
   payment-banking-service:
-    build: ./payment-banking-service
+    image: yassineoularbi4/tailoring-online-services:payment-banking-service
     container_name: payment-banking-service
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/PAYMENT-BANKING-SERVICE/actuator/health" ]
@@ -376,7 +376,7 @@ services:
       - tailoring-online-net
 
   promotion-management-service:
-    build: ./promotion-management-service
+    image: yassineoularbi4/tailoring-online-services:promotion-management-service
     container_name: promotion-management-service
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/PROMOTION-MANAGEMENT-SERVICE/actuator/health" ]
@@ -395,7 +395,7 @@ services:
       - tailoring-online-net
 
   review-management-service:
-    build: ./review-management-service
+    image: yassineoularbi4/tailoring-online-services:review-management-service
     container_name: review-management-service
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/REVIEW-MANAGEMENT-SERVICE/actuator/health" ]
@@ -414,7 +414,7 @@ services:
       - tailoring-online-net
 
   social-management-service:
-    build: ./social-management-service
+    image: yassineoularbi4/tailoring-online-services:social-management-service
     container_name: social-management-service
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://api-gateway-service:9191/SOCIAL-MANAGEMENT-SERVICE/actuator/health" ]
@@ -433,7 +433,7 @@ services:
       - tailoring-online-net
 
   api-gateway-service:
-    build: ./api-gateway-service
+    image: yassineoularbi4/tailoring-online-services:api-gateway-service
     container_name: api-gateway-service
     ports:
       - '9191:9191'
