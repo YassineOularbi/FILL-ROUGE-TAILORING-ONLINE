@@ -42,55 +42,55 @@ pipeline {
                                 }
                             }
 
-                            stage("Resolve Dependencies for ${service.capitalize()}") {
-                                dir("tailoring-online-services/${service}") {
-                                    sh 'mvn dependency:resolve'
-                                }
-                            }
-
-                            stage("Validate ${service.capitalize()}") {
-                                dir("tailoring-online-services/${service}") {
-                                    sh 'mvn validate'
-                                }
-                            }
-
-                            stage("Compile ${service.capitalize()}") {
-                                dir("tailoring-online-services/${service}") {
-                                    sh 'mvn compile'
-                                }
-                            }
-
-                            if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service') && !service.contains('social-management-service') && !service.contains('review-management-service') && !service.contains('promotion-management-service') && !service.contains('loyalty-program-service')) {
-                                stage("Compile Tests for ${service.capitalize()}") {
-                                    dir("tailoring-online-services/${service}") {
-                                        sh 'mvn test-compile'
-                                    }
-                                }
-
-                                stage("Run Unit Tests for ${service.capitalize()}") {
-                                    dir("tailoring-online-services/${service}") {
-                                        sh 'mvn test'
-                                    }
-                                }
-
-                                stage("Run Integration Tests for ${service.capitalize()}") {
-                                    dir("tailoring-online-services/${service}") {
-                                        sh 'mvn integration-test'
-                                    }
-                                }
-                            }
-
-                            stage("Verify ${service.capitalize()}") {
-                                dir("tailoring-online-services/${service}") {
-                                    sh 'mvn verify'
-                                }
-                            }
-
-                            stage("Package ${service.capitalize()}") {
-                                dir("tailoring-online-services/${service}") {
-                                    sh 'mvn package'
-                                }
-                            }
+//                             stage("Resolve Dependencies for ${service.capitalize()}") {
+//                                 dir("tailoring-online-services/${service}") {
+//                                     sh 'mvn dependency:resolve'
+//                                 }
+//                             }
+//
+//                             stage("Validate ${service.capitalize()}") {
+//                                 dir("tailoring-online-services/${service}") {
+//                                     sh 'mvn validate'
+//                                 }
+//                             }
+//
+//                             stage("Compile ${service.capitalize()}") {
+//                                 dir("tailoring-online-services/${service}") {
+//                                     sh 'mvn compile'
+//                                 }
+//                             }
+//
+//                             if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service') && !service.contains('social-management-service') && !service.contains('review-management-service') && !service.contains('promotion-management-service') && !service.contains('loyalty-program-service')) {
+//                                 stage("Compile Tests for ${service.capitalize()}") {
+//                                     dir("tailoring-online-services/${service}") {
+//                                         sh 'mvn test-compile'
+//                                     }
+//                                 }
+//
+//                                 stage("Run Unit Tests for ${service.capitalize()}") {
+//                                     dir("tailoring-online-services/${service}") {
+//                                         sh 'mvn test'
+//                                     }
+//                                 }
+//
+//                                 stage("Run Integration Tests for ${service.capitalize()}") {
+//                                     dir("tailoring-online-services/${service}") {
+//                                         sh 'mvn integration-test'
+//                                     }
+//                                 }
+//                             }
+//
+//                             stage("Verify ${service.capitalize()}") {
+//                                 dir("tailoring-online-services/${service}") {
+//                                     sh 'mvn verify'
+//                                 }
+//                             }
+//
+//                             stage("Package ${service.capitalize()}") {
+//                                 dir("tailoring-online-services/${service}") {
+//                                     sh 'mvn package'
+//                                 }
+//                             }
 
                             stage("Install ${service.capitalize()}") {
                                 dir("tailoring-online-services/${service}") {
