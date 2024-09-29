@@ -9,6 +9,14 @@ pipeline {
         MICRO_SERVICES = 'config-server,eureka-server,api-gateway-service,user-management-service,store-management-service,localization-shipping-service,loyalty-program-service,notification-mailing-service,order-management-service,payment-banking-service,promotion-management-service,review-management-service,social-management-service'
         SONAR_TOKEN = credentials('sonar-token')
         SONARQUBE = 'sonarqube'
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-token')
+        DOCKERHUB_USERNAME = 'yassineoularbi4'
+        DOCKERHUB_REPO = 'tailoring-online-services'
+        GITHUB_CREDENTIALS = credentials('github-token')
+    }
+
+    triggers {
+        pollSCM('*/5 * * * *')
     }
 
     stages {
@@ -21,120 +29,120 @@ pipeline {
             }
         }
 
-//         stage('Maven Build for MicroServices TAILORING ONLINE') {
-//             steps {
-//                 script {
-//                     def parallelStages = [:]
-//
-//                     env.MICRO_SERVICES.split(',').each { service ->
-//                         parallelStages["Process ${service.capitalize()}"] = {
-//                             stage("Clean ${service.capitalize()}") {
-//                                 dir("tailoring-online-services/${service}") {
-//                                     sh 'mvn clean'
-//                                 }
-//                             }
-//
-//                             stage("Resolve Dependencies for ${service.capitalize()}") {
-//                                 dir("tailoring-online-services/${service}") {
-//                                     sh 'mvn dependency:resolve'
-//                                 }
-//                             }
-//
-//                             stage("Validate ${service.capitalize()}") {
-//                                 dir("tailoring-online-services/${service}") {
-//                                     sh 'mvn validate'
-//                                 }
-//                             }
-//
-//                             stage("Compile ${service.capitalize()}") {
-//                                 dir("tailoring-online-services/${service}") {
-//                                     sh 'mvn compile'
-//                                 }
-//                             }
-//
-//                             if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service') && !service.contains('social-management-service') && !service.contains('review-management-service') && !service.contains('promotion-management-service') && !service.contains('loyalty-program-service')) {
-//                                 stage("Compile Tests for ${service.capitalize()}") {
-//                                     dir("tailoring-online-services/${service}") {
-//                                         sh 'mvn test-compile'
-//                                     }
-//                                 }
-//
-//                                 stage("Run Unit Tests for ${service.capitalize()}") {
-//                                     dir("tailoring-online-services/${service}") {
-//                                         sh 'mvn test'
-//                                     }
-//                                 }
-//
-//                                 stage("Run Integration Tests for ${service.capitalize()}") {
-//                                     dir("tailoring-online-services/${service}") {
-//                                         sh 'mvn integration-test'
-//                                     }
-//                                 }
-//                             }
-//
-//                             stage("Verify ${service.capitalize()}") {
-//                                 dir("tailoring-online-services/${service}") {
-//                                     sh 'mvn verify'
-//                                 }
-//                             }
-//
-//                             stage("Package ${service.capitalize()}") {
-//                                 dir("tailoring-online-services/${service}") {
-//                                     sh 'mvn package'
-//                                 }
-//                             }
-//
-//                             stage("Install ${service.capitalize()}") {
-//                                 dir("tailoring-online-services/${service}") {
-//                                     sh 'mvn install'
-//                                 }
-//                             }
-//                         }
-//                     }
-//
-//                     parallel parallelStages
-//                 }
-//             }
-//         }
-//
-//         stage('SonarQube Analysis for MicroServices TAILORING ONLINE') {
-//             steps {
-//                 script {
-//                     def parallelSonarStages = [:]
-//                     env.MICRO_SERVICES.split(',').each { service ->
-//                         parallelSonarStages["SonarQube Analysis for ${service.capitalize()}"] = {
-//                             dir("tailoring-online-services/${service}") {
-//                                 if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service') && !service.contains('social-management-service') && !service.contains('review-management-service') && !service.contains('promotion-management-service') && !service.contains('loyalty-program-service')) {
-//                                     withSonarQubeEnv(env.SONARQUBE) {
-//                                         sh """
-//                                             mvn sonar:sonar \
-//                                             -Dsonar.token=${SONAR_TOKEN}
-//                                         """
-//                                     }
-//                                 } else {
-//                                     withSonarQubeEnv(env.SONARQUBE) {
-//                                         sh """
-//                                             mvn sonar:sonar \
-//                                             -Dsonar.token=${SONAR_TOKEN} \
-//                                             -DskipTests=true
-//                                         """
-//                                     }
-//                                 }
-//                             }
-//                         }
-//                     }
-//                     parallel parallelSonarStages
-//                 }
-//             }
-//         }
-//
-//         stage('Quality Gate Check for MicroServices TAILORING ONLINE') {
-//             steps {
-//                 timeout(time: 5, unit: 'MINUTES') {
-//                     waitForQualityGate abortPipeline: true
-//                 }
-//             }
-//         }
+        stage('Maven Build for MicroServices TAILORING ONLINE') {
+            steps {
+                script {
+                    def parallelStages = [:]
+
+                    env.MICRO_SERVICES.split(',').each { service ->
+                        parallelStages["Process ${service.capitalize()}"] = {
+                            stage("Clean ${service.capitalize()}") {
+                                dir("tailoring-online-services/${service}") {
+                                    sh 'mvn clean'
+                                }
+                            }
+
+                            stage("Resolve Dependencies for ${service.capitalize()}") {
+                                dir("tailoring-online-services/${service}") {
+                                    sh 'mvn dependency:resolve'
+                                }
+                            }
+
+                            stage("Validate ${service.capitalize()}") {
+                                dir("tailoring-online-services/${service}") {
+                                    sh 'mvn validate'
+                                }
+                            }
+
+                            stage("Compile ${service.capitalize()}") {
+                                dir("tailoring-online-services/${service}") {
+                                    sh 'mvn compile'
+                                }
+                            }
+
+                            if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service') && !service.contains('social-management-service') && !service.contains('review-management-service') && !service.contains('promotion-management-service') && !service.contains('loyalty-program-service')) {
+                                stage("Compile Tests for ${service.capitalize()}") {
+                                    dir("tailoring-online-services/${service}") {
+                                        sh 'mvn test-compile'
+                                    }
+                                }
+
+                                stage("Run Unit Tests for ${service.capitalize()}") {
+                                    dir("tailoring-online-services/${service}") {
+                                        sh 'mvn test'
+                                    }
+                                }
+
+                                stage("Run Integration Tests for ${service.capitalize()}") {
+                                    dir("tailoring-online-services/${service}") {
+                                        sh 'mvn integration-test'
+                                    }
+                                }
+                            }
+
+                            stage("Verify ${service.capitalize()}") {
+                                dir("tailoring-online-services/${service}") {
+                                    sh 'mvn verify'
+                                }
+                            }
+
+                            stage("Package ${service.capitalize()}") {
+                                dir("tailoring-online-services/${service}") {
+                                    sh 'mvn package'
+                                }
+                            }
+
+                            stage("Install ${service.capitalize()}") {
+                                dir("tailoring-online-services/${service}") {
+                                    sh 'mvn install'
+                                }
+                            }
+                        }
+                    }
+
+                    parallel parallelStages
+                }
+            }
+        }
+
+        stage('SonarQube Analysis for MicroServices TAILORING ONLINE') {
+            steps {
+                script {
+                    def parallelSonarStages = [:]
+                    env.MICRO_SERVICES.split(',').each { service ->
+                        parallelSonarStages["SonarQube Analysis for ${service.capitalize()}"] = {
+                            dir("tailoring-online-services/${service}") {
+                                if (!service.contains('config-server') && !service.contains('eureka-server') && !service.contains('api-gateway-service') && !service.contains('social-management-service') && !service.contains('review-management-service') && !service.contains('promotion-management-service') && !service.contains('loyalty-program-service')) {
+                                    withSonarQubeEnv(env.SONARQUBE) {
+                                        sh """
+                                            mvn sonar:sonar \
+                                            -Dsonar.token=${SONAR_TOKEN}
+                                        """
+                                    }
+                                } else {
+                                    withSonarQubeEnv(env.SONARQUBE) {
+                                        sh """
+                                            mvn sonar:sonar \
+                                            -Dsonar.token=${SONAR_TOKEN} \
+                                            -DskipTests=true
+                                        """
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    parallel parallelSonarStages
+                }
+            }
+        }
+
+        stage('Quality Gate Check for MicroServices TAILORING ONLINE') {
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
 
         stage('Clean Up Docker Resources for MicroServices TAILORING ONLINE') {
             steps {
@@ -172,13 +180,6 @@ pipeline {
             }
         }
 
-        stage('Verify Docker') {
-            steps {
-                sh 'docker ps -a'
-                sh 'docker images'
-            }
-        }
-
         stage('Docker Build Images for MicroServices TAILORING ONLINE') {
             steps {
                 script {
@@ -195,6 +196,30 @@ pipeline {
                     }
 
                     parallel parallelBuildStages
+                }
+            }
+        }
+
+        stage('Tag and Push Docker Images for MicroServices TAILORING ONLINE') {
+            steps {
+                script {
+                    def parallelDockerStages = [:]
+
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-token') {
+                        env.MICRO_SERVICES.split(',').each { service ->
+                            parallelDockerStages["Tag and Push ${service.capitalize()}"] = {
+                                dir("tailoring-online-services/${service}") {
+                                    def imageName = "${DOCKERHUB_USERNAME}/${DOCKERHUB_REPO}:${service}"
+                                    sh """
+                                        docker tag ${service}:latest ${imageName}
+                                        docker push ${imageName}
+                                    """
+                                }
+                            }
+                        }
+                    }
+
+                    parallel parallelDockerStages
                 }
             }
         }
