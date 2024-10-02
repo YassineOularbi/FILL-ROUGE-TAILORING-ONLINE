@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="" />
+    <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/config-repo/api-gateway-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/api-gateway-service-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/api-gateway-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/api-gateway-service-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/eureka-server-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/eureka-server-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/eureka-server-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/eureka-server-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/localization-shipping-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/localization-shipping-service-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/localization-shipping-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/localization-shipping-service-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/logs/localization-shipping.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/localization-shipping.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/loyalty-program-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/loyalty-program-service-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/loyalty-program-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/loyalty-program-service-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/notification-mailing-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/notification-mailing-service-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/notification-mailing-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/notification-mailing-service-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/order-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/order-management-service-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/order-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/order-management-service-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/payment-banking-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/payment-banking-service-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/payment-banking-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/payment-banking-service-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/promotion-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/promotion-management-service-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/promotion-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/promotion-management-service-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/review-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/review-management-service-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/review-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/review-management-service-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/social-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/social-management-service-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/social-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/social-management-service-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/store-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/store-management-service-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/store-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/store-management-service-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/user-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/user-management-service-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/user-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/user-management-service-local.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,119 +67,120 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.docker-compose.yml.api-gateway-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.elasticsearch: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.eureka-server: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.jenkins: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.kibana: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.localization-shipping-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.loyalty-program-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.notification-mailing-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.order-management-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.payment-banking-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.promotion-management-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.review-management-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.social-management-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.social_db: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.user-management-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.user_db: Compose Deployment.executor": "Run",
-    "JUnit.AddressControllerTests.deleteAddress_NotFound.executor": "Run",
-    "JUnit.AddressControllerTests.executor": "Run",
-    "JUnit.AddressControllerTests.getAddressById_NotFound.executor": "Run",
-    "JUnit.AddressControllerTests.getAllAddresses_Exception.executor": "Run",
-    "JUnit.AddressControllerTests.getAllAddresses_Success.executor": "Run",
-    "JUnit.AddressControllerTests.getAllAddresses_Success_WithDifferentPagination.executor": "Run",
-    "JUnit.AddressControllerTests.search_NotFound.executor": "Run",
-    "JUnit.AddressControllerTests.updateAddress_NotFound.executor": "Run",
-    "JUnit.AdminControllerTests.executor": "Run",
-    "JUnit.AuthenticationControllerTests.executor": "Run",
-    "JUnit.AuthenticationControllerTests.login_Unauthorized.executor": "Run",
-    "JUnit.AuthenticationControllerTests.sendOtpByEmail_Success.executor": "Run",
-    "JUnit.AuthenticationControllerTests.sendVerificationCode_Success.executor": "Run",
-    "JUnit.AuthenticationControllerTests.verifyEmail_Success.executor": "Debug",
-    "JUnit.AuthenticationControllerTests.verifyOtpCode_Success.executor": "Run",
-    "JUnit.BankControllerTests.executor": "Run",
-    "JUnit.CustomerControllerTests.executor": "Run",
-    "JUnit.CustomizableMeasurementControllerTests.executor": "Run",
-    "JUnit.CustomizableOptionControllerTests.executor": "Run",
-    "JUnit.CustomizedMeasurementControllerTests.executor": "Run",
-    "JUnit.CustomizedOptionControllerTests.executor": "Run",
-    "JUnit.CustomizedProductControllerTests.executor": "Run",
-    "JUnit.EmailControllerTests.executor": "Run",
-    "JUnit.LocalizationShippingServiceApplicationTests.executor": "Run",
-    "JUnit.MaterialControllerTests.executor": "Run",
-    "JUnit.MaterialOptionControllerTests.executor": "Run",
-    "JUnit.MeasurementControllerTests.executor": "Run",
-    "JUnit.ProductControllerTests.executor": "Run",
-    "JUnit.StoreControllerTests.executor": "Run",
-    "JUnit.TailorControllerTests.executor": "Run",
-    "JUnit.ThreeDModelControllerTests.executor": "Run",
-    "JUnit.UserControllerTests.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "Maven.api-gateway-service [clean].executor": "Run",
-    "Maven.api-gateway-service [install].executor": "Run",
-    "Maven.config-server [clean].executor": "Run",
-    "Maven.config-server [install].executor": "Run",
-    "Maven.localization-shipping-service [clean].executor": "Run",
-    "Maven.localization-shipping-service [install].executor": "Run",
-    "Maven.store-management-service [clean].executor": "Run",
-    "Maven.store-management-service [install].executor": "Run",
-    "Maven.store-management-service [site].executor": "Run",
-    "Maven.tailoring-online-services [clean].executor": "Run",
-    "Maven.tailoring-online-services [compile].executor": "Run",
-    "Maven.tailoring-online-services [install].executor": "Run",
-    "Maven.tailoring-online-services [validate].executor": "Run",
-    "Maven.user-management-service [clean].executor": "Run",
-    "Maven.user-management-service [compile].executor": "Run",
-    "Maven.user-management-service [deploy].executor": "Run",
-    "Maven.user-management-service [install].executor": "Run",
-    "Maven.user-management-service [package].executor": "Run",
-    "Maven.user-management-service [site].executor": "Run",
-    "Maven.user-management-service [test].executor": "Run",
-    "Maven.user-management-service [validate].executor": "Run",
-    "Maven.user-management-service [verify].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.ApiGatewayServiceApplication.executor": "Run",
-    "Spring Boot.ConfigServerApplication.executor": "Run",
-    "Spring Boot.EurekaServerApplication.executor": "Run",
-    "Spring Boot.LocalizationShippingServiceApplication.executor": "Run",
-    "Spring Boot.LoyaltyProgramServiceApplication.executor": "Run",
-    "Spring Boot.NotificationMailingServiceApplication.executor": "Run",
-    "Spring Boot.OrderManagementServiceApplication.executor": "Run",
-    "Spring Boot.PaymentBankingServiceApplication.executor": "Run",
-    "Spring Boot.ProductManagementServiceApplication.executor": "Run",
-    "Spring Boot.PromotionManagementServiceApplication.executor": "Run",
-    "Spring Boot.ReviewManagementServiceApplication.executor": "Run",
-    "Spring Boot.SocialManagementServiceApplication.executor": "Run",
-    "Spring Boot.StoreManagementServiceApplication.executor": "Run",
-    "Spring Boot.UserManagementServiceApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/BRIEF-CONSTRUCTXPERT-FRONTEND/ConstructionXpertBackend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.configurations.included.in.services": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.docker-compose.yml.api-gateway-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.elasticsearch: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.eureka-server: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.jenkins: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.kibana: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.localization-shipping-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.logstash: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.loyalty-program-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.notification-mailing-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.order-management-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.payment-banking-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.promotion-management-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.review-management-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.social-management-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.social_db: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.user-management-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.user_db: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.deleteAddress_NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.getAddressById_NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.getAllAddresses_Exception.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.getAllAddresses_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.getAllAddresses_Success_WithDifferentPagination.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.search_NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.updateAddress_NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AdminControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthenticationControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthenticationControllerTests.login_Unauthorized.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthenticationControllerTests.sendOtpByEmail_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthenticationControllerTests.sendVerificationCode_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthenticationControllerTests.verifyEmail_Success.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.AuthenticationControllerTests.verifyOtpCode_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BankControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizableMeasurementControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizableOptionControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedMeasurementControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedOptionControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedProductControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmailControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LocalizationShippingServiceApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MaterialControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MaterialOptionControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MeasurementControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StoreControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TailorControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ThreeDModelControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.api-gateway-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.api-gateway-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.config-server [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.config-server [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.localization-shipping-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.localization-shipping-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.store-management-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.store-management-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.store-management-service [site].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tailoring-online-services [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tailoring-online-services [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tailoring-online-services [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tailoring-online-services [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [site].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [verify].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApiGatewayServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.LocalizationShippingServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.LoyaltyProgramServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.NotificationMailingServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.OrderManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.PaymentBankingServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ProductManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.PromotionManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ReviewManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.SocialManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.StoreManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.UserManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/BRIEF-CONSTRUCTXPERT-FRONTEND/ConstructionXpertBackend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -189,7 +216,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AddressControllerTests.search_NotFound">
+  <component name="RunManager" selected="Docker.docker-compose.yml.logstash: Compose Deployment">
     <configuration name="AddressControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="localization-shipping-service" />
       <extension name="coverage">
@@ -201,22 +228,6 @@
       <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
       <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AddressControllerTests.getAllAddresses_Exception" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="localization-shipping-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.localization_shipping_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
-      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
-      <option name="METHOD_NAME" value="getAllAddresses_Exception" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -372,12 +383,25 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.logstash: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="logstash" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Docker.docker-compose.yml.logstash: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.kibana: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.elasticsearch: Compose Deployment" />
       <item itemvalue="JUnit.AddressControllerTests" />
       <item itemvalue="JUnit.AddressControllerTests.search_NotFound" />
-      <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Exception" />
       <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
@@ -394,11 +418,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.logstash: Compose Deployment" />
         <item itemvalue="JUnit.AddressControllerTests.search_NotFound" />
         <item itemvalue="JUnit.AddressControllerTests" />
         <item itemvalue="Docker.docker-compose.yml.elasticsearch: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.kibana: Compose Deployment" />
-        <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Exception" />
       </list>
     </recent_temporary>
   </component>
@@ -427,7 +451,7 @@
       <workItem from="1727473377634" duration="4871000" />
       <workItem from="1727537137353" duration="33539000" />
       <workItem from="1727727804977" duration="18013000" />
-      <workItem from="1727862631672" duration="15419000" />
+      <workItem from="1727862631672" duration="19140000" />
     </task>
     <servers />
   </component>

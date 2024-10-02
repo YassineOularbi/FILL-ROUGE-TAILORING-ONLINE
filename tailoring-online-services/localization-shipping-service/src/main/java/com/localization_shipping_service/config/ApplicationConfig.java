@@ -1,6 +1,8 @@
 package com.localization_shipping_service.config;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,34 +27,44 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(ApplicationConfig.class);
     private final Environment environment;
 
     @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
     private String jwkSetUri;
 
-
     @Bean
     public UserDetailsService userDetailsService() {
+        String username = Objects.requireNonNull(environment.getProperty("spring.security.user.name"));
+        String password = passwordEncoder().encode(Objects.requireNonNull(environment.getProperty("spring.security.user.password")));
+        String roles = Objects.requireNonNull(environment.getProperty("spring.security.user.roles"));
+
+        logger.info("Creating UserDetailsService with username: {}", username);
+
         UserDetails user = User.builder()
-                .username(Objects.requireNonNull(environment.getProperty("spring.security.user.name")))
-                .password(passwordEncoder().encode(Objects.requireNonNull(environment.getProperty("spring.security.user.password"))))
-                .roles(Objects.requireNonNull(environment.getProperty("spring.security.user.roles")))
+                .username(username)
+                .password(password)
+                .roles(roles)
                 .build();
+
         return new InMemoryUserDetailsManager(user);
     }
 
     @Bean
     public JwtDecoder jwtDecoder() {
+        logger.info("Creating JwtDecoder with JWK Set URI: {}", jwkSetUri);
         return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        logger.info("Creating PasswordEncoder (BCryptPasswordEncoder)");
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        logger.info("Creating JwtAuthenticationConverter");
         JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
         converter.setJwtGrantedAuthoritiesConverter(keyCloakAuthConverter());
         return converter;
@@ -60,8 +72,7 @@ public class ApplicationConfig {
 
     @Bean
     public Converter<Jwt, Collection<GrantedAuthority>> keyCloakAuthConverter() {
+        logger.info("Creating Keycloak Auth Converter");
         return new JwtKeycloakConverter();
     }
-
-
 }
