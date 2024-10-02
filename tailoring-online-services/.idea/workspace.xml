@@ -29,6 +29,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -41,7 +44,10 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Docker.docker-compose.yml.api-gateway-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.elasticsearch: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.eureka-server: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.jenkins: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.kibana: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.localization-shipping-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.loyalty-program-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.notification-mailing-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
@@ -56,6 +62,9 @@
     &quot;JUnit.AddressControllerTests.deleteAddress_NotFound.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.AddressControllerTests.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.AddressControllerTests.getAddressById_NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.getAllAddresses_Exception.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.getAllAddresses_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.getAllAddresses_Success_WithDifferentPagination.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.AddressControllerTests.updateAddress_NotFound.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.AdminControllerTests.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.AuthenticationControllerTests.executor&quot;: &quot;Run&quot;,
@@ -126,7 +135,7 @@
     &quot;Spring Boot.UserManagementServiceApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/ITSUPPORT-JURY-BLANC/itsupport-backend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/BRIEF-CONSTRUCTXPERT-FRONTEND/ConstructionXpertBackend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -163,11 +172,11 @@
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.localization_shipping_service.service.jpa" />
       <recent name="com.user_management_service.config" />
       <recent name="com.store_management_service.config" />
       <recent name="com.social_management_service.config" />
       <recent name="com.review_management_service.config" />
-      <recent name="com.promotion_management_service.config" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -179,65 +188,50 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AuthenticationControllerTests.sendVerificationCode_Success">
-    <configuration name="AuthenticationControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
+  <component name="RunManager" selected="Docker.docker-compose.yml.elasticsearch: Compose Deployment">
+    <configuration name="AddressControllerTests.getAllAddresses_Exception" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="localization-shipping-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.user_management_service.*" />
+          <option name="PATTERN" value="com.localization_shipping_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.user_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AuthenticationControllerTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AuthenticationControllerTests.sendOtpByEmail_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.user_management_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.user_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AuthenticationControllerTests" />
-      <option name="METHOD_NAME" value="sendOtpByEmail_Success" />
+      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
+      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
+      <option name="METHOD_NAME" value="getAllAddresses_Exception" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthenticationControllerTests.sendVerificationCode_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
+    <configuration name="AddressControllerTests.getAllAddresses_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="localization-shipping-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.user_management_service.*" />
+          <option name="PATTERN" value="com.localization_shipping_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.user_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AuthenticationControllerTests" />
-      <option name="METHOD_NAME" value="sendVerificationCode_Success" />
+      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
+      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
+      <option name="METHOD_NAME" value="getAllAddresses_Success" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthenticationControllerTests.verifyEmail_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
+    <configuration name="AddressControllerTests.getAllAddresses_Success_WithDifferentPagination" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="localization-shipping-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.user_management_service.*" />
+          <option name="PATTERN" value="com.localization_shipping_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.user_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.user_management_service.AuthenticationControllerTests" />
-      <option name="METHOD_NAME" value="verifyEmail_Success" />
+      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
+      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
+      <option name="METHOD_NAME" value="getAllAddresses_Success_WithDifferentPagination" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -352,12 +346,25 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.jenkins: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="docker-compose.yml.elasticsearch: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
           <option name="services">
             <list>
-              <option value="jenkins" />
+              <option value="elasticsearch" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.kibana: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="kibana" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
@@ -366,11 +373,11 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Docker.docker-compose.yml.jenkins: Compose Deployment" />
-      <item itemvalue="JUnit.AuthenticationControllerTests.sendOtpByEmail_Success" />
-      <item itemvalue="JUnit.AuthenticationControllerTests.sendVerificationCode_Success" />
-      <item itemvalue="JUnit.AuthenticationControllerTests.verifyEmail_Success" />
-      <item itemvalue="JUnit.AuthenticationControllerTests" />
+      <item itemvalue="Docker.docker-compose.yml.kibana: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.elasticsearch: Compose Deployment" />
+      <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Exception" />
+      <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Success" />
+      <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Success_WithDifferentPagination" />
       <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
@@ -387,11 +394,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AuthenticationControllerTests.sendVerificationCode_Success" />
-        <item itemvalue="JUnit.AuthenticationControllerTests.sendOtpByEmail_Success" />
-        <item itemvalue="JUnit.AuthenticationControllerTests.verifyEmail_Success" />
-        <item itemvalue="JUnit.AuthenticationControllerTests" />
-        <item itemvalue="Docker.docker-compose.yml.jenkins: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.elasticsearch: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.kibana: Compose Deployment" />
+        <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Exception" />
+        <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Success_WithDifferentPagination" />
+        <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Success" />
       </list>
     </recent_temporary>
   </component>
@@ -418,6 +425,9 @@
       <workItem from="1726743533849" duration="19433000" />
       <workItem from="1727183041514" duration="74615000" />
       <workItem from="1727473377634" duration="4871000" />
+      <workItem from="1727537137353" duration="33539000" />
+      <workItem from="1727727804977" duration="18013000" />
+      <workItem from="1727862631672" duration="14401000" />
     </task>
     <servers />
   </component>
