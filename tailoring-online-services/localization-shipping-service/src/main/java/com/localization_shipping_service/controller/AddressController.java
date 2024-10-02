@@ -116,4 +116,14 @@ public class AddressController {
         }
     }
 
+    @GetMapping("/autocomplete")
+    public ResponseEntity<?> autocomplete(@RequestParam("input") String input) {
+        try {
+            var addresses = elasticsearchService.autocomplete(input);
+            return ResponseEntity.ok(addresses);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 }

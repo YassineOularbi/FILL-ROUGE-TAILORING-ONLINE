@@ -14,7 +14,9 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -127,5 +129,36 @@ public class AddressElasticsearchService {
         return new PageImpl<>(addresses, pageable, searchHits.getTotalHits());
     }
 
+    public List<String> autocomplete(String input) {
+        NativeQuery queryBuilder = NativeQuery.builder()
+                .withQuery(q -> q
+                        .bool(b -> {
+                            b.should(s -> s.multiMatch(mm -> mm
+                                    .query(input.toLowerCase())
+                                    .fields("address", "suite", "city", "province", "country")
+                                    .fuzziness("AUTO")
+                                    .prefixLength(1)
+                            ));
 
+                            b.should(s -> s.wildcard(w -> w.field("address").wildcard("*" + input.toLowerCase() + "*")));
+                            b.should(s -> s.wildcard(w -> w.field("suite").wildcard("*" + input.toLowerCase() + "*")));
+                            b.should(s -> s.wildcard(w -> w.field("city").wildcard("*" + input.toLowerCase() + "*")));
+                            b.should(s -> s.wildcard(w -> w.field("province").wildcard("*" + input.toLowerCase() + "*")));
+                            b.should(s -> s.wildcard(w -> w.field("country").wildcard("*" + input.toLowerCase() + "*")));
+                            return b;
+                        })
+                )
+                .build();
+        SearchHits<Address> searchHits = elasticsearchTemplate.search(queryBuilder, Address.class);
+        List<String> suggestions = new ArrayList<>();
+        for (SearchHit<Address> hit : searchHits.getSearchHits()) {
+            Address address = hit.getContent();
+            suggestions.add(address.getAddress());
+            suggestions.add(address.getSuite());
+            suggestions.add(address.getCity());
+            suggestions.add(address.getProvince());
+            suggestions.add(address.getCountry());
+        }
+        return suggestions.stream().filter(Objects::nonNull).distinct().collect(Collectors.toList());
+    }
 }
