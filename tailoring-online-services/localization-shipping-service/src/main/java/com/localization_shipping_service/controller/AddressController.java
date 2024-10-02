@@ -94,4 +94,26 @@ public class AddressController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    @GetMapping("/filter")
+    public ResponseEntity<?> filter(
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "10", name = "size") int size,
+            @RequestParam(defaultValue = "city", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection,
+            @RequestParam(required = false) String addressFilter,
+            @RequestParam(required = false) String suiteFilter,
+            @RequestParam(required = false) String cityFilter,
+            @RequestParam(required = false) String provinceFilter,
+            @RequestParam(required = false) String countryFilter,
+            @RequestParam(required = false) Boolean defaultFilter,
+            @RequestParam(required = false) String zipCodeFilter) {
+        try {
+            var addresses = elasticsearchService.filter(page, size, sortField, sortDirection, addressFilter, suiteFilter, cityFilter, provinceFilter, countryFilter, defaultFilter, zipCodeFilter);
+            return ResponseEntity.ok(addresses);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 }

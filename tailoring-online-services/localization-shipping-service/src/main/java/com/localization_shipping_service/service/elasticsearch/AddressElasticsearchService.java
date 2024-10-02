@@ -50,7 +50,7 @@ public class AddressElasticsearchService {
                                         .multiMatch(mm -> mm
                                                 .query(input)
                                                 .fields("address^3", "suite", "city^2", "province", "country^1")
-                                                .fuzziness("AUTO")
+                                                .fuzziness("AUTO").prefixLength(2)
                                         )
                                 )
                                 .should(s -> s.wildcard(w -> w.field("address").wildcard("*" + input.toLowerCase() + "*")))
@@ -67,5 +67,65 @@ public class AddressElasticsearchService {
         List<Address> addresses = searchHits.getSearchHits().stream().map(SearchHit::getContent).collect(Collectors.toList());
         return new PageImpl<>(addresses, pageable, searchHits.getTotalHits());
     }
+
+    public Page<Address> filter(int page, int size, String sortField, String sortDirection, String addressFilter, String suiteFilter, String cityFilter, String provinceFilter, String countryFilter, Boolean defaultFilter, String zipCodeFilter) {
+        if (size > MAX_PAGE_SIZE) {
+            size = MAX_PAGE_SIZE;
+        }
+        Sort.Direction direction = sortDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortField));
+        NativeQuery queryBuilder = NativeQuery.builder()
+                .withQuery(q -> q
+                        .bool(b -> {
+                            if (addressFilter != null && !addressFilter.isEmpty()) {
+                                b.should(s -> s
+                                        .multiMatch(mm -> mm
+                                                .query(addressFilter.toLowerCase())
+                                                .fields("address")
+                                                .fuzziness("AUTO").prefixLength(2)
+                                        ))
+                                .should(s -> s.wildcard(w -> w.field("address").wildcard("*" + addressFilter.toLowerCase() + "*")));
+                            }
+                            if (suiteFilter != null && !suiteFilter.isEmpty()) {
+                                b.should(s -> s
+                                        .multiMatch(mm -> mm
+                                                .query(suiteFilter.toLowerCase())
+                                                .fields("suite")
+                                                .fuzziness("AUTO").prefixLength(2)
+                                        ))
+                                .should(s -> s.wildcard(w -> w.field("suite").wildcard("*" + suiteFilter.toLowerCase() + "*")));
+                            }
+                            if (zipCodeFilter != null && !zipCodeFilter.isEmpty()) {
+                                b.should(s -> s
+                                                .multiMatch(mm -> mm
+                                                        .query(zipCodeFilter.toLowerCase())
+                                                        .fields("zipCode")
+                                                        .fuzziness("AUTO").prefixLength(1)
+                                                ))
+                                        .should(s -> s.wildcard(w -> w.field("zipCode").wildcard("*" + zipCodeFilter.toLowerCase() + "*")));
+                            }
+                            if (cityFilter != null && !cityFilter.isEmpty()) {
+                                b.filter(f -> f.term(t -> t.field("city").value(cityFilter.toLowerCase())));
+                            }
+                            if (provinceFilter != null && !provinceFilter.isEmpty()) {
+                                b.filter(f -> f.term(t -> t.field("province").value(provinceFilter.toLowerCase())));
+                            }
+                            if (countryFilter != null && !countryFilter.isEmpty()) {
+                                b.filter(f -> f.term(t -> t.field("country").value(countryFilter.toLowerCase())));
+                            }
+                            if (defaultFilter != null) {
+                                b.filter(f -> f.term(t -> t.field("isDefault").value(defaultFilter)));
+                            }
+                            return b;
+                        })
+                )
+                .withPageable(PageRequest.of(page, size))
+                .withSort(Sort.by(direction, sortField))
+                .build();
+        SearchHits<Address> searchHits = elasticsearchTemplate.search(queryBuilder, Address.class);
+        List<Address> addresses = searchHits.getSearchHits().stream().map(SearchHit::getContent).collect(Collectors.toList());
+        return new PageImpl<>(addresses, pageable, searchHits.getTotalHits());
+    }
+
 
 }

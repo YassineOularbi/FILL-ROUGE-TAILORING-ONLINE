@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
-    </list>
+    <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -429,7 +427,7 @@
       <workItem from="1727473377634" duration="4871000" />
       <workItem from="1727537137353" duration="33539000" />
       <workItem from="1727727804977" duration="18013000" />
-      <workItem from="1727862631672" duration="11215000" />
+      <workItem from="1727862631672" duration="13958000" />
     </task>
     <servers />
   </component>
