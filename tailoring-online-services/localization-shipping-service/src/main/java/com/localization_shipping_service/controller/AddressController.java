@@ -1,7 +1,8 @@
 package com.localization_shipping_service.controller;
 
 import com.localization_shipping_service.dto.AddressDto;
-import com.localization_shipping_service.service.AddressService;
+import com.localization_shipping_service.service.elasticsearch.AddressElasticsearchService;
+import com.localization_shipping_service.service.jpa.AddressJpaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +13,17 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AddressController {
 
-    private final AddressService addressService;
+    private final AddressJpaService addressService;
+    private final AddressElasticsearchService elasticsearchService;
 
     @GetMapping("/get-all-addresses")
-    public ResponseEntity<?> getAllAddresses() {
+    public ResponseEntity<?> getAllAddresses(
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "9", name = "size") int size,
+            @RequestParam(defaultValue = "address", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection) {
         try {
-            var addresses = addressService.getAllAddresses();
+            var addresses = addressService.getAllAddresses(page, size, sortField, sortDirection);
             return ResponseEntity.ok(addresses);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -69,6 +75,21 @@ public class AddressController {
         try {
             addressService.deleteAddress(Long.valueOf(id));
             return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> search(
+            @RequestParam("input") String input,
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "9", name = "size") int size,
+            @RequestParam(defaultValue = "address", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection) {
+        try {
+            var addresses = elasticsearchService.search(input, page, size, sortField, sortDirection);
+            return ResponseEntity.ok(addresses);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

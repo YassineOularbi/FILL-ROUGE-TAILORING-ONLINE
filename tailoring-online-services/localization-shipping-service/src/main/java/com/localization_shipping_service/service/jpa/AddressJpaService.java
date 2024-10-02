@@ -1,4 +1,4 @@
-package com.localization_shipping_service.service;
+package com.localization_shipping_service.service.jpa;
 
 import com.localization_shipping_service.client.UserManagementClient;
 import com.localization_shipping_service.dto.AddressDto;
@@ -6,24 +6,33 @@ import com.localization_shipping_service.exception.AddressNotFoundException;
 import com.localization_shipping_service.exception.UserNotFoundException;
 import com.localization_shipping_service.mapper.AddressMapper;
 import com.localization_shipping_service.model.Address;
-import com.localization_shipping_service.repository.AddressRepository;
+import com.localization_shipping_service.repository.jpa.AddressJpaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AddressService {
+public class AddressJpaService {
 
-    private final AddressRepository addressRepository;
+    private final AddressJpaRepository addressRepository;
     private final AddressMapper addressMapper;
     private final UserManagementClient userManagementClient;
+    private static final int MAX_PAGE_SIZE = 100;
 
-    public List<Address> getAllAddresses() {
-        return addressRepository.findAll();
+
+    public Page<Address> getAllAddresses(int page, int size, String sortField, String sortDirection) {
+        if (size > MAX_PAGE_SIZE) {
+            size = MAX_PAGE_SIZE;
+        }
+        Sort.Direction direction = sortDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortField));
+        return addressRepository.findAll(pageable);
     }
 
     public Address getAddressById(Long id) {
@@ -45,7 +54,7 @@ public class AddressService {
             return updateAddress(address.get().getId(), addressDto);
         } else {
             var mappedAddress = addressMapper.toEntity(addressDto);
-            mappedAddress.setUserId(user.getId());
+            mappedAddress.setUserId(id);
             var savedAddress = addressRepository.save(mappedAddress);
             return addressMapper.toDto(savedAddress);
         }
