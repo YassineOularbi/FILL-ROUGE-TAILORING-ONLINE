@@ -1,10 +1,15 @@
 package com.store_management_service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +21,9 @@ import java.util.Map;
 @NoArgsConstructor
 @Table(name = "store")
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
+@TypeAlias("")
+@Document(indexName = "stores")
 public class Store implements Serializable {
 
     @Id
@@ -24,9 +32,11 @@ public class Store implements Serializable {
     private Long id;
 
     @Column(name = "name", nullable = false)
+    @Field(type = FieldType.Keyword)
     private String name;
 
     @Column(name = "description", nullable = false)
+    @Field(type = FieldType.Keyword)
     private String description;
 
     @ElementCollection

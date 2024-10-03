@@ -146,7 +146,7 @@
     "Spring Boot.UserManagementServiceApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/order-management-service/src/main/java/com/order_management_service/service/elasticsearch",
+    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/store-management-service/src/main/java/com/store_management_service/service/elasticsearch",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -169,11 +169,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\service\elasticsearch" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\repository\elasticsearch" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\repository\jpa" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\order-management-service\src\main\java\com\order_management_service\service\elasticsearch" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\order-management-service\src\main\java\com\order_management_service\repository\elasticsearch" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\localization-shipping-service\src\main\java\com\localization_shipping_service\config" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\loyalty-program-service\src\main\java\com\loyalty_program_service" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\notification-mailing-service\src\main\java\com\notification_mailing_service\config" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\user-management-service\src\main\resources" />
@@ -199,7 +199,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.BankControllerTests">
+  <component name="RunManager" selected="JUnit.CustomizableOptionControllerTests">
     <configuration name="BankControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="payment-banking-service" />
       <extension name="coverage">
@@ -215,34 +215,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CustomizedOptionControllerTests.filterCustomizedOptions_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="order-management-service" />
+    <configuration name="CustomizableMeasurementControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="store-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.order_management_service.*" />
+          <option name="PATTERN" value="com.store_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.order_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.order_management_service.CustomizedOptionControllerTests" />
-      <option name="METHOD_NAME" value="filterCustomizedOptions_Success" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="com.store_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.store_management_service.CustomizableMeasurementControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CustomizedOptionControllerTests.searchCustomizedOptions_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="order-management-service" />
+    <configuration name="CustomizableOptionControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="store-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.order_management_service.*" />
+          <option name="PATTERN" value="com.store_management_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.order_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.order_management_service.CustomizedOptionControllerTests" />
-      <option name="METHOD_NAME" value="searchCustomizedOptions_Success" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="com.store_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.store_management_service.CustomizableOptionControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -389,8 +387,8 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.BankControllerTests" />
-      <item itemvalue="JUnit.CustomizedOptionControllerTests.filterCustomizedOptions_Success" />
-      <item itemvalue="JUnit.CustomizedOptionControllerTests.searchCustomizedOptions_Success" />
+      <item itemvalue="JUnit.CustomizableMeasurementControllerTests" />
+      <item itemvalue="JUnit.CustomizableOptionControllerTests" />
       <item itemvalue="JUnit.CustomizedProductControllerTests" />
       <item itemvalue="JUnit.CustomizedProductControllerTests.searchCustomizedProducts_Success" />
       <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
@@ -409,11 +407,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CustomizableOptionControllerTests" />
+        <item itemvalue="JUnit.CustomizableMeasurementControllerTests" />
         <item itemvalue="JUnit.BankControllerTests" />
         <item itemvalue="JUnit.CustomizedProductControllerTests.searchCustomizedProducts_Success" />
         <item itemvalue="JUnit.CustomizedProductControllerTests" />
-        <item itemvalue="JUnit.CustomizedOptionControllerTests.filterCustomizedOptions_Success" />
-        <item itemvalue="JUnit.CustomizedOptionControllerTests.searchCustomizedOptions_Success" />
       </list>
     </recent_temporary>
   </component>

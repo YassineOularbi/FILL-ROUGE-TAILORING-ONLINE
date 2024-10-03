@@ -1,7 +1,10 @@
 package com.store_management_service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "three_d_model")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@TypeAlias("")
+@Document(indexName = "ThreeDModels")
 public class ThreeDModel implements Serializable {
 
     @Id

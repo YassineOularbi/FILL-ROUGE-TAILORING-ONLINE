@@ -1,7 +1,8 @@
 package com.store_management_service.controller;
 
 import com.store_management_service.dto.ProductDto;
-import com.store_management_service.service.ProductService;
+import com.store_management_service.service.jpa.ProductJpaService;
+import com.store_management_service.service.elasticsearch.ProductElasticsearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +13,17 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductJpaService productService;
+    private final ProductElasticsearchService elasticsearchService;
 
     @GetMapping("/get-all-products")
-    public ResponseEntity<?> getAllProducts() {
+    public ResponseEntity<?> getAllProducts(
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "10", name = "size") int size,
+            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection) {
         try {
-            var products = productService.getAllProducts();
+            var products = productService.getAllProducts(page, size);
             return ResponseEntity.ok(products);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -70,6 +76,47 @@ public class ProductController {
             productService.deleteProduct(id);
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> search(
+            @RequestParam("input") String input,
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "10", name = "size") int size,
+            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection) {
+        try {
+            var results = elasticsearchService.search(input, page, size, sortField, sortDirection);
+            return ResponseEntity.ok(results);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<?> filter(
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "10", name = "size") int size,
+            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection,
+            @RequestParam(required = false) String categoryFilter,
+            @RequestParam(required = false) String nameFilter) {
+        try {
+            var results = elasticsearchService.filter(page, size, sortField, sortDirection, categoryFilter, nameFilter);
+            return ResponseEntity.ok(results);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/autocomplete")
+    public ResponseEntity<?> autocomplete(@RequestParam("input") String input) {
+        try {
+            var suggestions = elasticsearchService.autocomplete(input);
+            return ResponseEntity.ok(suggestions);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
