@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="" />
+    <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,6 +51,7 @@
     &quot;Docker.docker-compose.yml.jenkins: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.kibana: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.localization-shipping-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.logstash: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.loyalty-program-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.notification-mailing-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.order-management-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
@@ -65,6 +68,7 @@
     &quot;JUnit.AddressControllerTests.getAllAddresses_Exception.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.AddressControllerTests.getAllAddresses_Success.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.AddressControllerTests.getAllAddresses_Success_WithDifferentPagination.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.search_NotFound.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.AddressControllerTests.updateAddress_NotFound.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.AdminControllerTests.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.AuthenticationControllerTests.executor&quot;: &quot;Run&quot;,
@@ -188,8 +192,8 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.elasticsearch: Compose Deployment">
-    <configuration name="AddressControllerTests.getAllAddresses_Exception" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Docker.docker-compose.yml.logstash: Compose Deployment">
+    <configuration name="AddressControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="localization-shipping-service" />
       <extension name="coverage">
         <pattern>
@@ -199,13 +203,12 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
       <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
-      <option name="METHOD_NAME" value="getAllAddresses_Exception" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressControllerTests.getAllAddresses_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AddressControllerTests.search_NotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="localization-shipping-service" />
       <extension name="coverage">
         <pattern>
@@ -215,23 +218,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
       <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
-      <option name="METHOD_NAME" value="getAllAddresses_Success" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AddressControllerTests.getAllAddresses_Success_WithDifferentPagination" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="localization-shipping-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.localization_shipping_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.localization_shipping_service" />
-      <option name="MAIN_CLASS_NAME" value="com.localization_shipping_service.AddressControllerTests" />
-      <option name="METHOD_NAME" value="getAllAddresses_Success_WithDifferentPagination" />
+      <option name="METHOD_NAME" value="search_NotFound" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -372,12 +359,25 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.logstash: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="logstash" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Docker.docker-compose.yml.logstash: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.kibana: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.elasticsearch: Compose Deployment" />
-      <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Exception" />
-      <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Success" />
-      <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Success_WithDifferentPagination" />
+      <item itemvalue="JUnit.AddressControllerTests" />
+      <item itemvalue="JUnit.AddressControllerTests.search_NotFound" />
       <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
@@ -394,11 +394,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.logstash: Compose Deployment" />
+        <item itemvalue="JUnit.AddressControllerTests.search_NotFound" />
+        <item itemvalue="JUnit.AddressControllerTests" />
         <item itemvalue="Docker.docker-compose.yml.elasticsearch: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.kibana: Compose Deployment" />
-        <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Exception" />
-        <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Success_WithDifferentPagination" />
-        <item itemvalue="JUnit.AddressControllerTests.getAllAddresses_Success" />
       </list>
     </recent_temporary>
   </component>
@@ -427,7 +427,7 @@
       <workItem from="1727473377634" duration="4871000" />
       <workItem from="1727537137353" duration="33539000" />
       <workItem from="1727727804977" duration="18013000" />
-      <workItem from="1727862631672" duration="14401000" />
+      <workItem from="1727862631672" duration="19140000" />
     </task>
     <servers />
   </component>

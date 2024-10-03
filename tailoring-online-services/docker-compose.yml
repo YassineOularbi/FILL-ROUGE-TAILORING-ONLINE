@@ -242,6 +242,21 @@ services:
     networks:
       - es-network
 
+  logstash:
+    image: logstash:8.15.2
+    container_name: logstash
+    volumes:
+      - ./logstash/:/logstash_dir
+    command:
+      - logstash -f /logstash_dir/logstash.conf
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    depends_on:
+      - elasticsearch
+    networks:
+      - es-network
+
   config-server:
     image: yassineoularbi4/tailoring-online-services:config-server
     container_name: config-server
