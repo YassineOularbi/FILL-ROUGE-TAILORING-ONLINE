@@ -5,31 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/config-repo/api-gateway-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/api-gateway-service-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/api-gateway-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/api-gateway-service-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/eureka-server-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/eureka-server-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/eureka-server-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/eureka-server-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/localization-shipping-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/localization-shipping-service-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/localization-shipping-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/localization-shipping-service-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/logs/localization-shipping.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/localization-shipping.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/loyalty-program-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/loyalty-program-service-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/loyalty-program-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/loyalty-program-service-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/notification-mailing-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/notification-mailing-service-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/notification-mailing-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/notification-mailing-service-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/order-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/order-management-service-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/order-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/order-management-service-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/payment-banking-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/payment-banking-service-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/payment-banking-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/payment-banking-service-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/promotion-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/promotion-management-service-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/promotion-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/promotion-management-service-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/review-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/review-management-service-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/review-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/review-management-service-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/social-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/social-management-service-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/social-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/social-management-service-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/store-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/store-management-service-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/store-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/store-management-service-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/user-management-service-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/user-management-service-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/user-management-service-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/user-management-service-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
