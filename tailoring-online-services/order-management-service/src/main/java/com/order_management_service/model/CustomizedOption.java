@@ -1,9 +1,12 @@
 package com.order_management_service.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.order_management_service.enums.MaterialType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
 
@@ -13,6 +16,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "customized_option")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@TypeAlias("")
+@Document(indexName = "customizedOptions")
 public class CustomizedOption implements Serializable {
 
     @Id

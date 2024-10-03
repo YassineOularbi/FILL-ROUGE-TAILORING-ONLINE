@@ -5,12 +5,15 @@ import com.payment_banking_service.dto.BankDto;
 import com.payment_banking_service.exception.BankNotFoundException;
 import com.payment_banking_service.exception.UserNotFoundException;
 import com.payment_banking_service.model.Bank;
-import com.payment_banking_service.service.BankService;
+import com.payment_banking_service.service.elasticsearch.BankElasticsearchService;
+import com.payment_banking_service.service.jpa.BankJpaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -24,7 +27,10 @@ import static org.mockito.Mockito.*;
 class BankControllerTests {
 
     @Mock
-    private BankService bankService;
+    private BankJpaService bankService;
+
+    @Mock
+    private BankElasticsearchService elasticsearchService;
 
     @InjectMocks
     private BankController bankController;
@@ -37,19 +43,20 @@ class BankControllerTests {
     @Test
     void getAllBanks_Success() {
         List<Bank> banks = Arrays.asList(new Bank(), new Bank());
-        when(bankService.getAllBanks()).thenReturn(banks);
+        Page<Bank> bankPage = new PageImpl<>(banks);
+        when(bankService.getAllBanks(0, 9, "id", "asc")).thenReturn(bankPage);
 
-        ResponseEntity<?> response = bankController.getAllBanks();
+        ResponseEntity<?> response = bankController.getAllBanks(0, 9, "id", "asc");
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(banks, response.getBody());
+        assertEquals(bankPage, response.getBody());
     }
 
     @Test
     void getAllBanks_Exception() {
-        when(bankService.getAllBanks()).thenThrow(new RuntimeException("Error"));
+        when(bankService.getAllBanks(0, 9, "id", "asc")).thenThrow(new RuntimeException("Error"));
 
-        ResponseEntity<?> response = bankController.getAllBanks();
+        ResponseEntity<?> response = bankController.getAllBanks(0, 9, "id", "asc");
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertEquals("Error", response.getBody());
@@ -181,5 +188,72 @@ class BankControllerTests {
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertEquals(new BankNotFoundException(bankId).getMessage(), response.getBody());
+    }
+
+    // New tests for Elasticsearch methods
+
+    @Test
+    void searchBanks_Success() {
+        List<Bank> banks = Arrays.asList(new Bank(), new Bank());
+        Page<Bank> bankPage = new PageImpl<>(banks);
+        when(elasticsearchService.search("query", 0, 9, "id", "asc")).thenReturn(bankPage);
+
+        ResponseEntity<?> response = bankController.search("query", 0, 9, "id", "asc");
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(bankPage, response.getBody());
+    }
+
+    @Test
+    void searchBanks_Exception() {
+        when(elasticsearchService.search("query", 0, 9, "id", "asc")).thenThrow(new RuntimeException("Error"));
+
+        ResponseEntity<?> response = bankController.search("query", 0, 9, "id", "asc");
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("Error", response.getBody());
+    }
+
+    @Test
+    void filterBanks_Success() {
+        List<Bank> banks = Arrays.asList(new Bank(), new Bank());
+        Page<Bank> bankPage = new PageImpl<>(banks);
+        when(elasticsearchService.filter(0, 9, "id", "asc", "1234", "2023-01-01", "2025-01-01", "123", "1")).thenReturn(bankPage);
+
+        ResponseEntity<?> response = bankController.filter(0, 9, "id", "asc", "1234", "2023-01-01", "2025-01-01", "123", "1");
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(bankPage, response.getBody());
+    }
+
+    @Test
+    void filterBanks_Exception() {
+        when(elasticsearchService.filter(0, 9, "id", "asc", "1234", "2023-01-01", "2025-01-01", "123", "1")).thenThrow(new RuntimeException("Error"));
+
+        ResponseEntity<?> response = bankController.filter(0, 9, "id", "asc", "1234", "2023-01-01", "2025-01-01", "123", "1");
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("Error", response.getBody());
+    }
+
+    @Test
+    void autocompleteBanks_Success() {
+        List<String> suggestions = Arrays.asList("1234", "123");
+        when(elasticsearchService.autocomplete("123")).thenReturn(suggestions);
+
+        ResponseEntity<?> response = bankController.autocomplete("123");
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(suggestions, response.getBody());
+    }
+
+    @Test
+    void autocompleteBanks_Exception() {
+        when(elasticsearchService.autocomplete("123")).thenThrow(new RuntimeException("Error"));
+
+        ResponseEntity<?> response = bankController.autocomplete("123");
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("Error", response.getBody());
     }
 }
