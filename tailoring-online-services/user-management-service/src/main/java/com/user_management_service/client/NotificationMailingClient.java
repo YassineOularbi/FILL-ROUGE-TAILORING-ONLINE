@@ -1,6 +1,5 @@
 package com.user_management_service.client;
 
-import com.user_management_service.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
