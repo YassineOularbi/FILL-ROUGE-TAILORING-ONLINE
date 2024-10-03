@@ -1,0 +1,8 @@
+package com.store_management_service.repository.elasticsearch;
+
+import com.store_management_service.model.CustomizableMeasurement;
+import com.store_management_service.model.CustomizableMeasurementKey;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+public interface CustomizableMeasurementElasticsearchRepository extends ElasticsearchRepository<CustomizableMeasurement, CustomizableMeasurementKey> {
+}

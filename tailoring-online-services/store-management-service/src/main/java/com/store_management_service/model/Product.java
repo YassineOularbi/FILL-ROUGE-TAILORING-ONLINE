@@ -1,12 +1,17 @@
 package com.store_management_service.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.store_management_service.enums.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,6 +23,9 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "product")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@TypeAlias("")
+@Document(indexName = "products")
 public class Product implements Serializable {
 
     @Id
@@ -26,13 +34,16 @@ public class Product implements Serializable {
     private Long id;
 
     @Column(name = "name", nullable = false)
+    @Field(type = FieldType.Keyword)
     private String name;
 
     @Column(name = "description", nullable = false)
+    @Field(type = FieldType.Keyword)
     private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "category", nullable = false)
+    @Field(type = FieldType.Keyword)
     private Category category;
 
     @Column(name = "picture", nullable = false)
@@ -50,9 +61,11 @@ public class Product implements Serializable {
     private Map<String, String> details;
 
     @Column(name = "historical_story", nullable = false)
+    @Field(type = FieldType.Keyword)
     private String historicalStory;
 
     @Column(name = "code_sku")
+    @Field(type = FieldType.Keyword)
     private String codeSKU;
 
     @Column(name = "rating", columnDefinition = "Double default 0.00")
