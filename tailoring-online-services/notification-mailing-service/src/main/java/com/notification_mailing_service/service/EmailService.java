@@ -7,6 +7,8 @@ import com.notification_mailing_service.repository.EmailVerificationRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -25,6 +27,8 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class EmailService {
 
+    private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
+
     private final JavaMailSender javaMailSender;
     private final VerificationCodeGenerator verificationCodeGenerator;
     private final EmailVerificationRepository emailVerificationRepository;
@@ -36,10 +40,13 @@ public class EmailService {
         String body = getVerificationEmailTemplate(code);
 
         try {
+            logger.info("Envoi de l'e-mail de vérification à : {}", email);
             sendEmail(email, subject, body);
             emailVerificationRepository.save(EmailVerification.builder().email(email).verificationCode(code).build());
+            logger.info("E-mail de vérification envoyé et sauvegardé pour : {}", email);
             return CompletableFuture.completedFuture(true);
         } catch (MessagingException | UnsupportedEncodingException e) {
+            logger.error("Erreur lors de l'envoi de l'e-mail de vérification à : {}", email, e);
             return CompletableFuture.completedFuture(false);
         }
     }
@@ -51,20 +58,29 @@ public class EmailService {
         String emailText = getOtpLoginEmailTemplate(otp);
 
         try {
+            logger.info("Envoi de l'OTP par e-mail à : {}", email);
             sendEmail(email, subject, emailText);
             emailVerificationRepository.save(EmailVerification.builder().email(email).verificationCode(otp).build());
+            logger.info("OTP envoyé et sauvegardé pour : {}", email);
             return CompletableFuture.completedFuture(true);
         } catch (MessagingException | UnsupportedEncodingException e) {
+            logger.error("Erreur lors de l'envoi de l'OTP à : {}", email, e);
             return CompletableFuture.completedFuture(false);
         }
     }
 
     public Boolean verifyCode(String email, String code) {
-        var userVerification = emailVerificationRepository.findByEmail(email).orElseThrow(EmailNotFoundException::new);
+        var userVerification = emailVerificationRepository.findByEmail(email).orElseThrow(() -> {
+            logger.error("Aucun utilisateur trouvé pour l'email : {}", email);
+            return new EmailNotFoundException();
+        });
+
         if (userVerification != null && userVerification.getVerificationCode().equals(code)) {
             emailVerificationRepository.delete(userVerification);
+            logger.info("Code de vérification correct pour l'email : {}. Entrée supprimée.", email);
             return true;
         } else {
+            logger.warn("Échec de la vérification du code pour l'email : {}", email);
             return false;
         }
     }
@@ -85,6 +101,7 @@ public class EmailService {
         message.setSentDate(date);
 
         javaMailSender.send(message);
+        logger.info("E-mail envoyé à : {}", to);
     }
 
     @Async
@@ -111,8 +128,9 @@ public class EmailService {
         Date sentDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         mimeMessage.setSentDate(sentDate);
         javaMailSender.send(mimeMessage);
-    }
 
+        logger.info("Message de contact envoyé par : {}", email);
+    }
 
     private String getVerificationEmailTemplate(String verificationCode) {
         return String.format(
