@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class DynamicLoadBalancerConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(DynamicLoadBalancerConfig.class);
-    private static final int MAX_REQUESTS_PER_INSTANCE = 50;  // Limite de requêtes par instance
+    private static final int MAX_REQUESTS_PER_INSTANCE = 50;
 
     private final DiscoveryClient discoveryClient;
 

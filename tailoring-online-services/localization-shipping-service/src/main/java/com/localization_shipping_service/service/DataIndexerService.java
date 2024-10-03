@@ -1,6 +1,5 @@
 package com.localization_shipping_service.service;
 
-import com.localization_shipping_service.model.Address;
 import com.localization_shipping_service.repository.elasticsearch.AddressElasticsearchRepository;
 import com.localization_shipping_service.repository.jpa.AddressJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +9,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +23,7 @@ public class DataIndexerService {
     public void indexAllAddresses() {
         logger.info("Starting indexing of all addresses.");
 
-        List<Address> addresses = addressJpaRepository.findAll();
+        var addresses = addressJpaRepository.findAll();
         logger.info("Found {} addresses to index.", addresses.size());
 
         if (!addresses.isEmpty()) {
