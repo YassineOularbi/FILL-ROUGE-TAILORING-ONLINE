@@ -90,6 +90,7 @@
     "JUnit.CustomizedOptionControllerTests.filterCustomizedOptions_Success.executor": "Run",
     "JUnit.CustomizedOptionControllerTests.searchCustomizedOptions_Success.executor": "Run",
     "JUnit.CustomizedProductControllerTests.executor": "Run",
+    "JUnit.CustomizedProductControllerTests.searchCustomizedProducts_Success.executor": "Run",
     "JUnit.EmailControllerTests.executor": "Run",
     "JUnit.LocalizationShippingServiceApplicationTests.executor": "Run",
     "JUnit.MaterialControllerTests.executor": "Run",
@@ -182,11 +183,11 @@
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.payment_banking_service.service" />
+      <recent name="com.payment_banking_service.service.elasticsearch" />
+      <recent name="com.payment_banking_service.repository.elasticsearch" />
       <recent name="com.order_management_service.service" />
       <recent name="com.localization_shipping_service.service.jpa" />
-      <recent name="com.user_management_service.config" />
-      <recent name="com.store_management_service.config" />
-      <recent name="com.social_management_service.config" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -198,17 +199,17 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CustomizedProductControllerTests.searchCustomizedProducts_Success">
-    <configuration name="CustomizedOptionControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="order-management-service" />
+  <component name="RunManager" selected="JUnit.BankControllerTests">
+    <configuration name="BankControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="payment-banking-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.order_management_service.*" />
+          <option name="PATTERN" value="com.payment_banking_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.order_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.order_management_service.CustomizedOptionControllerTests" />
+      <option name="PACKAGE_NAME" value="com.payment_banking_service" />
+      <option name="MAIN_CLASS_NAME" value="com.payment_banking_service.BankControllerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -387,7 +388,7 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.CustomizedOptionControllerTests" />
+      <item itemvalue="JUnit.BankControllerTests" />
       <item itemvalue="JUnit.CustomizedOptionControllerTests.filterCustomizedOptions_Success" />
       <item itemvalue="JUnit.CustomizedOptionControllerTests.searchCustomizedOptions_Success" />
       <item itemvalue="JUnit.CustomizedProductControllerTests" />
@@ -408,11 +409,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BankControllerTests" />
         <item itemvalue="JUnit.CustomizedProductControllerTests.searchCustomizedProducts_Success" />
         <item itemvalue="JUnit.CustomizedProductControllerTests" />
         <item itemvalue="JUnit.CustomizedOptionControllerTests.filterCustomizedOptions_Success" />
         <item itemvalue="JUnit.CustomizedOptionControllerTests.searchCustomizedOptions_Success" />
-        <item itemvalue="JUnit.CustomizedOptionControllerTests" />
       </list>
     </recent_temporary>
   </component>
