@@ -56,15 +56,16 @@ public class DynamicLoadBalancerConfig {
                 throw new RuntimeException("No instances available for service: " + serviceId);
             }
 
+            logger.info("Instance chosen: {} with URI: {} for service: {}", instance.getServiceId(), instance.getUri(), serviceId);
             incrementLoadForInstance(serviceId, instance);
             try {
-                try {
-                    return request.apply(instance);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                return request.apply(instance);
+            } catch (Exception e) {
+                logger.error("Error during request execution for service: {}", serviceId, e);
+                throw new RuntimeException(e);
             } finally {
                 decrementLoadForInstance(serviceId, instance);
+                logger.info("Request completed for service: {}, load decremented for instance: {}", serviceId, instance.getUri());
             }
         }
 
@@ -73,18 +74,19 @@ public class DynamicLoadBalancerConfig {
             logger.info("Executing request for service: {} on instance: {}", serviceId, serviceInstance.getUri());
             incrementLoadForInstance(serviceId, serviceInstance);
             try {
-                try {
-                    return request.apply(serviceInstance);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                return request.apply(serviceInstance);
+            } catch (Exception e) {
+                logger.error("Error during request execution for service: {} on instance: {}", serviceId, serviceInstance.getUri(), e);
+                throw new RuntimeException(e);
             } finally {
                 decrementLoadForInstance(serviceId, serviceInstance);
+                logger.info("Request completed for service: {}, load decremented for instance: {}", serviceId, serviceInstance.getUri());
             }
         }
 
         @Override
         public URI reconstructURI(ServiceInstance instance, URI original) {
+            logger.debug("Reconstructing URI for instance: {} from original URI: {}", instance.getUri(), original);
             return UriComponentsBuilder.fromUri(original)
                     .host(instance.getHost())
                     .port(instance.getPort())
@@ -95,12 +97,15 @@ public class DynamicLoadBalancerConfig {
 
         @Override
         public ServiceInstance choose(String serviceId) {
+            logger.info("Choosing an instance for service: {}", serviceId);
             List<ServiceInstance> instances = discoveryClient.getInstances(serviceId);
             if (instances == null || instances.isEmpty()) {
                 logger.warn("No instances found for service: {}", serviceId);
                 return null;
             }
-            return instances.get(random.nextInt(instances.size()));
+            ServiceInstance instance = instances.get(random.nextInt(instances.size()));
+            logger.info("Instance chosen: {} with URI: {} for service: {}", instance.getServiceId(), instance.getUri(), serviceId);
+            return instance;
         }
 
         @Override
@@ -115,11 +120,13 @@ public class DynamicLoadBalancerConfig {
         }
 
         private void incrementLoadForInstance(String serviceId, ServiceInstance instance) {
-            getLoadForInstance(serviceId, instance).incrementAndGet();
+            int newLoad = getLoadForInstance(serviceId, instance).incrementAndGet();
+            logger.debug("Load incremented for instance: {} of service: {}. New load: {}", instance.getUri(), serviceId, newLoad);
         }
 
         private void decrementLoadForInstance(String serviceId, ServiceInstance instance) {
-            getLoadForInstance(serviceId, instance).decrementAndGet();
+            int newLoad = getLoadForInstance(serviceId, instance).decrementAndGet();
+            logger.debug("Load decremented for instance: {} of service: {}. New load: {}", instance.getUri(), serviceId, newLoad);
         }
     }
 }
