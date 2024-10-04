@@ -1,7 +1,8 @@
 package com.order_management_service.controller;
 
 import com.order_management_service.dto.CustomizedProductDto;
-import com.order_management_service.service.CustomizedProductService;
+import com.order_management_service.service.elasticsearch.CustomizedProductElasticsearchService;
+import com.order_management_service.service.jpa.CustomizedProductJpaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/customized-product")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class CustomizedProductController {
 
-    private final CustomizedProductService customizedProductService;
+    private final CustomizedProductJpaService customizedProductService;
+    private final CustomizedProductElasticsearchService elasticsearchService;
 
     @GetMapping("/get-all-customized-products")
-    public ResponseEntity<?> getAllCustomizedProducts() {
+    public ResponseEntity<?> getAllCustomizedProducts(
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "10", name = "size") int size,
+            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection) {
         try {
-            var customizedProducts = customizedProductService.getAllCustomizedProducts();
+            var customizedProducts = customizedProductService.getAllCustomizedProducts(page, size, sortField, sortDirection);
             return ResponseEntity.ok(customizedProducts);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -70,6 +75,48 @@ public class CustomizedProductController {
         try {
             customizedProductService.deleteCustomizedProduct(id);
             return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> search(
+            @RequestParam("input") String input,
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "10", name = "size") int size,
+            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection) {
+        try {
+            var results = elasticsearchService.search(input, page, size, sortField, sortDirection);
+            return ResponseEntity.ok(results);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<?> filter(
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "10", name = "size") int size,
+            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection,
+            @RequestParam(required = false) String productIdFilter,
+            @RequestParam(required = false) String measurementFilter,
+            @RequestParam(required = false) String optionFilter) {
+        try {
+            var results = elasticsearchService.filter(page, size, sortField, sortDirection, productIdFilter, measurementFilter, optionFilter);
+            return ResponseEntity.ok(results);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/autocomplete")
+    public ResponseEntity<?> autocomplete(@RequestParam("input") String input) {
+        try {
+            var suggestions = elasticsearchService.autocomplete(input);
+            return ResponseEntity.ok(suggestions);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

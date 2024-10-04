@@ -1,40 +1,25 @@
--- Drop foreign key constraint from the `user` table if it exists
-SET @fk_user_address = (
-    SELECT constraint_name
-    FROM information_schema.key_column_usage
-    WHERE table_name = 'user'
-    AND column_name = 'address_id'
-    AND referenced_table_name = 'address'
-    AND constraint_schema = DATABASE()
-    LIMIT 1
-);
+-- Supprimer les clés étrangères liées à la table address
+ALTER TABLE bank DROP CONSTRAINT FK_billing_address;
+ALTER TABLE customer DROP CONSTRAINT FK_shipping_address;
+ALTER TABLE user DROP CONSTRAINT FK_user_address;
 
-SET @drop_fk_user_address = CONCAT('ALTER TABLE `user` DROP FOREIGN KEY ', @fk_user_address);
+-- Supprimer les clés étrangères liées à la table bank
+ALTER TABLE bank DROP CONSTRAINT FK_bank_user;
 
-SET @sql_user = IF(@fk_user_address IS NOT NULL, @drop_fk_user_address, 'SELECT "No foreign key constraint to drop for user"');
+-- Supprimer les autres clés étrangères pour user et customer, si elles font référence à address ou bank
+ALTER TABLE address DROP CONSTRAINT FK_customer;
+ALTER TABLE address DROP CONSTRAINT FK_user;
 
-PREPARE stmt_user FROM @sql_user;
-EXECUTE stmt_user;
-DEALLOCATE PREPARE stmt_user;
+-- Supprimer les contraintes uniques liées à la table address
+ALTER TABLE address DROP CONSTRAINT UK_customer;
+ALTER TABLE address DROP CONSTRAINT UK_user;
 
--- Drop foreign key constraint from the `customer` table if it exists
-SET @fk_customer_address = (
-    SELECT constraint_name
-    FROM information_schema.key_column_usage
-    WHERE table_name = 'customer'
-    AND column_name = 'shipping_address_id'
-    AND referenced_table_name = 'address'
-    AND constraint_schema = DATABASE()
-    LIMIT 1
-);
+-- Supprimer les contraintes uniques liées à la table bank
+ALTER TABLE bank DROP CONSTRAINT UK_card_number;
 
-SET @drop_fk_customer_address = CONCAT('ALTER TABLE `customer` DROP FOREIGN KEY ', @fk_customer_address);
+-- Supprimer la contrainte unique sur address_id dans la table user
+ALTER TABLE user DROP CONSTRAINT UK_address;
 
-SET @sql_customer = IF(@fk_customer_address IS NOT NULL, @drop_fk_customer_address, 'SELECT "No foreign key constraint to drop for customer"');
-
-PREPARE stmt_customer FROM @sql_customer;
-EXECUTE stmt_customer;
-DEALLOCATE PREPARE stmt_customer;
 
 -- Drop the `address_id` column from the `user` table
 ALTER TABLE `user` DROP COLUMN `address_id`;

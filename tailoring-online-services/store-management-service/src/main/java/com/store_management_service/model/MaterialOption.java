@@ -1,8 +1,13 @@
 package com.store_management_service.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.elasticsearch.annotations.Document;
+
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -10,7 +15,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "material_option")
-public class MaterialOption {
+@JsonIgnoreProperties(ignoreUnknown = true)
+@TypeAlias("")
+@Document(indexName = "materialOptions")
+public class MaterialOption implements Serializable {
 
     @EmbeddedId
     private MaterialOptionKey id;

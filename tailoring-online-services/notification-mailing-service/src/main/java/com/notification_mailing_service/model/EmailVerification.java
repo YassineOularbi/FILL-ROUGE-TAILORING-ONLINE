@@ -3,6 +3,8 @@ package com.notification_mailing_service.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Entity
 @Builder
 @Getter
@@ -10,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 @Table(name = "email_verification")
-public class EmailVerification {
+public class EmailVerification implements Serializable {
 
         @Id
         @Column(nullable = false, name = "email", unique = true)

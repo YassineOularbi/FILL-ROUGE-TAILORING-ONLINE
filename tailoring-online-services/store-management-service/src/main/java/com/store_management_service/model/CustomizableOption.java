@@ -1,10 +1,14 @@
 package com.store_management_service.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.store_management_service.enums.MaterialType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.elasticsearch.annotations.Document;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -13,7 +17,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "customizable_option")
-public class CustomizableOption {
+@JsonIgnoreProperties(ignoreUnknown = true)
+@TypeAlias("")
+@Document(indexName = "customizableOptions")
+public class CustomizableOption implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

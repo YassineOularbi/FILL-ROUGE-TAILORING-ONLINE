@@ -1,6 +1,8 @@
 package com.api_gateway_service.config;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -18,18 +20,33 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
+
     private final ReactiveJwtDecoder reactiveJwtDecoder;
     private final Converter<Jwt, Mono<AbstractAuthenticationToken>> jwtAuthenticationConverter;
 
-
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+        logger.info("Initialisation de la chaîne de filtres de sécurité Web.");
+
         http.csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeExchange(authorize -> authorize.anyExchange().authenticated())
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtDecoder(reactiveJwtDecoder).jwtAuthenticationConverter(jwtAuthenticationConverter)))
+                .authorizeExchange(authorize -> {
+                    logger.debug("Configuration des règles d'autorisation : toutes les requêtes sont autorisées.");
+                    authorize.anyExchange().permitAll();
+                })
+                .oauth2ResourceServer(oauth2 -> {
+                    logger.debug("Configuration du serveur de ressources OAuth2 avec JWT.");
+                    oauth2.jwt(jwt -> {
+                        logger.debug("Utilisation du JWT Decoder et du JWT Authentication Converter pour la validation des tokens.");
+                        jwt.jwtDecoder(reactiveJwtDecoder);
+                        jwt.jwtAuthenticationConverter(jwtAuthenticationConverter);
+                    });
+                })
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults());
+
+        logger.info("Chaîne de filtres de sécurité Web initialisée avec succès.");
         return http.build();
     }
 

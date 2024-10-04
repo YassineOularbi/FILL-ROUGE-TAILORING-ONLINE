@@ -3,13 +3,14 @@ package com.store_management_service.model;
 import com.store_management_service.enums.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements Serializable {
     private String id;
     private String username;
     private String email;

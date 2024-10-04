@@ -1,7 +1,8 @@
 package com.store_management_service.controller;
 
 import com.store_management_service.dto.MeasurementDto;
-import com.store_management_service.service.MeasurementService;
+import com.store_management_service.service.jpa.MeasurementJpaService;
+import com.store_management_service.service.elasticsearch.MeasurementElasticsearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/measurement")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class MeasurementController {
 
-    private final MeasurementService measurementService;
+    private final MeasurementJpaService measurementService;
+    private final MeasurementElasticsearchService elasticsearchService;
 
     @GetMapping("/get-all-measurements")
-    public ResponseEntity<?> getAllMeasurements() {
+    public ResponseEntity<?> getAllMeasurements(
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "10", name = "size") int size,
+            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection) {
         try {
-            var measurements = measurementService.getAllMeasurements();
+            var measurements = measurementService.getAllMeasurements(page, size);
             return ResponseEntity.ok(measurements);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -61,6 +66,47 @@ public class MeasurementController {
             measurementService.deleteMeasurement(id);
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> search(
+            @RequestParam("input") String input,
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "10", name = "size") int size,
+            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection) {
+        try {
+            var results = elasticsearchService.search(input, page, size, sortField, sortDirection);
+            return ResponseEntity.ok(results);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<?> filter(
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "10", name = "size") int size,
+            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection,
+            @RequestParam(required = false) String nameFilter,
+            @RequestParam(required = false) String descriptionFilter) {
+        try {
+            var results = elasticsearchService.filter(page, size, sortField, sortDirection, nameFilter, descriptionFilter);
+            return ResponseEntity.ok(results);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/autocomplete")
+    public ResponseEntity<?> autocomplete(@RequestParam("input") String input) {
+        try {
+            var suggestions = elasticsearchService.autocomplete(input);
+            return ResponseEntity.ok(suggestions);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }

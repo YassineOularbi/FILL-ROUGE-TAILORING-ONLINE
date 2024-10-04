@@ -4,7 +4,7 @@ import com.user_management_service.exception.UserNotFoundException;
 import com.user_management_service.model.User;
 import com.user_management_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,10 +29,10 @@ public class UserService {
 
     public void getUserByUsername(String username){
         if (userRepository.findByUsername(username).isPresent()) {
-            throw new UsernameNotFoundException("Username already exists!");
+            throw new BadCredentialsException("Bad credentials !");
         }
         if (!authenticationService.getUser(username).isEmpty()) {
-            throw new UsernameNotFoundException("Username already exists!");
+            throw new BadCredentialsException("Bad credentials !");
         }
     }
 }

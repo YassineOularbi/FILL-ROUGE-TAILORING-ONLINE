@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,76 +43,150 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-gateway-service [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-gateway-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.store-management-service [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.store-management-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.store-management-service [site].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.tailoring-online-services [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.tailoring-online-services [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.user-management-service [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.user-management-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ApiGatewayServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.LocalizationShippingServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.LoyaltyProgramServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.NotificationMailingServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.OrderManagementServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.PaymentBankingServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.ProductManagementServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.PromotionManagementServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.ReviewManagementServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.SocialManagementServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.StoreManagementServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.UserManagementServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/api-gateway-service/src/main/java/com/api_gateway_service/config&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker-compose.yml.api-gateway-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.elasticsearch: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.eureka-server: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.jenkins: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.kibana: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.localization-shipping-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.logstash: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.loyalty-program-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.notification-mailing-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.order-management-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.payment-banking-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.promotion-management-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.review-management-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.social-management-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.social_db: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.user-management-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.user_db: Compose Deployment.executor": "Run",
+    "JUnit.AddressControllerTests.deleteAddress_NotFound.executor": "Run",
+    "JUnit.AddressControllerTests.executor": "Run",
+    "JUnit.AddressControllerTests.getAddressById_NotFound.executor": "Run",
+    "JUnit.AddressControllerTests.getAllAddresses_Exception.executor": "Run",
+    "JUnit.AddressControllerTests.getAllAddresses_Success.executor": "Run",
+    "JUnit.AddressControllerTests.getAllAddresses_Success_WithDifferentPagination.executor": "Run",
+    "JUnit.AddressControllerTests.search_NotFound.executor": "Run",
+    "JUnit.AddressControllerTests.updateAddress_NotFound.executor": "Run",
+    "JUnit.AdminControllerTests.executor": "Run",
+    "JUnit.AuthenticationControllerTests.executor": "Run",
+    "JUnit.AuthenticationControllerTests.login_Unauthorized.executor": "Run",
+    "JUnit.AuthenticationControllerTests.sendOtpByEmail_Success.executor": "Run",
+    "JUnit.AuthenticationControllerTests.sendVerificationCode_Success.executor": "Run",
+    "JUnit.AuthenticationControllerTests.verifyEmail_Success.executor": "Debug",
+    "JUnit.AuthenticationControllerTests.verifyOtpCode_Success.executor": "Run",
+    "JUnit.BankControllerTests.executor": "Run",
+    "JUnit.CustomerControllerTests.executor": "Run",
+    "JUnit.CustomizableMeasurementControllerTests.executor": "Run",
+    "JUnit.CustomizableOptionControllerTests.executor": "Run",
+    "JUnit.CustomizedMeasurementControllerTests.executor": "Run",
+    "JUnit.CustomizedMeasurementControllerTests.filterCustomizedMeasurements_Success.executor": "Run",
+    "JUnit.CustomizedMeasurementControllerTests.getAllCustomizedMeasurements_Success.executor": "Run",
+    "JUnit.CustomizedMeasurementControllerTests.searchCustomizedMeasurements_Success.executor": "Run",
+    "JUnit.CustomizedOptionControllerTests.executor": "Run",
+    "JUnit.CustomizedOptionControllerTests.filterCustomizedOptions_Success.executor": "Run",
+    "JUnit.CustomizedOptionControllerTests.searchCustomizedOptions_Success.executor": "Run",
+    "JUnit.CustomizedProductControllerTests.executor": "Run",
+    "JUnit.CustomizedProductControllerTests.searchCustomizedProducts_Success.executor": "Run",
+    "JUnit.EmailControllerTests.executor": "Run",
+    "JUnit.LocalizationShippingServiceApplicationTests.executor": "Run",
+    "JUnit.MaterialControllerTests.executor": "Run",
+    "JUnit.MaterialOptionControllerTests.executor": "Run",
+    "JUnit.MeasurementControllerTests.executor": "Run",
+    "JUnit.ProductControllerTests.executor": "Run",
+    "JUnit.StoreControllerTests.executor": "Run",
+    "JUnit.TailorControllerTests.executor": "Run",
+    "JUnit.ThreeDModelControllerTests.executor": "Run",
+    "JUnit.UserControllerTests.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.api-gateway-service [clean].executor": "Run",
+    "Maven.api-gateway-service [install].executor": "Run",
+    "Maven.config-server [clean].executor": "Run",
+    "Maven.config-server [install].executor": "Run",
+    "Maven.localization-shipping-service [clean].executor": "Run",
+    "Maven.localization-shipping-service [install].executor": "Run",
+    "Maven.store-management-service [clean].executor": "Run",
+    "Maven.store-management-service [install].executor": "Run",
+    "Maven.store-management-service [site].executor": "Run",
+    "Maven.tailoring-online-services [clean].executor": "Run",
+    "Maven.tailoring-online-services [compile].executor": "Run",
+    "Maven.tailoring-online-services [install].executor": "Run",
+    "Maven.tailoring-online-services [validate].executor": "Run",
+    "Maven.user-management-service [clean].executor": "Run",
+    "Maven.user-management-service [compile].executor": "Run",
+    "Maven.user-management-service [deploy].executor": "Run",
+    "Maven.user-management-service [install].executor": "Run",
+    "Maven.user-management-service [package].executor": "Run",
+    "Maven.user-management-service [site].executor": "Run",
+    "Maven.user-management-service [test].executor": "Run",
+    "Maven.user-management-service [validate].executor": "Run",
+    "Maven.user-management-service [verify].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.ApiGatewayServiceApplication.executor": "Run",
+    "Spring Boot.ConfigServerApplication.executor": "Run",
+    "Spring Boot.EurekaServerApplication.executor": "Run",
+    "Spring Boot.LocalizationShippingServiceApplication.executor": "Run",
+    "Spring Boot.LoyaltyProgramServiceApplication.executor": "Run",
+    "Spring Boot.NotificationMailingServiceApplication.executor": "Run",
+    "Spring Boot.OrderManagementServiceApplication.executor": "Run",
+    "Spring Boot.PaymentBankingServiceApplication.executor": "Run",
+    "Spring Boot.ProductManagementServiceApplication.executor": "Run",
+    "Spring Boot.PromotionManagementServiceApplication.executor": "Run",
+    "Spring Boot.ReviewManagementServiceApplication.executor": "Run",
+    "Spring Boot.SocialManagementServiceApplication.executor": "Run",
+    "Spring Boot.StoreManagementServiceApplication.executor": "Run",
+    "Spring Boot.UserManagementServiceApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/config",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\api-gateway-service\src\main\java\com\api_gateway_service\config" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\user-management-service\src\main\java\com\user_management_service\config" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\config" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\config" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\order-management-service\src\main\java\com\order_management_service\config" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\localization-shipping-service\src\main\java\com\localization_shipping_service\config" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\social-management-service\src\main\java\com\social_management_service\config" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\review-management-service\src\main\java\com\review_management_service\config" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\promotion-management-service\src\main\java\com\promotion_management_service\config" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\user-management-service\src\main\resources" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\notification-mailing-service\src\main\java\com\notification_mailing_service\controller" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\service" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\repository" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\model" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.user_management_service.config" />
-      <recent name="com.api_gateway_service.config" />
-      <recent name="com.store_management_service.config" />
-      <recent name="com.notification_mailing_service.config" />
-      <recent name="com.payment_banking_service.config" />
+      <recent name="com.payment_banking_service.service" />
+      <recent name="com.payment_banking_service.service.elasticsearch" />
+      <recent name="com.payment_banking_service.repository.elasticsearch" />
+      <recent name="com.order_management_service.service" />
+      <recent name="com.localization_shipping_service.service.jpa" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -125,7 +198,83 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.LocalizationShippingServiceApplication">
+  <component name="RunManager" selected="JUnit.CustomizableOptionControllerTests">
+    <configuration name="BankControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="payment-banking-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.payment_banking_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.payment_banking_service" />
+      <option name="MAIN_CLASS_NAME" value="com.payment_banking_service.BankControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomizableMeasurementControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="store-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.store_management_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.store_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.store_management_service.CustomizableMeasurementControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomizableOptionControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="store-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.store_management_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.store_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.store_management_service.CustomizableOptionControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomizedProductControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="order-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.order_management_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.order_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.order_management_service.CustomizedProductControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomizedProductControllerTests.searchCustomizedProducts_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="order-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.order_management_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.order_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.order_management_service.CustomizedProductControllerTests" />
+      <option name="METHOD_NAME" value="searchCustomizedProducts_Success" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ApiGatewayServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="api-gateway-service" />
@@ -149,16 +298,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LocalizationShippingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false" temporary="true" nameIsGenerated="true">
+    <configuration name="LocalizationShippingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="localization-shipping-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.localization_shipping_service.LocalizationShippingServiceApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.localization_shipping_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -235,7 +378,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="JUnit.BankControllerTests" />
+      <item itemvalue="JUnit.CustomizableMeasurementControllerTests" />
+      <item itemvalue="JUnit.CustomizableOptionControllerTests" />
+      <item itemvalue="JUnit.CustomizedProductControllerTests" />
+      <item itemvalue="JUnit.CustomizedProductControllerTests.searchCustomizedProducts_Success" />
+      <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
@@ -248,11 +403,14 @@
       <item itemvalue="Spring Boot.LoyaltyProgramServiceApplication" />
       <item itemvalue="Spring Boot.PromotionManagementServiceApplication" />
       <item itemvalue="Spring Boot.SocialManagementServiceApplication" />
-      <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
+        <item itemvalue="JUnit.CustomizableOptionControllerTests" />
+        <item itemvalue="JUnit.CustomizableMeasurementControllerTests" />
+        <item itemvalue="JUnit.BankControllerTests" />
+        <item itemvalue="JUnit.CustomizedProductControllerTests.searchCustomizedProducts_Success" />
+        <item itemvalue="JUnit.CustomizedProductControllerTests" />
       </list>
     </recent_temporary>
   </component>
@@ -277,6 +435,11 @@
       <workItem from="1726498056611" duration="5000" />
       <workItem from="1726498092610" duration="45349000" />
       <workItem from="1726743533849" duration="19433000" />
+      <workItem from="1727183041514" duration="74615000" />
+      <workItem from="1727473377634" duration="4871000" />
+      <workItem from="1727537137353" duration="33539000" />
+      <workItem from="1727727804977" duration="18013000" />
+      <workItem from="1727862631672" duration="19140000" />
     </task>
     <servers />
   </component>

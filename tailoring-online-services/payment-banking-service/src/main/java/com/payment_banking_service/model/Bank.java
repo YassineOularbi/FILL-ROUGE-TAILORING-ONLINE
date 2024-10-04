@@ -1,7 +1,10 @@
 package com.payment_banking_service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -13,6 +16,9 @@ import java.sql.Date;
 @AllArgsConstructor
 @Builder
 @Table(name = "bank")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@TypeAlias("")
+@Document(indexName = "banks")
 public class Bank implements Serializable {
 
     @Id

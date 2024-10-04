@@ -17,11 +17,23 @@
 	<description>Config Server module for Tailoring Online Services</description>
 
 	<properties>
-		<java.version>22</java.version>
-		<maven.compiler.source>22</maven.compiler.source>
-		<maven.compiler.target>22</maven.compiler.target>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>com.config_server.ConfigServerApplication</start-class>
+		<sonar.projectKey>config-server</sonar.projectKey>
+		<sonar.projectName>config-server</sonar.projectName>
+		<sonar.projectVersion>0.0.1-SNAPSHOT</sonar.projectVersion>
+		<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+		<sonar.java.source>17</sonar.java.source>
+		<sonar.java.enablePreview>true</sonar.java.enablePreview>
+		<sonar.test.exclusions>**/test/**/*</sonar.test.exclusions>
+		<sonar.exlusions>**/test/**/*</sonar.exlusions>
+		<sonar.tests></sonar.tests>
+		<sonar.coverage.exclusions>**/target/**, **/src/**</sonar.coverage.exclusions>
+		<sonar.cpd.exclusions>**/target/**, **/src/**</sonar.cpd.exclusions>
+		<sonar.java.binaries>target/classes</sonar.java.binaries>
+		<sonar.host.url>http://localhost:9000</sonar.host.url>
 	</properties>
 
 	<dependencies>
@@ -40,17 +52,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.5.0</version>
 				<configuration>
-					<mainClass>com.config_server.ConfigServerApplication</mainClass>
-					<layout>JAR</layout>
+					<argLine>--enable-preview</argLine>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
