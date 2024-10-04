@@ -108,29 +108,67 @@ public class EmailService {
     public void contactUs(String name, String email, String phone, String message) throws MessagingException, UnsupportedEncodingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-
         String body = String.format(
-                "<div style=\"font-family:Arial,sans-serif;line-height:1.5;padding:10px;\">"
-                        + "<h2>Contact Us Email</h2>"
-                        + "<p>Name : <strong>%s</strong></p>"
-                        + "<p>Email : <strong>%s</strong></p>"
-                        + "<p>Phone : <strong>%s</strong></p>"
-                        + "<p>Message : <strong>%s</strong></p>"
-                        + "</div>", name, email, phone, message);
-
-        helper.setFrom("Tailoring-online@outlook.com", "Tailoring Online");
-        helper.setReplyTo("Tailoring-online@outlook.com", "Tailoring Online");
-        helper.setTo("Tailoring-online@outlook.com");
+                "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" " +
+                        "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">" +
+                        "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">" +
+                        "<head>" +
+                        "<meta charset=\"UTF-8\">" +
+                        "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">" +
+                        "<style type=\"text/css\">" +
+                        "body { font-family: Arial, sans-serif; background-color: #FAFAFA; margin: 0; padding: 0; }"+
+                        ".container { width: 600px; margin: 0 auto; background-color: #FFFFFF; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 1px solid black; border-raduis: 10px; margin: 10px; }"+
+                        ".header { text-align: center; padding: 10px; }"+
+                        ".header img { width: 140px; }"+
+                        ".content { padding: 15px; }"+
+                        ".footer { text-align: center; font-size: 12px; color: #CCCCCC; }"+
+                        ".highlight { color: #5C68E2; font-weight: bold; }"+
+                        ".greeting { font-size: 16px; }"+
+                        ".thank-you { font-size: 18px; font-weight: bold; color: #333333; }"+
+                        ".message { margin: 15px 0; font-size: 14px; line-height: 1.5; }"+
+                        "</style>" +
+                        "</head>" +
+                        "<body>" +
+                        "<div class=\"container\">" +
+                        "<div class=\"header\">" +
+                        "<img src=\"https://i.ibb.co/mBfJvLc/logo.png\" alt=\"Logo\"> "+
+                        "<h1>Contact Us</h1>" +
+                        "</div>" +
+                        "<div class=\"content\">" +
+                        "<p class=\"greeting\">Bonjour <span class=\"highlight\">%s</span>,</p>" +
+                        "<p class=\"thank-you\">Merci de nous avoir contactés !</p>" +
+                        "<p class=\"message\">Nous avons bien reçu votre message et notre équipe est en train de le traiter. Voici les informations que vous avez fournies :</p>" +
+                        "<p class=\"contact-info\"><strong>Name:</strong> %s<br>" +
+                        "<strong>Email:</strong> %s<br>" +
+                        "<strong>Phone:</strong> %s<br>" +
+                        "<strong>Message:</strong></p>" +
+                        "<p class=\"message\">%s</p>" +
+                        "<p class=\"message\">Nous vous répondrons dans les plus brefs délais. En attendant, n’hésitez pas à explorer notre site pour découvrir nos dernières offres et services.</p>" +
+                        "<p class=\"message\">Nous sommes là pour vous aider !</p>" +
+                        "</div>" +
+                        "<div class=\"footer\">" +
+                        "<p>Sent on: %s</p>" +
+                        "<p>&copy; 2024 Tailoring Online. All Rights Reserved.</p>" +
+                        "</div>" +
+                        "</div>" +
+                        "</body>" +
+                        "</html>",
+                name, name, email, phone, message, LocalDate.now());
+        helper.setFrom("tailoring.online.1@gmail.com", "Tailoring Online");
+        helper.setReplyTo("tailoring.online.1@gmail.com", "Tailoring Online");
+        helper.setTo("tailoring.online.1@gmail.com");
         helper.setSubject(String.format("Client with name %s sent a message", name));
         helper.setText(body, true);
+
         LocalDate currentDate = LocalDate.now();
         LocalDateTime localDateTime = currentDate.atStartOfDay();
         Date sentDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         mimeMessage.setSentDate(sentDate);
         javaMailSender.send(mimeMessage);
-
         logger.info("Message de contact envoyé par : {}", email);
     }
+
+
 
     private String getVerificationEmailTemplate(String verificationCode) {
         return String.format(
