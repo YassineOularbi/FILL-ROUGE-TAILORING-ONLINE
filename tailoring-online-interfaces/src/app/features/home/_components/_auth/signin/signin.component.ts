@@ -51,7 +51,6 @@ export class SigninComponent implements OnInit {
 
     if (this.signinForm.valid) {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sign in successful!' });
-      console.log('Form Data:', this.signinForm.value);
     } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please check the form for errors.' });
     }
