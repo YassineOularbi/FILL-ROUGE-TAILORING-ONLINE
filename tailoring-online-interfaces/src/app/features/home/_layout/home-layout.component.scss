@@ -1,0 +1,60 @@
+:host {
+    position: relative;
+    display: block;
+    width: 100%;
+    font-family: "Inter";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.scroll-top {
+    background-color: var(--white);
+    border: 2px solid var(--black);
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    z-index: 1000;
+    cursor: pointer;
+    transition: background-color 0.4s ease, transform 0.4s ease;
+    animation: fadeInUp 1s ease forwards;
+
+    mat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 35px;
+        color: var(--black);
+        rotate: -90deg;
+        transition: color 0.4s ease, rotate 0.4s ease;
+    }
+}
+
+.scroll-top:hover {
+    background-color: var(--black);
+    transform: scale(1.1);
+}
+
+.scroll-top:hover mat-icon {
+    color: var(--white);
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .scroll-top{
+        right: 40px;
+    }
+}
