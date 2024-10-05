@@ -17,19 +17,19 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        this.isLoading = true;
-      } else if (
-        event instanceof NavigationEnd ||
-        event instanceof NavigationCancel ||
-        event instanceof NavigationError
-      ) {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 500); 
-      }
-    });
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationStart) {
+    //     this.isLoading = true;
+    //   } else if (
+    //     event instanceof NavigationEnd ||
+    //     event instanceof NavigationCancel ||
+    //     event instanceof NavigationError
+    //   ) {
+    //     setTimeout(() => {
+    //       this.isLoading = false;
+    //     }, 500); 
+    //   }
+    // });
   }
 
 }
