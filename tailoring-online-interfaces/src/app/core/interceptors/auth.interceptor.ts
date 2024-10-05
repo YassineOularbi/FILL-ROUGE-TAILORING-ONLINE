@@ -8,9 +8,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
     authReq = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
 
-  } else {
-    authReq = req.clone({ headers: req.headers.set('Authorization', `Basic YWRtaW46YWRtaW4=`) });
-  }
-
+  } 
+  // else {
+  //   const basicAuth = 'Basic ' + btoa('admin:admin');
+  //   authReq = authReq.clone({
+  //     headers: req.headers.set('Authorization', basicAuth)
+  //   });
+  // }
   return next(authReq);
 };

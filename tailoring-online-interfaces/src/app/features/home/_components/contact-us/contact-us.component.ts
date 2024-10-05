@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NotificationMailing } from '../../../../core/services/notification-mailing.service';
 import { HttpClient } from '@angular/common/http';
+import { LoadingComponent } from "../../../../shared/animations/loading/loading.component";
 
 @Component({
   selector: 'app-contact-us',
@@ -18,6 +19,7 @@ import { HttpClient } from '@angular/common/http';
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
+    LoadingComponent
   ],
   providers: [HttpClient],
   templateUrl: './contact-us.component.html',
@@ -27,6 +29,7 @@ export class ContactUsComponent implements OnInit {
   contactForm: FormGroup;
   successMessage: string = '';
   errorMessage: string = '';
+  isLoading: boolean = false;
 
   constructor(private fb: FormBuilder, private notificationMailing: NotificationMailing) {
     this.contactForm = this.fb.group({
@@ -42,24 +45,22 @@ export class ContactUsComponent implements OnInit {
 
   onSubmit(): void {
     if (this.contactForm.valid) {
+      this.isLoading = true;
       const { name, email, phone, message } = this.contactForm.value;
       this.notificationMailing.sendContactForm(name, email, phone, message)
         .subscribe({
-          next: (response) => {
-            this.successMessage = 'Email sent successefuly';
+          next: () => {
+            this.successMessage = 'Email sent successfully';
             this.errorMessage = '';
-            console.log(response);
-            
+            this.isLoading = false;
           },
-          error: (error) => {
-            this.errorMessage = error;
+          error: () => {
+            this.errorMessage = 'Error during sending your email';
             this.successMessage = '';
-            console.log(error);
-            
+            this.isLoading = false;
           }
         });
-    } else {
-      console.log('Form is invalid');
     }
   }
+
 }
