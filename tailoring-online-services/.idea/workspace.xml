@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/interceptors/auth.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/interceptors/auth.interceptor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/contact-us/contact-us.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/contact-us/contact-us.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/contact-us/contact-us.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/contact-us/contact-us.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/home.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

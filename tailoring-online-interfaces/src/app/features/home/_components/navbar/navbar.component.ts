@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { ViewportScroller } from '@angular/common';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,17 +13,27 @@ import { ViewportScroller } from '@angular/common';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
 
-  constructor(private viewportScroller: ViewportScroller){}
+  constructor(private viewportScroller: ViewportScroller, private router: Router){}
 
   scrollToSection(section: string): void {
-    this.viewportScroller.scrollToAnchor(section);
+    if (this.router.url === '/') {
+      this.viewportScroller.scrollToAnchor(section);
+    } else {
+      this.router.navigate(['/']).then(() => {
+        setTimeout(() => {
+          this.viewportScroller.scrollToAnchor(section);
+        }, 500)
+      });
+    }
   }
 
 }

@@ -1,21 +1,12 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
+import { Routes } from '@angular/router';
 
 export const AUTH_ROUTES: Routes = [
-  {
-    path: 'signin',
-    component: SigninComponent,
-  },
-  {
-    path: 'signup',
-    component: SignupComponent
-  }
+    {
+        path: 'signin',
+        loadComponent: () => import('./signin/signin.component').then(m => m.SigninComponent),
+    },
+    {
+        path: 'signup',
+        loadComponent: () => import('./signup/signup.component').then(m => m.SignupComponent),
+    }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(AUTH_ROUTES)],
-  exports: [RouterModule]
-})
-export class AuthRoutes { }
