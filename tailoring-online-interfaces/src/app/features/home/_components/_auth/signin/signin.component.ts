@@ -9,6 +9,8 @@ import { ToastModule } from 'primeng/toast';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button'
 import { InputSwitchModule } from 'primeng/inputswitch'; 
+import { UserManagementService } from '../../../../../core/services/user-management.service';
+import { AuthRequest } from '../../../../../core/dtos/auth-request.interface';
 
 @Component({
   selector: 'app-signin',
@@ -37,7 +39,7 @@ export class SigninComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  constructor(private fb: FormBuilder, private messageService: MessageService) {}
+  constructor(private fb: FormBuilder, private messageService: MessageService, private authService: UserManagementService) {}
 
   ngOnInit(): void {
     this.signinForm = this.fb.group({
@@ -50,7 +52,18 @@ export class SigninComponent implements OnInit {
     this.submitted = true;
 
     if (this.signinForm.valid) {
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sign in successful!' });
+      const authRequest: AuthRequest = this.signinForm.value;
+      this.authService.signing(authRequest).subscribe({
+        next: (response)  => {
+          console.log(response);
+          
+        },
+        error: (error) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid username or password !' });
+          console.log(error);
+          
+        }
+      })
     } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please check the form for errors.' });
     }

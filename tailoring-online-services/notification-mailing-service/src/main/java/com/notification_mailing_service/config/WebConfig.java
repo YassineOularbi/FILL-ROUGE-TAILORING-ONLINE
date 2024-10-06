@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         logger.info("Configuration CORS : ajout de mapping pour les requêtes provenant de http://localhost:9191");
 
-        registry.addMapping("/**")
+        registry.addMapping("http://localhost:9191")
                 .allowedOrigins("http://localhost:9191")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
                 .allowedHeaders("Authorization", "Cache-Control", "Content-Type")

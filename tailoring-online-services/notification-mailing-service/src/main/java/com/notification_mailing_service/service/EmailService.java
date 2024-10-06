@@ -104,7 +104,6 @@ public class EmailService {
         logger.info("E-mail envoyé à : {}", to);
     }
 
-    @Async
     public void contactUs(String name, String email, String phone, String message) throws MessagingException, UnsupportedEncodingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
