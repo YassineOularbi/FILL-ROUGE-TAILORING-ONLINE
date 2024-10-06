@@ -7,10 +7,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { PasswordModule } from 'primeng/password';
-import { ButtonModule } from 'primeng/button'
-import { InputSwitchModule } from 'primeng/inputswitch'; 
-import { UserManagementService } from '../../../../../core/services/user-management.service';
-import { AuthRequest } from '../../../../../core/dtos/auth-request.interface';
+import { ButtonModule } from 'primeng/button';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { AuthService } from '../../../../../core/services/auth.service';
+import { KeycloakAuthService } from '../../../../../core/keycloak/keycloak-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -28,23 +29,26 @@ import { AuthRequest } from '../../../../../core/dtos/auth-request.interface';
   ],
   providers: [MessageService],
   templateUrl: './signin.component.html',
-  styleUrl: './signin.component.scss'
+  styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
   signinForm!: FormGroup;
   submitted = false;
   showPassword = false;
 
-  togglePasswordVisibility() {
-    this.showPassword = !this.showPassword;
-  }
-
-  constructor(private fb: FormBuilder, private messageService: MessageService, private authService: UserManagementService) {}
+  constructor(
+    private fb: FormBuilder,
+    private messageService: MessageService,
+    private authService: AuthService,
+    private keycloakAuthService: KeycloakAuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.signinForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      rememberMe: [false],
     });
   }
 
@@ -52,21 +56,49 @@ export class SigninComponent implements OnInit {
     this.submitted = true;
 
     if (this.signinForm.valid) {
-      const authRequest: AuthRequest = this.signinForm.value;
-      this.authService.signing(authRequest).subscribe({
-        next: (response)  => {
-          console.log(response);
-          
+      localStorage.setItem('rememberMe', this.signinForm.value.rememberMe.toString());
+      this.authService.signin(this.signinForm.value.username, this.signinForm.value.password).subscribe({
+        next: () => {
+          this.router.navigate(['/signup'])
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Login successful! Redirecting...',
+          });
         },
-        error: (error) => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid username or password !' });
-          console.log(error);
-          
+        error: () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Invalid username or password!',
+          });
         }
-      })
-    } else {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please check the form for errors.' });
+      });
     }
+  }
+
+  forgotPassword(): void {
+    this.keycloakAuthService.forgotPassword().then(() => {
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Password Reset',
+        detail: 'Redirected to password reset page.',
+      });
+    }).catch(() => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Unable to reset password.',
+      });
+    });
+  }
+
+  loginWithProvider(provider: string): void {
+    this.keycloakAuthService.loginWithIdentityProvider(provider);
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
   get f() {

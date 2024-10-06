@@ -7,11 +7,11 @@ export const HOME_ROUTES: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./_layout/home-layout.component').then(m => m.HomeLayoutComponent)
+        loadComponent: () => import('./_layout/home-layout.component').then(m => m.HomeLayoutComponent),
       },
       {
         path: 'auth',
-        loadChildren: () => import('./_components/_auth/auth.routes').then(m => m.AUTH_ROUTES)
+        loadChildren: () => import('./_components/_auth/auth.routes').then(m => m.AUTH_ROUTES),
       }
     ]
   }
