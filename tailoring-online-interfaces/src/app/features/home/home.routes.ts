@@ -1,27 +1,18 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { HomeLayoutComponent } from './_layout/home-layout.component';
-import { HomeComponent } from './home.component';
+import { Routes } from '@angular/router';
 
 export const HOME_ROUTES: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    loadComponent: () => import('./home.component').then(m => m.HomeComponent),
     children: [
       {
         path: '',
-        component: HomeLayoutComponent
+        loadComponent: () => import('./_layout/home-layout.component').then(m => m.HomeLayoutComponent)
       },
       {
         path: 'auth',
-        loadChildren: () => import('./_components/_auth/auth.modules').then(m => m.AuthModule)
+        loadChildren: () => import('./_components/_auth/auth.routes').then(m => m.AUTH_ROUTES)
       }
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(HOME_ROUTES)],
-  exports: [RouterModule]
-})
-export class HomeRoutes { }

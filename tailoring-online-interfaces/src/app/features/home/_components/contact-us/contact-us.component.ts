@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { NotificationMailing } from '../../../../core/services/notification-mailing.service';
 import { HttpClient } from '@angular/common/http';
 import { LoadingComponent } from "../../../../shared/animations/loading/loading.component";
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-contact-us',
@@ -19,19 +21,18 @@ import { LoadingComponent } from "../../../../shared/animations/loading/loading.
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
-    LoadingComponent
+    LoadingComponent,
+    ToastModule
   ],
-  providers: [HttpClient],
+  providers: [HttpClient, MessageService],
   templateUrl: './contact-us.component.html',
-  styleUrl: './contact-us.component.scss',
+  styleUrls: ['./contact-us.component.scss'],
 })
 export class ContactUsComponent implements OnInit {
   contactForm: FormGroup;
-  successMessage: string = '';
-  errorMessage: string = '';
   isLoading: boolean = false;
 
-  constructor(private fb: FormBuilder, private notificationMailing: NotificationMailing) {
+  constructor(private fb: FormBuilder, private notificationMailing: NotificationMailing, private messageService: MessageService) {  // Injecter MessageService
     this.contactForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -40,27 +41,30 @@ export class ContactUsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit(): void {
     if (this.contactForm.valid) {
       this.isLoading = true;
       const { name, email, phone, message } = this.contactForm.value;
+      
       this.notificationMailing.sendContactForm(name, email, phone, message)
         .subscribe({
-          next: () => {
-            this.successMessage = 'Email sent successfully';
-            this.errorMessage = '';
-            this.isLoading = false;
+          next: (response) => {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Email sent successfully' });
+            setTimeout(() => {
+              this.isLoading = false;
+            }, 1500);
           },
-          error: () => {
-            this.errorMessage = 'Error during sending your email';
-            this.successMessage = '';
-            this.isLoading = false;
+          error: (error) => {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error sending your email' });
+            setTimeout(() => {
+              this.isLoading = false;
+            }, 1500);
           }
         });
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please fill in the form correctly.' });
     }
   }
-
 }

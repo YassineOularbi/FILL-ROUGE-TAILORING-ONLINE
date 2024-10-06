@@ -36,12 +36,24 @@
                     background-color: transparent;
                     color: var(--black);
                     transition: background-color 0.3s ease, color 0.3s ease;
+                    cursor: pointer;
                 }
-
+                
+                .active {
+                    background-color: var(--black);
+                    color: var(--white);
+                }
+                
+                .active:hover {
+                    background-color: var(--white) !important;
+                    color: var(--black) !important;
+                }
+                
                 .button:hover {
                     background-color: var(--black);
                     color: var(--white);
                 }
+                
             }
         }
     }

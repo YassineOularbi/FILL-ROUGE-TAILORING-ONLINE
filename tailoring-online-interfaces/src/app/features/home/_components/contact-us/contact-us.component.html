@@ -1,3 +1,4 @@
+<p-toast class="bottom-center"></p-toast>
 <div class="ligne">
     <div class="circle rounded-circle d-flex justify-content-center align-items-center">
         <p>Contact Us</p>
@@ -55,8 +56,6 @@
                 </button>
             </div>
         </form>
-        <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
-        <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
     </div>
 </section>
 <app-loading *ngIf="isLoading"></app-loading> 

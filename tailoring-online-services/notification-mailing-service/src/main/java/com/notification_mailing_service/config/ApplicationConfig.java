@@ -21,14 +21,12 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import java.util.Collection;
-import java.util.Objects;
 
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(ApplicationConfig.class);
-
     private final Environment environment;
 
     @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
@@ -36,15 +34,11 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        logger.info("Initialisation de l'InMemoryUserDetailsManager avec un utilisateur en mémoire.");
-
         UserDetails user = User.builder()
-                .username(Objects.requireNonNull(environment.getProperty("spring.security.user.name"), "Nom d'utilisateur manquant"))
-                .password(passwordEncoder().encode(Objects.requireNonNull(environment.getProperty("spring.security.user.password"), "Mot de passe manquant")))
-                .roles(Objects.requireNonNull(environment.getProperty("spring.security.user.roles"), "Rôles manquants"))
+                .username(environment.getProperty("spring.security.user.name"))
+                .password(passwordEncoder().encode(environment.getProperty("spring.security.user.password")))
+                .roles(environment.getProperty("spring.security.user.roles"))
                 .build();
-
-        logger.debug("Utilisateur en mémoire configuré avec succès : {}", user.getUsername());
         return new InMemoryUserDetailsManager(user);
     }
 

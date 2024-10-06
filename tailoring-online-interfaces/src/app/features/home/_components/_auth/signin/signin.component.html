@@ -1,1 +1,101 @@
-<p>signin works!</p>
+<p-toast position="bottom-right"></p-toast>
+<section class="signin w-100 d-flex flex-row justify-content-between align-items-center align-content-center">
+    <div class="left w-50 d-flex justify-content-center align-items-center">
+      <img class="w-75" src="assets/signin-bg.png" alt="sign bg">
+    </div>
+    
+    <div class="right w-50 py-3 px-5 mx-5 d-flex flex-column justify-content-around">
+      <div class="header d-flex flex-column w-100">
+        <h1>Sign In to continue -></h1>
+        <p>Enter your username and password to sign in</p>
+      </div>
+      
+      <div class="signin-container w-100">
+        <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+          <div class="w-100 mt-4 form-group mb-2">
+            <label [ngClass]="{'is-invalid': submitted && f['username'].invalid}" class="w-50 py-1" for="username">Username</label>
+            <div class="input-icon-wrapper">
+              <i [ngClass]="{'is-invalid': submitted && f['username'].invalid}" class="pi pi-user icon-left"></i>
+              <input
+                id="username"
+                type="text"
+                formControlName="username"
+                [attr.placeholder]="(submitted && f['username'].invalid) ? 'Username is required' : 'Enter your username here please ...'"
+                [ngClass]="{'is-invalid': submitted && f['username'].invalid}"
+              />
+            </div>
+            <div *ngIf="submitted && f['username'].errors" class="text-danger">
+              <small *ngIf="f['username'].errors['required']">Username is required.</small>
+              <small *ngIf="f['username'].errors['minlength']">Username must be at least 4 characters long.</small>
+            </div>
+          </div>
+          
+          <div class="w-100 mb-4 form-group">
+            <label [ngClass]="{'is-invalid': submitted && f['password'].invalid}" class="w-50 p-1" for="password">Password</label>
+            <div class="input-icon-wrapper">
+              <i [ngClass]="{'is-invalid': submitted && f['password'].invalid}" class="pi pi-lock icon-left"></i>
+              <input
+                id="password"
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="password"
+                [attr.placeholder]="(submitted && f['password'].invalid) ? 'Password is required' : '*****************'"
+                [ngClass]="{'is-invalid': submitted && f['password'].invalid}"
+              />
+              <i [ngClass]="{'is-invalid': submitted && f['password'].invalid, 'pi-eye-slash': showPassword}" class="pi pi-eye icon-right" (click)="togglePasswordVisibility()"></i>
+            </div>
+            <div *ngIf="submitted && f['password'].errors" class="text-danger">
+              <small *ngIf="f['password'].errors['required']">Password is required.</small>
+              <small *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters long.</small>
+            </div>
+          </div>
+
+          <div class="remember-me-container d-flex justify-content-between align-items-center w-100">
+            <div class="remember-toggle d-flex align-items-center justify-content-start align-content-center w-50">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <p>Remembre me</p>
+            </div>
+        
+            <div class="forgot-password w-50 text-end">
+                <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+        </div>
+        
+          
+          <div class="d-flex justify-content-center my-3 w-100">
+            <button pButton type="submit" label="Sign In" class="w-100"></button>
+          </div>
+        </form>
+
+        <div class="oauth w-100 my-4">
+            <div class="or w-100 d-flex justify-content-center align-items-center">
+                <p class="text-center">Or</p>
+            </div>
+            <div class="oauth-options w-100 my-4 d-flex flex-row justify-content-center align-content-center align-items-center">
+                <a class="option d-flex justify-content-center align-items-center">
+                    <img class="w-100" src="assets/facebook-logo.webp" alt="">
+                </a>
+                <a class="option d-flex justify-content-center align-items-center">
+                    <img class="w-100" src="assets/google-logo.webp" alt="">
+                </a>
+                <a class="option d-flex justify-content-center align-items-center">
+                    <img class="w-100" src="assets/github-logo.png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="register d-flex flex-column justify-content-center align-items-center w-100">
+            <a class="w-100 text-center mb-2">Don't have an account? <strong>Register</strong></a>
+            <div class="buttons w-100 d-flex justify-content-between align-content-center align-items-center mt-3">
+                <div class="button d-flex justify-content-center align-items-center">
+                    <a href="">Become Tailor</a>
+                </div>
+                <div class="button d-flex justify-content-center align-items-center">
+                    <a href="">Become Customer</a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>

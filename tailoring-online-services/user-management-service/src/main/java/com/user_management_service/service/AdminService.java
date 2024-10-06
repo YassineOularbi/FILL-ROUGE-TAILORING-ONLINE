@@ -8,7 +8,6 @@ import com.user_management_service.mapper.UserMapper;
 import com.user_management_service.model.Admin;
 import com.user_management_service.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -30,7 +30,7 @@ public class SecurityConfig {
         logger.debug("Protection CSRF désactivée.");
 
         http.cors(Customizer.withDefaults());
-        logger.debug("Configuration CORS activée.");
+        logger.debug("Configuration CORS activée par défaut.");
 
         http.httpBasic(Customizer.withDefaults());
         logger.debug("Authentification HTTP Basic activée.");
@@ -57,4 +57,5 @@ public class SecurityConfig {
         logger.info("Chaîne de filtres de sécurité initialisée avec succès.");
         return http.build();
     }
+
 }

@@ -1,30 +1,35 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { LoadingComponent } from "./shared/animations/loading/loading.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, LoadingComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
 
-  constructor(private renderer: Renderer2) {}
+  isLoading = false;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // this.applyThemeBasedOnTime();
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.isLoading = true;
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 2000); 
+      }
+    });
   }
 
-  applyThemeBasedOnTime(): void {
-    const currentHour = new Date().getHours();
-    const nightStart = 19; 
-    const nightEnd = 7; 
-
-    if (currentHour >= nightStart || currentHour < nightEnd) {
-      this.renderer.addClass(document.documentElement, 'dark');
-    } else {
-      this.renderer.removeClass(document.documentElement, 'dark');
-    }
-  }
 }

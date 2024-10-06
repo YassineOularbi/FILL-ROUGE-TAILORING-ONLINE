@@ -107,10 +107,10 @@ class EmailControllerTests {
         String message = "Test message";
         doNothing().when(emailService).contactUs(name, email, phone, message);
 
-        CompletableFuture<ResponseEntity<?>> response = emailController.contactUs(name, email, phone, message);
+        ResponseEntity<?> response = emailController.contactUs(name, email, phone, message);
 
-        assertEquals(HttpStatus.OK, response.join().getStatusCode());
-        assertEquals("Email sent successfully!", response.join().getBody());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Email sent successfully!", response.getBody());
     }
 
     @Test
@@ -121,9 +121,9 @@ class EmailControllerTests {
         String message = "Test message";
         doThrow(new MessagingException("Failed")).when(emailService).contactUs(name, email, phone, message);
 
-        CompletableFuture<ResponseEntity<?>> response = emailController.contactUs(name, email, phone, message);
+        ResponseEntity<?> response = emailController.contactUs(name, email, phone, message);
 
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.join().getStatusCode());
-        assertTrue(Objects.requireNonNull(response.join().getBody()).toString().contains("Failed to send email"));
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        assertTrue(Objects.requireNonNull(response.getBody()).toString().contains("Failed to send email"));
     }
 }
