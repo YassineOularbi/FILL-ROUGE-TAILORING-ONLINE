@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-import { Observable, from, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -9,23 +10,12 @@ export class KeycloakAuthService {
 
   constructor(private keycloakService: KeycloakService) { }
 
-  private isBrowser(): boolean {
-    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
-  }
-
-  login(rememberMe: boolean): Promise<void> {
-    if (this.isBrowser() && rememberMe) {
-      localStorage.setItem('rememberMe', 'true');
-    } else if (this.isBrowser()) {
-      localStorage.removeItem('rememberMe');
-    }
+  login(): Promise<void> {
     return this.keycloakService.login();
   }
 
   logout(): Promise<void> {
-    if (this.isBrowser()) {
-      localStorage.removeItem('rememberMe');
-    }
+    localStorage.removeItem('rememberMe');
     return this.keycloakService.logout();
   }
 
@@ -49,7 +39,19 @@ export class KeycloakAuthService {
 
   isAuthenticated(): Observable<boolean> {
     const isLoggedIn = this.keycloakService.isLoggedIn();
-    return of(isLoggedIn);
+    console.log(isLoggedIn);
+    
+    if (isLoggedIn) {
+      return from(this.keycloakService.updateToken(30)).pipe(
+        map(() => true),
+        catchError(() => {
+          console.error('Error refreshing token');
+          return of(false);
+        })
+      );
+    } else {
+      return of(false);
+    }
   }
 
   loadUserProfile(): Promise<Keycloak.KeycloakProfile> {

@@ -1,19 +1,15 @@
 import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { KeycloakAuthService } from '../keycloak/keycloak-auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const keycloakService = inject(KeycloakAuthService);
   let authReq = req;
-  const token = localStorage.getItem('auth-token');
-
+  const token = keycloakService.getAccessToken()
   if (token != null) {
 
     authReq = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
 
-  } 
-  // else {
-  //   const basicAuth = 'Basic ' + btoa('admin:admin');
-  //   authReq = authReq.clone({
-  //     headers: req.headers.set('Authorization', basicAuth)
-  //   });
-  // }
+  }
   return next(authReq);
 };

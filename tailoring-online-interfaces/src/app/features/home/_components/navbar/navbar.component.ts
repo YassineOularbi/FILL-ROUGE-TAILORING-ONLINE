@@ -5,6 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { ViewportScroller } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
+import { initializeKeycloakWithOptions } from '../../../../core/keycloak/initializeKeycloak';
 
 @Component({
   selector: 'app-navbar',
@@ -22,7 +24,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private viewportScroller: ViewportScroller, private router: Router){}
+  constructor(private viewportScroller: ViewportScroller, private router: Router, private keycloakService: KeycloakService){}
 
   scrollToSection(section: string): void {
     if (this.router.url === '/') {
@@ -34,6 +36,14 @@ export class NavbarComponent {
         }, 500)
       });
     }
+  }
+
+  onLogin(){
+    initializeKeycloakWithOptions(this.keycloakService).call(this).then(() => {
+      this.keycloakService.login({ redirectUri: window.location.origin });
+    }).catch(err => {
+      console.error('Erreur lors de l\'initialisation de Keycloak', err);
+    });
   }
 
 }

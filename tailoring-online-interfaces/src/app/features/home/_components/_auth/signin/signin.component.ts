@@ -8,10 +8,10 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
-import { InputSwitchModule } from 'primeng/inputswitch'; 
-import { UserManagementService } from '../../../../../core/services/user-management.service';
-import { AuthRequest } from '../../../../../core/dtos/auth-request.interface';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { AuthService } from '../../../../../core/services/auth.service';
 import { KeycloakAuthService } from '../../../../../core/keycloak/keycloak-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -39,8 +39,10 @@ export class SigninComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private messageService: MessageService,
-    private keycloakAuthService: KeycloakAuthService
-  ) {}
+    private authService: AuthService,
+    private keycloakAuthService: KeycloakAuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.signinForm = this.fb.group({
@@ -54,20 +56,23 @@ export class SigninComponent implements OnInit {
     this.submitted = true;
 
     if (this.signinForm.valid) {
-      const rememberMe = this.signinForm.value.rememberMe;
-
-      this.keycloakAuthService.login(rememberMe).then(() => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Login successful!',
-        });
-      }).catch(() => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Invalid username or password!',
-        });
+      localStorage.setItem('rememberMe', this.signinForm.value.rememberMe.toString());
+      this.authService.signin(this.signinForm.value.username, this.signinForm.value.password).subscribe({
+        next: () => {
+          this.router.navigate(['/signup'])
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Login successful! Redirecting...',
+          });
+        },
+        error: () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Invalid username or password!',
+          });
+        }
       });
     }
   }
@@ -89,8 +94,6 @@ export class SigninComponent implements OnInit {
   }
 
   loginWithProvider(provider: string): void {
-    console.log('provider');
-    
     this.keycloakAuthService.loginWithIdentityProvider(provider);
   }
 

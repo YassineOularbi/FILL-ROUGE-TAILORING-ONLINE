@@ -1,16 +1,6 @@
 import { KeycloakService } from 'keycloak-angular';
 
-export function initializeKeycloak(keycloak: KeycloakService): () => Promise<boolean> {
-  const isBrowser = typeof window !== 'undefined';
-
-  const rememberMe = isBrowser && typeof localStorage !== 'undefined'
-    ? localStorage.getItem('remember_me')
-    : null;
-
-  if (!isBrowser) {
-    return () => Promise.resolve(true);
-  }
-
+export function initializeKeycloakDefault(keycloak: KeycloakService): () => Promise<boolean> {
   return () =>
     keycloak.init({
       config: {
@@ -19,10 +9,25 @@ export function initializeKeycloak(keycloak: KeycloakService): () => Promise<boo
         clientId: 'tailoring-online-id',
       },
       initOptions: {
-        onLoad: rememberMe ? 'check-sso' : 'login-required',
-        checkLoginIframe: false,
+        checkLoginIframe: false
       },
-      enableBearerInterceptor: true,
-      bearerPrefix: 'Bearer',
     });
+}
+
+export function initializeKeycloakWithOptions(keycloak: KeycloakService): () => Promise<boolean> {
+  return () => {
+    const rememberMe = localStorage.getItem('rememberMe') === 'true';
+
+    return keycloak.init({
+      config: {
+        url: 'http://localhost:8080',
+        realm: 'tailoring-online',
+        clientId: 'tailoring-online-id',
+      },
+      initOptions: {
+        onLoad: rememberMe ? 'check-sso' : 'login-required',
+        checkLoginIframe: false
+      },
+    });
+  };
 }

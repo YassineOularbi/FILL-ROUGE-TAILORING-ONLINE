@@ -7,8 +7,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import { initializeKeycloak } from './core/keycloak/initializeKeycloak';
-
+import { initializeKeycloakDefault } from './core/keycloak/initializeKeycloak';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(KeycloakAngularModule),
     {
       provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
+      useFactory: (keycloak: KeycloakService) => initializeKeycloakDefault(keycloak),
       multi: true,
       deps: [KeycloakService]
     },
@@ -28,7 +27,6 @@ export const appConfig: ApplicationConfig = {
       provide: ENVIRONMENT_INITIALIZER,
       useFactory: () => () => {
         const primengConfig = inject(PrimeNGConfig);
-
         primengConfig.zIndex = {
           modal: 1100,   
           overlay: 1000, 
