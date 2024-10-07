@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MainComponent } from "../_components/main/main.component";
 import { CollectionsComponent } from "../_components/collections/collections.component";
 import { TailoringComponent } from "../_components/tailoring/tailoring.component";
@@ -7,6 +7,7 @@ import { AboutUsComponent } from "../_components/about-us/about-us.component";
 import { ContactUsComponent } from "../_components/contact-us/contact-us.component";
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { KeycloakAuthService } from '../../../core/keycloak/keycloak-auth.service';
 
 @Component({
   selector: 'app-home-layout',
@@ -15,10 +16,10 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './home-layout.component.html',
   styleUrl: './home-layout.component.scss'
 })
-export class HomeLayoutComponent {
+export class HomeLayoutComponent implements OnInit{
   showScrollTop = false;
 
-  constructor(private viewportScroller: ViewportScroller) {}
+  constructor(private viewportScroller: ViewportScroller, private keycloakAuthService: KeycloakAuthService) {}
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
@@ -29,5 +30,11 @@ export class HomeLayoutComponent {
 
   scrollToTop(): void {
     this.viewportScroller.scrollToPosition([0, 0]);
+  }
+
+  ngOnInit(): void {
+    this.keycloakAuthService.getToken()
+    this.keycloakAuthService.isLoggedIn()
+    this.keycloakAuthService.isTokenExpired()
   }
 }

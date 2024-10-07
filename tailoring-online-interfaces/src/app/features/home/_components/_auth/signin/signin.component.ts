@@ -57,44 +57,19 @@ export class SigninComponent implements OnInit {
 
     if (this.signinForm.valid) {
       localStorage.setItem('rememberMe', this.signinForm.value.rememberMe.toString());
-      this.authService.signin(this.signinForm.value.username, this.signinForm.value.password).subscribe({
-        next: () => {
+      this.authService.signin(this.signinForm.value.username, this.signinForm.value.password).subscribe(
+       (res) => {
+        console.log(res);
+        console.log(this.keycloakAuthService.keycloak?.userInfo);
           this.router.navigate(['/signup'])
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
             detail: 'Login successful! Redirecting...',
           });
-        },
-        error: () => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Invalid username or password!',
-          });
         }
-      });
+      );
     }
-  }
-
-  forgotPassword(): void {
-    this.keycloakAuthService.forgotPassword().then(() => {
-      this.messageService.add({
-        severity: 'info',
-        summary: 'Password Reset',
-        detail: 'Redirected to password reset page.',
-      });
-    }).catch(() => {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Unable to reset password.',
-      });
-    });
-  }
-
-  loginWithProvider(provider: string): void {
-    this.keycloakAuthService.loginWithIdentityProvider(provider);
   }
 
   togglePasswordVisibility(): void {
