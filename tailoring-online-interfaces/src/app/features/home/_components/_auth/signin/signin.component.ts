@@ -9,9 +9,8 @@ import { ToastModule } from 'primeng/toast';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { AuthService } from '../../../../../core/services/auth.service';
-import { KeycloakAuthService } from '../../../../../core/keycloak/keycloak-auth.service';
 import { Router } from '@angular/router';
+import { KeycloakService } from '../../../../../core/keycloak/keycloak.service';
 
 @Component({
   selector: 'app-signin',
@@ -39,8 +38,7 @@ export class SigninComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private messageService: MessageService,
-    private authService: AuthService,
-    private keycloakAuthService: KeycloakAuthService,
+    private keycloakService: KeycloakService,
     private router: Router
   ) { }
 
@@ -54,21 +52,22 @@ export class SigninComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-
     if (this.signinForm.valid) {
-      localStorage.setItem('rememberMe', this.signinForm.value.rememberMe.toString());
-      this.authService.signin(this.signinForm.value.username, this.signinForm.value.password).subscribe(
-       (res) => {
-        console.log(res);
-        console.log(this.keycloakAuthService.keycloak?.userInfo);
-          this.router.navigate(['/signup'])
+      localStorage.clear();
+      localStorage.setItem('remember-me', this.signinForm.value.rememberMe.toString());
+      this.keycloakService.signin(this.signinForm.value.username, this.signinForm.value.password).subscribe({
+        next: (response) => {
+          localStorage.setItem('keycloak', JSON.stringify(response));
+          this.router.navigate(['/auth/signup']);
+        },
+        error: () => {
           this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Login successful! Redirecting...',
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Invalid username or password!',
           });
         }
-      );
+      });
     }
   }
 

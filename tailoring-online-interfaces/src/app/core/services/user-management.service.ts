@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
-import { AuthRequest } from "../dtos/auth-request.interface";
+import { AuthRequest } from "../interfaces/auth-request.interface";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 

@@ -1,15 +1,33 @@
 // import { CanActivateFn, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 // import { inject } from '@angular/core';
-// import { Observable, of } from 'rxjs';
-// import { KeycloakAuthService } from '../keycloak/keycloak-auth.service';
+// import { map, Observable, of } from 'rxjs';
+// import { KeycloakService } from '../keycloak/keycloak.service';
+// import { KeycloakLogoutOptions } from 'keycloak-js';
 
 // export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
-//   const keycloakAuthService = inject(KeycloakAuthService);
+//   const keycloakService = inject(KeycloakService);
+//   const returnUrl = state.url;
+//   const logoutOptions: KeycloakLogoutOptions = {
+//     redirectUri: `${window.location.origin}/auth/signin?returnUrl=${encodeURIComponent(returnUrl)}`,
+//     logoutMethod: 'GET',
+//   };
+
+//   // keycloakService.isAuthenticated().subscribe({
+//   //   next: (isAuthenticated) => {
+//   //     console.log(isAuthenticated);
+      
+//   //   }
+//   // })
   
-//   if (keycloakAuthService.isLoggedIn()) {    
-//     return of(true);
-//   } else {
-//     keycloakAuthService.login();
-//     return of(false);
-//   }
+//   // return keycloakService.isAuthenticated().pipe(
+//   //   map(isAuthenticated => {
+//   //     if (!isAuthenticated) {
+//   //       // keycloakService.logout(logoutOptions);
+//   //       return false;
+//   //     }
+//   //     return true;
+//   //   })
+//   // );
+
+//   return of(true);
 // }

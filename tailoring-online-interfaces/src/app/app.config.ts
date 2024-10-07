@@ -6,7 +6,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
-import { KeycloakAuthService } from './core/keycloak/keycloak-auth.service';
+import { KeycloakService } from './core/keycloak/keycloak.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,11 +17,11 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     {
       provide: APP_INITIALIZER,
-      useFactory:  (keycloakAuthService: KeycloakAuthService) => {
-        return () => keycloakAuthService.init();
+      useFactory:  (keycloakService: KeycloakService) => {
+        return () => keycloakService.init();
       },
       multi: true,
-      deps: [KeycloakAuthService]
+      deps: [KeycloakService]
     },
     {
       provide: ENVIRONMENT_INITIALIZER,

@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { ViewportScroller } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { KeycloakAuthService } from '../../../../core/keycloak/keycloak-auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +22,7 @@ import { KeycloakAuthService } from '../../../../core/keycloak/keycloak-auth.ser
 })
 export class NavbarComponent {
 
-  constructor(private viewportScroller: ViewportScroller, private router: Router, private keycloakAuthService: KeycloakAuthService){}
+  constructor(private viewportScroller: ViewportScroller, private router: Router){}
 
   scrollToSection(section: string): void {
     if (this.router.url === '/') {
@@ -35,10 +34,6 @@ export class NavbarComponent {
         }, 500)
       });
     }
-  }
-
-  onLogin(){
-    this.keycloakAuthService.login();
   }
 
 }
