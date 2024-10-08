@@ -72,10 +72,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   logoutUser(): void {
-    const returnUrl = this.router.url;
     const logoutOptions: KeycloakLogoutOptions = {
-        redirectUri: `${window.location.origin}/auth/signin?returnUrl=${encodeURIComponent(returnUrl)}`,
-        logoutMethod: 'GET'
+      redirectUri: `${window.location.origin}/auth/signin?returnUrl=${encodeURIComponent(window.location.href)}`,
+      logoutMethod: 'GET'
     };
     this.keycloakService.logout(logoutOptions);
 }

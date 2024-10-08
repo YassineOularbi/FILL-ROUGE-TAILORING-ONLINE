@@ -34,6 +34,7 @@ export class SigninComponent implements OnInit {
   signinForm!: FormGroup;
   submitted = false;
   showPassword = false;
+  isRememberedAccount = false; // Nouvelle variable ajoutée
 
   constructor(
     private fb: FormBuilder,
@@ -48,15 +49,45 @@ export class SigninComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       rememberMe: [false],
     });
+
+    const rememberMe: boolean = localStorage.getItem('remember-me') === 'true';
+
+    if (rememberMe) {
+      this.isRememberedAccount = true; // Définir comme compte mémorisé
+      this.signinForm.patchValue({
+        username: localStorage.getItem('saved-username') || '',
+        password: localStorage.getItem('saved-password') || '',
+        rememberMe: rememberMe,
+      });
+      this.signinForm.controls['username'].disable();
+      this.signinForm.controls['password'].disable();
+      this.signinForm.controls['rememberMe'].disable();
+    }
   }
 
   onSubmit(): void {
     this.submitted = true;
     if (this.signinForm.valid) {
-      localStorage.clear();
-      localStorage.setItem('remember-me', this.signinForm.value.rememberMe.toString());
+      const rememberMe = this.signinForm.value.rememberMe;
+
       this.keycloakService.signin(this.signinForm.value.username, this.signinForm.value.password).subscribe({
         next: (response) => {
+          // Sauvegarder dans localStorage uniquement après une connexion réussie
+          if (rememberMe) {
+            localStorage.setItem('remember-me', 'true');
+            localStorage.setItem('saved-username', this.signinForm.value.username);
+            localStorage.setItem('saved-password', this.signinForm.value.password);
+            this.isRememberedAccount = true; // Marquer comme compte mémorisé
+            this.signinForm.controls['username'].disable();
+            this.signinForm.controls['password'].disable();
+            this.signinForm.controls['rememberMe'].disable();
+          } else {
+            localStorage.setItem('remember-me', 'false');
+            localStorage.removeItem('saved-username');
+            localStorage.removeItem('saved-password');
+            this.isRememberedAccount = false; // Ne pas mémoriser
+          }
+
           localStorage.setItem('keycloak', JSON.stringify(response));
           this.router.navigate(['/auth/signup']);
         },
@@ -73,6 +104,23 @@ export class SigninComponent implements OnInit {
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  changeAccount(): void {
+    this.submitted = false;
+    this.signinForm.reset({
+      username: '',
+      password: '',
+      rememberMe: false,
+    });
+    this.signinForm.controls['username'].enable();
+    this.signinForm.controls['password'].enable();
+    this.signinForm.controls['rememberMe'].enable();
+
+    localStorage.removeItem('saved-username');
+    localStorage.removeItem('saved-password');
+    localStorage.removeItem('remember-me');
+    this.isRememberedAccount = false; // Réinitialiser le statut de compte mémorisé
   }
 
   get f() {
