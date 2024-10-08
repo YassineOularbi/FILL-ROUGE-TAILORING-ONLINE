@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, ApplicationConfig, ENVIRONMENT_INITIALIZER, inject, provideZoneChangeDetection } from '@angular/core';
+import { APP_INITIALIZER, ApplicationConfig, ENVIRONMENT_INITIALIZER, importProvidersFrom, inject, provideZoneChangeDetection } from '@angular/core';
 import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
 import { routes } from './app.routes';
 import { PrimeNGConfig } from 'primeng/api';
@@ -7,6 +7,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { KeycloakService } from './core/keycloak/keycloak.service';
+import { KeycloakAngularModule } from 'keycloak-angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+    importProvidersFrom(KeycloakAngularModule),
     {
       provide: APP_INITIALIZER,
       useFactory:  (keycloakService: KeycloakService) => {
