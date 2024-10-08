@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_layout/home-layout.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_layout/home-layout.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/keycloak/keycloak.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/keycloak/keycloak.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/keycloak_theme/keycloakify-starter-angular" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/keycloak_theme/keycloakify-starter-angular" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
@@ -445,7 +447,8 @@
       <workItem from="1727862631672" duration="19140000" />
       <workItem from="1728091545304" duration="1879000" />
       <workItem from="1728093475014" duration="9807000" />
-      <workItem from="1728222144305" duration="2678000" />
+      <workItem from="1728222144305" duration="2694000" />
+      <workItem from="1728348202169" duration="604000" />
     </task>
     <servers />
   </component>
