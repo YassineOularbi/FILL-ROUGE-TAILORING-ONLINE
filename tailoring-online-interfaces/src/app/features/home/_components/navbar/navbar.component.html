@@ -28,7 +28,7 @@
 
         <ul class="navbar-nav w-25 h-100 d-flex d-md-none justify-content-center">
             <li class="nav-item w-100">
-                <a class="nav-link button text-center w-100 font-weight-bold" (click)="onLogin()">Sign In</a>
+                <a class="nav-link button text-center w-100 font-weight-bold" routerLink="/auth/signin" routerLinkActive="active">Sign In</a>
             </li>
         </ul>
 
@@ -40,7 +40,7 @@
                 <a class="nav-link text-center w-100" (click)="scrollToSection('contact-us')" routerLink="/">Contact Us</a>
             </li>
             <li class="nav-item col-md-3 d-flex justify-content-center">
-                <a class="nav-link button text-center w-100" (click)="onLogin()">Sign In</a>
+                <a class="nav-link button text-center w-100" routerLink="/auth/signin" routerLinkActive="active">Sign In</a>
             </li>
         </ul>
 

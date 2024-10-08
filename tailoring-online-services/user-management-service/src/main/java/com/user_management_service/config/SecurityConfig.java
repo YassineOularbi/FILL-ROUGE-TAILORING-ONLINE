@@ -37,7 +37,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(authorize -> {
             logger.debug("Toutes les requêtes nécessitent une authentification.");
-            authorize.anyRequest().permitAll();
+            authorize.anyRequest().authenticated();
         });
 
         http.oauth2ResourceServer(oauth2 -> {
