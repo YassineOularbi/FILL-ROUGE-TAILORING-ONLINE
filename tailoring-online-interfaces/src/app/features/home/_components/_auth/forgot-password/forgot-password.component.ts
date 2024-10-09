@@ -52,6 +52,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private notificationMailing: NotificationMailing
   ) {
+    // Initialize forms
     this.forgotPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });
@@ -76,6 +77,18 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.typingSubscription.unsubscribe();
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.forgotPasswordForm.controls;
+  }
+
+  get v(): { [key: string]: AbstractControl } {
+    return this.verifyCodeForm.controls;
+  }
+
+  get r(): { [key: string]: AbstractControl } {
+    return this.resetPasswordForm.controls;
   }
 
   passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
@@ -112,12 +125,12 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     }
 
     this.loading = true;
-    const email = this.forgotPasswordForm.value.email;
+    const email = this.f['email'].value;
 
     this.notificationMailing.sendVerificationCode(email)
       .pipe(
         catchError(err => {
-          this.error = err.error.message || 'An error occurred. Please try again.';
+          this.error = 'An error occurred. Please try again.';
           this.loading = false;
           return throwError(err);
         })
@@ -142,7 +155,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 
     this.verifyLoading = true;
     const email = this.forgotPasswordForm.value.email;
-    const code = this.verifyCodeForm.value.verificationCode;
+    const code = this.v['verificationCode'].value;
 
     this.notificationMailing.verifyCode(email, code)
       .pipe(
@@ -183,31 +196,47 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   }
 
   onSubmitResetPassword(): void {
-    this.resetSubmitted = true;
-    this.resetError = '';
-    this.resetSuccess = '';
+    // this.resetSubmitted = true;
+    // this.resetError = '';
+    // this.resetSuccess = '';
 
-    if (this.resetPasswordForm.invalid) {
-      return;
+    // if (this.resetPasswordForm.invalid) {
+    //   return;
+    // }
+
+    // this.resetLoading = true;
+    // const newPassword = this.r['newPassword'].value;
+
+    // this.notificationMailing.resetPassword(newPassword)
+    //   .pipe(
+    //     catchError(err => {
+    //       this.resetError = err.error.message || 'Failed to reset password. Please try again.';
+    //       this.resetLoading = false;
+    //       return throwError(err);
+    //     })
+    //   )
+    //   .subscribe(response => {
+    //     this.resetSuccess = 'Your password has been successfully reset.';
+    //     this.resetLoading = false;
+    //     this.resetPasswordForm.reset();
+    //     this.resetSubmitted = false;
+    //     this.step = 1;
+    //   });
+  }
+
+  onInput(): void {
+    if (this.f['email'].value.trim() !== '') {
+      this.isTyping = true;
+      this.typingSubject.next();
+    } else {
+      this.isTyping = false;
     }
 
-    this.resetLoading = true;
-    const newPassword = this.resetPasswordForm.value.newPassword;
-
-    this.notificationMailing.resetPassword(newPassword) 
-      .pipe(
-        catchError(err => {
-          this.resetError = err.error.message || 'Failed to reset password. Please try again.';
-          this.resetLoading = false;
-          return throwError(err);
-        })
-      )
-      .subscribe(response => {
-        this.resetSuccess = 'Your password has been successfully reset.';
-        this.resetLoading = false;
-        this.resetPasswordForm.reset();
-        this.resetSubmitted = false;
-        this.step = 1;
-      });
+    if (this.error) {
+      this.error = '';
+    }
+    if (this.success) {
+      this.success = '';
+    }
   }
 }
