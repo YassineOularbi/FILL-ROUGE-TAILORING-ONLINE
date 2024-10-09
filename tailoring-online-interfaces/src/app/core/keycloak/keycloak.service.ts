@@ -5,6 +5,8 @@ import { catchError, from, Observable, of } from 'rxjs';
 import { map, retry, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { KeycloakService as KeycloakAuthService } from 'keycloak-angular';
+
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
 export class KeycloakService {
   keycloak?: Keycloak;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private keycloakService: KeycloakAuthService) {
   }
 
   init(): Promise<boolean> {
@@ -22,6 +24,7 @@ export class KeycloakService {
       onLoad: 'check-sso',
       silentCheckSsoRedirectUri: `${location.origin}/silent-check-sso.html`,
     };
+    
     const response = localStorage.getItem('keycloak');
     if (response) {
       const parsedResponse = JSON.parse(response);
@@ -158,4 +161,13 @@ export class KeycloakService {
   getKeycloakInstance(): Keycloak | undefined {
     return this.keycloak;
   }
+
+  async onLoginWithProvider(provider: string): Promise<void> {
+    await this.init();
+    const loginOptions: KeycloakLoginOptions = {
+      idpHint: provider,
+    };
+    return this.login(loginOptions);
+  }
+
 }

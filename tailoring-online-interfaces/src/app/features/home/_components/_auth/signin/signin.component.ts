@@ -34,7 +34,7 @@ export class SigninComponent implements OnInit {
   signinForm!: FormGroup;
   submitted = false;
   showPassword = false;
-  isRememberedAccount = false; // Nouvelle variable ajoutée
+  isRememberedAccount = false;
 
   constructor(
     private fb: FormBuilder,
@@ -53,7 +53,7 @@ export class SigninComponent implements OnInit {
     const rememberMe: boolean = localStorage.getItem('remember-me') === 'true';
 
     if (rememberMe) {
-      this.isRememberedAccount = true; // Définir comme compte mémorisé
+      this.isRememberedAccount = true;
       this.signinForm.patchValue({
         username: localStorage.getItem('saved-username') || '',
         password: localStorage.getItem('saved-password') || '',
@@ -72,12 +72,11 @@ export class SigninComponent implements OnInit {
 
       this.keycloakService.signin(this.signinForm.value.username, this.signinForm.value.password).subscribe({
         next: (response) => {
-          // Sauvegarder dans localStorage uniquement après une connexion réussie
           if (rememberMe) {
             localStorage.setItem('remember-me', 'true');
             localStorage.setItem('saved-username', this.signinForm.value.username);
             localStorage.setItem('saved-password', this.signinForm.value.password);
-            this.isRememberedAccount = true; // Marquer comme compte mémorisé
+            this.isRememberedAccount = true;
             this.signinForm.controls['username'].disable();
             this.signinForm.controls['password'].disable();
             this.signinForm.controls['rememberMe'].disable();
@@ -85,7 +84,7 @@ export class SigninComponent implements OnInit {
             localStorage.setItem('remember-me', 'false');
             localStorage.removeItem('saved-username');
             localStorage.removeItem('saved-password');
-            this.isRememberedAccount = false; // Ne pas mémoriser
+            this.isRememberedAccount = false;
           }
 
           localStorage.setItem('keycloak', JSON.stringify(response));
@@ -120,7 +119,21 @@ export class SigninComponent implements OnInit {
     localStorage.removeItem('saved-username');
     localStorage.removeItem('saved-password');
     localStorage.removeItem('remember-me');
-    this.isRememberedAccount = false; // Réinitialiser le statut de compte mémorisé
+    this.isRememberedAccount = false;
+  }
+
+  onLoginWithProvider(provider: string): void {
+    this.keycloakService.onLoginWithProvider(provider)?.then(() => {
+      if (this.keycloakService.isLoggedIn()) {
+        this.router.navigate(['/auth/signup']);
+      }
+    }).catch((error) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Login Error',
+        detail: `Failed to login with ${provider}: ${error.message}`
+      });
+    });
   }
 
   get f() {

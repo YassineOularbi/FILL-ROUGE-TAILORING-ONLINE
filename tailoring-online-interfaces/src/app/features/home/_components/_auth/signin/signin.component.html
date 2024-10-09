@@ -31,7 +31,6 @@
                     </div>
                 </div>
 
-                <!-- Champ Mot de Passe visible uniquement si ce n'est pas un compte mémorisé -->
                 <div class="w-100 mb-4 form-group" *ngIf="!isRememberedAccount">
                     <label [ngClass]="{'is-invalid': submitted && f['password'].invalid}" class="w-50 p-1"
                         for="password">Password</label>
@@ -82,14 +81,14 @@
                     <p class="text-center">Or</p>
                 </div>
                 <div
-                    class="oauth-options w-100 my-4 d-flex flex-row justify-content-center align-content-center align-items-center">
-                    <button class="option d-flex justify-content-center align-items-center">
+                    class="oauth-options w-100 my-4 d-flex flex-row justify-content-center align-content-center align-items-center" >
+                    <button class="option d-flex justify-content-center align-items-center" (click)="onLoginWithProvider('facebook')">
                         <img class="w-100" src="assets/facebook-logo.webp" alt="Facebook Login">
                     </button>
-                    <button class="option d-flex justify-content-center align-items-center">
+                    <button class="option d-flex justify-content-center align-items-center" (click)="onLoginWithProvider('google')">
                         <img class="w-100" src="assets/google-logo.webp" alt="Google Login">
                     </button>
-                    <button class="option d-flex justify-content-center align-items-center">
+                    <button class="option d-flex justify-content-center align-items-center" (click)="onLoginWithProvider('github')">
                         <img class="w-100" src="assets/github-logo.png" alt="GitHub Login">
                     </button>
                 </div>
