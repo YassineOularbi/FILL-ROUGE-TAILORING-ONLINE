@@ -36,9 +36,10 @@ public class EmailService {
     private final KafkaProducerService kafkaProducerService;
     private final KafkaConsumerService kafkaConsumerService;
 
-    @Async
     @CircuitBreaker(name = "default", fallbackMethod = "fallbackSendVerificationEmail")
-    public CompletableFuture<Boolean> sendVerificationEmail(String email) {
+    public boolean sendVerificationEmail(String email) {
+        Logger logger = LoggerFactory.getLogger(getClass());
+
         kafkaProducerService.sendUserVerificationRequest(email);
 
         try {
@@ -46,12 +47,12 @@ public class EmailService {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             logger.error("Thread interrupted while waiting for user verification response", e);
-            return CompletableFuture.completedFuture(false);
+            return false;
         }
 
         if (!kafkaConsumerService.isUserExists()) {
             logger.warn("No user found with the email: {}", email);
-            return CompletableFuture.completedFuture(false);
+            return false;
         }
 
         String code = verificationCodeGenerator.generateVerificationCode();
@@ -94,6 +95,7 @@ public class EmailService {
                 code,
                 LocalDate.now()
         );
+
         try {
             logger.info("Sending verification email to: {}", email);
             sendEmail(email, "Email Verification Code", body);
@@ -102,10 +104,10 @@ public class EmailService {
                     .verificationCode(code)
                     .build());
             logger.info("Verification email sent and saved for: {}", email);
-            return CompletableFuture.completedFuture(true);
+            return true;
         } catch (MessagingException | UnsupportedEncodingException e) {
             logger.error("Error sending verification email to: {}", email, e);
-            return CompletableFuture.completedFuture(false);
+            return false;
         }
     }
 

@@ -43,6 +43,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   verifySuccess: string = '';
   resetError: string = '';
   resetSuccess: string = '';
+  email: string | null = null;
 
   isTyping = false;
   private typingSubject: Subject<void> = new Subject<void>();
@@ -52,7 +53,6 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private notificationMailing: NotificationMailing
   ) {
-    // Initialize forms
     this.forgotPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });
@@ -125,9 +125,9 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     }
 
     this.loading = true;
-    const email = this.f['email'].value;
+    this.email = this.f['email'].value;
 
-    this.notificationMailing.sendVerificationCode(email)
+    this.notificationMailing.sendVerificationCode(this.email!)
       .pipe(
         catchError(err => {
           this.error = 'An error occurred. Please try again.';
@@ -136,7 +136,6 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(response => {
-        this.success = `Verification code sent to: ${email}`;
         this.loading = false;
         this.forgotPasswordForm.reset();
         this.submitted = false;
@@ -154,18 +153,20 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     }
 
     this.verifyLoading = true;
-    const email = this.forgotPasswordForm.value.email;
+    const email = this.email;
     const code = this.v['verificationCode'].value;
 
-    this.notificationMailing.verifyCode(email, code)
+    this.notificationMailing.verifyCode(email!, code)
       .pipe(
         catchError(err => {
+          console.log(err);
           this.verifyError = err.error.message || 'Verification failed. Please try again.';
           this.verifyLoading = false;
           return throwError(err);
         })
       )
       .subscribe(response => {
+        console.log(response);
         this.verifySuccess = 'Your account has been successfully authenticated.';
         this.verifyLoading = false;
         this.verifyCodeForm.reset();

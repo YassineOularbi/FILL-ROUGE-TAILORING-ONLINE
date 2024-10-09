@@ -8,6 +8,8 @@ import com.user_management_service.mapper.UserMapper;
 import com.user_management_service.model.Customer;
 import com.user_management_service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,27 +37,43 @@ public class CustomerService {
     }
 
     public CustomerDto register(CustomerDto customerDto) {
+        Logger logger = LoggerFactory.getLogger(getClass());
+
+        logger.info("Registering customer: {}", customerDto);
+
         userService.getUserByUsername(customerDto.getUsername());
+
         var customer = (Customer) customerMapper.toEntity(customerDto);
+
+        logger.info("Customer password before adding to Keycloak: {}", customer.getPassword());
+
         String keycloakUserId;
         try {
             keycloakUserId = authenticationService.addUser(customer);
         } catch (Exception e) {
+            logger.error("Failed to create customer in Keycloak: {}", e.getMessage());
             throw new KeycloakServiceException("Failed to create customer in Keycloak", e);
         }
+
         if (keycloakUserId == null || keycloakUserId.isEmpty()) {
+            logger.error("Failed to retrieve user ID from Keycloak");
             throw new KeycloakServiceException("Failed to retrieve user ID from Keycloak");
         }
+
         customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
         customer.setId(keycloakUserId);
+
         try {
-            var savedCustomer= customerRepository.save(customer);
+            var savedCustomer = customerRepository.save(customer);
+            logger.info("Customer saved successfully with ID: {}", savedCustomer.getId());
             return (CustomerDto) customerMapper.toDto(savedCustomer);
         } catch (Exception e) {
             authenticationService.deleteUser(keycloakUserId);
+            logger.error("Failed to save customer in local repository: {}", e.getMessage());
             throw new CustomerRepositoryException("Failed to save customer in local repository", e);
         }
     }
+
 
     public CustomerDto updateCustomer(String id, CustomerDto customerDto) {
         var existingCustomer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));

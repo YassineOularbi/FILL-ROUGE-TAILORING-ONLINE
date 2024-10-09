@@ -19,6 +19,8 @@ import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.ClientRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -59,34 +61,68 @@ public class AuthenticationService {
     }
 
     public String addUser(User user) {
+        Logger logger = LoggerFactory.getLogger(getClass());
+
+        logger.info("Starting to add user: {}", user.getUsername());
+        System.out.println("Starting to add user: " + user.getUsername());
+
         Keycloak keycloak = keycloakConfig.getInstance(username, password);
         UsersResource usersResource = keycloak.realm(realm).users();
+
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setUsername(user.getUsername());
         userRepresentation.setFirstName(user.getFirstName());
         userRepresentation.setLastName(user.getLastName());
         userRepresentation.setEmail(user.getEmail());
-        userRepresentation.setEnabled(false);
+        userRepresentation.setEnabled(true);
         userRepresentation.setEmailVerified(false);
+
+        // Log password check
+        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+            logger.error("Password is null or empty for user: {}", user.getUsername());
+            System.out.println("Error: Password is null or empty for user: " + user.getUsername());
+            throw new IllegalArgumentException("Password cannot be null or empty");
+        }
+        logger.info("Creating password credentials for user: {}", user.getUsername());
+
         userRepresentation.setCredentials(Collections.singletonList(keycloakConfig.createPasswordCredentials(user.getPassword())));
-        userRepresentation.setCreatedTimestamp(System.currentTimeMillis());
+
+        logger.info("Attempting to create user in Keycloak: {}", userRepresentation);
+        System.out.println("Attempting to create user in Keycloak: " + userRepresentation);
+
         Response response = usersResource.create(userRepresentation);
         int status = response.getStatus();
+
+        logger.info("Received response status: {}", status);
+        System.out.println("Received response status: " + status);
 
         if (status == Response.Status.CREATED.getStatusCode()) {
             String locationHeader = response.getHeaderString("Location");
             String userId = locationHeader.substring(locationHeader.lastIndexOf('/') + 1);
+            logger.info("User created successfully in Keycloak with ID: {}", userId);
+            System.out.println("User created successfully in Keycloak with ID: " + userId);
+
             ClientRepresentation clientRepresentation = keycloak.realm(realm).clients().findByClientId(clientId).get(0);
             String clientId = clientRepresentation.getId();
             ClientResource clientResource = keycloak.realm(realm).clients().get(clientId);
+
             String roleName = user.getRole().name();
+            logger.info("Assigning role: {} to user ID: {}", roleName, userId);
+            System.out.println("Assigning role: " + roleName + " to user ID: " + userId);
+
             RoleRepresentation roleRepresentation = clientResource.roles().get(roleName).toRepresentation();
             RoleScopeResource roleMappingResource = keycloak.realm(realm).users().get(userId).roles().clientLevel(clientId);
             roleMappingResource.add(Collections.singletonList(roleRepresentation));
 
+            logger.info("Role {} assigned successfully to user ID: {}", roleName, userId);
+            System.out.println("Role " + roleName + " assigned successfully to user ID: " + userId);
+
             return userId;
         } else {
-            throw new KeycloakServiceException(String.format("Failed to create user in Keycloak. HTTP Status: %s", status));
+            String errorMessage = response.readEntity(String.class);
+            logger.error("Failed to create user in Keycloak. HTTP Status: {}. Error: {}", status, errorMessage);
+            System.out.println("Failed to create user in Keycloak. HTTP Status: " + status + ". Error: " + errorMessage);
+            throw new KeycloakServiceException(String.format("Failed to create user in Keycloak. HTTP Status: %s. Error: %s", status, errorMessage));
         }
     }
 
