@@ -9,7 +9,7 @@ import { ToastModule } from 'primeng/toast';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { KeycloakService } from '../../../../../core/keycloak/keycloak.service';
 
 @Component({
@@ -24,7 +24,8 @@ import { KeycloakService } from '../../../../../core/keycloak/keycloak.service';
     ToastModule,
     PasswordModule,
     ButtonModule,
-    InputSwitchModule
+    InputSwitchModule,
+    RouterLink
   ],
   providers: [MessageService],
   templateUrl: './signin.component.html',
@@ -124,6 +125,7 @@ export class SigninComponent implements OnInit {
 
   onLoginWithProvider(provider: string): void {
     this.keycloakService.onLoginWithProvider(provider)?.then(() => {
+      this.router.navigate(['/auth/signup']);
       if (this.keycloakService.isLoggedIn()) {
         this.router.navigate(['/auth/signup']);
       }

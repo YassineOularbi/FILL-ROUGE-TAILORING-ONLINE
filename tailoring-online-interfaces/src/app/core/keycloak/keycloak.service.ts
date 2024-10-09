@@ -165,6 +165,7 @@ export class KeycloakService {
   async onLoginWithProvider(provider: string): Promise<void> {
     await this.init();
     const loginOptions: KeycloakLoginOptions = {
+      redirectUri: `${window.location.origin}/auth/signin?returnUrl=${encodeURIComponent(window.location.href)}`,
       idpHint: provider,
     };
     return this.login(loginOptions);
