@@ -1,4 +1,5 @@
 <p-toast class="bottom-center"></p-toast>
+<app-sending *ngIf="isLoading"></app-sending>
 <div class="ligne">
     <div class="circle rounded-circle d-flex justify-content-center align-items-center">
         <p>Contact Us</p>
@@ -58,4 +59,3 @@
         </form>
     </div>
 </section>
-<app-loading *ngIf="isLoading"></app-loading> 

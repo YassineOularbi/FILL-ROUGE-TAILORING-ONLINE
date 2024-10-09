@@ -17,7 +17,7 @@ export class KeycloakService {
   constructor(private http: HttpClient, private keycloakService: KeycloakAuthService) {
   }
 
-  init(): Promise<boolean> {
+  init(): Promise<boolean | void> {
     this.keycloak = new Keycloak(environment.keycloakConfig);
     const initOptions: KeycloakInitOptions = {
       checkLoginIframe: false,
@@ -32,7 +32,9 @@ export class KeycloakService {
       initOptions.refreshToken = parsedResponse.refresh_token;
       initOptions.timeSkew
     }
-    return this.keycloak.init(initOptions);
+    return this.keycloak.init(initOptions).catch(() => {
+      window.location.href = '/internal-server-error';
+  });
   }
 
   signin(username: string, password: string): Observable<any> {

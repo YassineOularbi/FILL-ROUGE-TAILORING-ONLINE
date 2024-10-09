@@ -7,6 +7,7 @@ import { InputOtpModule } from 'primeng/inputotp';
 import { catchError, debounceTime } from 'rxjs/operators';
 import { throwError, Subject, Subscription } from 'rxjs';
 import { NotificationMailing } from '../../../../../core/services/notification-mailing.service';
+import { SendingComponent } from "../../../../../shared/animations/sending/sending.component";
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,8 +17,9 @@ import { NotificationMailing } from '../../../../../core/services/notification-m
     CommonModule,
     InputTextModule,
     ButtonModule,
-    InputOtpModule
-  ],
+    InputOtpModule,
+    SendingComponent
+],
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
@@ -31,6 +33,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   submitted = false;
   verifySubmitted = false;
   resetSubmitted = false;
+  isSending= false;
 
   loading = false;
   verifyLoading = false;
@@ -116,6 +119,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   }
 
   onSubmitForgotPassword(): void {
+    this.isSending = true
     this.submitted = true;
     this.error = '';
     this.success = '';
@@ -130,12 +134,14 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     this.notificationMailing.sendVerificationCode(this.email!)
       .pipe(
         catchError(err => {
+          this.isSending = false
           this.error = 'An error occurred. Please try again.';
           this.loading = false;
           return throwError(err);
         })
       )
       .subscribe(response => {
+        this.isSending = false
         this.loading = false;
         this.forgotPasswordForm.reset();
         this.submitted = false;
@@ -144,6 +150,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   }
 
   onSubmitVerifyCode(): void {
+    this.isSending = true
     this.verifySubmitted = true;
     this.verifyError = '';
     this.verifySuccess = '';
@@ -159,14 +166,16 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     this.notificationMailing.verifyCode(email!, code)
       .pipe(
         catchError(err => {
+          this.isSending = false
           console.log(err);
-          this.verifyError = err.error.message || 'Verification failed. Please try again.';
+          this.verifyError = 'Verification failed. Please try again.';
           this.verifyLoading = false;
           return throwError(err);
         })
       )
       .subscribe(response => {
         console.log(response);
+        this.isSending = false
         this.verifySuccess = 'Your account has been successfully authenticated.';
         this.verifyLoading = false;
         this.verifyCodeForm.reset();
@@ -197,32 +206,32 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   }
 
   onSubmitResetPassword(): void {
-    // this.resetSubmitted = true;
-    // this.resetError = '';
-    // this.resetSuccess = '';
+    this.resetSubmitted = true;
+    this.resetError = '';
+    this.resetSuccess = '';
 
-    // if (this.resetPasswordForm.invalid) {
-    //   return;
-    // }
+    if (this.resetPasswordForm.invalid) {
+      return;
+    }
 
-    // this.resetLoading = true;
-    // const newPassword = this.r['newPassword'].value;
+    this.resetLoading = true;
+    const newPassword = this.r['newPassword'].value;
 
-    // this.notificationMailing.resetPassword(newPassword)
-    //   .pipe(
-    //     catchError(err => {
-    //       this.resetError = err.error.message || 'Failed to reset password. Please try again.';
-    //       this.resetLoading = false;
-    //       return throwError(err);
-    //     })
-    //   )
-    //   .subscribe(response => {
-    //     this.resetSuccess = 'Your password has been successfully reset.';
-    //     this.resetLoading = false;
-    //     this.resetPasswordForm.reset();
-    //     this.resetSubmitted = false;
-    //     this.step = 1;
-    //   });
+    this.notificationMailing.sendOTPVerification(newPassword)
+      .pipe(
+        catchError(err => {
+          this.resetError = 'Failed to reset password. Please try again.';
+          this.resetLoading = false;
+          return throwError(err);
+        })
+      )
+      .subscribe(response => {
+        this.resetSuccess = 'Your password has been successfully reset.';
+        this.resetLoading = false;
+        this.resetPasswordForm.reset();
+        this.resetSubmitted = false;
+        this.step = 1;
+      });
   }
 
   onInput(): void {

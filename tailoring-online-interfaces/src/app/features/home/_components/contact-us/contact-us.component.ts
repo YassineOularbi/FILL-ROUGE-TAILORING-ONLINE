@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoadingComponent } from "../../../../shared/animations/loading/loading.component";
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { SendingComponent } from "../../../../shared/animations/sending/sending.component";
 
 @Component({
   selector: 'app-contact-us',
@@ -22,8 +23,9 @@ import { ToastModule } from 'primeng/toast';
     MatButtonModule,
     MatIconModule,
     LoadingComponent,
-    ToastModule
-  ],
+    ToastModule,
+    SendingComponent
+],
   providers: [HttpClient, MessageService],
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.scss'],
