@@ -38,6 +38,7 @@ public class EmailService {
     @Async
     public CompletableFuture<Boolean> sendVerificationEmail(String email) {
         kafkaProducerService.sendUserVerificationRequest(email);
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -45,48 +46,67 @@ public class EmailService {
             logger.error("Thread interrupted while waiting for user verification response", e);
             return CompletableFuture.completedFuture(false);
         }
+
         if (!kafkaConsumerService.isUserExists()) {
             logger.warn("No user found with the email: {}", email);
             return CompletableFuture.completedFuture(false);
         }
-        String subject = "Email Verification Code";
+
         String code = verificationCodeGenerator.generateVerificationCode();
         String body = String.format(
-                "<div style=\"font-family:Arial,sans-serif;line-height:1.5;padding:10px;\">" +
-                        "<h2>Email Verification</h2>" +
-                        "<p>Your verification code is: <strong>%s</strong></p>" +
-                        "<p>This code is valid for 10 minutes.</p>" +
-                        "</div>", code
+                "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">" +
+                        "<head>" +
+                        "<meta charset=\"UTF-8\">" +
+                        "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">" +
+                        "<style type=\"text/css\">" +
+                        "body { font-family: Arial, sans-serif; background-color: #FAFAFA; margin: 0; padding: 0; }" +
+                        ".container { width: 600px; margin: 0 auto; background-color: #FFFFFF; padding: 20px; border-radius: 5px; border: 1px solid black; margin: 10px; }" +
+                        ".header { text-align: center; padding: 10px; }" +
+                        ".header img { width: 140px; }" +
+                        ".content { padding: 15px; }" +
+                        ".footer { text-align: center; font-size: 12px; color: #CCCCCC; }" +
+                        ".highlight { color: #5C68E2; font-weight: bold; }" +
+                        ".greeting { font-size: 16px; }" +
+                        ".message { margin: 15px 0; font-size: 14px; line-height: 1.5; }" +
+                        "</style>" +
+                        "</head>" +
+                        "<body>" +
+                        "<div class=\"container\">" +
+                        "<div class=\"header\">" +
+                        "<img src=\"https://i.ibb.co/mBfJvLc/logo.png\" alt=\"Logo\">" +
+                        "<h1>Email Verification</h1>" +
+                        "</div>" +
+                        "<div class=\"content\">" +
+                        "<p class=\"greeting\">Bonjour,</p>" +
+                        "<p class=\"message\">Votre code de vérification est : <span class=\"highlight\">%s</span></p>" +
+                        "<p class=\"message\">Ce code est valide pour 10 minutes.</p>" +
+                        "<p class=\"message\">Si vous n'avez pas demandé cette vérification, veuillez ignorer cet e-mail.</p>" +
+                        "</div>" +
+                        "<div class=\"footer\">" +
+                        "<p>Sent on: %s</p>" +
+                        "<p>&copy; 2024 Tailoring Online. All Rights Reserved.</p>" +
+                        "</div>" +
+                        "</div>" +
+                        "</body>" +
+                        "</html>",
+                code,
+                LocalDate.now()
         );
         try {
-            MimeMessage message = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message);
-
-            helper.setFrom("Tailoring-online@outlook.com", "Tailoring Online");
-            helper.setReplyTo("Tailoring-online@outlook.com", "Tailoring Online");
-            helper.setTo(email);
-            helper.setSubject(subject);
-            helper.setText(body, true);
-
-            LocalDate currentDate = LocalDate.now();
-            LocalDateTime localDateTime = currentDate.atStartOfDay();
-            Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-            message.setSentDate(date);
-
-            javaMailSender.send(message);
-            logger.info("Verification email sent to: {}", email);
+            logger.info("Sending verification email to: {}", email);
+            sendEmail(email, "Email Verification Code", body);
             emailVerificationRepository.save(EmailVerification.builder()
                     .email(email)
                     .verificationCode(code)
                     .build());
-            logger.info("Verification details saved for: {}", email);
-
+            logger.info("Verification email sent and saved for: {}", email);
             return CompletableFuture.completedFuture(true);
         } catch (MessagingException | UnsupportedEncodingException e) {
             logger.error("Error sending verification email to: {}", email, e);
             return CompletableFuture.completedFuture(false);
         }
     }
+
 
 
     @Async
