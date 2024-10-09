@@ -4,6 +4,7 @@ import com.notification_mailing_service.config.VerificationCodeGenerator;
 import com.notification_mailing_service.exception.EmailNotFoundException;
 import com.notification_mailing_service.model.EmailVerification;
 import com.notification_mailing_service.repository.EmailVerificationRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,7 @@ public class EmailService {
     private final KafkaConsumerService kafkaConsumerService;
 
     @Async
+    @CircuitBreaker(name = "default", fallbackMethod = "fallbackSendVerificationEmail")
     public CompletableFuture<Boolean> sendVerificationEmail(String email) {
         kafkaProducerService.sendUserVerificationRequest(email);
 
@@ -107,7 +109,10 @@ public class EmailService {
         }
     }
 
-
+    public CompletableFuture<Boolean> fallbackSendVerificationEmail(String email, Throwable throwable) {
+        logger.error("Fallback: Unable to send verification email to: {}", email, throwable);
+        return CompletableFuture.completedFuture(false);
+    }
 
     @Async
     public CompletableFuture<Boolean> sendOTPByEmail(String email) {
