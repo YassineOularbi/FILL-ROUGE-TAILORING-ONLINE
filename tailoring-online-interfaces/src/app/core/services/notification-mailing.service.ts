@@ -21,4 +21,16 @@ export class NotificationMailing {
 
     return this.http.get<string>(`${this.apiUrl}api/email/contact-us`, { params, responseType: 'text' as 'json' });
   }
+
+  sendVerificationCode(email: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}api/email/send-verification-code/${encodeURIComponent(email)}`);
+  }
+
+  sendOTPVerification(email: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}api/email/send-otp-verification/${encodeURIComponent(email)}`);
+  }
+
+  verifyCode(email: string, code: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}api/email/verify-code/${encodeURIComponent(email)}&${encodeURIComponent(code)}`);
+  }
 }

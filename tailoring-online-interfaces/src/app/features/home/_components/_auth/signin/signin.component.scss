@@ -204,6 +204,7 @@
                             font-weight: 600;
                             color: var(--black);
                             text-decoration: none;
+                            cursor: pointer;
                         }
 
                         .forgot-link:hover {
@@ -239,6 +240,7 @@
                         border-radius: 10px;
                         border: 1px solid var(--black);
                         transition: border 0.5s ease-out;
+                        background-color: var(--white);
                         cursor: pointer;
 
                         &:hover {

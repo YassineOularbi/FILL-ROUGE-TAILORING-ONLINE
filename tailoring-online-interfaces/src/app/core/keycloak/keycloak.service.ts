@@ -1,53 +1,38 @@
 import { Injectable } from '@angular/core';
-import { KeycloakService as KeycloakAngularService, KeycloakOptions } from 'keycloak-angular';
-import { KeycloakProfile, KeycloakLoginOptions, KeycloakLogoutOptions, KeycloakConfig } from 'keycloak-js';
+import Keycloak, { KeycloakInitOptions, KeycloakProfile, KeycloakLoginOptions, KeycloakLogoutOptions } from 'keycloak-js';
 import { environment } from '../../../environments/environment';
-import { Observable, from, of } from 'rxjs';
-import { map, catchError, retry } from 'rxjs/operators';
+import { catchError, from, Observable, of } from 'rxjs';
+import { map, retry, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { KeycloakService as KeycloakAuthService } from 'keycloak-angular';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class KeycloakService {
-  constructor(
-    private keycloakAngular: KeycloakAngularService, private http: HttpClient) { }
+  keycloak?: Keycloak;
+
+  constructor(private http: HttpClient, private keycloakService: KeycloakAuthService) {
+  }
 
   init(): Promise<boolean> {
-    const response = localStorage.getItem('keycloak');
-
-    if (response) {
-            const parsedResponse = JSON.parse(response);
-
-      if (this.isAuthenticated()) {
-        const initOptions: KeycloakOptions = {
-          config: environment.keycloakConfig as KeycloakConfig,
-          initOptions: {
-            checkLoginIframe: false,
-            onLoad: 'check-sso',
-            silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
-            token: parsedResponse.access_token,
-            refreshToken: parsedResponse.refresh_token,
-          },
-        };
-        return this.keycloakAngular.init(initOptions);
-          } else {
-            localStorage.removeItem('keycloak');
-      }
-    }
-
-    const initOptions: KeycloakOptions = {
-      config: environment.keycloakConfig as KeycloakConfig,
-      initOptions: {
-        checkLoginIframe: false,
-        onLoad: 'check-sso',
-        silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
-        token: undefined,
-        refreshToken: undefined,
-      },
+    this.keycloak = new Keycloak(environment.keycloakConfig);
+    const initOptions: KeycloakInitOptions = {
+      checkLoginIframe: false,
+      onLoad: 'check-sso',
+      silentCheckSsoRedirectUri: `${location.origin}/silent-check-sso.html`,
     };
-
-    return this.keycloakAngular.init(initOptions);
+    
+    const response = localStorage.getItem('keycloak');
+    if (response) {
+      const parsedResponse = JSON.parse(response);
+      initOptions.token = parsedResponse.access_token;
+      initOptions.refreshToken = parsedResponse.refresh_token;
+      initOptions.timeSkew
+    }
+    return this.keycloak.init(initOptions);
   }
 
   signin(username: string, password: string): Observable<any> {
@@ -63,72 +48,84 @@ export class KeycloakService {
     });
   }
 
-  login(options?: KeycloakLoginOptions): Promise<void> {
-    return this.keycloakAngular.login(options);
+  refreshToken(refresh_token: string): Observable<any> {
+    const body = new HttpParams()
+      .set('refresh_token', refresh_token)
+      .set('grant_type', 'refresh_token')
+      .set('client_id', 'tailoring-online-id');
+
+    return this.http.post('http://localhost:8080/realms/tailoring-online/protocol/openid-connect/token', body.toString(), {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+    });
   }
 
-  logout(options?: KeycloakLogoutOptions): Promise<void> {
+  login(options?: KeycloakLoginOptions): Promise<void> | undefined {
+    return this.keycloak?.login(options);
+  }
+
+  logout(options?: KeycloakLogoutOptions): Promise<void> | undefined {
     localStorage.removeItem('keycloak');
-    return this.keycloakAngular.logout(options?.redirectUri);
+    return this.keycloak?.logout(options);
   }
 
-  accountManagement(): Promise<void> {
-    return this.keycloakAngular.getKeycloakInstance().accountManagement();
+  accountManagement(): Promise<void> | undefined {
+    return this.keycloak?.accountManagement();
   }
 
-  loadUserProfile(): Promise<KeycloakProfile> {
-    return this.keycloakAngular.loadUserProfile();
+  loadUserProfile(): Promise<KeycloakProfile> | undefined {
+    return this.keycloak?.loadUserProfile();
   }
 
-  isAuthenticated(): boolean {
-    const isLoggedIn = this.keycloakAngular.isLoggedIn();
+  isLoggedIn(): boolean | undefined {
+    console.log(this.keycloak?.authenticated);
+    return this.keycloak?.authenticated;
+  }
 
-    if (!isLoggedIn) {
-      localStorage.removeItem('keycloak');
-      return false;
+  isAuthenticated(): Observable<boolean> {
+    if (!this.keycloak?.authenticated) {
+      return of(false);
     }
-
-    if (this.isTokenExpired()) {
-      map(updated => {
-        if (!updated) {
-          localStorage.removeItem('keycloak');
-          return false;
+    return this.isTokenExpired().pipe(
+      tap(expired => {
+        if (expired) {
+          this.onTokenExpired();
         }
-        return true;
-      })
-    }
-
-    return this.keycloakAngular.isLoggedIn();
-  }
-
-  isTokenExpired(): boolean {
-    return this.keycloakAngular.isTokenExpired(5);
-  }
-
-  onTokenExpired(): Observable<boolean> {
-    return this.updateToken(30).pipe(
-      map(updated => {
-        if (updated) {
-          localStorage.removeItem('keycloak');
-          const tokenResponse = {
-            access_token: this.keycloakAngular.getToken(),
-            expires_in: this.keycloakAngular.getKeycloakInstance()?.tokenParsed?.exp,
-            refresh_expires_in: this.keycloakAngular.getKeycloakInstance()?.refreshTokenParsed?.exp,
-            refresh_token: this.keycloakAngular.getKeycloakInstance()?.refreshToken,
-            scope: "profile email",
-            session_state: this.keycloakAngular.getKeycloakInstance()?.tokenParsed?.session_state,
-            token_type: "Bearer",
-          };
-          localStorage.setItem('keycloak', JSON.stringify(tokenResponse));
-        }
-        return updated;
       }),
-      catchError(() => of(false))
+      map(expired => !expired && !!this.keycloak?.authenticated)
     );
   }
 
+
+  isTokenExpired(): Observable<boolean | undefined> {
+    return of(this.keycloak?.isTokenExpired(10));
+  }
+
+  onTokenExpired(): void {
+    this.updateToken(10).subscribe({
+      next: (updated) => {
+        if (updated) {
+          localStorage.removeItem('keycloak');
+          const tokenResponse = {
+            access_token: this.keycloak?.token,
+            expires_in: this.keycloak?.tokenParsed?.exp,
+            refresh_expires_in: this.keycloak?.refreshTokenParsed?.exp,
+            refresh_token: this.keycloak?.refreshToken,
+            scope: "profile email",
+            session_state: this.keycloak?.tokenParsed?.session_state,
+            token_type: "Bearer",
+          };
+          localStorage.setItem('keycloak', JSON.stringify(tokenResponse))
+        }
+      }
+    });
+  }
+
   updateToken(minValidity: number = 5): Observable<boolean> {
-    return from(this.keycloakAngular.updateToken(minValidity)).pipe(
+    if (!this.keycloak) {
+      return of(false);
+    }
+    return from(this.keycloak.updateToken(minValidity)).pipe(
       retry({
         count: 3,
         delay: 1000
@@ -137,31 +134,41 @@ export class KeycloakService {
     );
   }
 
-  getToken(): string | undefined {
-    return this.keycloakAngular.getKeycloakInstance().token;
+  getToken(): string | null | undefined {
+    return this.keycloak?.authenticated ? this.keycloak?.token : null;
   }
 
-  getRefreshToken(): string | undefined {
-    return this.keycloakAngular.getKeycloakInstance().refreshToken;
+  getRefreshToken(): string | null | undefined {
+    return this.keycloak?.authenticated ? this.keycloak?.refreshToken : null;
   }
 
   getId(): string | undefined {
-    return this.keycloakAngular.getKeycloakInstance().subject;
+    return this.keycloak?.tokenParsed?.sub;
   }
 
-  getTimeSkew(): Observable<number | undefined> {
-    return of(this.keycloakAngular.getKeycloakInstance().timeSkew);
+  getTimeSkew() {
+    return this.keycloak?.timeSkew;
   }
 
-  hasRealmRole(role: string): boolean {
-    return this.keycloakAngular.isUserInRole(role);
+  hasRealmRole(role: string): boolean | undefined {
+    return this.keycloak?.hasRealmRole(role);
   }
 
-  hasResourceRole(role: string, resource?: string): boolean {
-    return this.keycloakAngular.isUserInRole(role, resource);
+  hasResourceRole(role: string, resource?: string): boolean | undefined {
+    return this.keycloak?.hasResourceRole(role, resource);
   }
 
-  getKeycloakInstance(): any {
-    return this.keycloakAngular.getKeycloakInstance();
+  getKeycloakInstance(): Keycloak | undefined {
+    return this.keycloak;
   }
+
+  async onLoginWithProvider(provider: string): Promise<void> {
+    await this.init();
+    const loginOptions: KeycloakLoginOptions = {
+      redirectUri: `${window.location.origin}/auth/signin?returnUrl=${encodeURIComponent(window.location.href)}`,
+      idpHint: provider,
+    };
+    return this.login(loginOptions);
+  }
+
 }

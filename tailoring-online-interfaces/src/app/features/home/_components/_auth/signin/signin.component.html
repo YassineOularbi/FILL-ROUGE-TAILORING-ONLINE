@@ -1,4 +1,4 @@
-<p-toast position="bottom-right"></p-toast>
+<p-toast position="bottom-right"></p-toast> 
 <section class="signin w-100 d-flex flex-row justify-content-between align-items-center align-content-center">
     <div class="left w-50 d-flex justify-content-center align-items-center">
         <img class="w-75" src="assets/signin-bg.png" alt="sign bg">
@@ -7,29 +7,31 @@
     <div class="right w-50 py-3 px-5 mx-5 d-flex flex-column justify-content-around">
         <div class="header d-flex flex-column w-100">
             <h1>Sign In to continue -></h1>
-            <p>Enter your username and password to sign in</p>
+            <p *ngIf="!isRememberedAccount">Enter your credentials to sign in</p>
+            <p *ngIf="isRememberedAccount">You are logged in as <strong>{{ f['username'].value }}</strong></p>
         </div>
 
         <div class="signin-container w-100">
             <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
                 <div class="w-100 mt-4 form-group mb-2">
-                    <label [ngClass]="{'is-invalid': submitted && f['username'].invalid}" class="w-50 py-1"
-                        for="username">Username</label>
+                    <label *ngIf="!isRememberedAccount"
+                        [ngClass]="{'is-invalid': submitted && f['username'].invalid}" class="w-50 py-1"
+                        for="username">Username / Email</label>
                     <div class="input-icon-wrapper">
                         <i [ngClass]="{'is-invalid': submitted && f['username'].invalid}"
                             class="pi pi-user icon-left"></i>
                         <input id="username" type="text" formControlName="username"
-                            [attr.placeholder]="(submitted && f['username'].invalid) ? 'Username is required' : 'Enter your username here please ...'"
+                            [attr.placeholder]="(submitted && f['username'].invalid) ? 'Username or email is required' : 'Enter your username or email here please ...'"
                             [ngClass]="{'is-invalid': submitted && f['username'].invalid}" />
                     </div>
                     <div *ngIf="submitted && f['username'].errors" class="text-danger">
-                        <small *ngIf="f['username'].errors['required']">Username is required.</small>
+                        <small *ngIf="f['username'].errors['required']">Username or email is required.</small>
                         <small *ngIf="f['username'].errors['minlength']">Username must be at least 4 characters
                             long.</small>
                     </div>
                 </div>
 
-                <div class="w-100 mb-4 form-group">
+                <div class="w-100 mb-4 form-group" *ngIf="!isRememberedAccount">
                     <label [ngClass]="{'is-invalid': submitted && f['password'].invalid}" class="w-50 p-1"
                         for="password">Password</label>
                     <div class="input-icon-wrapper">
@@ -59,13 +61,18 @@
                     </div>
 
                     <div class="forgot-password w-50 text-end">
-                        <a href="#" class="forgot-link">Forgot Password?</a>
+                        <a class="forgot-link" routerLink="/auth/forgot-password">Forgot Password?</a>
                     </div>
                 </div>
 
+                <div class="d-flex flex-column justify-content-center my-3 w-100">
+                    <button pButton type="submit" label="Sign In" class="w-100 m-1"
+                        [ngStyle]="{'background-color': isRememberedAccount ? 'black' : '', 'color': isRememberedAccount ? 'white' : ''}">
+                    </button>
 
-                <div class="d-flex justify-content-center my-3 w-100">
-                    <button pButton type="submit" label="Sign In" class="w-100"></button>
+                    <button *ngIf="isRememberedAccount" pButton type="button"
+                        label="Change account" class="w-100 m-1" (click)="changeAccount()">
+                    </button>
                 </div>
             </form>
 
@@ -74,19 +81,16 @@
                     <p class="text-center">Or</p>
                 </div>
                 <div
-                    class="oauth-options w-100 my-4 d-flex flex-row justify-content-center align-content-center align-items-center">
-                    <button class="option d-flex justify-content-center align-items-center"
-                        >
+                    class="oauth-options w-100 my-4 d-flex flex-row justify-content-center align-content-center align-items-center" >
+                    <button class="option d-flex justify-content-center align-items-center" (click)="onLoginWithProvider('facebook')">
                         <img class="w-100" src="assets/facebook-logo.webp" alt="Facebook Login">
                     </button>
-                    <button class="option d-flex justify-content-center align-items-center"
-                        >
+                    <button class="option d-flex justify-content-center align-items-center" (click)="onLoginWithProvider('google')">
                         <img class="w-100" src="assets/google-logo.webp" alt="Google Login">
                     </button>
-                    <button class="option d-flex justify-content-center align-items-center"
-                        >
+                    <button class="option d-flex justify-content-center align-items-center" (click)="onLoginWithProvider('github')">
                         <img class="w-100" src="assets/github-logo.png" alt="GitHub Login">
-                </button>
+                    </button>
                 </div>
             </div>
             <div class="register d-flex flex-column justify-content-center align-items-center w-100">

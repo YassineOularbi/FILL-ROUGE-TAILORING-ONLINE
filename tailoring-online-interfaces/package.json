@@ -23,6 +23,7 @@
     "@angular/router": "^18.2.0",
     "@keycloakify/angular": "^0.0.1-rc.0",
     "bootstrap": "^5.3.3",
+    "jwt-decode": "^4.0.0",
     "keycloak-angular": "^16.0.1",
     "keycloak-js": "^26.0.0",
     "keycloakify": "^11.3.0",

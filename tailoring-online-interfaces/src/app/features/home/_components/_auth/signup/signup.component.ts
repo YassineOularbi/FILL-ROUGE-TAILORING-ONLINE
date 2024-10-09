@@ -15,6 +15,10 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.keycloakService.getToken());
     console.log(this.keycloakService.getRefreshToken());
+    console.log(this.keycloakService.isTokenExpired());
+    console.log(this.keycloakService.getTimeSkew());
+    console.log(this.keycloakService.getKeycloakInstance());
+    console.log(this.keycloakService.isAuthenticated());
   }
 
 }
