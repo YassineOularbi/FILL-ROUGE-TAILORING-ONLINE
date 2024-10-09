@@ -12,7 +12,7 @@ public class VerificationCodeGenerator {
     private static final Logger logger = LoggerFactory.getLogger(VerificationCodeGenerator.class);
 
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    private static final int DEFAULT_CODE_LENGTH = 4;
+    private static final int DEFAULT_CODE_LENGTH = 6;
     private static final SecureRandom random = new SecureRandom();
 
     public String generateVerificationCode() {

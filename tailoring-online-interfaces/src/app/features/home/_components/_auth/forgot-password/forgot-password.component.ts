@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { InputOtpModule } from 'primeng/inputotp';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { catchError, debounceTime } from 'rxjs/operators';
 import { throwError, Subject, Subscription } from 'rxjs';
+import { NotificationMailing } from '../../../../../core/services/notification-mailing.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,8 +16,7 @@ import { throwError, Subject, Subscription } from 'rxjs';
     CommonModule,
     InputTextModule,
     ButtonModule,
-    InputOtpModule,
-    HttpClientModule
+    InputOtpModule
   ],
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
@@ -49,7 +48,10 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   private typingSubject: Subject<void> = new Subject<void>();
   private typingSubscription!: Subscription;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private notificationMailing: NotificationMailing
+  ) {
     this.forgotPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });
@@ -61,14 +63,12 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     this.resetPasswordForm = this.formBuilder.group({
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
-    }, { validators: this.passwordsMatch });
+    }, { validators: this.passwordsMatchValidator });
   }
 
   ngOnInit(): void {
     this.typingSubscription = this.typingSubject
-      .pipe(
-        debounceTime(500)
-      )
+      .pipe(debounceTime(500))
       .subscribe(() => {
         this.isTyping = false;
       });
@@ -78,38 +78,28 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     this.typingSubscription.unsubscribe();
   }
 
-  get f(): { email: AbstractControl } {
-    return this.forgotPasswordForm.controls as { email: AbstractControl };
-  }
+  passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
+    if (control instanceof FormGroup) {
+      const newPassword = control.get('newPassword')?.value;
+      const confirmPassword = control.get('confirmPassword')?.value;
 
-  get v(): { verificationCode: AbstractControl } {
-    return this.verifyCodeForm.controls as { verificationCode: AbstractControl };
-  }
-
-  get r(): { newPassword: AbstractControl; confirmPassword: AbstractControl } {
-    return this.resetPasswordForm.controls as { newPassword: AbstractControl; confirmPassword: AbstractControl };
-  }
-
-  passwordsMatch: ValidatorFn = (group: FormGroup): ValidationErrors | null => {
-    const password = group.get('newPassword')?.value;
-    const confirmPassword = group.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { passwordsMismatch: true };
-  };
-
-  onInput(): void {
-    if (this.f.email.value.trim() !== '') {
-      this.isTyping = true;
-      this.typingSubject.next();
-    } else {
-      this.isTyping = false;
+      if (newPassword !== confirmPassword) {
+        control.get('confirmPassword')?.setErrors({ mismatch: true });
+        return { mismatch: true };
+      } else {
+        const errors = control.get('confirmPassword')?.errors;
+        if (errors) {
+          delete errors['mismatch'];
+          if (Object.keys(errors).length === 0) {
+            control.get('confirmPassword')?.setErrors(null);
+          } else {
+            control.get('confirmPassword')?.setErrors(errors);
+          }
+        }
+        return null;
+      }
     }
-
-    if (this.error) {
-      this.error = '';
-    }
-    if (this.success) {
-      this.success = '';
-    }
+    return null;
   }
 
   onSubmitForgotPassword(): void {
@@ -122,10 +112,9 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     }
 
     this.loading = true;
+    const email = this.forgotPasswordForm.value.email;
 
-    const email = this.f.email.value;
-
-    this.http.post<any>('https://your-api.com/api/reset-password', { email })
+    this.notificationMailing.sendVerificationCode(email)
       .pipe(
         catchError(err => {
           this.error = err.error.message || 'An error occurred. Please try again.';
@@ -134,7 +123,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(response => {
-        this.success = 'An email with reset instructions has been sent.';
+        this.success = `Verification code sent to: ${email}`;
         this.loading = false;
         this.forgotPasswordForm.reset();
         this.submitted = false;
@@ -152,10 +141,10 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     }
 
     this.verifyLoading = true;
-
+    const email = this.forgotPasswordForm.value.email;
     const code = this.verifyCodeForm.value.verificationCode;
 
-    this.http.post<any>('https://your-api.com/api/verify-code', { code })
+    this.notificationMailing.verifyCode(email, code)
       .pipe(
         catchError(err => {
           this.verifyError = err.error.message || 'Verification failed. Please try again.';
@@ -179,7 +168,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 
     const email = this.forgotPasswordForm.value.email;
 
-    this.http.post<any>('https://your-api.com/api/resend-code', { email })
+    this.notificationMailing.sendOTPVerification(email)
       .pipe(
         catchError(err => {
           this.verifyError = err.error.message || 'Failed to resend code. Please try again.';
@@ -203,10 +192,9 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     }
 
     this.resetLoading = true;
-
     const newPassword = this.resetPasswordForm.value.newPassword;
 
-    this.http.post<any>('https://your-api.com/api/reset-password-final', { newPassword })
+    this.notificationMailing.resetPassword(newPassword) 
       .pipe(
         catchError(err => {
           this.resetError = err.error.message || 'Failed to reset password. Please try again.';
