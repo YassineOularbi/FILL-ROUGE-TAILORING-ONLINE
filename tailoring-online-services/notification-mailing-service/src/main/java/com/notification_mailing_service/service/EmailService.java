@@ -4,6 +4,7 @@ import com.notification_mailing_service.config.VerificationCodeGenerator;
 import com.notification_mailing_service.exception.EmailNotFoundException;
 import com.notification_mailing_service.model.EmailVerification;
 import com.notification_mailing_service.repository.EmailVerificationRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -32,23 +33,85 @@ public class EmailService {
     private final JavaMailSender javaMailSender;
     private final VerificationCodeGenerator verificationCodeGenerator;
     private final EmailVerificationRepository emailVerificationRepository;
+    private final KafkaProducerService kafkaProducerService;
+    private final KafkaConsumerService kafkaConsumerService;
 
     @Async
+    @CircuitBreaker(name = "default", fallbackMethod = "fallbackSendVerificationEmail")
     public CompletableFuture<Boolean> sendVerificationEmail(String email) {
-        String subject = "Email Verification Code";
-        String code = verificationCodeGenerator.generateVerificationCode();
-        String body = getVerificationEmailTemplate(code);
+        kafkaProducerService.sendUserVerificationRequest(email);
 
         try {
-            logger.info("Envoi de l'e-mail de vérification à : {}", email);
-            sendEmail(email, subject, body);
-            emailVerificationRepository.save(EmailVerification.builder().email(email).verificationCode(code).build());
-            logger.info("E-mail de vérification envoyé et sauvegardé pour : {}", email);
-            return CompletableFuture.completedFuture(true);
-        } catch (MessagingException | UnsupportedEncodingException e) {
-            logger.error("Erreur lors de l'envoi de l'e-mail de vérification à : {}", email, e);
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            logger.error("Thread interrupted while waiting for user verification response", e);
             return CompletableFuture.completedFuture(false);
         }
+
+        if (!kafkaConsumerService.isUserExists()) {
+            logger.warn("No user found with the email: {}", email);
+            return CompletableFuture.completedFuture(false);
+        }
+
+        String code = verificationCodeGenerator.generateVerificationCode();
+        String body = String.format(
+                "<html dir=\"ltr\" xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">" +
+                        "<head>" +
+                        "<meta charset=\"UTF-8\">" +
+                        "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">" +
+                        "<style type=\"text/css\">" +
+                        "body { font-family: Arial, sans-serif; background-color: #FAFAFA; margin: 0; padding: 0; }" +
+                        ".container { width: 600px; margin: 0 auto; background-color: #FFFFFF; padding: 20px; border-radius: 5px; border: 1px solid black; margin: 10px; }" +
+                        ".header { text-align: center; padding: 10px; }" +
+                        ".header img { width: 140px; }" +
+                        ".content { padding: 15px; }" +
+                        ".footer { text-align: center; font-size: 12px; color: #CCCCCC; }" +
+                        ".highlight { color: #5C68E2; font-weight: bold; }" +
+                        ".greeting { font-size: 16px; }" +
+                        ".message { margin: 15px 0; font-size: 14px; line-height: 1.5; }" +
+                        "</style>" +
+                        "</head>" +
+                        "<body>" +
+                        "<div class=\"container\">" +
+                        "<div class=\"header\">" +
+                        "<img src=\"https://i.ibb.co/mBfJvLc/logo.png\" alt=\"Logo\">" +
+                        "<h1>Email Verification</h1>" +
+                        "</div>" +
+                        "<div class=\"content\">" +
+                        "<p class=\"greeting\">Bonjour,</p>" +
+                        "<p class=\"message\">Votre code de vérification est : <span class=\"highlight\">%s</span></p>" +
+                        "<p class=\"message\">Ce code est valide pour 10 minutes.</p>" +
+                        "<p class=\"message\">Si vous n'avez pas demandé cette vérification, veuillez ignorer cet e-mail.</p>" +
+                        "</div>" +
+                        "<div class=\"footer\">" +
+                        "<p>Sent on: %s</p>" +
+                        "<p>&copy; 2024 Tailoring Online. All Rights Reserved.</p>" +
+                        "</div>" +
+                        "</div>" +
+                        "</body>" +
+                        "</html>",
+                code,
+                LocalDate.now()
+        );
+        try {
+            logger.info("Sending verification email to: {}", email);
+            sendEmail(email, "Email Verification Code", body);
+            emailVerificationRepository.save(EmailVerification.builder()
+                    .email(email)
+                    .verificationCode(code)
+                    .build());
+            logger.info("Verification email sent and saved for: {}", email);
+            return CompletableFuture.completedFuture(true);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            logger.error("Error sending verification email to: {}", email, e);
+            return CompletableFuture.completedFuture(false);
+        }
+    }
+
+    public CompletableFuture<Boolean> fallbackSendVerificationEmail(String email, Throwable throwable) {
+        logger.error("Fallback: Unable to send verification email to: {}", email, throwable);
+        return CompletableFuture.completedFuture(false);
     }
 
     @Async
