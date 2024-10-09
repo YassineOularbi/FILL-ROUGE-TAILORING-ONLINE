@@ -10,7 +10,6 @@ import java.sql.Date;
 @Entity
 @Getter
 @Setter
-@Builder
 @Table(name = "customer")
 public class Customer extends User implements Serializable {
 

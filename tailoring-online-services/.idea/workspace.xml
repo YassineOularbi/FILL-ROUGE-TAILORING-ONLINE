@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/_auth/forgot-password/forgot-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/_auth/forgot-password/forgot-password.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/keycloak_theme/keycloakify-starter-angular" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/keycloak_theme/keycloakify-starter-angular" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +96,8 @@
     "JUnit.CustomizedProductControllerTests.executor": "Run",
     "JUnit.CustomizedProductControllerTests.searchCustomizedProducts_Success.executor": "Run",
     "JUnit.EmailControllerTests.executor": "Run",
+    "JUnit.EmailControllerTests.sendVerificationCode_Failure.executor": "Run",
+    "JUnit.EmailControllerTests.sendVerificationCode_Success.executor": "Run",
     "JUnit.LocalizationShippingServiceApplicationTests.executor": "Run",
     "JUnit.MaterialControllerTests.executor": "Run",
     "JUnit.MaterialOptionControllerTests.executor": "Run",
@@ -200,37 +205,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.kafka: Compose Deployment">
-    <configuration name="BankControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="payment-banking-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.payment_banking_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.payment_banking_service" />
-      <option name="MAIN_CLASS_NAME" value="com.payment_banking_service.BankControllerTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CustomizableMeasurementControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="store-management-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.store_management_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.store_management_service" />
-      <option name="MAIN_CLASS_NAME" value="com.store_management_service.CustomizableMeasurementControllerTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.EmailControllerTests.sendVerificationCode_Failure">
     <configuration name="CustomizableOptionControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="store-management-service" />
       <extension name="coverage">
@@ -242,6 +217,38 @@
       <option name="PACKAGE_NAME" value="com.store_management_service" />
       <option name="MAIN_CLASS_NAME" value="com.store_management_service.CustomizableOptionControllerTests" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmailControllerTests.sendVerificationCode_Failure" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="notification-mailing-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.notification_mailing_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.notification_mailing_service" />
+      <option name="MAIN_CLASS_NAME" value="com.notification_mailing_service.EmailControllerTests" />
+      <option name="METHOD_NAME" value="sendVerificationCode_Failure" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmailControllerTests.sendVerificationCode_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="notification-mailing-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.notification_mailing_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.notification_mailing_service" />
+      <option name="MAIN_CLASS_NAME" value="com.notification_mailing_service.EmailControllerTests" />
+      <option name="METHOD_NAME" value="sendVerificationCode_Success" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -384,8 +391,8 @@
     <list>
       <item itemvalue="Docker.docker-compose.yml.kafka: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.zookeeper: Compose Deployment" />
-      <item itemvalue="JUnit.BankControllerTests" />
-      <item itemvalue="JUnit.CustomizableMeasurementControllerTests" />
+      <item itemvalue="JUnit.EmailControllerTests.sendVerificationCode_Failure" />
+      <item itemvalue="JUnit.EmailControllerTests.sendVerificationCode_Success" />
       <item itemvalue="JUnit.CustomizableOptionControllerTests" />
       <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
@@ -403,11 +410,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EmailControllerTests.sendVerificationCode_Failure" />
+        <item itemvalue="JUnit.EmailControllerTests.sendVerificationCode_Success" />
         <item itemvalue="Docker.docker-compose.yml.kafka: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.zookeeper: Compose Deployment" />
         <item itemvalue="JUnit.CustomizableOptionControllerTests" />
-        <item itemvalue="JUnit.CustomizableMeasurementControllerTests" />
-        <item itemvalue="JUnit.BankControllerTests" />
       </list>
     </recent_temporary>
   </component>
@@ -441,7 +448,7 @@
       <workItem from="1728093475014" duration="9807000" />
       <workItem from="1728222144305" duration="2694000" />
       <workItem from="1728348202169" duration="604000" />
-      <workItem from="1728431981266" duration="5870000" />
+      <workItem from="1728431981266" duration="10462000" />
     </task>
     <servers />
   </component>

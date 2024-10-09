@@ -34,24 +34,25 @@ class EmailControllerTests {
     @Test
     void sendVerificationCode_Success() throws MessagingException, UnsupportedEncodingException {
         String email = "test@example.com";
-        when(emailService.sendVerificationEmail(email)).thenReturn(CompletableFuture.completedFuture(true));
+        when(emailService.sendVerificationEmail(email)).thenReturn(true);
 
-        CompletableFuture<ResponseEntity<?>> response = emailController.sendVerificationCode(email);
+        ResponseEntity<?> response = emailController.sendVerificationCode(email);
 
-        assertEquals(HttpStatus.OK, response.join().getStatusCode());
-        assertTrue(Objects.requireNonNull(response.join().getBody()).toString().contains("Verification code sent to the registered email address"));
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(Objects.requireNonNull(response.getBody()).toString().contains("Verification code sent to the registered email address"));
     }
 
     @Test
     void sendVerificationCode_Failure() throws MessagingException, UnsupportedEncodingException {
         String email = "test@example.com";
-        when(emailService.sendVerificationEmail(email)).thenReturn(CompletableFuture.completedFuture(false));
+        when(emailService.sendVerificationEmail(email)).thenReturn(false);
 
-        CompletableFuture<ResponseEntity<?>> response = emailController.sendVerificationCode(email);
+        ResponseEntity<?> response = emailController.sendVerificationCode(email);
 
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.join().getStatusCode());
-        assertTrue(Objects.requireNonNull(response.join().getBody()).toString().contains("Failed to send verification code"));
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        assertTrue(Objects.requireNonNull(response.getBody()).toString().contains("Failed to send verification code"));
     }
+
 
     @Test
     void sendOTPByEmail_Success() {

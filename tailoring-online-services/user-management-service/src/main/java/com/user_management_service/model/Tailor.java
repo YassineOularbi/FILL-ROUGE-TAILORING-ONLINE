@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Builder
 @Table(name = "tailor")
 public class Tailor extends User implements Serializable {
 

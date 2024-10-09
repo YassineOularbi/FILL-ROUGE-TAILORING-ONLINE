@@ -18,15 +18,17 @@ public class EmailController {
     private final EmailService emailService;
 
     @GetMapping(path = "/send-verification-code/{email}")
-    public CompletableFuture<ResponseEntity<?>> sendVerificationCode(@PathVariable("email") String email) throws MessagingException, UnsupportedEncodingException {
-        return emailService.sendVerificationEmail(email).thenApply(success -> {
-            if (success) {
-                return ResponseEntity.ok(String.format("{\"message\": \"Verification code sent to the registered email address: %s\"}", email));
-            } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"message\": \"Failed to send verification code\"}");
-            }
-        });
+    public ResponseEntity<?> sendVerificationCode(@PathVariable("email") String email) {
+        boolean success;
+        success = emailService.sendVerificationEmail(email);
+
+        if (success) {
+            return ResponseEntity.ok(String.format("{\"message\": \"Verification code sent to the registered email address: %s\"}", email));
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"message\": \"Failed to send verification code\"}");
+        }
     }
+
 
     @GetMapping("/send-otp-verification/{email}")
     public CompletableFuture<ResponseEntity<?>> sendOTPByEmail(@PathVariable("email") String email) {
