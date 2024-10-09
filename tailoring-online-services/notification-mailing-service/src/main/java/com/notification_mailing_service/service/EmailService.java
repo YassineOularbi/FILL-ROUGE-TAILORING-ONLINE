@@ -32,24 +32,62 @@ public class EmailService {
     private final JavaMailSender javaMailSender;
     private final VerificationCodeGenerator verificationCodeGenerator;
     private final EmailVerificationRepository emailVerificationRepository;
+    private final KafkaProducerService kafkaProducerService;
+    private final KafkaConsumerService kafkaConsumerService;
 
     @Async
     public CompletableFuture<Boolean> sendVerificationEmail(String email) {
+        kafkaProducerService.sendUserVerificationRequest(email);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            logger.error("Thread interrupted while waiting for user verification response", e);
+            return CompletableFuture.completedFuture(false);
+        }
+        if (!kafkaConsumerService.isUserExists()) {
+            logger.warn("No user found with the email: {}", email);
+            return CompletableFuture.completedFuture(false);
+        }
         String subject = "Email Verification Code";
         String code = verificationCodeGenerator.generateVerificationCode();
-        String body = getVerificationEmailTemplate(code);
-
+        String body = String.format(
+                "<div style=\"font-family:Arial,sans-serif;line-height:1.5;padding:10px;\">" +
+                        "<h2>Email Verification</h2>" +
+                        "<p>Your verification code is: <strong>%s</strong></p>" +
+                        "<p>This code is valid for 10 minutes.</p>" +
+                        "</div>", code
+        );
         try {
-            logger.info("Envoi de l'e-mail de vérification à : {}", email);
-            sendEmail(email, subject, body);
-            emailVerificationRepository.save(EmailVerification.builder().email(email).verificationCode(code).build());
-            logger.info("E-mail de vérification envoyé et sauvegardé pour : {}", email);
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+
+            helper.setFrom("Tailoring-online@outlook.com", "Tailoring Online");
+            helper.setReplyTo("Tailoring-online@outlook.com", "Tailoring Online");
+            helper.setTo(email);
+            helper.setSubject(subject);
+            helper.setText(body, true);
+
+            LocalDate currentDate = LocalDate.now();
+            LocalDateTime localDateTime = currentDate.atStartOfDay();
+            Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+            message.setSentDate(date);
+
+            javaMailSender.send(message);
+            logger.info("Verification email sent to: {}", email);
+            emailVerificationRepository.save(EmailVerification.builder()
+                    .email(email)
+                    .verificationCode(code)
+                    .build());
+            logger.info("Verification details saved for: {}", email);
+
             return CompletableFuture.completedFuture(true);
         } catch (MessagingException | UnsupportedEncodingException e) {
-            logger.error("Erreur lors de l'envoi de l'e-mail de vérification à : {}", email, e);
+            logger.error("Error sending verification email to: {}", email, e);
             return CompletableFuture.completedFuture(false);
         }
     }
+
 
     @Async
     public CompletableFuture<Boolean> sendOTPByEmail(String email) {
