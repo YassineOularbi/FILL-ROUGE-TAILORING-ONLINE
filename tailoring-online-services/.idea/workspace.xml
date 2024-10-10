@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/_auth/signup/become-tailor/become-tailor.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/_auth/signup/become-tailor/become-tailor.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/_auth/signup/become-tailor/become-tailor.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/_auth/signup/become-tailor/become-tailor.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/keycloak_theme/keycloakify-starter-angular" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/keycloak_theme/keycloakify-starter-angular" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
@@ -450,7 +448,7 @@
       <workItem from="1728093475014" duration="9807000" />
       <workItem from="1728222144305" duration="2694000" />
       <workItem from="1728348202169" duration="604000" />
-      <workItem from="1728431981266" duration="15942000" />
+      <workItem from="1728431981266" duration="18418000" />
     </task>
     <servers />
   </component>
