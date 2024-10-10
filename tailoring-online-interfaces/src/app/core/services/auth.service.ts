@@ -12,9 +12,25 @@ import { HttpClient } from "@angular/common/http";
 
     constructor(private http: HttpClient) {}
 
-    private apiUrl = `${environment.apiUser}api/`;
+    private apiUrl = environment.apiUserManagement;
 
     signing(authRequest: AuthRequest): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}auth/login`, authRequest);
+        return this.http.post<any>(`${this.apiUrl}api/auth/login`, authRequest);
     }
+
+    sendVerificationCode(id: string): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}api/auth/send-verification-code/${id}`, null);
+      }
+    
+      verifyEmail(id: string, code: string): Observable<string> {
+        return this.http.post<string>(`${this.apiUrl}api/auth/verify-email/${id}&${code}`, null);
+      }
+    
+      sendOTPByEmail(id: string): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}api/auth/send-otp-verification/${id}`, null);
+      }
+    
+      verifyOtpCode(id: string, code: string): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}api/auth/verify-otp/${id}&${code}`, null);
+      }
   }
