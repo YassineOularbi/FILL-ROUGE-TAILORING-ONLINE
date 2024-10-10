@@ -1,0 +1,121 @@
+:host {
+    display: block;
+    width: 100%;
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    padding: 30px;
+}
+
+main {
+    width: 100%;
+
+    h1 {
+        font-size: 20px;
+        font-weight: bold;
+        color: var(--black);
+        margin-bottom: 1.5rem;
+    }
+
+    form {
+        width: 80%;
+
+        .p-stepper {
+            width: 100%;
+            margin: auto;
+
+            .form-row {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+
+                .form-group {
+                    flex: 0 0 48%;
+                    margin-bottom: 1rem;
+
+                    label {
+                        font-size: 14px;
+                        font-weight: 400;
+                        color: var(--black);
+                        display: block;
+                    }
+
+                    .input-icon-wrapper {
+                        position: relative;
+
+                        input {
+                            width: 100%;
+                            padding: 0.5rem 2.5rem;
+                            border: 1px solid var(--black);
+                            border-radius: 10px;
+                            font-size: 14px;
+                            transition: border-color 0.3s;
+
+                            &::placeholder {
+                                color: black;
+                            }
+
+                            &.is-invalid {
+                                border-color: red;
+                            }
+                        }
+
+                        select {
+                            width: 100%;
+                            padding: 0.5rem 2.5rem;
+                            border: 1px solid var(--black);
+                            border-radius: 10px;
+                            font-size: 14px;
+                            transition: border-color 0.3s;
+                        }
+
+                        input[type="date"]::-webkit-calendar-picker-indicator {
+                            background: none;
+                        }
+
+                        input::placeholder {
+                            color: black;
+                        }
+
+                        input.is-invalid::placeholder {
+                            color: red;
+                        }
+
+                        .icon-left,
+                        .icon-right {
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            color: var(--black);
+                        }
+
+                        .icon-left {
+                            left: 0.75rem;
+                        }
+
+                        .icon-right {
+                            right: 0.75rem;
+                            cursor: pointer;
+                        }
+
+                        .is-invalid {
+                            color: red !important;
+                            border-color: red;
+                        }
+
+                    }
+
+                    small {
+                        color: red;
+                        font-size: 10px;
+                        font-weight: bold;
+                        display: block;
+                    }
+
+                    &.is-invalid {
+                        border-color: red;
+                    }
+                }
+            }
+        }
+    }
+}
