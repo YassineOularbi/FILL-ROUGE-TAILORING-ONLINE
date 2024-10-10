@@ -60,3 +60,86 @@ $theme: mat.define-theme();
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.p-stepper .p-stepper-header .p-stepper-action .p-stepper-title {
+  margin-left: 0.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--black);
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.p-stepper .p-stepper-header .p-stepper-action .p-stepper-number {
+  color: var(--black);
+  border: 1px solid var(--black);
+  border-width: 2px;
+  background: var(--white);
+  min-width: 2rem;
+  height: 2rem;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.p-stepper .p-stepper-header:has(~ .p-highlight) .p-stepper-separator {
+  background-color: var(--black);
+}
+
+.p-stepper .p-stepper-header.p-highlight .p-stepper-number {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--black);
+  color: white;
+}
+
+.p-stepper .p-stepper-header .p-stepper-action {
+  transition: box-shadow 0.2s;
+  border-radius: 6px;
+  background: #ffffff;
+  outline-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.p-button {
+  font-family: "Inter", sans-serif;
+  font-size: 15px !important;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--black);
+  background: var(--white);
+  border: 1px solid var(--black);
+  border-radius: 30px !important;
+  padding: 0.75rem 6rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 6px;
+  outline-color: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.p-button:hover {
+  background-color: var(--black);
+  color: var(--white);
+  font-weight: bold;
+}
+
+.p-stepper .p-stepper-header.p-highlight .p-stepper-title {
+  font-weight: bold;
+}
+
+.p-inputtext {
+  box-shadow: none;
+}
+
+.p-inputtext:focus {
+  outline: 1px solid var(--black) !important;
+}

@@ -6,9 +6,9 @@ import { Injectable } from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationMailing {
+export class MailingService {
 
-  apiUrl = environment.apiNotification;
+  apiUrl = environment.apiNotificationMailing;
 
   constructor(private http: HttpClient) { }
 

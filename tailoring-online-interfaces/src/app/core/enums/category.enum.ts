@@ -1,0 +1,6 @@
+export enum Category {
+    CAFTAN = 'CAFTAN',
+    TAKCHITA = 'TAKCHITA',
+    DJELLABA_MEN = 'DJELLABA_MEN',
+    DJELLABA_WOMEN = 'DJELLABA_WOMEN'
+}

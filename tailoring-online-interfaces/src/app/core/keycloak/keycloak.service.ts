@@ -17,7 +17,7 @@ export class KeycloakService {
   constructor(private http: HttpClient, private keycloakService: KeycloakAuthService) {
   }
 
-  init(): Promise<boolean> {
+  init(): Promise<boolean | void> {
     this.keycloak = new Keycloak(environment.keycloakConfig);
     const initOptions: KeycloakInitOptions = {
       checkLoginIframe: false,
@@ -32,29 +32,18 @@ export class KeycloakService {
       initOptions.refreshToken = parsedResponse.refresh_token;
       initOptions.timeSkew
     }
-    return this.keycloak.init(initOptions);
-  }
-
-  signin(username: string, password: string): Observable<any> {
-    const body = new HttpParams()
-      .set('username', username)
-      .set('password', password)
-      .set('grant_type', 'password')
-      .set('client_id', 'tailoring-online-id');
-
-    return this.http.post('http://localhost:8080/realms/tailoring-online/protocol/openid-connect/token', body.toString(), {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-    });
+    return this.keycloak.init(initOptions).catch(() => {
+      window.location.href = '/internal-server-error';
+  });
   }
 
   refreshToken(refresh_token: string): Observable<any> {
     const body = new HttpParams()
       .set('refresh_token', refresh_token)
       .set('grant_type', 'refresh_token')
-      .set('client_id', 'tailoring-online-id');
+      .set('client_id',  environment.keycloakConfig.clientId);
 
-    return this.http.post('http://localhost:8080/realms/tailoring-online/protocol/openid-connect/token', body.toString(), {
+    return this.http.post(environment.keycloakUrl, body.toString(), {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
     });
