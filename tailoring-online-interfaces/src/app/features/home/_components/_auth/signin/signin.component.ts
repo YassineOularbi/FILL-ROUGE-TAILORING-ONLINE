@@ -11,6 +11,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { Router, RouterLink } from '@angular/router';
 import { KeycloakService } from '../../../../../core/keycloak/keycloak.service';
+import { AuthService } from '../../../../../core/services/auth.service';
+import { AuthRequest } from '../../../../../core/interfaces/auth-request.interface';
 
 @Component({
   selector: 'app-signin',
@@ -40,7 +42,8 @@ export class SigninComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private messageService: MessageService,
-    private keycloakService: KeycloakService,
+    private authService: AuthService,
+    private keyloakService: KeycloakService,
     private router: Router
   ) { }
 
@@ -70,8 +73,8 @@ export class SigninComponent implements OnInit {
     this.submitted = true;
     if (this.signinForm.valid) {
       const rememberMe = this.signinForm.value.rememberMe;
-
-      this.keycloakService.signin(this.signinForm.value.username, this.signinForm.value.password).subscribe({
+      const authRequest: AuthRequest = this.signinForm.value;
+      this.authService.signing(authRequest).subscribe({
         next: (response) => {
           if (rememberMe) {
             localStorage.setItem('remember-me', 'true');
@@ -124,9 +127,9 @@ export class SigninComponent implements OnInit {
   }
 
   onLoginWithProvider(provider: string): void {
-    this.keycloakService.onLoginWithProvider(provider)?.then(() => {
+    this.keyloakService.onLoginWithProvider(provider)?.then(() => {
       this.router.navigate(['/auth/signup']);
-      if (this.keycloakService.isLoggedIn()) {
+      if (this.keyloakService.isLoggedIn()) {
         this.router.navigate(['/auth/signup']);
       }
     }).catch((error) => {

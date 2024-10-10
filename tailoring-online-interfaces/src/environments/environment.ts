@@ -6,5 +6,6 @@ export const environment = {
         url: 'http://localhost:8080',
         realm: 'tailoring-online',
         clientId: 'tailoring-online-id',
-    }
+    },
+    keycloakUrl: 'http://localhost:8080/realms/tailoring-online/protocol/openid-connect/token'
 };

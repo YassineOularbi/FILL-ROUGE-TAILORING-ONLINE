@@ -37,26 +37,13 @@ export class KeycloakService {
   });
   }
 
-  signin(username: string, password: string): Observable<any> {
-    const body = new HttpParams()
-      .set('username', username)
-      .set('password', password)
-      .set('grant_type', 'password')
-      .set('client_id', 'tailoring-online-id');
-
-    return this.http.post('http://localhost:8080/realms/tailoring-online/protocol/openid-connect/token', body.toString(), {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-    });
-  }
-
   refreshToken(refresh_token: string): Observable<any> {
     const body = new HttpParams()
       .set('refresh_token', refresh_token)
       .set('grant_type', 'refresh_token')
-      .set('client_id', 'tailoring-online-id');
+      .set('client_id',  environment.keycloakConfig.clientId);
 
-    return this.http.post('http://localhost:8080/realms/tailoring-online/protocol/openid-connect/token', body.toString(), {
+    return this.http.post(environment.keycloakUrl, body.toString(), {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
     });

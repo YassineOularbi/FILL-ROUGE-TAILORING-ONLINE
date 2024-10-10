@@ -1,1 +1,298 @@
-<p>become-tailor works!</p>
+<main class="d-flex flex-column justify-content-center align-items-center p-3">
+    <h1 class="my-3">Become our customer!</h1>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <p-stepper class="p-2">
+            <p-stepperPanel header="Account info">
+                <ng-template pTemplate="content" let-nextCallback="nextCallback">
+                    <div class="flex flex-column h-12rem">
+                        <div class="form-row d-flex flex-row justify-content-between">
+                            <div class="form-group w-50 mt-4 mb-2 pr-2">
+                                <label [ngClass]="{'is-invalid': submitted && f['firstName'].invalid}" for="firstName">
+                                    What's your first name?
+                                </label>
+                                <div class="input-icon-wrapper">
+                                    <i [ngClass]="{'is-invalid': submitted && f['firstName'].invalid}"
+                                        class="pi pi-user icon-left"></i>
+                                    <input id="firstName" type="text" formControlName="firstName"
+                                        [attr.placeholder]="(submitted && f['firstName'].invalid) ? 'First name is required' : 'Enter your first name here...'"
+                                        [ngClass]="{'is-invalid': submitted && f['firstName'].invalid}" />
+                                </div>
+                                <div *ngIf="submitted && f['firstName'].errors" class="text-danger">
+                                    <small *ngIf="f['firstName'].errors['required']">First name is required.</small>
+                                    <small *ngIf="f['firstName'].errors['minlength']">First name must be at least 4
+                                        characters long.</small>
+                                </div>
+                            </div>
+                            <div class="form-group w-50 mt-4 mb-2 pl-2">
+                                <label [ngClass]="{'is-invalid': submitted && f['lastName'].invalid}" for="lastName">
+                                    What's your last name?
+                                </label>
+                                <div class="input-icon-wrapper">
+                                    <i [ngClass]="{'is-invalid': submitted && f['lastName'].invalid}"
+                                        class="pi pi-user icon-left"></i>
+                                    <input id="lastName" type="text" formControlName="lastName"
+                                        [attr.placeholder]="(submitted && f['lastName'].invalid) ? 'Last name is required' : 'Enter your last name here...'"
+                                        [ngClass]="{'is-invalid': submitted && f['lastName'].invalid}" />
+                                </div>
+                                <div *ngIf="submitted && f['lastName'].errors" class="text-danger">
+                                    <small *ngIf="f['lastName'].errors['required']">Last name is required.</small>
+                                    <small *ngIf="f['lastName'].errors['minlength']">Last name must be at least 4
+                                        characters long.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row d-flex flex-row justify-content-between">
+                            <div class="form-group w-50 mt-4 mb-2 pr-2">
+                                <label [ngClass]="{'is-invalid': submitted && f['username'].invalid}" for="username">
+                                    Choose a username
+                                </label>
+                                <div class="input-icon-wrapper">
+                                    <i [ngClass]="{'is-invalid': submitted && f['username'].invalid}"
+                                        class="pi pi-user icon-left"></i>
+                                    <input id="username" type="text" formControlName="username"
+                                        [attr.placeholder]="(submitted && f['username'].invalid) ? 'Username is required' : 'Enter your username here...'"
+                                        [ngClass]="{'is-invalid': submitted && f['username'].invalid}" />
+                                </div>
+                                <div *ngIf="submitted && f['username'].errors" class="text-danger">
+                                    <small *ngIf="f['username'].errors['required']">Username is required.</small>
+                                </div>
+                            </div>
+                            <div class="form-group w-50 mt-4 mb-2 pl-2">
+                                <label [ngClass]="{'is-invalid': submitted && f['email'].invalid}" for="email">
+                                    What's your email?
+                                </label>
+                                <div class="input-icon-wrapper">
+                                    <i [ngClass]="{'is-invalid': submitted && f['email'].invalid}"
+                                        class="pi pi-envelope icon-left"></i>
+                                    <input id="email" type="email" formControlName="email"
+                                        [attr.placeholder]="(submitted && f['email'].invalid) ? 'Email is required' : 'Enter your email here...'"
+                                        [ngClass]="{'is-invalid': submitted && f['email'].invalid}" />
+                                </div>
+                                <div *ngIf="submitted && f['email'].errors" class="text-danger">
+                                    <small *ngIf="f['email'].errors['required']">Email is required.</small>
+                                    <small *ngIf="f['email'].errors['email']">Invalid email format.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row d-flex flex-row justify-content-between">
+                            <div class="form-group w-50 mt-4 mb-2 pr-2">
+                                <label [ngClass]="{'is-invalid': submitted && f['password'].invalid}" for="password">
+                                    Password
+                                </label>
+                                <div class="input-icon-wrapper">
+                                    <i [ngClass]="{'is-invalid': submitted && f['password'].invalid}"
+                                        class="pi pi-lock icon-left"></i>
+                                    <input id="password" [type]="showPassword ? 'text' : 'password'"
+                                        formControlName="password"
+                                        [attr.placeholder]="(submitted && f['password'].invalid) ? 'Password is required' : 'Enter your password...'"
+                                        [ngClass]="{'is-invalid': submitted && f['password'].invalid}" />
+                                    <i [ngClass]="{'is-invalid': submitted && f['password'].invalid, 'pi-eye-slash': showPassword, 'pi-eye': !showPassword}"
+                                        class="pi icon-right" (click)="togglePasswordVisibility()"></i>
+                                </div>
+                                <div *ngIf="submitted && f['password'].errors" class="text-danger">
+                                    <small *ngIf="f['password'].errors['required']">Password is required.</small>
+                                    <small *ngIf="f['password'].errors['minlength']">Password must be at least 6
+                                        characters long.</small>
+                                </div>
+                            </div>
+                            <div class="form-group w-50 mt-4 mb-2 pl-2">
+                                <label
+                                    [ngClass]="{'is-invalid': submitted && f['confirmPassword'].invalid || (submitted && !passwordsMatch)}"
+                                    for="confirmPassword">
+                                    Confirm Password
+                                </label>
+                                <div class="input-icon-wrapper">
+                                    <i [ngClass]="{'is-invalid': submitted && f['confirmPassword'].invalid || (submitted && !passwordsMatch)}"
+                                        class="pi pi-lock icon-left"></i>
+                                    <input id="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'"
+                                        formControlName="confirmPassword"
+                                        [attr.placeholder]="(submitted && f['confirmPassword'].invalid) ? 'Confirmation is required' : 'Confirm your password...'"
+                                        [ngClass]="{'is-invalid': submitted && f['confirmPassword'].invalid || (submitted && !passwordsMatch)}" />
+                                    <i [ngClass]="{'is-invalid': submitted && f['confirmPassword'].invalid || (submitted && !passwordsMatch), 'pi-eye-slash': showConfirmPassword, 'pi-eye': !showConfirmPassword}"
+                                        class="pi icon-right" (click)="toggleConfirmPasswordVisibility()"></i>
+                                </div>
+                                <div *ngIf="submitted && (f['confirmPassword']?.errors || !passwordsMatch)"
+                                    class="text-danger">
+                                    <small *ngIf="f['confirmPassword']?.errors?.['required']">Confirmation is
+                                        required.</small>
+                                    <small *ngIf="!passwordsMatch">Passwords do not match.</small>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row align-content-center align-items-center pt-4 justify-content-center">
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right"
+                            (onClick)="nextCallback.emit()" />
+                    </div>
+                </ng-template>
+            </p-stepperPanel>
+            <p-stepperPanel header="Advanced info">
+                <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback">
+                    <div class="flex flex-column h-12rem">
+
+                        <div class="form-row d-flex flex-row justify-content-between">
+                            <div class="form-group w-50 mt-4 mb-2 pr-2">
+                                <label [ngClass]="{'is-invalid': submitted && f['phoneNumber'].invalid}"
+                                    for="phoneNumber">
+                                    Phone Number
+                                </label>
+                                <div class="input-icon-wrapper">
+                                    <i [ngClass]="{'is-invalid': submitted && f['phoneNumber'].invalid}"
+                                        class="pi pi-phone icon-left"></i>
+                                    <input id="phoneNumber" type="text" formControlName="phoneNumber"
+                                        [attr.placeholder]="(submitted && f['phoneNumber'].invalid) ? 'Phone number is required' : 'Enter your phone number...'"
+                                        [ngClass]="{'is-invalid': submitted && f['phoneNumber'].invalid}" />
+                                </div>
+                                <div *ngIf="submitted && f['phoneNumber'].errors" class="text-danger">
+                                    <small *ngIf="f['phoneNumber'].errors['required']">Phone number is required.</small>
+                                </div>
+                            </div>
+                            <div class="form-group w-50 mt-4 mb-2 pl-2">
+                                <label [ngClass]="{'is-invalid': submitted && f['dateOfBirth'].invalid}"
+                                    for="dateOfBirth">
+                                    Date of Birth
+                                </label>
+                                <div class="input-icon-wrapper">
+                                    <i [ngClass]="{'is-invalid': submitted && f['dateOfBirth'].invalid}"
+                                        class="pi pi-calendar icon-left"></i>
+                                    <input id="dateOfBirth" type="date" formControlName="dateOfBirth"
+                                        [attr.placeholder]="(submitted && f['dateOfBirth'].invalid) ? 'Date of birth is required' : 'Select your date of birth...'"
+                                        [ngClass]="{'is-invalid': submitted && f['dateOfBirth'].invalid}" />
+                                </div>
+                                <div *ngIf="submitted && f['dateOfBirth'].errors" class="text-danger">
+                                    <small *ngIf="f['dateOfBirth'].errors['required']">Date of birth is
+                                        required.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row d-flex flex-row justify-content-between">
+                            <div class="form-group w-50 mt-4 mb-2 pr-2">
+                                <label [ngClass]="{'is-invalid': submitted && f['gender'].invalid}" for="gender">
+                                    Gender
+                                </label>
+                                <div class="input-icon-wrapper">
+                                    <select id="gender" formControlName="gender"
+                                        [ngClass]="{'is-invalid': submitted && f['gender'].invalid}">
+                                        <option value="" disabled>Select your gender...</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div *ngIf="submitted && f['gender'].errors" class="text-danger">
+                                    <small *ngIf="f['gender'].errors['required']">Gender is required.</small>
+                                </div>
+                            </div>
+                            <div class="form-group w-50 mt-4 mb-2 pl-2">
+                                <label [ngClass]="{'is-invalid': submitted && f['notificationPreference'].invalid}"
+                                    for="notificationPreference">
+                                    Notification Preference
+                                </label>
+                                <div class="input-icon-wrapper">
+                                    <select id="notificationPreference" formControlName="notificationPreference"
+                                        [ngClass]="{'is-invalid': submitted && f['notificationPreference'].invalid}">
+                                        <option value="" disabled>Select a preference...</option>
+                                        <option value="email">Email</option>
+                                        <option value="sms">SMS</option>
+                                        <option value="push">Push Notification</option>
+                                    </select>
+                                </div>
+                                <div *ngIf="submitted && f['notificationPreference'].errors" class="text-danger">
+                                    <small *ngIf="f['notificationPreference'].errors['required']">Notification
+                                        preference is required.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row align-content-center align-items-center pt-4 justify-content-center">
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right"
+                            (onClick)="nextCallback.emit()" />
+                    </div>
+                </ng-template>
+            </p-stepperPanel>
+            <p-stepperPanel header="Finish profile">
+                <ng-template pTemplate="content">
+                    <div class="flex flex-column h-12rem">
+                        <p-toast />
+                        <p-fileUpload name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                            [multiple]="true" accept="image/*" maxFileSize="1000000" (onUpload)="onTemplatedUpload()"
+                            (onSelect)="onSelectedFiles($event)">
+                            <ng-template pTemplate="header" let-files let-chooseCallback="chooseCallback"
+                                let-clearCallback="clearCallback" let-uploadCallback="uploadCallback">
+                                <div class="flex flex-wrap justify-content-between align-items-center flex-1 gap-2">
+                                    <div class="flex gap-2">
+                                        <p-button (onClick)="choose($event, chooseCallback)" icon="pi pi-images"
+                                            [rounded]="true" [outlined]="true" />
+                                        <p-button (onClick)="uploadEvent(uploadCallback)" icon="pi pi-cloud-upload"
+                                            [rounded]="true" [outlined]="true" severity="success"
+                                            [disabled]="!files || files.length === 0" />
+                                        <p-button (onClick)="clearCallback()" icon="pi pi-times" [rounded]="true"
+                                            [outlined]="true" severity="danger"
+                                            [disabled]="!files || files.length === 0" />
+                                    </div>
+                                    <p-progressBar [value]="totalSizePercent" [showValue]="false"
+                                        styleClass="md:w-20rem h-1rem w-full md:ml-auto"
+                                        [ngClass]="{ 'exceeded-progress-bar': totalSizePercent > 100 }">
+                                        <span class="white-space-nowrap">{{ totalSize }}B / 1Mb</span>
+                                    </p-progressBar>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="content" let-files let-uploadedFiles="uploadedFiles"
+                                let-removeFileCallback="removeFileCallback"
+                                let-removeUploadedFileCallback="removeUploadedFileCallback">
+                                <div *ngIf="files?.length > 0">
+                                    <h5>Pending</h5>
+                                    <div class="flex flex-wrap p-0 sm:p-5 gap-5">
+                                        <div *ngFor="let file of files; let i = index"
+                                            class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3">
+                                            <div>
+                                                <img role="presentation" [alt]="file.name" [src]="file.objectURL"
+                                                    width="100" height="50" />
+                                            </div>
+                                            <span class="font-semibold">{{ file.name }}</span>
+                                            <div>{{ formatSize(file.size) }}</div>
+                                            <p-badge value="Pending" severity="warning" />
+                                            <p-button icon="pi pi-times"
+                                                (onClick)="onRemoveTemplatingFile($event, file, removeFileCallback, i)"
+                                                [outlined]="true" [rounded]="true" severity="danger" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="uploadedFiles?.length > 0">
+                                    <h5>Completed</h5>
+                                    <div class="flex flex-wrap p-0 sm:p-5 gap-5">
+                                        <div *ngFor="let file of uploadedFiles; let i = index"
+                                            class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3">
+                                            <div>
+                                                <img role="presentation" [alt]="file.name" [src]="file.objectURL"
+                                                    width="100" height="50" />
+                                            </div>
+                                            <span class="font-semibold">{{ file.name }}</span>
+                                            <div>{{ formatSize(file.size) }}</div>
+                                            <p-badge value="Completed" class="mt-3" severity="success" />
+                                            <p-button icon="pi pi-times" (onClick)="removeUploadedFileCallback(i)"
+                                                [outlined]="true" [rounded]="true" severity="danger" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="file"> </ng-template>
+                            <ng-template pTemplate="empty">
+                                <div class="flex align-items-center justify-content-center flex-column">
+                                    <i
+                                        class="pi pi-cloud-upload border-2 border-circle p-5 text-8xl text-400 border-400"></i>
+                                    <p class="mt-4 mb-0">Drag and drop files here to upload.</p>
+                                </div>
+                            </ng-template>
+                        </p-fileUpload>
+                    </div>
+                    <div class="d-flex flex-row align-content-center align-items-center pt-4 justify-content-center">
+                        <p-button label="Register" type="submit" />
+                    </div>
+                </ng-template>
+            </p-stepperPanel>
+        </p-stepper>
+    </form>
+</main>
