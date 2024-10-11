@@ -77,28 +77,6 @@ class CustomerControllerTests {
     }
 
     @Test
-    void addCustomer_Success() {
-        CustomerDto customerDto = new CustomerDto();
-        when(customerService.register(customerDto)).thenReturn(customerDto);
-
-        ResponseEntity<?> response = customerController.addCustomer(customerDto);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(customerDto, response.getBody());
-    }
-
-    @Test
-    void addCustomer_BadRequest() {
-        CustomerDto customerDto = new CustomerDto();
-        when(customerService.register(customerDto)).thenThrow(new RuntimeException("Invalid customer data"));
-
-        ResponseEntity<?> response = customerController.addCustomer(customerDto);
-
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertEquals("Invalid customer data", response.getBody());
-    }
-
-    @Test
     void updateCustomer_Success() {
         String id = "1";
         CustomerDto customerDto = new CustomerDto();

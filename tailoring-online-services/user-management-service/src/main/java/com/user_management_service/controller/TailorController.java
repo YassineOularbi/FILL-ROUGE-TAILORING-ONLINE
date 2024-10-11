@@ -34,16 +34,6 @@ public class TailorController {
         }
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> addTailor(@RequestBody TailorDto tailorDto) {
-        try {
-            var addedTailor = tailorService.register(tailorDto);
-            return ResponseEntity.ok(addedTailor);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-
     @PutMapping("/update-tailor/{id}")
     public ResponseEntity<?> updateTailor(@PathVariable("id") String id, @RequestBody TailorDto tailorDto) {
         try {

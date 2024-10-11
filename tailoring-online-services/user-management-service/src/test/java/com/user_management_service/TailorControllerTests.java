@@ -77,28 +77,6 @@ class TailorControllerTests {
     }
 
     @Test
-    void addTailor_Success() {
-        TailorDto tailorDto = new TailorDto();
-        when(tailorService.register(tailorDto)).thenReturn(tailorDto);
-
-        ResponseEntity<?> response = tailorController.addTailor(tailorDto);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(tailorDto, response.getBody());
-    }
-
-    @Test
-    void addTailor_BadRequest() {
-        TailorDto tailorDto = new TailorDto();
-        when(tailorService.register(tailorDto)).thenThrow(new RuntimeException("Invalid tailor data"));
-
-        ResponseEntity<?> response = tailorController.addTailor(tailorDto);
-
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertEquals("Invalid tailor data", response.getBody());
-    }
-
-    @Test
     void updateTailor_Success() {
         String id = "1";
         TailorDto tailorDto = new TailorDto();

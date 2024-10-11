@@ -1,13 +1,11 @@
 package com.user_management_service.model;
 
 import com.user_management_service.enums.*;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
 @Entity
 @Getter

@@ -34,16 +34,6 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> addAdmin(@RequestBody AdminDto adminDto) {
-        try {
-            var addedAdmin = adminService.register(adminDto);
-            return ResponseEntity.ok(addedAdmin);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-
     @PutMapping("/update-admin/{id}")
     public ResponseEntity<?> updateAdmin(@PathVariable("id") String id, @RequestBody AdminDto adminDto) {
         try {

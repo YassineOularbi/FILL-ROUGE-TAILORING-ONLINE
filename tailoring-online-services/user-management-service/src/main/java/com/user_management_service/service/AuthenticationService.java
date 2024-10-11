@@ -77,7 +77,6 @@ public class AuthenticationService {
         userRepresentation.setEnabled(true);
         userRepresentation.setEmailVerified(false);
 
-        // Log password check
         if (user.getPassword() == null || user.getPassword().isEmpty()) {
             logger.error("Password is null or empty for user: {}", user.getUsername());
             System.out.println("Error: Password is null or empty for user: " + user.getUsername());

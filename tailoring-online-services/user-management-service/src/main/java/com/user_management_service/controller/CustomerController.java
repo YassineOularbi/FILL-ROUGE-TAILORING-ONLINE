@@ -34,16 +34,6 @@ public class CustomerController {
         }
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> addCustomer(@RequestBody CustomerDto customerDto) {
-        try {
-            var addedCustomer = customerService.register(customerDto);
-            return ResponseEntity.ok(addedCustomer);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-
     @PutMapping("/update-customer/{id}")
     public ResponseEntity<?> updateCustomer(@PathVariable("id") String id, @RequestBody CustomerDto customerDto) {
         try {

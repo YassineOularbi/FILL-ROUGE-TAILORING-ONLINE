@@ -77,28 +77,6 @@ class AdminControllerTests {
     }
 
     @Test
-    void addAdmin_Success() {
-        AdminDto adminDto = new AdminDto();
-        when(adminService.register(adminDto)).thenReturn(adminDto);
-
-        ResponseEntity<?> response = adminController.addAdmin(adminDto);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(adminDto, response.getBody());
-    }
-
-    @Test
-    void addAdmin_BadRequest() {
-        AdminDto adminDto = new AdminDto();
-        when(adminService.register(adminDto)).thenThrow(new RuntimeException("Invalid admin data"));
-
-        ResponseEntity<?> response = adminController.addAdmin(adminDto);
-
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertEquals("Invalid admin data", response.getBody());
-    }
-
-    @Test
     void updateAdmin_Success() {
         String id = "1";
         AdminDto adminDto = new AdminDto();
