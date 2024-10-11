@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { KeycloakService } from './core/keycloak/keycloak.service';
 import { jwtDecode } from 'jwt-decode';
 import { KeycloakLogoutOptions } from 'keycloak-js';
+import { NotificationService } from './core/services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -19,9 +20,10 @@ export class AppComponent implements OnInit, OnDestroy {
   private intervalId: any;
   private checkInterval = 1000;
 
-  constructor(private router: Router, private keycloakService: KeycloakService) { }
+  constructor(private router: Router, private keycloakService: KeycloakService, private notificationService: NotificationService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
+    this.notificationService.connect();  
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         this.isLoading = true;
@@ -40,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.notificationService.disconnect();
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }

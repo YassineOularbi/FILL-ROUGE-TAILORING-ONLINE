@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/keycloak_theme/keycloakify-starter-angular" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/keycloak_theme/keycloakify-starter-angular" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log.2024-10-02.0.gz" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +112,8 @@
     "Maven.config-server [install].executor": "Run",
     "Maven.localization-shipping-service [clean].executor": "Run",
     "Maven.localization-shipping-service [install].executor": "Run",
+    "Maven.notification-mailing-service [clean].executor": "Run",
+    "Maven.notification-mailing-service [install].executor": "Run",
     "Maven.store-management-service [clean].executor": "Run",
     "Maven.store-management-service [install].executor": "Run",
     "Maven.store-management-service [site].executor": "Run",

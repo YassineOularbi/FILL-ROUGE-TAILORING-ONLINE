@@ -2,6 +2,8 @@ package com.api_gateway_service.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
+import org.springframework.boot.web.reactive.server.ReactiveWebServerFactory;
 import org.springframework.cloud.client.discovery.ReactiveDiscoveryClient;
 import org.springframework.cloud.gateway.discovery.DiscoveryClientRouteDefinitionLocator;
 import org.springframework.cloud.gateway.discovery.DiscoveryLocatorProperties;
@@ -12,6 +14,11 @@ import org.springframework.context.annotation.Configuration;
 public class GatewayConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(GatewayConfig.class);
+
+    @Bean
+    public ReactiveWebServerFactory reactiveWebServerFactory() {
+        return new NettyReactiveWebServerFactory();
+    }
 
     @Bean
     public DiscoveryClientRouteDefinitionLocator locator(ReactiveDiscoveryClient rd, DiscoveryLocatorProperties dl) {
