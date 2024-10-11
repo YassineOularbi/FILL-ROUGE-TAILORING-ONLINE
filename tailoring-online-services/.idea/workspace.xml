@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/keycloak_theme/keycloakify-starter-angular" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/keycloak_theme/keycloakify-starter-angular" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log.2024-10-02.0.gz" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +150,7 @@
     "Spring Boot.UserManagementServiceApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/user-management-service/src/main/java/com/user_management_service/config",
+    "last_opened_file_path": "C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -170,11 +173,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\user-management-service\src\main\java\com\user_management_service\config" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\config" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\social-management-service\src\main\java\com\social_management_service\config" />
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\review-management-service\src\main\java\com\review_management_service\config" />
-      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\promotion-management-service\src\main\java\com\promotion_management_service\config" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\user-management-service\src\main\resources" />
