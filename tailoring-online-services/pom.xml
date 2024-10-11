@@ -33,6 +33,7 @@
     <module>promotion-management-service</module>
     <module>review-management-service</module>
     <module>social-management-service</module>
+    <module>cloudinary-service</module>
   </modules>
 
   <properties>
