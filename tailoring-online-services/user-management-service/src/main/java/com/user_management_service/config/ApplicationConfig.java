@@ -21,6 +21,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import java.util.Collection;
+import java.util.Objects;
 
 @Configuration
 @RequiredArgsConstructor
@@ -35,7 +36,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.builder()
-                .username(environment.getProperty("spring.security.user.name"))
+                .username(Objects.requireNonNull(environment.getProperty("spring.security.user.name")))
                 .password(passwordEncoder().encode(environment.getProperty("spring.security.user.password")))
                 .roles(environment.getProperty("spring.security.user.roles"))
                 .build();

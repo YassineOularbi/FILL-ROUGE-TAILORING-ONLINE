@@ -448,11 +448,21 @@
       <workItem from="1728093475014" duration="9807000" />
       <workItem from="1728222144305" duration="2694000" />
       <workItem from="1728348202169" duration="604000" />
-      <workItem from="1728431981266" duration="21688000" />
+      <workItem from="1728431981266" duration="24186000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/config/FeignClientConfig.java</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
