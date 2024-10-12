@@ -1,0 +1,74 @@
+:host {
+    display: block;
+    width: 100%;
+    font-family: "Inter";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--black);
+}
+
+footer {
+    width: 100%;
+
+    .up {
+        .right {
+            .navbar-nav {
+                .nav-item {
+                    .nav-link {
+                        font-family: 'Inter';
+                        font-size: 15px;
+                        font-weight: 600;
+                        color: var(--white);
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .middle {
+            img {
+                margin-bottom: 20px;
+            }
+
+            p {
+                font-family: 'Inter';
+                font-size: 15px;
+                font-weight: 600;
+                color: var(--white);
+            }
+        }
+
+        .left {
+            iframe {
+                border-radius: 20px;
+            }
+        }
+    }
+
+    .down {
+        font-family: 'Inter';
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--white);
+    }
+}
+
+@media (max-width: 768px) {
+    .up{
+        flex-direction: column !important;
+        gap: 20px;
+        margin-top: 30px !important;
+        .right{
+            margin-top: 30px !important;
+            width: 100% !important;
+        }
+        .middle{
+            width: 100% !important;
+        }
+        .left{
+            width: 100% !important;
+        }
+    }
+
+}
