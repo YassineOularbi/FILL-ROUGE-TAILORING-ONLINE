@@ -6,8 +6,10 @@ import { KeycloakLogoutOptions } from 'keycloak-js';
 
 export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
     const keycloakService = inject(KeycloakService);
+    const returnUrl = encodeURIComponent(window.location.pathname);
+
     const logoutOptions: KeycloakLogoutOptions = {
-        redirectUri: `${window.location.origin}/auth/signin?returnUrl=${encodeURIComponent(window.location.href)}`,
+        redirectUri: `${window.location.origin}/auth/signin?returnUrl=${returnUrl}`,
         logoutMethod: 'GET',
     };
 

@@ -67,7 +67,6 @@ export class KeycloakService {
   }
 
   isLoggedIn(): boolean | undefined {
-    console.log(this.keycloak?.authenticated);
     return this.keycloak?.authenticated;
   }
 
