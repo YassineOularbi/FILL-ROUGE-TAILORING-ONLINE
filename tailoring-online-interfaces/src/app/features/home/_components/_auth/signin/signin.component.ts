@@ -9,7 +9,7 @@ import { ToastModule } from 'primeng/toast';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { KeycloakService } from '../../../../../core/keycloak/keycloak.service';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { AuthRequest } from '../../../../../core/interfaces/auth-request.interface';
@@ -38,16 +38,19 @@ export class SigninComponent implements OnInit {
   submitted = false;
   showPassword = false;
   isRememberedAccount = false;
+  returnUrl: string | null = null; 
 
   constructor(
     private fb: FormBuilder,
     private messageService: MessageService,
     private authService: AuthService,
     private keyloakService: KeycloakService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
     this.signinForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -63,15 +66,18 @@ export class SigninComponent implements OnInit {
         password: localStorage.getItem('saved-password') || '',
         rememberMe: rememberMe,
       });
-      this.signinForm.controls['username'].disable();
-      this.signinForm.controls['password'].disable();
       this.signinForm.controls['rememberMe'].disable();
     }
   }
 
   onSubmit(): void {
     this.submitted = true;
+    console.log("submit");
+    console.log(this.signinForm);
+    
     if (this.signinForm.valid) {
+      console.log("here");
+      
       const rememberMe = this.signinForm.value.rememberMe;
       const authRequest: AuthRequest = this.signinForm.value;
       this.authService.signing(authRequest).subscribe({
@@ -92,7 +98,7 @@ export class SigninComponent implements OnInit {
           }
 
           localStorage.setItem('keycloak', JSON.stringify(response));
-          this.router.navigate(['/auth/signup']);
+          this.router.navigate([this.returnUrl || '/dashboard']);
         },
         error: () => {
           this.messageService.add({
