@@ -211,6 +211,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: var(--black);
 }
 
+.p-carousel .p-carousel-content .p-carousel-prev, .p-carousel .p-carousel-content .p-carousel-next {
+  width: 2rem;
+  height: 2rem;
+  color: #ffffff;
+  border: 0 none;
+  background: transparent;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  margin: 0.5rem;
+  z-index: 1000;
+}
+
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: var(--black);
+}
+
+.p-carousel-next {
+  position: absolute;
+  right: 0;
+}
+
+.p-carousel-prev {
+  position: absolute;
+  left: 0;
+}
+
 .flag {
   width: 18px;
   height: auto;
