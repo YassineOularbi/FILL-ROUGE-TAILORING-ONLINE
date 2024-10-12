@@ -138,8 +138,88 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .p-inputtext {
   box-shadow: none;
+  padding: 0;
 }
 
 .p-inputtext:focus {
   outline: 1px solid var(--black) !important;
 }
+
+
+.p-dropdown {
+  background-color: transparent !important;
+  width: 100% !important;
+  border: none;
+  outline: none;
+  height: inherit;
+}
+
+.p-dropdown-panel .p-dropdown-items {
+  padding: 0 !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  margin: 0;
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white);
+  background: gray;
+  padding: 10px;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  margin: 0;
+  padding: 10px;
+  border: 0 none;
+  margin: 0;
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--black);  background: transparent;
+  transition: box-shadow 0.2s;
+  border-radius: 0;
+}
+
+.p-dropdown .p-dropdown-trigger {
+  background: transparent;
+  color: var(--black);
+  width: 20px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.p-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.p-dropdown .p-dropdown-label {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.p-dropdown .p-dropdown-label:focus{
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.p-inputtext {
+  margin: 0;
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.flag {
+  width: 18px;
+  height: auto;
+  background-size: cover;
+  display: inline-block;
+}
+
+.flag-us { background-image: url('https://www.countryflags.com/wp-content/uploads/united-states-of-america-flag-png-large.png'); }
+.flag-fr { background-image: url('https://www.countryflags.com/wp-content/uploads/france-flag-png-large.png'); }
+.flag-es { background-image: url('https://www.countryflags.com/wp-content/uploads/spain-flag-png-large.png'); }
+.flag-it { background-image: url('https://www.countryflags.com/wp-content/uploads/italy-flag-png-large.png'); }
+.flag-ar { background-image: url('https://www.countryflags.com/wp-content/uploads/morocco-flag-png-large.png'); }

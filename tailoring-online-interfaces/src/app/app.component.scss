@@ -1,4 +1,5 @@
 :host {
+    position: relative;
     display: block;
     width: 100%;
     height: 100%;
@@ -6,12 +7,74 @@
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-main {
+  }
+  
+  main {
     width: 100%;
-    height: 100%;
-    display: flex;
-    box-sizing: inherit;
-    position: relative;
-}
+  
+    .up {
+      width: 100%;
+      height: 40px;
+      background-color: #DBDBDB;
+  
+      div {
+        width: 100%;
+        height: inherit;
+        gap: 10px;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row-reverse;
+  
+        p {
+          margin: 0;
+          font-family: 'Inter';
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--black);
+        }
+  
+        a {
+          margin: 0;
+          font-family: 'Inter';
+          font-size: 13px;
+          font-weight: bold;
+          text-decoration: underline;
+          color: var(--black);
+        }
+  
+       ;.custom-dropdown {
+          height: 100% !important;
+          width: 40% !important;
+          outline: none !important;
+  
+          &.ng-invalid:not(form) > div {
+            border: none !important;
+          }
+  
+          &.ng-invalid.ng-touched.ui-inputwrapper-focus:not(form) > div,
+          &.ng-invalid.ng-untouched.ui-inputwrapper-focus:not(form) > div {
+            box-shadow: none !important;
+            border: none !important;
+            border-radius: 0 !important;
+          }
+        }
+  
+        .custom-dropdown .p-dropdown {
+          border: none;
+          box-shadow: none;
+          outline: none;
+  
+          &:not(.p-disabled) {
+            &.p-focus, &:hover {
+              box-shadow: none;
+              border-color: transparent;
+            }
+          }
+  
+          .p-dropdown-label {
+            border: none;
+          }
+        }
+      }
+    }
+  }
