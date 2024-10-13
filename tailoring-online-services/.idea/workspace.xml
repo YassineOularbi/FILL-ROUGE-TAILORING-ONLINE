@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/_components/navbar/navbar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/_components/navbar/navbar.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
     </list>
