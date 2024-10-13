@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { provideStore } from '@ngrx/store';
-import { paginationReducer } from '../../core/stores/pagination/pagination.reducer';
+import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { PaginationEffects } from '../../core/stores/pagination/pagination.effects';
+import { paginationReducer } from '../../core/stores/pagination/reducers/pagination.reducer';
+import { PaginationEffects } from '../../core/stores/pagination/effects/pagination.effects';
 
 export const SHOP_ROUTES: Routes = [
-  {
-    path: '',
-    loadComponent: () => import('./shop.component').then(m => m.ShopComponent),
-    providers: [
-        provideStore({ pagination: paginationReducer }),
-        provideEffects([PaginationEffects])
-      ]
-  }
+    {
+        path: '',
+        loadComponent: () => import('./shop.component').then(m => m.ShopComponent),
+        providers: [
+            provideState('pagination', paginationReducer),
+            provideEffects(PaginationEffects)
+        ]
+    }
 ];
