@@ -1,0 +1,52 @@
+<main>
+    <div class="img mt-3">
+        <p-carousel [value]="images" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="10000"
+            [responsiveOptions]="responsiveOptions" [showIndicators]="true" [showNavigators]="true">
+            <ng-template pTemplate="item" let-image>
+                <div class="image-container" [ngStyle]="{ 'background-image': 'url(' + image + ')' }">
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+    <div class="features-container d-flex justify-content-center gap-4 flex-wrap mt-5 pt-4">
+        <div class="feature-card card p-3 m-2">
+          <div class="d-flex align-items-center">
+            <i class="pi pi-truck feature-icon me-3"></i>
+            <div>
+              <h5 class="mb-1">Free Shipping</h5>
+              <p class="text-muted mb-0">Free Shipping world wide</p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="feature-card card p-3 m-2">
+          <div class="d-flex align-items-center">
+            <i class="pi pi-clock feature-icon me-3"></i>
+            <div>
+              <h5 class="mb-1">24 × 7 Service</h5>
+              <p class="text-muted mb-0">Online Service For 24 × 7</p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="feature-card card p-3 m-2">
+          <div class="d-flex align-items-center">
+            <i class="pi pi-credit-card feature-icon me-3"></i>
+            <div>
+              <h5 class="mb-1">Online Pay</h5>
+              <p class="text-muted mb-0">Online Payment Available</p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="feature-card card p-3 m-2">
+          <div class="d-flex align-items-center">
+            <i class="pi pi-refresh feature-icon me-3"></i>
+            <div>
+              <h5 class="mb-1">100% Original</h5>
+              <p class="text-muted mb-0">100% Money Back</p>
+            </div>
+          </div>
+        </div>
+      </div>      
+</main>
