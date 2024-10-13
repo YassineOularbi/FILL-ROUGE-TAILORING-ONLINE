@@ -89,13 +89,14 @@
       }
   
       .confirm-button {
-        background-color: #4267b2;
+        background-color: rgb(76, 76, 76);
         font-family: "Inter";
         font-size: 15px;
         font-weight: 400;
         color: var(--white);
         padding: 10px 20px;
-        border-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
         border: none;
         margin-left: -60px;
         cursor: pointer;

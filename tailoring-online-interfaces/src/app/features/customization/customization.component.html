@@ -1,6 +1,38 @@
 <main>
     <app-navbar></app-navbar>
     <div class="customization">
-        
+        <div class="customization-header">
+            <h2>Customize Your Measurements</h2>
+        </div>
+
+        <div class="measurements-container d-flex justify-content-center align-content-center align-items-center">
+            <img src="assets/mannequin.webp" alt="Human Body" class="human-body">
+            <img src="assets/mannequin.webp" alt="Reflection" class="reflection">
+
+            <div class="measurement-input chest">
+                <label for="chest">Chest (cm)</label>
+                <input type="number" id="chest" placeholder="Enter chest size" required>
+            </div>
+
+            <div class="measurement-input waist">
+                <label for="waist">Waist (cm)</label>
+                <input type="number" id="waist" placeholder="Enter waist size" required>
+            </div>
+
+            <div class="measurement-input hips">
+                <label for="hips">Hips (cm)</label>
+                <input type="number" id="hips" placeholder="Enter hips size" required>
+            </div>
+
+            <div class="measurement-input sleeve">
+                <label for="sleeve">Sleeve Length (cm)</label>
+                <input type="number" id="sleeve" placeholder="Enter sleeve length" required>
+            </div>
+
+            <div class="measurement-input height">
+                <label for="height">Height (cm)</label>
+                <input type="number" id="height" placeholder="Enter height" required>
+            </div>
+        </div>
     </div>
 </main>
