@@ -8,6 +8,11 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { KeycloakService } from './core/keycloak/keycloak.service';
 import { KeycloakAngularModule } from 'keycloak-angular';
+import { provideStoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { AppState } from './core/stores/app.state';
+import { appEffects } from './core/stores/app.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,10 +21,13 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+    provideStore<AppState>(),
+    provideEffects(appEffects),
+    provideStoreDevtools({ maxAge: 25, logOnly: false }),
     importProvidersFrom(KeycloakAngularModule),
     {
       provide: APP_INITIALIZER,
-      useFactory:  (keycloakService: KeycloakService) => {
+      useFactory: (keycloakService: KeycloakService) => {
         return () => keycloakService.init();
       },
       multi: true,
@@ -30,13 +38,14 @@ export const appConfig: ApplicationConfig = {
       useFactory: () => () => {
         const primengConfig = inject(PrimeNGConfig);
         primengConfig.zIndex = {
-          modal: 1100,   
-          overlay: 1000, 
-          menu: 1000,    
-          tooltip: 1100  
+          modal: 1100,
+          overlay: 1000,
+          menu: 1000,
+          tooltip: 1100
         };
       },
       multi: true
-    }
+    },
+    importProvidersFrom(StoreDevtoolsModule.instrument({ maxAge: 25 }))
   ]
 };
