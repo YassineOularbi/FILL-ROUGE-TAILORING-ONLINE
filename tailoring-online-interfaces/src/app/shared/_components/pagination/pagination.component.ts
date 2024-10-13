@@ -1,8 +1,12 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
 import { TableModule } from 'primeng/table';
-import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from '../../../core/stores/app.state';
+import { selectPage, selectPageSize, selectSortDirection, selectSortField } from '../../../core/stores/pagination/selectors/pagination.selectors';
+import * as PaginationActions from '../../../core/stores/pagination/actions/pagination.actions';
 
 @Component({
   selector: 'app-pagination',
@@ -13,38 +17,30 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent implements OnInit {
-  page: number = 1;
-  size: number = 10;
-  sortField: string = 'name';
-  sortDirection: string = 'asc';
-
-  @Output() pageChange = new EventEmitter<{ page: number; size: number }>();
-  @Output() sortChange = new EventEmitter<{ sortField: string; sortDirection: string }>();
+  page$?: Observable<number>;
+  size$?: Observable<number>;
+  sortField$: Observable<string>;
+  sortDirection$: Observable<string>;
 
   @Input() totalRecords: number = 0;
 
+  constructor(private store: Store<AppState>) {
+    this.page$ = this.store.select(selectPage);
+    this.size$ = this.store.select(selectPageSize);
+    this.sortField$ = this.store.select(selectSortField);
+    this.sortDirection$ = this.store.select(selectSortDirection);
+  }
+
   ngOnInit(): void {
-    this.emitPagination();
-    this.emitSorting();
+    this.store.dispatch(PaginationActions.initPagination());
   }
 
   onPageChange(event: any): void {
-    this.page = event.page + 1;
-    this.size = event.rows;
-    this.emitPagination();
+    this.store.dispatch(PaginationActions.setPage({ page: event.page + 1 }));
+    this.store.dispatch(PaginationActions.setPageSize({ size: event.rows }));
   }
 
   onSort(event: any): void {
-    this.sortField = event.field;
-    this.sortDirection = event.order === 1 ? 'asc' : 'desc';
-    this.emitSorting();
-  }
-
-  private emitPagination(): void {
-    this.pageChange.emit({ page: this.page, size: this.size });
-  }
-
-  private emitSorting(): void {
-    this.sortChange.emit({ sortField: this.sortField, sortDirection: this.sortDirection });
+    this.store.dispatch(PaginationActions.setSort({ sortField: event.field, sortDirection: event.order === 1 ? 'asc' : 'desc' }));
   }
 }
