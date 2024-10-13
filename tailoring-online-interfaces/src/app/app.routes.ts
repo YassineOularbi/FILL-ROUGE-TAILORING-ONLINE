@@ -14,6 +14,10 @@ export const routes: Routes = [
         loadChildren: () => import('./features/shop/shop.routes').then(m => m.SHOP_ROUTES)
     },
     {
+        path: 'customization',
+        loadChildren: () => import('./features/customization/customization.routes').then(m => m.CUSTOMIZATION_ROUTES)
+    },
+    {
         path: 'internal-server-error',
         loadComponent: () => import('./shared/pages/internal-server-error/internal-server-error.component').then(m => m.InternalServerErrorComponent),
     },
