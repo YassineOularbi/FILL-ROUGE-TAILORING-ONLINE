@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Table(name = "customized_option")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @TypeAlias("")
-@Document(indexName = "customizedOptions")
+@Document(indexName = "customized_options")
 public class CustomizedOption implements Serializable {
 
     @Id

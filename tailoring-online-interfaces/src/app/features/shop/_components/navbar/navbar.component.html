@@ -37,7 +37,7 @@
         </div>
   
         <div class="location-dropdown">
-            <p-dropdown [options]="locations" [(ngModel)]="selectedLocation" optionLabel="name" placeholder="Your Location">
+            <p-dropdown class="location" [options]="locations" [(ngModel)]="selectedLocation" optionLabel="name" placeholder="Your Location">
               <ng-template pTemplate="selectedItem">
                 <div class="d-flex align-items-center gap-2 justify-content-end flex-row">
                   <i class="pi pi-map-marker m-1 p-1" style="margin-right: 0.5rem;"></i>
@@ -62,7 +62,7 @@
           <a href="#" class="icon-link mx-2"><i class="pi pi-bell"></i><span class="badge">2</span></a>
           <a href="#" class="icon-link mx-2"><i class="pi pi-heart"></i><span class="badge">2</span></a>
           <a href="#" class="icon-link mx-2"><i class="pi pi-shopping-cart"></i><span class="badge">2</span></a>
-          <a href="#" class="user-account mx-2">
+          <a (click)="onLogout()" class="user-account mx-2">
             <i class="pi pi-user"></i>
             <span>Hello,<br>My Account</span>
           </a>

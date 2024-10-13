@@ -161,6 +161,7 @@
             position: relative;
             color: #000;
             text-decoration: none;
+            cursor: pointer;
 
             .badge {
                 position: absolute;
@@ -182,6 +183,7 @@
             text-decoration: none;
 
             span {
+                cursor: pointer;
                 font-size: 12px;
                 line-height: 1.2;
             }
@@ -227,6 +229,7 @@
             text-decoration: none;
             font-weight: 500;
             position: relative;
+            cursor: pointer;
 
             .new-badge {
                 position: absolute;
@@ -258,4 +261,10 @@
             background: #e0e0e0;
         }
     }
+}
+
+
+.location {
+    box-shadow: none;
+    padding: 0 !important;
 }

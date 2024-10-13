@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "customized_product")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @TypeAlias("")
-@Document(indexName = "customizedProducts")
+@Document(indexName = "customized_products")
 public class CustomizedProduct implements Serializable {
 
     @Id

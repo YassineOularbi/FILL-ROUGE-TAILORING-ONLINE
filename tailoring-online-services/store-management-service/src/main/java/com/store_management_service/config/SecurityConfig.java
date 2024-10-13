@@ -1,5 +1,6 @@
 package com.store_management_service.config;
 
+import com.store_management_service.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,9 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(authorize -> {
             logger.debug("Toutes les requêtes nécessitent une authentification.");
-            authorize.anyRequest().authenticated();
+            authorize
+                    .requestMatchers("/api/product/**").hasAnyAuthority(Role.ADMIN.name(), Role.TAILOR.name(), Role.CUSTOMER.name())
+                    .anyRequest().authenticated();
         });
 
         http.oauth2ResourceServer(oauth2 -> {

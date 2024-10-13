@@ -1,0 +1,17 @@
+<div class="model-viewer-container">
+    <canvas #takchitaCanvas></canvas>
+</div>
+
+
+<div class="customization-header">
+    <h2>Select Your Materials</h2>
+</div>
+
+<div class="materials-grid">
+    <div *ngFor="let material of materialTypes" class="material-card">
+        <div class="card-content">
+            <i [ngClass]="getMaterialIcon(material)" class="material-icon"></i>
+            <h3>{{ material }}</h3>
+        </div>
+    </div>
+</div>

@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "three_d_model")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @TypeAlias("")
-@Document(indexName = "ThreeDModels")
+@Document(indexName = "three_d_models")
 public class ThreeDModel implements Serializable {
 
     @Id

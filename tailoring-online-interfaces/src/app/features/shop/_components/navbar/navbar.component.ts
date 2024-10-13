@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { LanguagePreference } from '../../../../core/enums/language-preference.enum';
+import { KeycloakService } from '../../../../core/keycloak/keycloak.service';
+import { KeycloakLogoutOptions } from 'keycloak-js';
 
 @Component({
   selector: 'app-navbar',
@@ -24,6 +26,8 @@ export class NavbarComponent implements OnInit {
 
   locations: any[] = [];
   selectedLocation: any | undefined;
+
+  constructor(private keycloakService: KeycloakService) {}
 
   ngOnInit() {
     this.initializeLanguages();
@@ -61,5 +65,15 @@ export class NavbarComponent implements OnInit {
       { name: 'Phoenix', code: 'PHX' },
     ];
     this.selectedLocation = this.locations[0];
+  }
+
+  onLogout(): void {
+    const returnUrl = encodeURIComponent(window.location.pathname);
+
+    const logoutOptions: KeycloakLogoutOptions = {
+        redirectUri: `${window.location.origin}/auth/signin?returnUrl=${returnUrl}`,
+        logoutMethod: 'GET',
+    };
+    this.keycloakService.logout(logoutOptions);
   }
 }

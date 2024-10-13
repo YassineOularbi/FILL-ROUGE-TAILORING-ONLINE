@@ -98,7 +98,7 @@ export class SigninComponent implements OnInit {
           }
 
           localStorage.setItem('keycloak', JSON.stringify(response));
-          this.router.navigate([this.returnUrl || '/dashboard']);
+          this.router.navigate([this.returnUrl || '/shop']);
         },
         error: () => {
           this.messageService.add({
