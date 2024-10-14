@@ -66,6 +66,7 @@ export class ProductComponent implements OnInit {
       next: (response: any) => {
         this.products = response.content;
         this.totalPages = response.totalPages;
+
         this.store.dispatch(PaginationActions.setTotalRecords({ totalRecords: response.totalElements }));
       }
     });
