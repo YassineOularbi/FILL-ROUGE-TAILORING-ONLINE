@@ -1,8 +1,6 @@
 spring:
-  jpa:
-    open-in-view: true
   application:
-    name: store-management-service
+    name: payment-banking-service
   profiles:
     active: local
   cloud:

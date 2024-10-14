@@ -8,3 +8,7 @@ export const setSort = createAction(
   '[Pagination] Set Sort',
   props<{ sortField: string; sortDirection: string }>()
 );
+export const setTotalRecords = createAction(
+  '[Pagination] Set Total Records',
+  props<{ totalRecords: number }>()
+);

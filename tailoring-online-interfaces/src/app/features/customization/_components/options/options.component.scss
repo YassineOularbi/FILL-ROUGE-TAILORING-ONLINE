@@ -1,0 +1,70 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--black);
+}
+
+model-viewer-container {
+    width: 200%;
+    height: 6000px;
+    position: absolute;
+
+}
+
+canvas {
+    margin-top: -30px;
+    margin-bottom: 20px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+.materials-grid {
+    margin-top: -58px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 100px;
+    margin-left: 60px;
+
+    .material-card {
+        width: 90px;
+        background-color: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 5px;
+        text-align: left;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            h3 {
+                color: white;
+                font-size: 12px;
+                font-weight: 600;
+                margin-top: 5px;
+            }
+
+            .material-icon {
+                font-size: 15px;
+                color: white;
+            }
+        }
+    }
+}

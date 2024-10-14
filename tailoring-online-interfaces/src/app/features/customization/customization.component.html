@@ -1,60 +1,7 @@
 <main>
     <app-navbar></app-navbar>
-    <div class="customization">
-      <!-- <div class="customization-header">
-          <h2>Customize Your Measurements</h2>
-      </div>
-  
-      <div class="measurements-container d-flex justify-content-center align-content-center align-items-center">
-          <img src="assets/mannequin.webp" alt="Human Body" class="human-body">
-          <img src="assets/mannequin.webp" alt="Reflection" class="reflection">
-  
-          <div class="measurement-input chest">
-              <label for="chest">Chest (cm)</label>
-              <input type="number" id="chest" placeholder="Enter chest size" required>
-          </div>
-  
-          <div class="measurement-input waist">
-              <label for="waist">Waist (cm)</label>
-              <input type="number" id="waist" placeholder="Enter waist size" required>
-          </div>
-  
-          <div class="measurement-input hips">
-              <label for="hips">Hips (cm)</label>
-              <input type="number" id="hips" placeholder="Enter hips size" required>
-          </div>
-  
-          <div class="measurement-input sleeve">
-              <label for="sleeve">Sleeve Length (cm)</label>
-              <input type="number" id="sleeve" placeholder="Enter sleeve length" required>
-          </div>
-  
-          <div class="measurement-input height">
-              <label for="height">Height (cm)</label>
-              <input type="number" id="height" placeholder="Enter height" required>
-          </div>
-      </div> -->
-
-      <div class="model-viewer-container">
-        <!-- Ajoutez ici une référence avec #takchitaCanvas -->
-        <canvas #takchitaCanvas></canvas>
-      </div>
-  
-  
-      <div class="customization-header">
-        <h2>Select Your Materials</h2>
-      </div>
-  
-      <div class="materials-grid">
-        <div *ngFor="let material of materialTypes" class="material-card">
-          <div class="card-content">
-            <i [ngClass]="getMaterialIcon(material)" class="material-icon"></i>
-            <h3>{{ material }}</h3>
-          </div>
-        </div>
-      </div>
-
-      
+    <div class="customization"> 
+       <router-outlet></router-outlet> 
     </div>
   </main>
   

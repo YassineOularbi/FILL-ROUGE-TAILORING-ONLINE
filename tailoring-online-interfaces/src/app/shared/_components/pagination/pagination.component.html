@@ -1,37 +1,30 @@
 <div class="pagination-container">
-    <p-table 
-      [value]="[]" 
-      [paginator]="false"
-      [sortField]="(sortField$ | async)"
-      [sortOrder]="(sortDirection$ | async) === 'asc' ? 1 : -1"
-      (onSort)="onSort($event)"
-      class="custom-table"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th pSortableColumn="name" class="border-dark border-right">
-            Name <p-sortIcon field="name"></p-sortIcon>
-          </th>
-          <th pSortableColumn="rating">
-            Rating <p-sortIcon field="rating"></p-sortIcon>
-          </th>
-          <th pSortableColumn="sales" class="border-dark border-left">
-            Sales <p-sortIcon field="sales"></p-sortIcon>
-          </th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body">
-        <tr></tr>
-      </ng-template>
+    <p-table [value]="[]" [paginator]="false" [sortField]="(sortField$ | async)"
+        [sortOrder]="(sortDirection$ | async) === 'asc' ? 1 : -1" (onSort)="onSort($event)" class="custom-table">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name" class="border-dark border-right">
+                    Name <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="category" class="border-dark border-left">
+                    Catefory <p-sortIcon field="category"></p-sortIcon>
+                </th>
+                <th pSortableColumn="rating">
+                    Rating <p-sortIcon field="rating"></p-sortIcon>
+                </th>
+                <th pSortableColumn="sales" class="border-dark border-left">
+                    Sales <p-sortIcon field="sales"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body">
+            <tr></tr>
+        </ng-template>
     </p-table>
-  
-    <p-paginator
-    [rows]="(size$ | async) ?? 10"
-    [totalRecords]="totalRecords"
-    [first]="(((page$ | async) ?? 1) - 1) * ((size$ | async) ?? 10)"
-    [rowsPerPageOptions]="[5,10,20]"
-    (onPageChange)="onPageChange($event)"
-    class="custom-paginator"
-  ></p-paginator>
-  
-  </div>
+
+    <p-paginator [rows]="(size$ | async) ?? 9" [totalRecords]="(totalRecords$ | async) ?? 0"
+        [first]="(page$ | async) ?? 0" [rowsPerPageOptions]="[6, 9, 12]" (onPageChange)="onPageChange($event)"
+        class="custom-paginator"></p-paginator>
+
+
+</div>

@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Table(name = "customizable_measurement")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @TypeAlias("")
-@Document(indexName = "customizableMeasurements")
+@Document(indexName = "customizable_measurements")
 public class CustomizableMeasurement implements Serializable {
 
     @EmbeddedId

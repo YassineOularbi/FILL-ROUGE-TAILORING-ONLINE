@@ -13,13 +13,13 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getAllProducts(page: number, size: number, sortField: string, sortDirection: string): Observable<Product[]> {
+  getAllProducts(page: number, size: number, sortField: string, sortDirection: string): Observable<any> {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString())
       .set('sortField', sortField)
       .set('sortDirection', sortDirection);
-    return this.http.get<Product[]>(`${this.apiUrl}api/product/get-all-products`, { params });
+    return this.http.get<any>(`${this.apiUrl}api/product/get-all-products`, { params });
   }
 
   getAllProductsByStore(id: string): Observable<Product[]> {

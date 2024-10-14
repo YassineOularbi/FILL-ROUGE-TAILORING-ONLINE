@@ -10,10 +10,7 @@ import com.store_management_service.repository.jpa.StoreJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,23 +28,19 @@ public class ProductJpaService {
     private final StoreJpaRepository storeRepository;
     private static final int MAX_PAGE_SIZE = 100;
 
-    public Page<ProductDto> getAllProducts(int page, int size) {
+    public Page<Product> getAllProducts(int page, int size, String sortField, String sortDirection) {
         logger.info("Fetching all products with page: {}, size: {}", page, size);
 
         if (size > MAX_PAGE_SIZE) {
             size = MAX_PAGE_SIZE;
             logger.warn("Requested size exceeds maximum page size. Setting size to {}", MAX_PAGE_SIZE);
         }
-
-        Pageable pageable = PageRequest.of(page, size);
+        Sort.Direction direction = sortDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortField));
         Page<Product> productPage = productRepository.findAll(pageable);
         logger.info("Fetched {} products", productPage.getTotalElements());
 
-        List<ProductDto> productDtos = productPage.stream()
-                .map(productMapper::toDto)
-                .collect(Collectors.toList());
-
-        return new PageImpl<>(productDtos, pageable, productPage.getTotalElements());
+        return productPage;
     }
 
     public List<Product> getAllProductsByStore(Long id) {

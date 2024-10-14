@@ -22,3 +22,8 @@ export const selectSortDirection = createSelector(
   selectPaginationState,
   (state) => state.sortDirection
 );
+
+export const selectTotalRecords = createSelector(
+  selectPaginationState,
+  (state) => state.totalRecords
+);

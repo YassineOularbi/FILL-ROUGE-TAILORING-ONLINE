@@ -28,6 +28,7 @@
 
     .contact-info {
         width: 30%;
+
         span {
             font-family: "Inter", sans-serif;
             font-size: 12px !important;
@@ -48,6 +49,7 @@
         font-weight: 500;
         text-decoration: none;
         color: var(--black);
+
         a {
             color: var(--black);
             font-weight: bold;
@@ -60,11 +62,13 @@
         display: flex;
         align-items: center;
         gap: 10px;
+
         .lang-drop {
             width: 30% !important;
             display: flex;
             justify-content: flex-end;
         }
+
         ::ng-deep .p-dropdown {
             background: transparent;
             border: none;
@@ -103,12 +107,14 @@
             color: var(--black);
             padding: 0;
         }
+
         .p-dropdown .p-dropdown-label {
             background: transparent;
             border: none;
             outline: none;
             padding: 20px !important;
         }
+
         .pi-map-marker {
             width: 30px;
             height: 30px;
@@ -118,6 +124,7 @@
             align-items: center;
             align-content: center;
         }
+
         ::ng-deep .p-dropdown {
             border: 1px solid #ddd;
             border-radius: 4px;
@@ -150,7 +157,34 @@
             border-radius: 0 4px 4px 0;
             cursor: pointer;
         }
-    }
+      
+        .suggestions {
+          position: absolute;
+          bottom: -75%;
+          background: white;
+          border: 1px solid #ddd;
+          border-radius: 0 0 4px 4px;
+          list-style-type: none;
+          margin-top: 0;
+          padding-left: 0;
+          height: 200px;
+          width: 51%;
+          z-index: 1000;
+          overflow: hidden;
+          overflow-y: scroll;
+      
+          li {
+            padding: 10px;
+            cursor: pointer;
+            color: var(--black);
+            &:hover {
+              background-color: #f0f0f0;
+            }
+          }
+        }
+      }
+      
+
 
     .user-actions {
         display: flex;
@@ -161,6 +195,7 @@
             position: relative;
             color: #000;
             text-decoration: none;
+            cursor: pointer;
 
             .badge {
                 position: absolute;
@@ -182,6 +217,7 @@
             text-decoration: none;
 
             span {
+                cursor: pointer;
                 font-size: 12px;
                 line-height: 1.2;
             }
@@ -227,6 +263,7 @@
             text-decoration: none;
             font-weight: 500;
             position: relative;
+            cursor: pointer;
 
             .new-badge {
                 position: absolute;
@@ -258,4 +295,10 @@
             background: #e0e0e0;
         }
     }
+}
+
+
+.location {
+    box-shadow: none;
+    padding: 0 !important;
 }

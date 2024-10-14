@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Table(name = "material_option")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @TypeAlias("")
-@Document(indexName = "materialOptions")
+@Document(indexName = "material_options")
 public class MaterialOption implements Serializable {
 
     @EmbeddedId

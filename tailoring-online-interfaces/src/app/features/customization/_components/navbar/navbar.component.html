@@ -1,6 +1,6 @@
 <nav class="navbar-custom">
     <div class="nav-left">
-      <button class="nav-icon-button d-flex justify-content-start align-content-center align-items-center w-50 gap-2" aria-label="Back">
+      <button routerLink="/shop" class="nav-icon-button d-flex justify-content-start align-content-center align-items-center w-50 gap-2" aria-label="Back">
         <i class="pi pi-arrow-left"></i>
         <span>Back</span>
       </button>
@@ -15,12 +15,17 @@
     </div>
   
     <div class="nav-right d-flex justify-content-end align-content-center align-items-center gap-2">
-      <div class="price-tag">
-        23,000.00€
+        <div class="price-tag">
+          {{ budget }}€
+        </div>
+    
+        <button class="confirm-button" *ngIf="showNextButton" (click)="goToOptions()">
+          Next
+        </button>
+    
+        <button class="confirm-button" *ngIf="showConfirmButton" (click)="confirmCustomization()">
+          Confirm
+        </button>
       </div>
-      <button class="confirm-button">
-        Confirm
-      </button>
-    </div>
   </nav>
   

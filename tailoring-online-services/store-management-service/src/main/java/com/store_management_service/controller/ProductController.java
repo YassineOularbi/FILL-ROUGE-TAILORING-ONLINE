@@ -19,11 +19,11 @@ public class ProductController {
     @GetMapping("/get-all-products")
     public ResponseEntity<?> getAllProducts(
             @RequestParam(defaultValue = "0", name = "page") int page,
-            @RequestParam(defaultValue = "10", name = "size") int size,
-            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "9", name = "size") int size,
+            @RequestParam(defaultValue = "name", name = "sortField") String sortField,
             @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection) {
         try {
-            var products = productService.getAllProducts(page, size);
+            var products = productService.getAllProducts(page, size, sortField, sortDirection);
             return ResponseEntity.ok(products);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -84,8 +84,8 @@ public class ProductController {
     public ResponseEntity<?> search(
             @RequestParam("input") String input,
             @RequestParam(defaultValue = "0", name = "page") int page,
-            @RequestParam(defaultValue = "10", name = "size") int size,
-            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "9", name = "size") int size,
+            @RequestParam(defaultValue = "name", name = "sortField") String sortField,
             @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection) {
         try {
             var results = elasticsearchService.search(input, page, size, sortField, sortDirection);
@@ -98,8 +98,8 @@ public class ProductController {
     @GetMapping("/filter")
     public ResponseEntity<?> filter(
             @RequestParam(defaultValue = "0", name = "page") int page,
-            @RequestParam(defaultValue = "10", name = "size") int size,
-            @RequestParam(defaultValue = "id", name = "sortField") String sortField,
+            @RequestParam(defaultValue = "9", name = "size") int size,
+            @RequestParam(defaultValue = "name", name = "sortField") String sortField,
             @RequestParam(defaultValue = "asc", name = "sortDirection") String sortDirection,
             @RequestParam(required = false) String categoryFilter,
             @RequestParam(required = false) String nameFilter) {

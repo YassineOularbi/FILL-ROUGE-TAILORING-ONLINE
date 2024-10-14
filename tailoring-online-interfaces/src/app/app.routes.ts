@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -6,16 +7,14 @@ export const routes: Routes = [
         loadChildren: () => import('./features/home/home.routes').then(m => m.HOME_ROUTES),
     },
     {
-        path: 'dashboard',
-        loadChildren: () => import('./features/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
-    },
-    {
         path: 'shop',
-        loadChildren: () => import('./features/shop/shop.routes').then(m => m.SHOP_ROUTES)
+        loadChildren: () => import('./features/shop/shop.routes').then(m => m.SHOP_ROUTES),
+        canActivate: [authGuard]
     },
     {
         path: 'customization',
-        loadChildren: () => import('./features/customization/customization.routes').then(m => m.CUSTOMIZATION_ROUTES)
+        loadChildren: () => import('./features/customization/customization.routes').then(m => m.CUSTOMIZATION_ROUTES),
+        canActivate: [authGuard]
     },
     {
         path: 'internal-server-error',
