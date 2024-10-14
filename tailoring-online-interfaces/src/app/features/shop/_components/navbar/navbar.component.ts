@@ -1,24 +1,23 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
-import { LanguagePreference } from '../../../../core/enums/language-preference.enum';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KeycloakService } from '../../../../core/keycloak/keycloak.service';
+import { ProductService } from '../../../../core/services/product.service';
+import { debounceTime, switchMap } from 'rxjs/operators';
 import { KeycloakLogoutOptions } from 'keycloak-js';
-import { AutoCompleteModule } from 'primeng/autocomplete';
-
+import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
-    DropdownModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
-    AutoCompleteModule
+    DropdownModule
   ],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   languageOptions: any[] = [];
@@ -30,21 +29,33 @@ export class NavbarComponent implements OnInit {
   locations: any[] = [];
   selectedLocation: any | undefined;
 
-  constructor(private keycloakService: KeycloakService) {}
+  searchQuery = new FormControl('');
+  filteredResults: any[] = [];
+  showSuggestions: boolean = false;
+
+  constructor(private keycloakService: KeycloakService, private productService: ProductService) {}
 
   ngOnInit() {
     this.initializeLanguages();
     this.initializeCurrencies();
     this.initializeLocations();
+
+    this.searchQuery.valueChanges.pipe(
+      debounceTime(300),
+      switchMap((query) => this.search(query!))
+    ).subscribe((results) => {
+      this.filteredResults = results;
+      this.showSuggestions = results.length > 0;
+    });
   }
 
   private initializeLanguages() {
     this.languageOptions = [
-      { name: 'English', code: LanguagePreference.EN, flag: 'us' },
-      { name: 'Français', code: LanguagePreference.FR, flag: 'fr' },
-      { name: 'Español', code: LanguagePreference.ES, flag: 'es' },
-      { name: 'Italiano', code: LanguagePreference.IT, flag: 'it' },
-      { name: 'العربية', code: LanguagePreference.AR, flag: 'ar' },
+      { name: 'English', code: 'EN', flag: 'us' },
+      { name: 'Français', code: 'FR', flag: 'fr' },
+      { name: 'Español', code: 'ES', flag: 'es' },
+      { name: 'Italiano', code: 'IT', flag: 'it' },
+      { name: 'العربية', code: 'AR', flag: 'ar' },
     ];
     this.selectedLanguage = this.languageOptions[0];
   }
@@ -70,12 +81,32 @@ export class NavbarComponent implements OnInit {
     this.selectedLocation = this.locations[0];
   }
 
+  search(query: string) {
+    if (query) {
+      return this.productService.autocomplete(query);
+    } else {
+      this.filteredResults = [];
+      return [];
+    }
+  }
+
+  performSearch() {
+    this.productService.search(this.searchQuery.value!, 0, 10, 'name', 'asc').subscribe((result) => {
+      console.log('Search Results:', result);
+      this.showSuggestions = false;
+    });
+  }
+
+  selectSuggestion(suggestion: string) {
+    this.searchQuery.setValue(suggestion);
+    this.showSuggestions = false;
+  }
+
   onLogout(): void {
     const returnUrl = encodeURIComponent(window.location.pathname);
-
     const logoutOptions: KeycloakLogoutOptions = {
-        redirectUri: `${window.location.origin}/auth/signin?returnUrl=${returnUrl}`,
-        logoutMethod: 'GET',
+      redirectUri: `${window.location.origin}/auth/signin?returnUrl=${returnUrl}`,
+      logoutMethod: 'GET',
     };
     this.keycloakService.logout(logoutOptions);
   }
