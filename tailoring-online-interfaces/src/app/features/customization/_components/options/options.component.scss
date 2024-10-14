@@ -17,6 +17,8 @@ model-viewer-container {
 }
 
 canvas {
+    margin-top: -30px;
+    margin-bottom: 20px;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -24,18 +26,20 @@ canvas {
 
 
 .materials-grid {
+    margin-top: -58px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 100%;
     max-width: 100px;
-    margin-left: 20px;
+    margin-left: 60px;
 
     .material-card {
+        width: 90px;
         background-color: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(10px);
         border-radius: 12px;
-        padding: 15px;
+        padding: 5px;
         text-align: left;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         cursor: pointer;
@@ -52,13 +56,13 @@ canvas {
 
             h3 {
                 color: white;
-                font-size: 16px;
+                font-size: 12px;
                 font-weight: 600;
-                margin-top: 10px;
+                margin-top: 5px;
             }
 
             .material-icon {
-                font-size: 30px;
+                font-size: 15px;
                 color: white;
             }
         }

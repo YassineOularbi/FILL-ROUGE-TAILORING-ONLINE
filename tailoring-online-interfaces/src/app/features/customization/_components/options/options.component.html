@@ -9,7 +9,7 @@
 
 <div class="materials-grid">
     <div *ngFor="let material of materialTypes" class="material-card">
-        <div class="card-content">
+        <div class="card-content d-flex justify-content-center align-content-center align-items-center">
             <i [ngClass]="getMaterialIcon(material)" class="material-icon"></i>
             <h3>{{ material }}</h3>
         </div>

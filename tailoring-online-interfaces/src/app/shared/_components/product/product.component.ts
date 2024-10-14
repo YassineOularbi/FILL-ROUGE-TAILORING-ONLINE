@@ -8,13 +8,15 @@ import { Subscription } from 'rxjs';
 import { AppState } from '../../../core/stores/app.state';
 import { selectPage, selectPageSize, selectSortDirection, selectSortField, selectTotalRecords } from '../../../core/stores/pagination/selectors/pagination.selectors';
 import * as PaginationActions from '../../../core/stores/pagination/actions/pagination.actions';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [
     MatCardModule,
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
