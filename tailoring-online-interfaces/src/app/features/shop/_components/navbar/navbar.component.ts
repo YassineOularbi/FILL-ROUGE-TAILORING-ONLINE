@@ -5,6 +5,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { LanguagePreference } from '../../../../core/enums/language-preference.enum';
 import { KeycloakService } from '../../../../core/keycloak/keycloak.service';
 import { KeycloakLogoutOptions } from 'keycloak-js';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +14,8 @@ import { KeycloakLogoutOptions } from 'keycloak-js';
   imports: [
     DropdownModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    AutoCompleteModule
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'

@@ -53,10 +53,13 @@
           </div>
           
   
-        <div class="search-bar">
-          <input type="text" placeholder="I'm searching for...">
-          <button type="button"><i class="pi pi-search"></i></button>
-        </div>
+          <div class="search-bar">
+            <p-autoComplete [(ngModel)]="searchQuery" [suggestions]="filteredResults" (completeMethod)="search($event)" 
+                            field="name" placeholder="I'm searching for...">
+            </p-autoComplete>
+            <button type="button" pButton icon="pi pi-search" (click)="performSearch()"></button>
+          </div>
+          
   
         <div class="user-actions">
           <a href="#" class="icon-link mx-2"><i class="pi pi-bell"></i><span class="badge">2</span></a>

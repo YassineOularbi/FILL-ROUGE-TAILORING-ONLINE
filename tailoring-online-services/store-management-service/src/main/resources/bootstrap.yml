@@ -1,4 +1,6 @@
 spring:
+  jpa:
+    open-in-view: true
   application:
     name: store-management-service
   profiles:

@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/customization.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/services/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/services/product.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/actions/pagination.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/actions/pagination.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/pagination.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/pagination.state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/reducers/pagination.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/reducers/pagination.reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/selectors/pagination.selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/selectors/pagination.selectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/_auth/signin/signin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/_auth/signin/signin.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/product/product.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/product/product.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/product/product.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/product/product.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -193,11 +201,11 @@
       <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.store_management_service.service" />
       <recent name="com.payment_banking_service.service" />
       <recent name="com.payment_banking_service.service.elasticsearch" />
       <recent name="com.payment_banking_service.repository.elasticsearch" />
       <recent name="com.order_management_service.service" />
-      <recent name="com.localization_shipping_service.service.jpa" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -462,7 +470,7 @@
       <workItem from="1728222144305" duration="2694000" />
       <workItem from="1728348202169" duration="604000" />
       <workItem from="1728431981266" duration="24186000" />
-      <workItem from="1728776041475" duration="8094000" />
+      <workItem from="1728776041475" duration="12832000" />
     </task>
     <servers />
   </component>

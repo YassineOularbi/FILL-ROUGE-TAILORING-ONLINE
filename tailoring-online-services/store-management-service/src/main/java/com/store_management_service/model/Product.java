@@ -24,7 +24,7 @@ import java.util.Map;
 @NoArgsConstructor
 @Table(name = "product")
 @JsonIgnoreProperties(ignoreUnknown = true)
-@TypeAlias("")
+@TypeAlias("product")
 @Document(indexName = "products")
 public class Product implements Serializable {
 
@@ -34,11 +34,11 @@ public class Product implements Serializable {
     private Long id;
 
     @Column(name = "name", nullable = false)
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Text)
     private String name;
 
     @Column(name = "description", nullable = false)
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Text)
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -47,21 +47,24 @@ public class Product implements Serializable {
     private Category category;
 
     @Column(name = "picture", nullable = false)
+    @Field(type = FieldType.Keyword)
     private String picture;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "image_url")
+    @Field(type = FieldType.Keyword)
     private List<String> images;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "product_details", joinColumns = @JoinColumn(name = "product_id"))
     @MapKeyColumn(name = "details_key")
     @Column(name = "details_value")
+    @Field(type = FieldType.Object)
     private Map<String, String> details;
 
     @Column(name = "historical_story", nullable = false)
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Text)
     private String historicalStory;
 
     @Column(name = "code_sku")
@@ -69,12 +72,15 @@ public class Product implements Serializable {
     private String codeSKU;
 
     @Column(name = "rating", columnDefinition = "Double default 0.00")
+    @Field(type = FieldType.Double)
     private Double rating;
 
     @Column(name = "sales", columnDefinition = "Integer default 0")
+    @Field(type = FieldType.Integer)
     private Integer sales;
 
     @Column(name = "authenticity_verified", columnDefinition = "Boolean default false")
+    @Field(type = FieldType.Boolean)
     private Boolean authenticityVerified;
 
     @ManyToOne

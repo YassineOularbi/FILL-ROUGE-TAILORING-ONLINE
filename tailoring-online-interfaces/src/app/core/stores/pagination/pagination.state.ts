@@ -3,11 +3,13 @@ export interface PaginationState {
     size: number;
     sortField: string;
     sortDirection: string;
+    totalRecords: number;
 }
 
 export const initialPaginationState: PaginationState = {
-    page: 1,
-    size: 10,
+    page: 0,
+    size: 9,
     sortField: 'name',
-    sortDirection: 'asc'
+    sortDirection: 'asc',
+    totalRecords: 0
 };

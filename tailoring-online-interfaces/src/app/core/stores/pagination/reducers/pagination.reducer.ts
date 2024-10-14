@@ -11,5 +11,9 @@ export const paginationReducer = createReducer(
     ...state,
     sortField,
     sortDirection
+  })),
+  on(PaginationActions.setTotalRecords, (state, { totalRecords }) => ({
+    ...state,
+    totalRecords
   }))
 );

@@ -72,12 +72,9 @@ export class SigninComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-    console.log("submit");
-    console.log(this.signinForm);
     
     if (this.signinForm.valid) {
-      console.log("here");
-      
+
       const rememberMe = this.signinForm.value.rememberMe;
       const authRequest: AuthRequest = this.signinForm.value;
       this.authService.signing(authRequest).subscribe({
