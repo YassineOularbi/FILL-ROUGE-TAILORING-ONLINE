@@ -12,11 +12,11 @@ export const productReducer = createReducer(
     error: null
   })),
 
-  on(ProductActions.searchProducts, (state) => ({
-    ...state,
-    loading: true,
-    error: null
-  })),
+//   on(ProductActions.searchProducts, (state) => ({
+//     ...state,
+//     loading: true,
+//     error: null
+//   })),
 
   on(ProductActions.loadProductsSuccess, (state, { products, totalRecords }) => ({
     ...state,
