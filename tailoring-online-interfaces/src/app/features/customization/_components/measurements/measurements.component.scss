@@ -1,0 +1,120 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 120%;
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--black);
+}
+
+.customization-header {
+    text-align: center;
+    margin-bottom: 20px;
+
+    h2 {
+        font-size: 20px;
+        color: #fff;
+    }
+}
+
+.measurements-container {
+    position: relative;
+    width: 100%;
+    height: 431px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+
+    .human-body {
+        width: 30%;
+        display: block;
+        position: relative;
+        z-index: 1000;
+    }
+
+    .reflection {
+        width: 30%;
+        position: absolute;
+        top: 95%;
+        left: 35%;
+        transform: scaleY(-1);
+        opacity: 0.3;
+        filter: blur(2px);
+    }
+
+    .measurement-input {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+        label {
+            font-size: 14px;
+            color: #fff;
+        }
+
+        input {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+        }
+
+        input::placeholder {
+            color: #bbb;
+        }
+    }
+
+    .chest {
+        top: 45%;
+        left: 20%;
+    }
+
+    .waist {
+        top: 20%;
+        left: 20%;
+    }
+
+    .hips {
+        top: 70%;
+        right: 20%;
+    }
+
+    .sleeve {
+        top: 70%;
+        left: 20%;
+    }
+
+    .height {
+        top: 0;
+        right: 20%;
+    }
+
+    .arm-length {
+        top: 45%;
+        right: 20%;
+    }
+
+    .shoulder-width {
+        top: 20%;
+        right: 20%;
+    }
+
+    .inseam {
+        top: 0%;
+        left: 20%;
+    }
+
+    .full-body-length {
+        top: 85%;
+        right: 15%;
+    }
+}

@@ -1,0 +1,13 @@
+package com.user_management_service.dto;
+
+import lombok.*;
+
+import java.io.Serializable;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class CustomerDto extends UserDto implements Serializable {
+    private Integer loyaltyPoints;
+}

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: local
+  cloud:
+    config:
+      enabled: true
+      uri: http://admin:admin@localhost:8888
+      failFast: true
+      retry:
+        maxAttempts: 20
+      profile: local
+      label: main

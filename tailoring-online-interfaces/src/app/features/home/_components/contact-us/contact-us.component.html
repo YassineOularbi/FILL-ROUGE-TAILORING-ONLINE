@@ -1,0 +1,61 @@
+<p-toast class="bottom-center"></p-toast>
+<app-sending *ngIf="isLoading"></app-sending>
+<div class="ligne">
+    <div class="circle rounded-circle d-flex justify-content-center align-items-center">
+        <p>Contact Us</p>
+    </div>
+</div>
+
+<section id="contact-us"
+    class="contact-us d-flex flex-column justify-content-between align-content-center align-items-center p-5 mt-5">
+    <h1>Get In Touch With Us</h1>
+    <div class="contact-us-container w-100 mt-5 px-5">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="input dark w-100">
+                        <mat-label>Name</mat-label>
+                        <input matInput type="text" formControlName="name" placeholder="Enter your name">
+                        <mat-error *ngIf="contactForm.get('name')?.hasError('required')">Name is
+                            <strong>required</strong></mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="input w-100">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="email" placeholder="Enter your email">
+                        <mat-error *ngIf="contactForm.get('email')?.hasError('required')">Email is
+                            <strong>required</strong></mat-error>
+                        <mat-error *ngIf="contactForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="input w-100">
+                        <mat-label>Phone</mat-label>
+                        <input matInput type="tel" formControlName="phone" placeholder="Enter your phone number">
+                        <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">Phone is
+                            <strong>required</strong></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <mat-form-field appearance="outline" class="input w-100">
+                    <mat-label>Message</mat-label>
+                    <textarea matInput formControlName="message" placeholder="Enter your message" rows="4"></textarea>
+                    <mat-error *ngIf="contactForm.get('message')?.hasError('required')">Message is
+                        <strong>required</strong></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group w-100 d-flex justify-content-center align-content-center align-items-center">
+                <button type="submit"
+                    class="get-in-touch col-md-2 h-100 p-2 d-flex flex-row justify-content-around align-items-center">
+                    <a>Get in touch</a>
+                    <mat-icon>arrow_forward</mat-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</section>

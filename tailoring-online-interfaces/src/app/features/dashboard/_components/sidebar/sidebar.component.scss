@@ -1,0 +1,25 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-family: "Inter";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: black;
+}
+
+.sidebar {
+    width: 100%;
+    height: 100%;
+
+    .brand-logo {
+        width: 100%;
+        height: 15%;
+    }
+
+    .sidebar-nav {
+        width: 90%;
+        height: 80%;
+    }
+}

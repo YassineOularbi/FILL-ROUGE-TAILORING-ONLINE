@@ -1,0 +1,67 @@
+:host {
+    display: block;
+    width: 100%;
+    font-family: "Inter";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar {
+    background-color: var(--white);
+    .container-fluid {
+        .navbar-nav {
+            padding: 0 10px;
+
+            .nav-item {
+                padding: 0 !important;
+                cursor: pointer;
+
+                .nav-link {
+                    font-family: "Inter";
+                    font-size: 13px;
+                    color: var(--black);
+                    font-weight: 400;
+                    cursor: pointer;
+                    transition: color 0.3s ease, font-weight 0.3s ease;
+                }
+
+                .nav-link:hover {
+                    font-weight: 500;
+                }
+
+                .button {
+                    border: 1px solid var(--black);
+                    border-radius: 35px;
+                    background-color: transparent;
+                    color: var(--black);
+                    transition: background-color 0.3s ease, color 0.3s ease;
+                    cursor: pointer;
+                }
+                
+                .active {
+                    background-color: var(--black);
+                    color: var(--white);
+                }
+                
+                .active:hover {
+                    background-color: var(--white) !important;
+                    color: var(--black) !important;
+                }
+                
+                .button:hover {
+                    background-color: var(--black);
+                    color: var(--white);
+                }
+                
+            }
+        }
+    }
+
+    .offcanvas{
+        a {
+            font-family: "Inter", "Sans sherif";
+            font-size: 15px;
+        }
+    }
+}

@@ -1,0 +1,251 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the theme object.
+$tailoring-online-interfaces-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$azure-palette,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+$theme: mat.define-theme();
+
+.tertiary-checkbox {
+  @include mat.checkbox-color($theme, $color-variant: tertiary);
+}
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+:root {
+  @include mat.all-component-themes($tailoring-online-interfaces-theme);
+}
+
+// Comment out the line below if you want to use the pre-defined typography utility classes.
+// For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
+// @include mat.typography-hierarchy($tailoring-online-interfaces-theme);
+
+// Comment out the line below if you want to use the deprecated `color` inputs.
+// @include mat.color-variants-backwards-compatibility($tailoring-online-interfaces-theme);
+/* You can add global styles to this file, and also import other style files */
+
+@import "primeicons/primeicons.css";
+
+:host {
+  $white: #fff;
+  $black: #000;
+}
+
+:root {
+  --white: #fff;
+  --black: #000;
+}
+
+:root.dark{
+  --white: #000;
+  --black: #fff;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.p-stepper .p-stepper-header .p-stepper-action .p-stepper-title {
+  margin-left: 0.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--black);
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.p-stepper .p-stepper-header .p-stepper-action .p-stepper-number {
+  color: var(--black);
+  border: 1px solid var(--black);
+  border-width: 2px;
+  background: var(--white);
+  min-width: 2rem;
+  height: 2rem;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.p-stepper .p-stepper-header:has(~ .p-highlight) .p-stepper-separator {
+  background-color: var(--black);
+}
+
+.p-stepper .p-stepper-header.p-highlight .p-stepper-number {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--black);
+  color: white;
+}
+
+.p-stepper .p-stepper-header .p-stepper-action {
+  transition: box-shadow 0.2s;
+  border-radius: 6px;
+  background: #ffffff;
+  outline-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.p-button {
+  font-family: "Inter", sans-serif;
+  font-size: 15px !important;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--black);
+  background: var(--white);
+  border: 1px solid var(--black);
+  border-radius: 30px !important;
+  padding: 0.75rem 6rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 6px;
+  outline-color: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.p-button:hover {
+  background-color: var(--black);
+  color: var(--white);
+  font-weight: bold;
+}
+
+.p-stepper .p-stepper-header.p-highlight .p-stepper-title {
+  font-weight: bold;
+}
+
+.p-inputtext {
+  box-shadow: none;
+  padding: 0;
+}
+
+.p-inputtext:focus {
+  outline: 1px solid var(--black) !important;
+}
+
+
+.p-dropdown {
+  background-color: transparent !important;
+  width: 100% !important;
+  border: none;
+  outline: none;
+  height: inherit;
+}
+
+.p-dropdown-panel .p-dropdown-items {
+  padding: 0 !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  margin: 0;
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white);
+  background: gray;
+  padding: 10px;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  margin: 0;
+  padding: 10px;
+  border: 0 none;
+  margin: 0;
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--black);  background: transparent;
+  transition: box-shadow 0.2s;
+  border-radius: 0;
+}
+
+.p-dropdown .p-dropdown-trigger {
+  background: transparent;
+  color: var(--black);
+  width: 20px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.p-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.p-dropdown .p-dropdown-label {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.p-dropdown .p-dropdown-label:focus{
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.p-inputtext {
+  margin: 0;
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.p-carousel .p-carousel-content .p-carousel-prev, .p-carousel .p-carousel-content .p-carousel-next {
+  width: 2rem;
+  height: 2rem;
+  color: #ffffff;
+  border: 0 none;
+  background: transparent;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  margin: 0.5rem;
+  z-index: 1000;
+}
+
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: var(--black);
+}
+
+.p-carousel-next {
+  position: absolute;
+  right: 0;
+}
+
+.p-carousel-prev {
+  position: absolute;
+  left: 0;
+}
+
+.flag {
+  width: 18px;
+  height: auto;
+  background-size: cover;
+  display: inline-block;
+}
+
+.flag-us { background-image: url('https://www.countryflags.com/wp-content/uploads/united-states-of-america-flag-png-large.png'); }
+.flag-fr { background-image: url('https://www.countryflags.com/wp-content/uploads/france-flag-png-large.png'); }
+.flag-es { background-image: url('https://www.countryflags.com/wp-content/uploads/spain-flag-png-large.png'); }
+.flag-it { background-image: url('https://www.countryflags.com/wp-content/uploads/italy-flag-png-large.png'); }
+.flag-ar { background-image: url('https://www.countryflags.com/wp-content/uploads/morocco-flag-png-large.png'); }

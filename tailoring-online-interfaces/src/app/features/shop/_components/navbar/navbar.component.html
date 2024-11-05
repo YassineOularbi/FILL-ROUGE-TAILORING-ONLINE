@@ -1,0 +1,105 @@
+<header>
+  <div class="top-bar d-flex justify-content-around align-content-center align-items-center">
+    <div class="container">
+      <div class="contact-info d-flex justify-content-center align-content-center align-items-center">
+        <span><i class="pi pi-headphones"></i> Yassineoularbi&#64;gmail.com | +212 6 10 44 60 80</span>
+      </div>
+      <div class="promo-message d-flex justify-content-center align-items-center align-content-center gap-2">
+        Something you love is now on sale! <a href="#">Buy Now!</a>
+      </div>
+      <div class="language-currency d-flex justify-content-center align-items-center align-content-center">
+        <p-dropdown class="lang-drop" [options]="languageOptions" [(ngModel)]="selectedLanguage" optionLabel="name"
+          [showClear]="false" placeholder="Select a Language">
+          <ng-template pTemplate="selectedItem">
+            <div class="d-flex align-items-center gap-2 justify-content-end flex-row" *ngIf="selectedLanguage">
+              <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                [class]="'flag flag-' + selectedLanguage.flag" style="width: 18px" />
+              <div>{{ selectedLanguage.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-language pTemplate="item">
+            <div class="d-flex align-items-center gap-2 justify-content-start flex-row">
+              <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                [class]="'flag flag-' + language.flag" style="width: 18px" />
+              <div>{{ language.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+        <p-dropdown [options]="currencies" [(ngModel)]="selectedCurrency" optionLabel="code"></p-dropdown>
+      </div>
+    </div>
+  </div>
+
+  <nav class="main-nav">
+    <div class="container px-5">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Vincent The Tailor">
+      </div>
+
+      <div class="location-dropdown">
+        <p-dropdown class="location" [options]="locations" [(ngModel)]="selectedLocation" optionLabel="name"
+          placeholder="Your Location">
+          <ng-template pTemplate="selectedItem">
+            <div class="d-flex align-items-center gap-2 justify-content-end flex-row">
+              <i class="pi pi-map-marker m-1 p-1" style="margin-right: 0.5rem;"></i>
+              <span>{{selectedLocation ? selectedLocation.name : 'Your Location'}}</span>
+            </div>
+          </ng-template>
+          <ng-template let-location pTemplate="item">
+            <div class="flex align-items-center">
+              <span>{{ location.name }}</span>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+
+
+      <div class="search-bar">
+        <input type="text" [formControl]="searchQuery" placeholder="I'm searching for..." 
+               (focus)="showSuggestions = true" />
+        <button type="button" class="custom-button" (click)="performSearch()">
+          <i class="pi pi-search"></i>
+        </button>
+      
+        <ul *ngIf="showSuggestions && filteredResults.length > 0" class="suggestions">
+          <li *ngFor="let result of filteredResults" (click)="selectSuggestion(result.name)">
+            {{ result }}
+          </li>
+        </ul>
+      </div>
+      
+      
+      
+
+
+      <div class="user-actions">
+        <a href="#" class="icon-link mx-2"><i class="pi pi-bell"></i><span class="badge">2</span></a>
+        <a href="#" class="icon-link mx-2"><i class="pi pi-heart"></i><span class="badge">2</span></a>
+        <a href="#" class="icon-link mx-2"><i class="pi pi-shopping-cart"></i><span class="badge">2</span></a>
+        <a (click)="onLogout()" class="user-account mx-2">
+          <i class="pi pi-user"></i>
+          <span>Hello,<br>My Account</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="categories-nav">
+    <div class="container  d-flex justify-content-around">
+      <button class="all-categories-btn">
+        <i class="pi pi-bars"></i> All Categories
+      </button>
+      <ul class="nav-links">
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Stores</a></li>
+        <li><a href="#">Product <span class="new-badge">New</span></a></li>
+        <li><a href="#">Collections</a></li>
+        <li><a href="#">Best Sellers</a></li>
+        <li><a href="#">Tailors</a></li>
+      </ul>
+      <button class="free-shipping-btn">
+        <i class="pi pi-bolt"></i> Free Shipping
+      </button>
+    </div>
+  </div>
+</header>

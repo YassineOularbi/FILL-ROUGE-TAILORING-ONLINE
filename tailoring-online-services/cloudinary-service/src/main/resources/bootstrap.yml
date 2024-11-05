@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: cloudinary-service
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: ADMIN
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
+server:
+  port: 9999
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
