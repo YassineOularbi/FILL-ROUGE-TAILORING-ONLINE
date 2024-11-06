@@ -1,6 +1,7 @@
 package com.user_management_service.model;
 
 import com.user_management_service.enums.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.io.Serializable;
@@ -11,10 +12,16 @@ import java.util.List;
 @Setter
 public class Tailor extends User implements Serializable {
 
+    @NotNull(message = "Bio cannot be null")
+    @Size(max = 250, message = "Bio cannot exceed 250 characters")
     private String bio;
 
+    @NotNull(message = "Specialties cannot be null")
+    @Size(min = 1, message = "At least one specialty is required")
     private List<Speciality> specialties;
 
+    @DecimalMin(value = "0.0", inclusive = true, message = "Rating must be at least 0.0")
+    @DecimalMax(value = "5.0", inclusive = true, message = "Rating cannot exceed 5.0")
     private Double rating;
 
     public Tailor(String bio, List<Speciality> specialties, Double rating) {
