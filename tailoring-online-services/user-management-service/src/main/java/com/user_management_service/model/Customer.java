@@ -1,6 +1,8 @@
 package com.user_management_service.model;
 
 import com.user_management_service.enums.*;
+import com.user_management_service.validation.CreateGroup;
+import com.user_management_service.validation.UpdateGroup;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 
@@ -11,7 +13,7 @@ import java.sql.Date;
 @Setter
 public class Customer extends User implements Serializable {
 
-    @Min(value = 0, message = "Loyalty points must be zero or positive")
+    @Min(value = 0, message = "Loyalty points must be zero or positive", groups = {CreateGroup.class, UpdateGroup.class})
     private Integer loyaltyPoints = 0;
 
     public Customer(String username, String password, String email, Role role, String firstName, String lastName, String phoneNumber, String profilePicture, Date dateOfBirth, Date lastLogin, Status status, LanguagePreference languagePreference, Gender gender, Integer loyaltyPoints) {

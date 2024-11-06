@@ -1,6 +1,7 @@
 package com.user_management_service.model;
 
 import com.user_management_service.enums.*;
+import com.user_management_service.validation.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -12,17 +13,17 @@ import java.util.List;
 @Setter
 public class Tailor extends User implements Serializable {
 
-    @NotNull(message = "Bio cannot be null")
-    @Size(max = 250, message = "Bio cannot exceed 250 characters")
+    @NotNull(message = "Bio cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
+    @Size(max = 250, message = "Bio cannot exceed 250 characters", groups = {CreateGroup.class, UpdateGroup.class})
     private String bio;
 
-    @NotNull(message = "Specialties cannot be null")
-    @Size(min = 1, message = "At least one specialty is required")
+    @NotNull(message = "Specialties cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
+    @Size(min = 1, message = "At least one specialty is required", groups = {CreateGroup.class, UpdateGroup.class})
     private List<Speciality> specialties;
 
-    @DecimalMin(value = "0.0", inclusive = true, message = "Rating must be at least 0.0")
-    @DecimalMax(value = "5.0", inclusive = true, message = "Rating cannot exceed 5.0")
-    private Double rating;
+    @DecimalMin(value = "0.0", inclusive = true, message = "Rating must be at least 0.0", groups = {CreateGroup.class, UpdateGroup.class})
+    @DecimalMax(value = "5.0", inclusive = true, message = "Rating cannot exceed 5.0", groups = {CreateGroup.class, UpdateGroup.class})
+    private Double rating = 0.0;
 
     public Tailor(String bio, List<Speciality> specialties, Double rating) {
         this.bio = bio;
@@ -39,7 +40,8 @@ public class Tailor extends User implements Serializable {
         this.setRole(Role.TAILOR);
     }
 
-    public Tailor(){
+    public Tailor() {
         this.setRole(Role.TAILOR);
+        this.rating = 0.0;
     }
 }
