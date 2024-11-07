@@ -1,12 +1,12 @@
-//package com.user_management_service.mapper;
-//
-//import com.user_management_service.dto.*;
-//import com.user_management_service.model.*;
-//import org.mapstruct.*;
-//
-//@Mapper(componentModel = "spring", unmappedSourcePolicy = ReportingPolicy.IGNORE, subclassExhaustiveStrategy = SubclassExhaustiveStrategy.RUNTIME_EXCEPTION)
-//public interface UserMapper {
-//
+package com.user_management_service.mapper;
+
+import com.user_management_service.dto.*;
+import com.user_management_service.model.*;
+import org.mapstruct.*;
+
+@Mapper(componentModel = "spring", unmappedSourcePolicy = ReportingPolicy.IGNORE, subclassExhaustiveStrategy = SubclassExhaustiveStrategy.RUNTIME_EXCEPTION)
+public interface UserMapper {
+
 //    @SubclassMapping(source = AdminDto.class, target = Admin.class)
 //    @SubclassMapping(source = TailorDto.class, target = Tailor.class)
 //    @SubclassMapping(source = CustomerDto.class, target = Customer.class)
@@ -17,5 +17,5 @@
 //    UserDto toDto(User user);
 //
 //    User partialUpdate(UserDto userDto, @MappingTarget User user);
-//
-//}
+
+}

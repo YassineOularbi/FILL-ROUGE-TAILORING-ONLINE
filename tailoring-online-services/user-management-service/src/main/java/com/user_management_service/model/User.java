@@ -68,8 +68,8 @@ public class User implements Serializable {
 
     private Date lastLogin;
 
-    @NotNull(message = "Status cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
-    private Status status;
+    @NotNull(message = "Status cannot be null", groups = {UpdateGroup.class})
+    private Status status = Status.INACTIVE;
 
     @NotNull(message = "Language preference cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
     private LanguagePreference languagePreference;
@@ -82,7 +82,7 @@ public class User implements Serializable {
     @Constraint(validatedBy = AgeValidator.class)
     public @interface DateOfBirthValidation {
         String message() default "User must be at least 18 years old";
-        Class<?>[] groups() default {CreateGroup.class, UpdateGroup.class};
+        Class<?>[] groups() default {};
         Class<? extends Payload>[] payload() default {};
     }
 
