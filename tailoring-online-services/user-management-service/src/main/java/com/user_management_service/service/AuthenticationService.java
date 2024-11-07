@@ -8,12 +8,10 @@ import com.user_management_service.exception.KeycloakException;
 import com.user_management_service.exception.UserAlreadyExistsException;
 import com.user_management_service.mapper.CustomerMapper;
 import com.user_management_service.validation.CreateGroup;
-import jakarta.ws.rs.ProcessingException;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.UsersResource;
-import org.keycloak.common.VerificationException;
 import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.*;
 import org.slf4j.*;
@@ -22,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -42,7 +41,7 @@ public class AuthenticationService {
     @Value("${keycloak.password}")
     private String password;
 
-    public AccessTokenResponse login(AuthenticationRequest authenticationRequest) {
+    public AccessTokenResponse login(@Validated AuthenticationRequest authenticationRequest) {
         try {
             var keycloak = keycloakConfig.getInstance(authenticationRequest.username(), authenticationRequest.password());
             return keycloak.tokenManager().getAccessToken();
@@ -76,13 +75,12 @@ public class AuthenticationService {
         userRepresentation.setEmailVerified(false);
         userRepresentation.setTotp(false);
         userRepresentation.setCredentials(Collections.singletonList(keycloakConfig.createPasswordCredentials(customer.getPassword())));
-//        userRepresentation.setRealmRoles(Collections.singletonList(customer.getRole().name()));
-//        userRepresentation.setGroups(Collections.singletonList(customer.getRole().name()));
+        userRepresentation.setGroups(Collections.singletonList(customer.getRole().name()));
         Map<String, List<String>> attributes = new HashMap<>();
         attributes.put("phoneNumber", Collections.singletonList(customer.getPhoneNumber()));
         attributes.put("dateOfBirth", Collections.singletonList(customer.getDateOfBirth().toString()));
         attributes.put("gender", Collections.singletonList(customer.getGender().name()));
-        attributes.put("lastLogin", Collections.singletonList("null"));
+        attributes.put("lastLogin", Collections.singletonList(LocalDateTime.now().toString()));
         attributes.put("languagePreference", Collections.singletonList(customer.getLanguagePreference().name()));
         attributes.put("status", Collections.singletonList(customer.getStatus().name()));
         attributes.put("profilePicture", Collections.singletonList(customer.getProfilePicture()));
@@ -94,6 +92,16 @@ public class AuthenticationService {
             String responseBody = response.readEntity(String.class);
             if (response.getStatus() == Response.Status.CREATED.getStatusCode()) {
                 logger.info("User {} created successfully in Keycloak", customer.getUsername());
+//                String userId = response.getLocation().getPath().replaceAll(".*/([^/]+)$", "$1");
+//                String groupName = customer.getRole().name();
+//                var groupsResource = keycloak.realm(realm).groups();
+//                List<GroupRepresentation> groups = groupsResource.groups();
+//                GroupRepresentation group = groups.stream()
+//                        .filter(g -> g.getName().equals(groupName))
+//                        .findFirst()
+//                        .orElseThrow(() -> new KeycloakException("Group not found", List.of("Group " + groupName + " does not exist in Keycloak")));
+//                usersResource.get(userId).joinGroup(group.getId());
+//                logger.info("User {} created and added to group {}", customer.getUsername(), groupName);
             } else {
                 List<String> details = List.of(
                         "Status: " + response.getStatus(),

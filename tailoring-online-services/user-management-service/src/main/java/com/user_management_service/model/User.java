@@ -3,21 +3,14 @@ package com.user_management_service.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.user_management_service.enums.*;
 import com.user_management_service.validation.*;
-import jakarta.validation.Constraint;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
-import jakarta.validation.Payload;
+import jakarta.validation.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.validator.constraints.URL;
 
 import java.io.Serializable;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.Period;
+import java.lang.annotation.*;
+import java.time.*;
 
 @Getter
 @Setter
@@ -59,14 +52,16 @@ public class User implements Serializable {
     @Pattern(regexp = "^(\\+\\d{1,2}\\s?)?\\(?\\d{1,4}\\)?[\\s\\-]?\\d{1,4}[\\s\\-]?\\d{1,4}[\\s\\-]?\\d{1,9}$", message = "Invalid phone number format", groups = {CreateGroup.class, UpdateGroup.class})
     private String phoneNumber;
 
-    private String profilePicture;
+    @URL(message = "Profile picture must be a valid URL", groups = {CreateGroup.class, UpdateGroup.class})
+    private String profilePicture = "https://res.cloudinary.com/dqegda2km/image/upload/v1730966537/sxdg6zledc1fjvwxs61q.webp"; // URL par défaut
 
     @NotNull(message = "Date of birth cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
     @Past(message = "Date of birth must be in the past", groups = {CreateGroup.class, UpdateGroup.class})
     @DateOfBirthValidation(message = "User must be at least 18 years old")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
-    private Date lastLogin;
+    @NotNull(message = "Last login cannot be null", groups = {UpdateGroup.class})
+    private LocalDateTime lastLogin;
 
     @NotNull(message = "Status cannot be null", groups = {UpdateGroup.class})
     private Status status = Status.INACTIVE;
@@ -86,7 +81,7 @@ public class User implements Serializable {
         Class<? extends Payload>[] payload() default {};
     }
 
-    public static class AgeValidator implements ConstraintValidator<DateOfBirthValidation, Date> {
+    public static class AgeValidator implements ConstraintValidator<DateOfBirthValidation, LocalDate> {
 
         private String message;
 
@@ -96,13 +91,12 @@ public class User implements Serializable {
         }
 
         @Override
-        public boolean isValid(Date dateOfBirth, ConstraintValidatorContext context) {
+        public boolean isValid(LocalDate dateOfBirth, ConstraintValidatorContext context) {
             if (dateOfBirth == null) {
                 return true;
             }
-            LocalDate dob = dateOfBirth.toLocalDate();
-            LocalDate now = LocalDate.now();
-            int age = Period.between(dob, now).getYears();
+
+            int age = Period.between(dateOfBirth, LocalDate.now()).getYears();
 
             if (age < 18) {
                 context.disableDefaultConstraintViolation();

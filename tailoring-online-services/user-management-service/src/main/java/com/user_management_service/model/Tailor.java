@@ -6,7 +6,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.*;
 import java.util.List;
 
 @Getter
@@ -32,7 +32,7 @@ public class Tailor extends User implements Serializable {
         this.setRole(Role.TAILOR);
     }
 
-    public Tailor(String username, String password, String email, Role role, String firstName, String lastName, String phoneNumber, String profilePicture, Date dateOfBirth, Date lastLogin, Status status, LanguagePreference languagePreference, Gender gender, String bio, List<Speciality> specialties, Double rating) {
+    public Tailor(String username, String password, String email, Role role, String firstName, String lastName, String phoneNumber, String profilePicture, LocalDate dateOfBirth, LocalDateTime lastLogin, Status status, LanguagePreference languagePreference, Gender gender, String bio, List<Speciality> specialties, Double rating) {
         super(username, password, email, role, firstName, lastName, phoneNumber, profilePicture, dateOfBirth, lastLogin, status, languagePreference, gender);
         this.bio = bio;
         this.specialties = specialties;

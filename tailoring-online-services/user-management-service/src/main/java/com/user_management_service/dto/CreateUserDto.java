@@ -2,13 +2,13 @@ package com.user_management_service.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.user_management_service.enums.*;
+import com.user_management_service.model.User;
 import com.user_management_service.validation.CreateGroup;
 import jakarta.validation.*;
 import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
 import java.lang.annotation.*;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -47,7 +47,7 @@ public record CreateUserDto(
         @NotNull(message = "Date of birth cannot be null", groups = {CreateGroup.class})
         @Past(message = "Date of birth must be in the past", groups = {CreateGroup.class})
         @CreateUserDto.DateOfBirthValidation(message = "User must be at least 18 years old")
-        Date dateOfBirth,
+        LocalDate dateOfBirth,
 
         @NotNull(message = "Language preference cannot be null", groups = {CreateGroup.class})
         LanguagePreference languagePreference,
@@ -58,35 +58,36 @@ public record CreateUserDto(
 
     @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE})
     @Retention(RetentionPolicy.RUNTIME)
-    @Constraint(validatedBy = AgeValidator.class)
+    @Constraint(validatedBy = User.AgeValidator.class)
     public @interface DateOfBirthValidation {
         String message() default "User must be at least 18 years old";
-        Class<?>[] groups() default {CreateGroup.class};
+        Class<?>[] groups() default {};
         Class<? extends Payload>[] payload() default {};
     }
 
-    public static class AgeValidator implements ConstraintValidator<DateOfBirthValidation, Date> {
+    public static class AgeValidator implements ConstraintValidator<User.DateOfBirthValidation, LocalDate> {
+
         private String message;
 
         @Override
-        public void initialize(DateOfBirthValidation constraintAnnotation) {
+        public void initialize(User.DateOfBirthValidation constraintAnnotation) {
             this.message = constraintAnnotation.message();
         }
 
         @Override
-        public boolean isValid(Date dateOfBirth, ConstraintValidatorContext context) {
+        public boolean isValid(LocalDate dateOfBirth, ConstraintValidatorContext context) {
             if (dateOfBirth == null) {
                 return true;
             }
-            LocalDate dob = dateOfBirth.toLocalDate();
-            LocalDate now = LocalDate.now();
-            int age = Period.between(dob, now).getYears();
+
+            int age = Period.between(dateOfBirth, LocalDate.now()).getYears();
 
             if (age < 18) {
                 context.disableDefaultConstraintViolation();
                 context.buildConstraintViolationWithTemplate(this.message).addConstraintViolation();
                 return false;
             }
+
             return true;
         }
     }

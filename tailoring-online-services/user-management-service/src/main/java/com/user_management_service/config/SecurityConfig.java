@@ -1,5 +1,6 @@
 package com.user_management_service.config;
 
+import com.user_management_service.enums.Role;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
