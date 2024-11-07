@@ -24,6 +24,7 @@ public class User implements Serializable {
     private String username;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @PasswordValidation(message = "Password cannot contain username or email", groups = {CreateGroup.class, UpdateGroup.class} )
     @NotBlank(message = "Password cannot be empty", groups = {CreateGroup.class, UpdateGroup.class})
     @Size(min = 8, message = "Password must be at least 8 characters long", groups = {CreateGroup.class, UpdateGroup.class})
     @Pattern(regexp = ".*[A-Z].*", message = "Password must contain at least one uppercase letter", groups = {CreateGroup.class, UpdateGroup.class})
@@ -53,7 +54,7 @@ public class User implements Serializable {
     private String phoneNumber;
 
     @URL(message = "Profile picture must be a valid URL", groups = {CreateGroup.class, UpdateGroup.class})
-    private String profilePicture = "https://res.cloudinary.com/dqegda2km/image/upload/v1730966537/sxdg6zledc1fjvwxs61q.webp"; // URL par défaut
+    private String profilePicture = "https://res.cloudinary.com/dqegda2km/image/upload/v1730966537/sxdg6zledc1fjvwxs61q.webp";
 
     @NotNull(message = "Date of birth cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
     @Past(message = "Date of birth must be in the past", groups = {CreateGroup.class, UpdateGroup.class})
@@ -105,6 +106,29 @@ public class User implements Serializable {
             }
 
             return true;
+        }
+    }
+
+    @Target({ ElementType.FIELD, ElementType.METHOD })
+    @Retention(RetentionPolicy.RUNTIME)
+    @Constraint(validatedBy = PasswordValidator.class)
+    public @interface PasswordValidation {
+        String message() default "Password cannot contain username or email";
+        Class<?>[] groups() default {};
+        Class<? extends Payload>[] payload() default {};
+    }
+
+    public static class PasswordValidator implements ConstraintValidator<PasswordValidation, String> {
+
+        @Override
+        public boolean isValid(String password, ConstraintValidatorContext context) {
+            if (password == null) {
+                return true;
+            }
+            Tailor tailor = (Tailor) context.unwrap(Tailor.class);
+            String username = tailor.getUsername();
+            String email = tailor.getEmail();
+            return !password.contains(username) && (email == null || !password.contains(email));
         }
     }
 }

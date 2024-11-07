@@ -2,8 +2,10 @@ package com.user_management_service.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.user_management_service.enums.*;
+import com.user_management_service.model.Tailor;
 import com.user_management_service.model.User;
 import com.user_management_service.validation.CreateGroup;
+import com.user_management_service.validation.UpdateGroup;
 import jakarta.validation.*;
 import jakarta.validation.constraints.*;
 
@@ -19,6 +21,7 @@ public record CreateUserDto(
         String username,
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+        @PasswordValidation(message = "Password cannot contain username or email", groups = {CreateGroup.class} )
         @NotBlank(message = "Password cannot be empty", groups = {CreateGroup.class})
         @Size(min = 8, message = "Password must be at least 8 characters long", groups = {CreateGroup.class})
         @Pattern(regexp = ".*[A-Z].*", message = "Password must contain at least one uppercase letter", groups = {CreateGroup.class})
@@ -89,6 +92,29 @@ public record CreateUserDto(
             }
 
             return true;
+        }
+    }
+
+    @Target({ ElementType.FIELD, ElementType.METHOD })
+    @Retention(RetentionPolicy.RUNTIME)
+    @Constraint(validatedBy = User.PasswordValidator.class)
+    public @interface PasswordValidation {
+        String message() default "Password cannot contain username or email";
+        Class<?>[] groups() default {};
+        Class<? extends Payload>[] payload() default {};
+    }
+
+    public static class PasswordValidator implements ConstraintValidator<User.PasswordValidation, String> {
+
+        @Override
+        public boolean isValid(String password, ConstraintValidatorContext context) {
+            if (password == null) {
+                return true;
+            }
+            Tailor tailor = (Tailor) context.unwrap(Tailor.class);
+            String username = tailor.getUsername();
+            String email = tailor.getEmail();
+            return !password.contains(username) && (email == null || !password.contains(email));
         }
     }
 }
