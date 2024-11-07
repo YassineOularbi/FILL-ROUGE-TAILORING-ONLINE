@@ -1,5 +1,6 @@
 package com.user_management_service.controller;
 
+import com.user_management_service.dto.AuthenticationRequest;
 import com.user_management_service.dto.CreateCustomerDto;
 import com.user_management_service.service.AuthenticationService;
 import jakarta.validation.Valid;
@@ -15,14 +16,16 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest) {
+        var response = authenticationService.login(authenticationRequest);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/register-customer")
     public ResponseEntity<?> register(@Valid @RequestBody CreateCustomerDto createCustomerDto) {
-        try {
-            authenticationService.registerCustomer(createCustomerDto);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+        authenticationService.registerCustomer(createCustomerDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }
