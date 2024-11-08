@@ -15,8 +15,8 @@
         </processorPath>
         <module name="store-management-service" />
         <module name="loyalty-program-service" />
-        <module name="cloudinary-service" />
         <module name="localization-shipping-service" />
+        <module name="cloudinary-service" />
         <module name="eureka-server" />
         <module name="notification-mailing-service" />
         <module name="payment-banking-service" />

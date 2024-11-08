@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @AllArgsConstructor
@@ -23,9 +24,11 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register-customer")
-    public ResponseEntity<?> register(@Valid @RequestBody CreateCustomerDto createCustomerDto) {
+    public ResponseEntity<?> register(
+            @Valid @RequestBody CreateCustomerDto createCustomerDto,
+            @RequestParam(required = false, name = "profilePicture") MultipartFile profilePicture
+    ) {
         authenticationService.registerCustomer(createCustomerDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
 }
