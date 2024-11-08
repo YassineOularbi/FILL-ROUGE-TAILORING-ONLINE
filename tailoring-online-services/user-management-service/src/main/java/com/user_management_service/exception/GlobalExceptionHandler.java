@@ -37,6 +37,11 @@ public class GlobalExceptionHandler {
         return createErrorResponse(HttpStatus.UNAUTHORIZED, "Authentication Failed", ex.getMessage(), request, Collections.singletonList("Invalid username or password"));
     }
 
+    @ExceptionHandler(RegistrationException.class)
+    public ResponseEntity<ErrorResponse> handleRegistrationException(RegistrationException ex, WebRequest request) {
+        return createErrorResponse(HttpStatus.BAD_REQUEST, "Validation Error", ex.getMessage(), request, ex.getDetails());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, WebRequest request) {
         List<String> validationErrors = ex.getBindingResult()

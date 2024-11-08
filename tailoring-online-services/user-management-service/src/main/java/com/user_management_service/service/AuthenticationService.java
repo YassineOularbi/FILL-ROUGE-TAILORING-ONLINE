@@ -1,11 +1,8 @@
 package com.user_management_service.service;
 
 import com.user_management_service.config.KeycloakConfig;
-import com.user_management_service.dto.AuthenticationRequest;
-import com.user_management_service.dto.CreateCustomerDto;
-import com.user_management_service.exception.AuthenticationException;
-import com.user_management_service.exception.KeycloakException;
-import com.user_management_service.exception.UserAlreadyExistsException;
+import com.user_management_service.dto.*;
+import com.user_management_service.exception.*;
 import com.user_management_service.mapper.CustomerMapper;
 import com.user_management_service.validation.CreateGroup;
 import jakarta.ws.rs.core.Response;
@@ -41,7 +38,7 @@ public class AuthenticationService {
     @Value("${keycloak.password}")
     private String password;
 
-    public AccessTokenResponse login(@Validated AuthenticationRequest authenticationRequest) {
+    public AccessTokenResponse login(AuthenticationRequest authenticationRequest) {
         try {
             var keycloak = keycloakConfig.getInstance(authenticationRequest.username(), authenticationRequest.password());
             return keycloak.tokenManager().getAccessToken();
@@ -53,6 +50,7 @@ public class AuthenticationService {
 
     public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto) {
         var customer = customerMapper.toCreateEntity(createCustomerDto);
+        passwordValidator(customer.getPassword(), customer.getUsername(), customer.getEmail());
         logger.info("Starting to add user: {}", customer.getUsername());
         Keycloak keycloak = keycloakConfig.getInstance(username, password);
         UsersResource usersResource = keycloak.realm(realm).users();
@@ -92,16 +90,6 @@ public class AuthenticationService {
             String responseBody = response.readEntity(String.class);
             if (response.getStatus() == Response.Status.CREATED.getStatusCode()) {
                 logger.info("User {} created successfully in Keycloak", customer.getUsername());
-//                String userId = response.getLocation().getPath().replaceAll(".*/([^/]+)$", "$1");
-//                String groupName = customer.getRole().name();
-//                var groupsResource = keycloak.realm(realm).groups();
-//                List<GroupRepresentation> groups = groupsResource.groups();
-//                GroupRepresentation group = groups.stream()
-//                        .filter(g -> g.getName().equals(groupName))
-//                        .findFirst()
-//                        .orElseThrow(() -> new KeycloakException("Group not found", List.of("Group " + groupName + " does not exist in Keycloak")));
-//                usersResource.get(userId).joinGroup(group.getId());
-//                logger.info("User {} created and added to group {}", customer.getUsername(), groupName);
             } else {
                 List<String> details = List.of(
                         "Status: " + response.getStatus(),
@@ -118,4 +106,16 @@ public class AuthenticationService {
         }
     }
 
+    private void passwordValidator(String password, String username, String email) {
+        List<String> errors = new ArrayList<>();
+        if (password.contains(username)) {
+            errors.add("Password cannot contain username.");
+        }
+        if (password.contains(email)) {
+            errors.add("Password cannot contain email.");
+        }
+        if (!errors.isEmpty()) {
+            throw new RegistrationException("Invalid input provided", errors);
+        }
+    }
 }
