@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/services/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/services/product.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/actions/pagination.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/actions/pagination.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/pagination.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/pagination.state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/reducers/pagination.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/reducers/pagination.reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/selectors/pagination.selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/core/stores/pagination/selectors/pagination.selectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/_components/measurements/measurements.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/_components/measurements/measurements.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/_components/measurements/measurements.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/_components/measurements/measurements.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/_components/options/options.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/_components/options/options.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/_components/options/options.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/customization/_components/options/options.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/_auth/signin/signin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/features/home/_components/_auth/signin/signin.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/pagination/pagination.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/product/product.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/product/product.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/product/product.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../tailoring-online-interfaces/src/app/shared/_components/product/product.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/logs/tailoring-online.log" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Record" />
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/config-repo" />
+  </component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2lRK8zM6aLEfbBEtM5Kj0PLnu1O" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.docker-compose.yml.api-gateway-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.elasticsearch: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.eureka-server: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.jenkins: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.kafka: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.kibana: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.localization-shipping-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.logstash: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.loyalty-program-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.notification-mailing-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.order-management-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.payment-banking-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.promotion-management-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.review-management-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.social-management-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.social_db: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.user-management-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.user_db: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.zookeeper: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.deleteAddress_NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.getAddressById_NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.getAllAddresses_Exception.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.getAllAddresses_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.getAllAddresses_Success_WithDifferentPagination.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.search_NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressControllerTests.updateAddress_NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AdminControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthenticationControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthenticationControllerTests.login_Unauthorized.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthenticationControllerTests.sendOtpByEmail_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthenticationControllerTests.sendVerificationCode_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthenticationControllerTests.verifyEmail_Success.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.AuthenticationControllerTests.verifyOtpCode_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BankControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizableMeasurementControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizableOptionControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedMeasurementControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedMeasurementControllerTests.filterCustomizedMeasurements_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedMeasurementControllerTests.getAllCustomizedMeasurements_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedMeasurementControllerTests.searchCustomizedMeasurements_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedOptionControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedOptionControllerTests.filterCustomizedOptions_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedOptionControllerTests.searchCustomizedOptions_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedProductControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomizedProductControllerTests.searchCustomizedProducts_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmailControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmailControllerTests.sendVerificationCode_Failure.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmailControllerTests.sendVerificationCode_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LocalizationShippingServiceApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MaterialControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MaterialOptionControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MeasurementControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StoreControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TailorControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ThreeDModelControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserControllerTests.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.api-gateway-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.api-gateway-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.config-server [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.config-server [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.localization-shipping-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.localization-shipping-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.notification-mailing-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.notification-mailing-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.store-management-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.store-management-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.store-management-service [site].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tailoring-online-services [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tailoring-online-services [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tailoring-online-services [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tailoring-online-services [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [site].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-management-service [verify].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApiGatewayServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.CloudinaryServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.LocalizationShippingServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.LoyaltyProgramServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.NotificationMailingServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.OrderManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.PaymentBankingServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ProductManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.PromotionManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ReviewManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.SocialManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.StoreManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.UserManagementServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Desktop/ENAA-CHALLENGES-WORKSHOP-PROJECT/BRIEFS-ENAA-SIMPLONE/FILL-ROUGE/tailoring-online-services/cloudinary-service/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\cloudinary-service\src\main\resources" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\user-management-service\src\main\java\com\user_management_service\config" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\store-management-service\src\main\java\com\store_management_service\config" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\social-management-service\src\main\java\com\social_management_service\config" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\user-management-service\src\main\resources" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\notification-mailing-service\src\main\java\com\notification_mailing_service\controller" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\service" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\repository" />
+      <recent name="C:\Users\user\Desktop\ENAA-CHALLENGES-WORKSHOP-PROJECT\BRIEFS-ENAA-SIMPLONE\FILL-ROUGE\tailoring-online-services\payment-banking-service\src\main\java\com\payment_banking_service\model" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.store_management_service.service" />
+      <recent name="com.payment_banking_service.service" />
+      <recent name="com.payment_banking_service.service.elasticsearch" />
+      <recent name="com.payment_banking_service.repository.elasticsearch" />
+      <recent name="com.order_management_service.service" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.EmailControllerTests.sendVerificationCode_Failure">
+    <configuration name="CustomizableOptionControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="store-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.store_management_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.store_management_service" />
+      <option name="MAIN_CLASS_NAME" value="com.store_management_service.CustomizableOptionControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmailControllerTests.sendVerificationCode_Failure" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="notification-mailing-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.notification_mailing_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.notification_mailing_service" />
+      <option name="MAIN_CLASS_NAME" value="com.notification_mailing_service.EmailControllerTests" />
+      <option name="METHOD_NAME" value="sendVerificationCode_Failure" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmailControllerTests.sendVerificationCode_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="notification-mailing-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.notification_mailing_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.notification_mailing_service" />
+      <option name="MAIN_CLASS_NAME" value="com.notification_mailing_service.EmailControllerTests" />
+      <option name="METHOD_NAME" value="sendVerificationCode_Success" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ApiGatewayServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="api-gateway-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.api_gateway_service.ApiGatewayServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CloudinaryServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="cloudinary-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloudinary_service.CloudinaryServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="config-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.config_server.ConfigServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="eureka-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.eureka_server.EurekaServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LocalizationShippingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="localization-shipping-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.localization_shipping_service.LocalizationShippingServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoyaltyProgramServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="loyalty-program-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.loyalty_program_service.LoyaltyProgramServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotificationMailingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="notification-mailing-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.notification_mailing_service.NotificationMailingServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderManagementServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="order-management-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.order_management_service.OrderManagementServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PaymentBankingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="payment-banking-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.payment_banking_service.PaymentBankingServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PromotionManagementServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="promotion-management-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.promotion_management_service.PromotionManagementServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReviewManagementServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="review-management-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.review_management_service.ReviewManagementServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SocialManagementServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="social-management-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.social_management_service.SocialManagementServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StoreManagementServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="store-management-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.store_management_service.StoreManagementServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserManagementServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="user-management-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.user_management_service.UserManagementServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.kafka: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="kafka" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.zookeeper: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="zookeeper" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Docker.docker-compose.yml.kafka: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.zookeeper: Compose Deployment" />
+      <item itemvalue="JUnit.EmailControllerTests.sendVerificationCode_Failure" />
+      <item itemvalue="JUnit.EmailControllerTests.sendVerificationCode_Success" />
+      <item itemvalue="JUnit.CustomizableOptionControllerTests" />
+      <item itemvalue="Spring Boot.CloudinaryServiceApplication" />
+      <item itemvalue="Spring Boot.LocalizationShippingServiceApplication" />
+      <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
+      <item itemvalue="Spring Boot.ConfigServerApplication" />
+      <item itemvalue="Spring Boot.EurekaServerApplication" />
+      <item itemvalue="Spring Boot.NotificationMailingServiceApplication" />
+      <item itemvalue="Spring Boot.OrderManagementServiceApplication" />
+      <item itemvalue="Spring Boot.PaymentBankingServiceApplication" />
+      <item itemvalue="Spring Boot.StoreManagementServiceApplication" />
+      <item itemvalue="Spring Boot.UserManagementServiceApplication" />
+      <item itemvalue="Spring Boot.ReviewManagementServiceApplication" />
+      <item itemvalue="Spring Boot.LoyaltyProgramServiceApplication" />
+      <item itemvalue="Spring Boot.PromotionManagementServiceApplication" />
+      <item itemvalue="Spring Boot.SocialManagementServiceApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.EmailControllerTests.sendVerificationCode_Failure" />
+        <item itemvalue="JUnit.EmailControllerTests.sendVerificationCode_Success" />
+        <item itemvalue="Docker.docker-compose.yml.kafka: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.zookeeper: Compose Deployment" />
+        <item itemvalue="JUnit.CustomizableOptionControllerTests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="607a0108-1de0-42ec-a042-f6185f43dcfe" name="Changes" comment="" />
+      <created>1725137295874</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1725137295874</updated>
+      <workItem from="1725137560987" duration="32213000" />
+      <workItem from="1725222488321" duration="22585000" />
+      <workItem from="1725262433198" duration="19181000" />
+      <workItem from="1725324745322" duration="52538000" />
+      <workItem from="1725491720818" duration="1503000" />
+      <workItem from="1725493924606" duration="55893000" />
+      <workItem from="1725752634152" duration="22249000" />
+      <workItem from="1725876739826" duration="281000" />
+      <workItem from="1725877704667" duration="625000" />
+      <workItem from="1725880792858" duration="1900000" />
+      <workItem from="1726498056611" duration="5000" />
+      <workItem from="1726498092610" duration="45349000" />
+      <workItem from="1726743533849" duration="19433000" />
+      <workItem from="1727183041514" duration="74615000" />
+      <workItem from="1727473377634" duration="4871000" />
+      <workItem from="1727537137353" duration="33539000" />
+      <workItem from="1727727804977" duration="18013000" />
+      <workItem from="1727862631672" duration="19140000" />
+      <workItem from="1728091545304" duration="1879000" />
+      <workItem from="1728093475014" duration="9807000" />
+      <workItem from="1728222144305" duration="2694000" />
+      <workItem from="1728348202169" duration="604000" />
+      <workItem from="1728431981266" duration="24186000" />
+      <workItem from="1728776041475" duration="12832000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/user-management-service/src/main/java/com/user_management_service/config/FeignClientConfig.java</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
