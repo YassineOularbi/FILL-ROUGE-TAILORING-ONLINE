@@ -1,7 +1,6 @@
 package com.user_management_service;
 
 import com.user_management_service.controller.CustomerController;
-import com.user_management_service.dto.CustomerDto;
 import com.user_management_service.exception.CustomerNotFoundException;
 import com.user_management_service.model.Customer;
 import com.user_management_service.service.CustomerService;

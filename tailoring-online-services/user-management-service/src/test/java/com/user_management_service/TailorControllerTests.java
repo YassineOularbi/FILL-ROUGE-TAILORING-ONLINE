@@ -1,7 +1,6 @@
 package com.user_management_service;
 
 import com.user_management_service.controller.TailorController;
-import com.user_management_service.dto.TailorDto;
 import com.user_management_service.exception.TailorNotFoundException;
 import com.user_management_service.model.Tailor;
 import com.user_management_service.service.TailorService;

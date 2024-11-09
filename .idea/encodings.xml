@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/api-gateway-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/cloudinary-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/config-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/eureka-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/localization-shipping-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/loyalty-program-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/notification-mailing-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/order-management-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/payment-banking-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/promotion-management-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/review-management-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/social-management-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/store-management-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tailoring-online-services/user-management-service/src/main/java" charset="UTF-8" />
+  </component>
+</project>

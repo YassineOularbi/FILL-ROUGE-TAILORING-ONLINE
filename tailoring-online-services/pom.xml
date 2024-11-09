@@ -43,18 +43,6 @@
     <lombok.version>1.18.32</lombok.version>
     <junit.jupiter.version>5.9.3</junit.jupiter.version>
     <mysql.connector.version>8.0.30</mysql.connector.version>
-    <sonar.projectKey>tailoring-online</sonar.projectKey>
-    <sonar.projectName>tailoring-online</sonar.projectName>
-    <sonar.projectVersion>0.0.1-SNAPSHOT</sonar.projectVersion>
-    <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
-    <sonar.java.source>17</sonar.java.source>
-    <sonar.java.enablePreview>true</sonar.java.enablePreview>
-    <sonar.sources>src/main/java</sonar.sources>
-    <sonar.tests>src/test/java</sonar.tests>
-    <sonar.coverage.exclusions>**/target/**, **/src/**</sonar.coverage.exclusions>
-    <sonar.cpd.exclusions>**/target/**, **/src/**</sonar.cpd.exclusions>
-    <sonar.java.binaries>target/classes</sonar.java.binaries>
-    <sonar.junit.reportsPath>**/target/surefire-reports/TEST-*.xml</sonar.junit.reportsPath>
   </properties>
 
   <dependencyManagement>
@@ -77,34 +65,6 @@
   </dependencyManagement>
 
   <dependencies>
-    <!-- Spring Boot Dependencies -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-mysql</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-    </dependency>
-
-    <!-- MySQL Connector Dependency -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>${mysql.connector.version}</version>
-    </dependency>
 
     <!-- Lombok for reducing boilerplate code -->
     <dependency>
@@ -114,25 +74,13 @@
       <optional>true</optional>
     </dependency>
 
-    <!-- MapStruct -->
-    <dependency>
-      <groupId>org.mapstruct</groupId>
-      <artifactId>mapstruct</artifactId>
-      <version>${org.mapstruct.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.mapstruct</groupId>
-      <artifactId>mapstruct-processor</artifactId>
-      <version>${org.mapstruct.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
     <!-- Swagger -->
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
       <version>${springdoc.version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
@@ -147,19 +95,20 @@
     </dependency>
 
     <!-- JUnit 5 Dependencies -->
-
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit.jupiter.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.jupiter.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
@@ -199,12 +148,12 @@
       <artifactId>spring-cloud-starter-bootstrap</artifactId>
     </dependency>
 
-
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
       <version>${springdoc.version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
@@ -237,6 +186,7 @@
       <groupId>io.github.resilience4j</groupId>
       <artifactId>resilience4j-spring-boot3</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-aop</artifactId>
@@ -270,7 +220,6 @@
               </dependency>
             </annotationProcessorPaths>
             <compilerArgs>
-              <arg>--enable-preview</arg>
               <compilerArg>
                 -Amapstruct.defaultComponentModel=spring
               </compilerArg>

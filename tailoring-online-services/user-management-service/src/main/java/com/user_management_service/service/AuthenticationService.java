@@ -1,33 +1,24 @@
 package com.user_management_service.service;
 
-import com.user_management_service.client.NotificationMailingClient;
 import com.user_management_service.config.KeycloakConfig;
-import com.user_management_service.dto.AuthenticationRequest;
-import com.user_management_service.dto.UserDto;
-import com.user_management_service.exception.AuthenticationException;
-import com.user_management_service.exception.EmailVerificationException;
-import com.user_management_service.exception.KeycloakServiceException;
-import com.user_management_service.exception.UserNotFoundException;
-import com.user_management_service.model.User;
-import com.user_management_service.repository.UserRepository;
+import com.user_management_service.dto.*;
+import com.user_management_service.exception.*;
+import com.user_management_service.mapper.CustomerMapper;
+import com.user_management_service.validation.CreateGroup;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 import org.keycloak.admin.client.Keycloak;
-import org.keycloak.admin.client.resource.*;
-
+import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.AccessTokenResponse;
-import org.keycloak.representations.idm.ClientRepresentation;
-import org.keycloak.representations.idm.RoleRepresentation;
-import org.keycloak.representations.idm.UserRepresentation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.keycloak.representations.idm.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 @Transactional
@@ -35,8 +26,8 @@ import java.util.List;
 public class AuthenticationService {
 
     private final KeycloakConfig keycloakConfig;
-    private final UserRepository userRepository;
-    private final NotificationMailingClient notificationMailingClient;
+    private final CustomerMapper customerMapper;
+    private final Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
 
     @Value("${keycloak.realm}")
     private String realm;
@@ -47,174 +38,84 @@ public class AuthenticationService {
     @Value("${keycloak.password}")
     private String password;
 
-    @Value("${keycloak.resource}")
-    private String clientId;
-
-
     public AccessTokenResponse login(AuthenticationRequest authenticationRequest) {
         try {
-            var keycloak = keycloakConfig.getInstance(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+            var keycloak = keycloakConfig.getInstance(authenticationRequest.username(), authenticationRequest.password());
             return keycloak.tokenManager().getAccessToken();
         } catch (Exception e) {
-            throw new AuthenticationException("Failed to authenticate user");
+            throw new AuthenticationException("Invalid credentials");
         }
     }
 
-    public String addUser(User user) {
-        Logger logger = LoggerFactory.getLogger(getClass());
 
-        logger.info("Starting to add user: {}", user.getUsername());
-        System.out.println("Starting to add user: " + user.getUsername());
-
+    public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto) {
+        var customer = customerMapper.toCreateEntity(createCustomerDto);
+        passwordValidator(customer.getPassword(), customer.getUsername(), customer.getEmail());
+        logger.info("Starting to add user: {}", customer.getUsername());
         Keycloak keycloak = keycloakConfig.getInstance(username, password);
         UsersResource usersResource = keycloak.realm(realm).users();
-
+        List<UserRepresentation> existingUsersByUsername = usersResource.search(customer.getUsername(), true);
+        if (!existingUsersByUsername.isEmpty()) {
+            List<String> details = List.of("User with username " + customer.getUsername() + " already exists.");
+            throw new UserAlreadyExistsException("User with username " + customer.getUsername() + " already exists.", details);
+        }
+        List<UserRepresentation> existingUsersByEmail = usersResource.search(null, null, null, customer.getEmail(), 0, 1);
+        if (!existingUsersByEmail.isEmpty()) {
+            List<String> details = List.of("User with email " + customer.getEmail() + " already exists.");
+            throw new UserAlreadyExistsException("User with email " + customer.getEmail() + " already exists.", details);
+        }
         UserRepresentation userRepresentation = new UserRepresentation();
-        userRepresentation.setUsername(user.getUsername());
-        userRepresentation.setFirstName(user.getFirstName());
-        userRepresentation.setLastName(user.getLastName());
-        userRepresentation.setEmail(user.getEmail());
-        userRepresentation.setEnabled(true);
+        userRepresentation.setUsername(customer.getUsername());
+        userRepresentation.setFirstName(customer.getFirstName());
+        userRepresentation.setLastName(customer.getLastName());
+        userRepresentation.setEmail(customer.getEmail());
+        userRepresentation.setEnabled(false);
         userRepresentation.setEmailVerified(false);
-
-        if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            logger.error("Password is null or empty for user: {}", user.getUsername());
-            System.out.println("Error: Password is null or empty for user: " + user.getUsername());
-            throw new IllegalArgumentException("Password cannot be null or empty");
-        }
-        logger.info("Creating password credentials for user: {}", user.getUsername());
-
-        userRepresentation.setCredentials(Collections.singletonList(keycloakConfig.createPasswordCredentials(user.getPassword())));
-
+        userRepresentation.setTotp(false);
+        userRepresentation.setCredentials(Collections.singletonList(keycloakConfig.createPasswordCredentials(customer.getPassword())));
+        userRepresentation.setGroups(Collections.singletonList(customer.getRole().name()));
+        Map<String, List<String>> attributes = new HashMap<>();
+        attributes.put("phoneNumber", Collections.singletonList(customer.getPhoneNumber()));
+        attributes.put("dateOfBirth", Collections.singletonList(customer.getDateOfBirth().toString()));
+        attributes.put("gender", Collections.singletonList(customer.getGender().name()));
+        attributes.put("lastLogin", Collections.singletonList(LocalDateTime.now().toString()));
+        attributes.put("languagePreference", Collections.singletonList(customer.getLanguagePreference().name()));
+        attributes.put("status", Collections.singletonList(customer.getStatus().name()));
+        attributes.put("profilePicture", Collections.singletonList(customer.getProfilePicture()));
+        attributes.put("loyaltyPoints", Collections.singletonList(customer.getLoyaltyPoints().toString()));
+        userRepresentation.setAttributes(attributes);
         logger.info("Attempting to create user in Keycloak: {}", userRepresentation);
-        System.out.println("Attempting to create user in Keycloak: " + userRepresentation);
-
-        Response response = usersResource.create(userRepresentation);
-        int status = response.getStatus();
-
-        logger.info("Received response status: {}", status);
-        System.out.println("Received response status: " + status);
-
-        if (status == Response.Status.CREATED.getStatusCode()) {
-            String locationHeader = response.getHeaderString("Location");
-            String userId = locationHeader.substring(locationHeader.lastIndexOf('/') + 1);
-            logger.info("User created successfully in Keycloak with ID: {}", userId);
-            System.out.println("User created successfully in Keycloak with ID: " + userId);
-
-            ClientRepresentation clientRepresentation = keycloak.realm(realm).clients().findByClientId(clientId).get(0);
-            String clientId = clientRepresentation.getId();
-            ClientResource clientResource = keycloak.realm(realm).clients().get(clientId);
-
-            String roleName = user.getRole().name();
-            logger.info("Assigning role: {} to user ID: {}", roleName, userId);
-            System.out.println("Assigning role: " + roleName + " to user ID: " + userId);
-
-            RoleRepresentation roleRepresentation = clientResource.roles().get(roleName).toRepresentation();
-            RoleScopeResource roleMappingResource = keycloak.realm(realm).users().get(userId).roles().clientLevel(clientId);
-            roleMappingResource.add(Collections.singletonList(roleRepresentation));
-
-            logger.info("Role {} assigned successfully to user ID: {}", roleName, userId);
-            System.out.println("Role " + roleName + " assigned successfully to user ID: " + userId);
-
-            return userId;
-        } else {
-            String errorMessage = response.readEntity(String.class);
-            logger.error("Failed to create user in Keycloak. HTTP Status: {}. Error: {}", status, errorMessage);
-            System.out.println("Failed to create user in Keycloak. HTTP Status: " + status + ". Error: " + errorMessage);
-            throw new KeycloakServiceException(String.format("Failed to create user in Keycloak. HTTP Status: %s. Error: %s", status, errorMessage));
-        }
-    }
-
-    public List<UserRepresentation> getUser(String userName) {
-        return keycloakConfig.getInstance(username, password).realm(realm).users().search(userName, true);
-    }
-
-    public String getUserEmailById(String userId) {
-        UsersResource usersResource = keycloakConfig.getInstance(username, password).realm(realm).users();
-        UserRepresentation user = usersResource.get(userId).toRepresentation();
-        return user.getEmail();
-    }
-
-    public void updateUser(String userId, UserDto user) {
-        UsersResource usersResource = keycloakConfig.getInstance(username, password).realm(realm).users();
-        UserRepresentation userRepresentation = new UserRepresentation();
-        userRepresentation.setUsername(user.getUsername());
-        userRepresentation.setFirstName(user.getFirstName());
-        userRepresentation.setLastName(user.getLastName());
-        userRepresentation.setEmail(user.getEmail());
-        userRepresentation.setEnabled(true);
-        userRepresentation.setEmailVerified(user.getEmailVerified());
-        userRepresentation.setCredentials(Collections.singletonList(keycloakConfig.createPasswordCredentials(user.getPassword())));
-        userRepresentation.setCreatedTimestamp(System.currentTimeMillis());
-        usersResource.get(userId).update(userRepresentation);
-    }
-
-    public void deleteUser(String userId) {
         try {
-            keycloakConfig.getInstance(username, password).realm(realm).users().get(userId).remove();
+            Response response = usersResource.create(userRepresentation);
+            String responseBody = response.readEntity(String.class);
+            if (response.getStatus() == Response.Status.CREATED.getStatusCode()) {
+                logger.info("User {} created successfully in Keycloak", customer.getUsername());
+            } else {
+                List<String> details = List.of(
+                        "Status: " + response.getStatus(),
+                        "Response: " + responseBody,
+                        "Reason: " + response.getStatusInfo()
+                );
+                logger.error("Failed to create user {} in Keycloak. Status: {}, Response: {}, Reason {}",
+                        customer.getUsername(), response.getStatus(), responseBody, response.getStatusInfo());
+                throw new KeycloakException("Failed to create user in Keycloak, status: " + response.getStatus() + ", reason: " + response.getStatusInfo(), details);
+            }
         } catch (Exception e) {
-            throw new KeycloakServiceException("Failed to delete user in Keycloak", e);
+            logger.error("An error occurred while trying to create user in Keycloak: {}", e.getMessage(), e);
+            throw new KeycloakException("An error occurred while creating user: " + e.getMessage(), Collections.singletonList(e.getMessage()));
         }
     }
 
-    public String sendVerificationCode(String id) {
-        var localUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-        var email = localUser.getEmail();
-        if (email != null && !email.isEmpty()) {
-            notificationMailingClient.sendVerificationCode(email);
+    private void passwordValidator(String password, String username, String email) {
+        List<String> errors = new ArrayList<>();
+        if (password.contains(username)) {
+            errors.add("Password cannot contain username.");
         }
-        return email;
-    }
-
-    public String verifyEmail(String id, String code) {
-        var localUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-        var email = localUser.getEmail();
-        if (email != null && !email.isEmpty()) {
-            ResponseEntity<String> response = notificationMailingClient.verifyEmail(email, code);
-            if (response.getStatusCode().is2xxSuccessful()) {
-                UsersResource usersResource = keycloakConfig.getInstance(username, password).realm(realm).users();
-                UserRepresentation userRepresentation = new UserRepresentation();
-                userRepresentation.setEnabled(true);
-                userRepresentation.setEmailVerified(true);
-                usersResource.get(id).update(userRepresentation);
-
-                localUser.setEmailVerified(true);
-                localUser.setIsVerified(true);
-                userRepository.save(localUser);
-            } else {
-                throw new EmailVerificationException("Invalid verification code");
-            }
-        } else {
-            throw new EmailVerificationException("Error during email verification");
+        if (password.contains(email)) {
+            errors.add("Password cannot contain email.");
         }
-        return email;
-    }
-
-    public String sendOtpVerification(String id) {
-        var localUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-        var email = localUser.getEmail();
-
-        if (email != null && !email.isEmpty()) {
-            notificationMailingClient.sendOTPByEmail(email);
-        }
-        return email;
-    }
-
-    public String verifyOtpCode(String id, String code) {
-        var localUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-        var email = localUser.getEmail();
-        if (email != null && !email.isEmpty()) {
-            ResponseEntity<String> response = notificationMailingClient.verifyEmail(email, code);
-            if (response.getStatusCode().is2xxSuccessful()) {
-                localUser.setIs2FAuth(true);
-                userRepository.save(localUser);
-                return email;
-            } else {
-                throw new EmailVerificationException("Invalid OTP code");
-            }
-        } else {
-            throw new EmailVerificationException("Error during OTP verification");
+        if (!errors.isEmpty()) {
+            throw new RegistrationException("Invalid input provided", errors);
         }
     }
-
 }

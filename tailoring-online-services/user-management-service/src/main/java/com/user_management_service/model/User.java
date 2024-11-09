@@ -2,121 +2,109 @@ package com.user_management_service.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.user_management_service.enums.*;
-import jakarta.persistence.*;
+import com.user_management_service.validation.*;
+import jakarta.validation.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.hibernate.validator.constraints.URL;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.Collection;
-import java.util.List;
+import java.lang.annotation.*;
+import java.time.*;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "user")
-public class User implements UserDetails, Serializable {
+public class User implements Serializable {
 
-    @Id
-    @Column(name = "id", nullable = false, unique = true)
-    private String id;
-
-    @Column(name = "username", nullable = false, unique = true)
+    @NotBlank(message = "Username cannot be empty", groups = {CreateGroup.class})
+    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters", groups = {CreateGroup.class})
+    @Pattern(regexp = "^[a-zA-Z0-9_]*$", message = "Username can only contain alphanumeric characters and underscores", groups = {CreateGroup.class})
     private String username;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column(name = "password", nullable = false, unique = true)
+    @NotBlank(message = "Password cannot be empty", groups = {CreateGroup.class, UpdateGroup.class})
+    @Size(min = 8, message = "Password must be at least 8 characters long", groups = {CreateGroup.class, UpdateGroup.class})
+    @Pattern(regexp = ".*[A-Z].*", message = "Password must contain at least one uppercase letter", groups = {CreateGroup.class, UpdateGroup.class})
+    @Pattern(regexp = ".*[a-z].*", message = "Password must contain at least one lowercase letter", groups = {CreateGroup.class, UpdateGroup.class})
+    @Pattern(regexp = ".*\\d.*", message = "Password must contain at least one digit", groups = {CreateGroup.class, UpdateGroup.class})
+    @Pattern(regexp = ".*[!@#$%^&*].*", message = "Password must contain at least one special character", groups = {CreateGroup.class, UpdateGroup.class})
     private String password;
 
-    @Column(name = "email", nullable = false)
+    @NotBlank(message = "Email cannot be empty", groups = {CreateGroup.class})
+    @Email(message = "Invalid email format", groups = {CreateGroup.class})
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
+    @NotNull(message = "Role cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
     private Role role;
 
-    @Column(name = "first_name", nullable = false)
+    @NotBlank(message = "First name cannot be empty", groups = {CreateGroup.class, UpdateGroup.class})
+    @Size(max = 50, message = "First name cannot exceed 50 characters", groups = {CreateGroup.class, UpdateGroup.class})
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "First name can only contain letters", groups = {CreateGroup.class, UpdateGroup.class})
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @NotBlank(message = "Last name cannot be empty", groups = {CreateGroup.class, UpdateGroup.class})
+    @Size(max = 50, message = "Last name cannot exceed 50 characters", groups = {CreateGroup.class, UpdateGroup.class})
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Last name can only contain letters", groups = {CreateGroup.class, UpdateGroup.class})
     private String lastName;
 
-    @Column(name = "phone_number", nullable = false)
+    @Pattern(regexp = "^(\\+\\d{1,2}\\s?)?\\(?\\d{1,4}\\)?[\\s\\-]?\\d{1,4}[\\s\\-]?\\d{1,4}[\\s\\-]?\\d{1,9}$", message = "Invalid phone number format", groups = {CreateGroup.class, UpdateGroup.class})
     private String phoneNumber;
 
-    @Column(name = "profile_picture")
-    private String profilePicture;
+    @URL(message = "Profile picture must be a valid URL", groups = {CreateGroup.class, UpdateGroup.class})
+    private String profilePicture = "https://res.cloudinary.com/dqegda2km/image/upload/v1730966537/sxdg6zledc1fjvwxs61q.webp";
 
-    @Column(name = "date_of_birth", nullable = false)
-    private Date dateOfBirth;
+    @NotNull(message = "Date of birth cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
+    @Past(message = "Date of birth must be in the past", groups = {CreateGroup.class, UpdateGroup.class})
+    @DateOfBirthValidation(message = "User must be at least 18 years old")
+    private LocalDate dateOfBirth;
 
-    @Column(name = "last_login", nullable = false)
-    private Date lastLogin;
+    @NotNull(message = "Last login cannot be null", groups = {UpdateGroup.class})
+    private LocalDateTime lastLogin;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private Status status;
+    @NotNull(message = "Status cannot be null", groups = {UpdateGroup.class})
+    private Status status = Status.INACTIVE;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "language_preference", nullable = false)
+    @NotNull(message = "Language preference cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
     private LanguagePreference languagePreference;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender", nullable = false)
+    @NotNull(message = "Gender cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
     private Gender gender;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "notification_preference", nullable = false)
-    private NotificationPreference notificationPreference;
-
-    @Column(name = "email_verified", nullable = false, columnDefinition="boolean default false")
-    private Boolean emailVerified;
-
-    @Column(name = "phone_verified", nullable = false, columnDefinition="boolean default false")
-    private Boolean phoneVerified;
-
-    @Column(name = "o_auth_2", nullable = false, columnDefinition="boolean default false")
-    private Boolean OAuth2;
-
-    @Column(name = "is_2f_auth", nullable = false, columnDefinition="boolean default false")
-    private Boolean is2FAuth;
-
-    @Column(name = "has_fingerprint", nullable = false, columnDefinition="boolean default false")
-    private Boolean hasFingerprint;
-
-    @Column(name = "has_face_id", nullable = false, columnDefinition="boolean default false")
-    private Boolean hasFaceId;
-
-    @Column(name = "is_verified", nullable = false, columnDefinition="boolean default false")
-    private Boolean isVerified;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.role.name()));
+    @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Constraint(validatedBy = AgeValidator.class)
+    public @interface DateOfBirthValidation {
+        String message() default "User must be at least 18 years old";
+        Class<?>[] groups() default {};
+        Class<? extends Payload>[] payload() default {};
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
-    }
+    public static class AgeValidator implements ConstraintValidator<DateOfBirthValidation, LocalDate> {
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
-    }
+        private String message;
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
-    }
+        @Override
+        public void initialize(DateOfBirthValidation constraintAnnotation) {
+            this.message = constraintAnnotation.message();
+        }
 
-    @Override
-    public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
+        @Override
+        public boolean isValid(LocalDate dateOfBirth, ConstraintValidatorContext context) {
+            if (dateOfBirth == null) {
+                return true;
+            }
+
+            int age = Period.between(dateOfBirth, LocalDate.now()).getYears();
+
+            if (age < 18) {
+                context.disableDefaultConstraintViolation();
+                context.buildConstraintViolationWithTemplate(this.message).addConstraintViolation();
+                return false;
+            }
+
+            return true;
+        }
     }
 }

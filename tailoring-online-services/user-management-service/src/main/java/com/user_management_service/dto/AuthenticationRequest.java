@@ -1,15 +1,11 @@
 package com.user_management_service.dto;
 
-import lombok.*;
+import jakarta.validation.constraints.NotBlank;
 
-import java.io.Serializable;
+public record AuthenticationRequest (
+        @NotBlank(message = "Username cannot be empty")
+        String username,
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class AuthenticationRequest implements Serializable {
-    private String username;
-    private String password;
-}
+        @NotBlank(message = "Password cannot be empty")
+        String password
+) {}

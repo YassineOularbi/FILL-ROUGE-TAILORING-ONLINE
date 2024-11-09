@@ -1,4 +1,4 @@
-package com.user_management_service.service;
+package com.user_management_service.messaging;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -20,4 +20,3 @@ public class KafkaProducerService {
         sendMessage("user-verification-response-topic", String.valueOf(exists));
     }
 }
-

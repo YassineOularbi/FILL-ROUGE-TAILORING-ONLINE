@@ -19,12 +19,15 @@ public class KeycloakConfig {
     @Value("${keycloak.resource}")
     private String clientId;
 
+    @Value("${keycloak.client-secret}")
+    private String clientSecret;
 
     public Keycloak getInstance(String username, String password){
         return KeycloakBuilder.builder()
                 .serverUrl(serverUrl)
                 .realm(realm)
                 .clientId(clientId)
+                .clientSecret(clientSecret)
                 .username(username)
                 .password(password)
                 .grantType(OAuth2Constants.PASSWORD)

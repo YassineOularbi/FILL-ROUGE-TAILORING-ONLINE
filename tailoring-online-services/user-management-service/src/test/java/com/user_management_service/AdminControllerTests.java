@@ -1,10 +1,6 @@
 package com.user_management_service;
 
 import com.user_management_service.controller.AdminController;
-import com.user_management_service.dto.AdminDto;
-import com.user_management_service.exception.AdminNotFoundException;
-import com.user_management_service.model.Admin;
-import com.user_management_service.service.AdminService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
