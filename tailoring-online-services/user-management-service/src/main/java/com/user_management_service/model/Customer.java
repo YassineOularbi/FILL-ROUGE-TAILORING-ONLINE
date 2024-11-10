@@ -11,6 +11,7 @@ import java.time.*;
 
 @Getter
 @Setter
+@ToString
 public class Customer extends User implements Serializable {
 
     @Min(value = 0, message = "Loyalty points must be zero or positive", groups = {CreateGroup.class, UpdateGroup.class})

@@ -34,7 +34,7 @@
   "loginWithEmailAllowed": true,
   "duplicateEmailsAllowed": false,
   "resetPasswordAllowed": true,
-  "editUsernameAllowed": false,
+  "editUsernameAllowed": true,
   "bruteForceProtected": false,
   "permanentLockout": false,
   "maxTemporaryLockouts": 0,
@@ -1409,47 +1409,7 @@
         "organization",
         "offline_access",
         "microprofile-jwt"
-      ],
-      "authorizationSettings": {
-        "allowRemoteResourceManagement": true,
-        "policyEnforcementMode": "ENFORCING",
-        "resources": [
-          {
-            "name": "Default Resource",
-            "type": "urn:tailoring-online-id:resources:default",
-            "ownerManagedAccess": false,
-            "attributes": {},
-            "uris": [
-              "/*"
-            ]
-          }
-        ],
-        "policies": [
-          {
-            "name": "Default Policy",
-            "description": "A policy that grants access only for users within this realm",
-            "type": "js",
-            "logic": "POSITIVE",
-            "decisionStrategy": "AFFIRMATIVE",
-            "config": {
-              "code": "// by default, grants any permission associated with this policy\n$evaluation.grant();\n"
-            }
-          },
-          {
-            "name": "Default Permission",
-            "description": "A permission that applies to the default resource type",
-            "type": "resource",
-            "logic": "POSITIVE",
-            "decisionStrategy": "UNANIMOUS",
-            "config": {
-              "defaultResourceType": "urn:tailoring-online-id:resources:default",
-              "applyPolicies": "[\"Default Policy\"]"
-            }
-          }
-        ],
-        "scopes": [],
-        "decisionStrategy": "UNANIMOUS"
-      }
+      ]
     }
   ],
   "clientScopes": [
@@ -2227,7 +2187,7 @@
         "subComponents": {},
         "config": {
           "kc.user.profile.config": [
-            "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"lastLogin\",\"displayName\":\"${lastLogin}\",\"validations\":{},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"phoneNumber\",\"displayName\":\"${phoneNumber}\",\"validations\":{\"pattern\":{\"pattern\":\"^(\\\\+\\\\d{1,2}\\\\s?)?\\\\(?\\\\d{1,4}\\\\)?[\\\\s\\\\-]?\\\\d{1,4}[\\\\s\\\\-]?\\\\d{1,4}[\\\\s\\\\-]?\\\\d{1,9}$\",\"error-message\":\"Invalid phone number format\"}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"profilePicture\",\"displayName\":\"${profilePicture}\",\"validations\":{\"uri\":{\"allowFragment\":true,\"requireValidUrl\":true,\"allowedSchemes\":[\"https\"]}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"dateOfBirth\",\"displayName\":\"${dateOfBirth}\",\"validations\":{\"iso-date\":{}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"status\",\"displayName\":\"${status}\",\"validations\":{\"options\":{\"min\":\"\",\"max\":\"\",\"options\":[\"ACTIVE\",\"INACTIVE\",\"SUSPENDED\"]}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"languagePreference\",\"displayName\":\"${languagePreference}\",\"validations\":{\"options\":{\"options\":[\"AR\",\"FR\",\"EN\",\"ES\",\"IT\"]}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"gender\",\"displayName\":\"${gender}\",\"validations\":{\"options\":{\"options\":[\"MALE\",\"FEMALE\"]}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"loyaltyPoints\",\"displayName\":\"${loyaltyPoints}\",\"validations\":{\"integer\":{\"min\":\"0\",\"max\":\"1000\"}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"CUSTOMER\",\"multivalued\":false},{\"name\":\"bio\",\"displayName\":\"${bio}\",\"validations\":{\"length\":{\"min\":\"0\",\"max\":\"250\"}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"TAILOR\",\"multivalued\":false},{\"name\":\"specialities\",\"displayName\":\"${specialities}\",\"validations\":{\"multivalued\":{\"min\":\"0\",\"max\":\"3\"}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"TAILOR\",\"multivalued\":true},{\"name\":\"rating\",\"displayName\":\"${rating}\",\"validations\":{\"double\":{\"min\":\"0.0\",\"max\":\"5.0\"}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"TAILOR\",\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"},{\"name\":\"USER\",\"displayHeader\":\"USER\",\"displayDescription\":\"USER\",\"annotations\":{}},{\"name\":\"CUSTOMER\",\"displayHeader\":\"CUSTOMER\",\"displayDescription\":\"CUSTOMER\",\"annotations\":{}},{\"name\":\"TAILOR\",\"displayHeader\":\"TAILOR\",\"displayDescription\":\"TAILOR\",\"annotations\":{}}]}"
+            "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"lastLogin\",\"displayName\":\"${lastLogin}\",\"validations\":{},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"phoneNumber\",\"displayName\":\"${phoneNumber}\",\"validations\":{\"pattern\":{\"pattern\":\"^(\\\\+\\\\d{1,2}\\\\s?)?\\\\(?\\\\d{1,4}\\\\)?[\\\\s\\\\-]?\\\\d{1,4}[\\\\s\\\\-]?\\\\d{1,4}[\\\\s\\\\-]?\\\\d{1,9}$\",\"error-message\":\"Invalid phone number format\"}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"profilePicture\",\"displayName\":\"${profilePicture}\",\"validations\":{\"uri\":{\"allowFragment\":true,\"requireValidUrl\":true,\"allowedSchemes\":[\"https\"]}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"dateOfBirth\",\"displayName\":\"${dateOfBirth}\",\"validations\":{\"iso-date\":{}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"status\",\"displayName\":\"${status}\",\"validations\":{\"options\":{\"min\":\"\",\"max\":\"\",\"options\":[\"ACTIVE\",\"INACTIVE\",\"SUSPENDED\"]}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"languagePreference\",\"displayName\":\"${languagePreference}\",\"validations\":{\"options\":{\"options\":[\"AR\",\"FR\",\"EN\",\"ES\",\"IT\"]}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"gender\",\"displayName\":\"${gender}\",\"validations\":{\"options\":{\"options\":[\"MALE\",\"FEMALE\"]}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"USER\",\"multivalued\":false},{\"name\":\"loyaltyPoints\",\"displayName\":\"${loyaltyPoints}\",\"validations\":{\"integer\":{\"min\":\"0\",\"max\":\"1000\"}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"CUSTOMER\",\"multivalued\":false},{\"name\":\"bio\",\"displayName\":\"${bio}\",\"validations\":{\"length\":{\"min\":\"0\",\"max\":\"250\"}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"TAILOR\",\"multivalued\":false},{\"name\":\"specialities\",\"displayName\":\"${specialities}\",\"validations\":{\"multivalued\":{\"min\":\"0\",\"max\":\"3\"}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"TAILOR\",\"multivalued\":true},{\"name\":\"rating\",\"displayName\":\"${rating}\",\"validations\":{\"double\":{\"min\":\"0.0\",\"max\":\"5.0\"}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"group\":\"TAILOR\",\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"},{\"name\":\"USER\",\"displayHeader\":\"USER\",\"displayDescription\":\"USER\",\"annotations\":{}},{\"name\":\"CUSTOMER\",\"displayHeader\":\"CUSTOMER\",\"displayDescription\":\"CUSTOMER\",\"annotations\":{}},{\"name\":\"TAILOR\",\"displayHeader\":\"TAILOR\",\"displayDescription\":\"TAILOR\",\"annotations\":{}}]}"
           ]
         }
       }

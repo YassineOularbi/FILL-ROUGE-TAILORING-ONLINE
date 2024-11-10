@@ -16,6 +16,7 @@ import java.time.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class User implements Serializable {
 
     @NotBlank(message = "Username cannot be empty", groups = {CreateGroup.class})

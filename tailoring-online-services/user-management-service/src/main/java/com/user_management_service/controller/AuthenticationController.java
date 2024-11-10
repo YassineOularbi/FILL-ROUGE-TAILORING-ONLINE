@@ -28,7 +28,7 @@ public class AuthenticationController {
             @Valid @RequestBody CreateCustomerDto createCustomerDto,
             @RequestParam(required = false, name = "profilePicture") MultipartFile profilePicture
     ) {
-        authenticationService.registerCustomer(createCustomerDto);
+        authenticationService.registerCustomer(createCustomerDto,  profilePicture);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

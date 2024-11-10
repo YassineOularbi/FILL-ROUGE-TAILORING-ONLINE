@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -48,7 +49,7 @@ public class AuthenticationService {
     }
 
 
-    public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto) {
+    public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto, MultipartFile profilePicture) {
         var customer = customerMapper.toCreateEntity(createCustomerDto);
         passwordValidator(customer.getPassword(), customer.getUsername(), customer.getEmail());
         logger.info("Starting to add user: {}", customer.getUsername());

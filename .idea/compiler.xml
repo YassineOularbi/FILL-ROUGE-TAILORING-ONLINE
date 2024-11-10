@@ -18,8 +18,8 @@
         <module name="localization-shipping-service" />
         <module name="cloudinary-service" />
         <module name="eureka-server" />
-        <module name="notification-mailing-service" />
         <module name="payment-banking-service" />
+        <module name="notification-mailing-service" />
         <module name="config-server" />
         <module name="api-gateway-service" />
         <module name="user-management-service" />

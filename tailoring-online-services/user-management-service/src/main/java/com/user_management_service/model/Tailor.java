@@ -11,6 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@ToString
 public class Tailor extends User implements Serializable {
 
     @NotNull(message = "Bio cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
