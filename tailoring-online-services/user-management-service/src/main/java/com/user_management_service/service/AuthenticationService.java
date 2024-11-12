@@ -4,6 +4,7 @@ import com.user_management_service.config.KeycloakConfig;
 import com.user_management_service.dto.*;
 import com.user_management_service.exception.*;
 import com.user_management_service.mapper.CustomerMapper;
+import com.user_management_service.messaging.KafkaProducer;
 import com.user_management_service.validation.CreateGroup;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -28,6 +30,7 @@ public class AuthenticationService {
 
     private final KeycloakConfig keycloakConfig;
     private final CustomerMapper customerMapper;
+    private final KafkaProducer kafkaProducer;
     private final Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
 
     @Value("${keycloak.realm}")
@@ -49,7 +52,7 @@ public class AuthenticationService {
     }
 
 
-    public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto, MultipartFile profilePicture) {
+    public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto, MultipartFile profilePicture) throws IOException {
         var customer = customerMapper.toCreateEntity(createCustomerDto);
         passwordValidator(customer.getPassword(), customer.getUsername(), customer.getEmail());
         logger.info("Starting to add user: {}", customer.getUsername());
@@ -64,6 +67,9 @@ public class AuthenticationService {
         if (!existingUsersByEmail.isEmpty()) {
             List<String> details = List.of("User with email " + customer.getEmail() + " already exists.");
             throw new UserAlreadyExistsException("User with email " + customer.getEmail() + " already exists.", details);
+        }
+        if (!profilePicture.isEmpty()) {
+            kafkaProducer.sendProfilePicture(profilePicture);
         }
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setUsername(customer.getUsername());
@@ -105,6 +111,10 @@ public class AuthenticationService {
             logger.error("An error occurred while trying to create user in Keycloak: {}", e.getMessage(), e);
             throw new KeycloakException("An error occurred while creating user: " + e.getMessage(), Collections.singletonList(e.getMessage()));
         }
+    }
+
+    public void sendPicture(MultipartFile picture) throws IOException {
+        kafkaProducer.sendProfilePicture(picture);
     }
 
     private void passwordValidator(String password, String username, String email) {

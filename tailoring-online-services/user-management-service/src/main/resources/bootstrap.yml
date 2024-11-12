@@ -12,3 +12,35 @@ spring:
         maxAttempts: 20
       profile: local
       label: main
+    stream:
+      bindings:
+        sendProfilePicture-in-0:
+          destination: cloudinary-upload-image-request-topic
+          group: cloudinary-service-group
+          binder: kafka
+        sendProfilePicture-out-0:
+          destination: cloudinary-upload-image-response-topic
+          binder: kafka
+      function:
+        definition: sendProfilePicture
+      kafka:
+        binder:
+          brokers: localhost:9092
+          defaultBrokerPort: 9092
+          configuration:
+            auto.offset.reset: earliest
+            consumer:
+              enable.auto.commit: true
+              auto.commit.interval.ms: 1000
+            producer:
+              retries: 3
+              acks: all
+  kafka:
+    consumer:
+      group-id: user-management-group
+      auto-offset-reset: earliest
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
