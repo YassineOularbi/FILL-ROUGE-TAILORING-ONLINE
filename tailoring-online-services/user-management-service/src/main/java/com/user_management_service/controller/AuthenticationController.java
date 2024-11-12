@@ -6,7 +6,6 @@ import com.user_management_service.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,20 +25,13 @@ public class AuthenticationController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping(value = "/register-customer")
+    @PostMapping(value = "/register-customer", consumes = {"multipart/form-data", "application/json"})
     public ResponseEntity<?> register(
-            @Valid @ModelAttribute CreateCustomerDto createCustomerDto,
-            @RequestParam(required = false, name = "profilePicture") MultipartFile profilePicture
+            @Valid @RequestPart("createCustomerDto") CreateCustomerDto createCustomerDto,
+            @RequestPart(required = false, name = "profilePicture") MultipartFile profilePicture
     ) throws IOException {
-        authenticationService.registerCustomer(createCustomerDto,  profilePicture);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    @PostMapping(value = "/send-picture")
-    public ResponseEntity<?> sendPicture(
-            @RequestParam(required = false, name = "profilePicture") MultipartFile profilePicture
-    ) throws IOException {
-        authenticationService.sendPicture(profilePicture);
+        System.out.println("Received register request for customer: " + createCustomerDto.createUserDto().username());
+        authenticationService.registerCustomer(createCustomerDto, profilePicture);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

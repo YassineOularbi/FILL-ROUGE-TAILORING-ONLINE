@@ -68,7 +68,7 @@ public class AuthenticationService {
             List<String> details = List.of("User with email " + customer.getEmail() + " already exists.");
             throw new UserAlreadyExistsException("User with email " + customer.getEmail() + " already exists.", details);
         }
-        if (!profilePicture.isEmpty()) {
+        if (!profilePicture.isEmpty() && profilePicture != null) {
             kafkaProducer.sendProfilePicture(profilePicture);
         }
         UserRepresentation userRepresentation = new UserRepresentation();
@@ -111,10 +111,6 @@ public class AuthenticationService {
             logger.error("An error occurred while trying to create user in Keycloak: {}", e.getMessage(), e);
             throw new KeycloakException("An error occurred while creating user: " + e.getMessage(), Collections.singletonList(e.getMessage()));
         }
-    }
-
-    public void sendPicture(MultipartFile picture) throws IOException {
-        kafkaProducer.sendProfilePicture(picture);
     }
 
     private void passwordValidator(String password, String username, String email) {
