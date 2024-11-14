@@ -30,7 +30,6 @@ public class AuthenticationController {
             @Valid @RequestPart("createCustomerDto") CreateCustomerDto createCustomerDto,
             @RequestPart(required = false, name = "profilePicture") MultipartFile profilePicture
     ) throws IOException {
-        System.out.println("Received register request for customer: " + createCustomerDto.createUserDto().username());
         authenticationService.registerCustomer(createCustomerDto, profilePicture);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

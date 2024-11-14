@@ -4,16 +4,15 @@ import com.user_management_service.config.KeycloakConfig;
 import com.user_management_service.dto.*;
 import com.user_management_service.exception.*;
 import com.user_management_service.mapper.CustomerMapper;
+import com.user_management_service.messaging.KafkaConsumer;
 import com.user_management_service.messaging.KafkaProducer;
 import com.user_management_service.validation.CreateGroup;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
-import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.*;
 import org.slf4j.*;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -31,20 +30,12 @@ public class AuthenticationService {
     private final KeycloakConfig keycloakConfig;
     private final CustomerMapper customerMapper;
     private final KafkaProducer kafkaProducer;
+    private final KafkaConsumer kafkaConsumer;
     private final Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
-
-    @Value("${keycloak.realm}")
-    private String realm;
-
-    @Value("${keycloak.username}")
-    private String username;
-
-    @Value("${keycloak.password}")
-    private String password;
 
     public AccessTokenResponse login(AuthenticationRequest authenticationRequest) {
         try {
-            var keycloak = keycloakConfig.getInstance(authenticationRequest.username(), authenticationRequest.password());
+            var keycloak = keycloakConfig.getAuthenticationInstance(authenticationRequest.username(), authenticationRequest.password());
             return keycloak.tokenManager().getAccessToken();
         } catch (Exception e) {
             throw new AuthenticationException("Invalid credentials");
@@ -56,8 +47,7 @@ public class AuthenticationService {
         var customer = customerMapper.toCreateEntity(createCustomerDto);
         passwordValidator(customer.getPassword(), customer.getUsername(), customer.getEmail());
         logger.info("Starting to add user: {}", customer.getUsername());
-        Keycloak keycloak = keycloakConfig.getInstance(username, password);
-        UsersResource usersResource = keycloak.realm(realm).users();
+        UsersResource usersResource = keycloakConfig.getRealmResource().users();
         List<UserRepresentation> existingUsersByUsername = usersResource.search(customer.getUsername(), true);
         if (!existingUsersByUsername.isEmpty()) {
             List<String> details = List.of("User with username " + customer.getUsername() + " already exists.");
@@ -68,9 +58,42 @@ public class AuthenticationService {
             List<String> details = List.of("User with email " + customer.getEmail() + " already exists.");
             throw new UserAlreadyExistsException("User with email " + customer.getEmail() + " already exists.", details);
         }
-        if (!profilePicture.isEmpty() && profilePicture != null) {
-            kafkaProducer.sendProfilePicture(profilePicture);
+        if (profilePicture != null && !profilePicture.isEmpty()) {
+            try {
+                kafkaProducer.sendProfilePicture(profilePicture);
+                logger.info("Profile picture sent to Kafka for user {}", customer.getUsername());
+                boolean urlRetrieved = false;
+                int attempt = 0;
+                while (!urlRetrieved) {
+                    try {
+                        String profilePictureUrl = kafkaConsumer.getProfilePictureUrl();
+                        if (profilePictureUrl != null) {
+                            customer.setProfilePicture(profilePictureUrl);
+                            urlRetrieved = true;
+                            logger.info("Profile picture URL retrieved successfully on attempt {}", attempt + 1);
+                        } else {
+                            attempt++;
+                            logger.warn("Attempt {} to retrieve profile picture URL failed. Retrying...", attempt);
+                            Thread.sleep(2000);
+                        }
+                    } catch (Exception e) {
+                        attempt++;
+                        logger.error("Attempt {} resulted in an exception: {}", attempt, e.getMessage());
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException ie) {
+                            Thread.currentThread().interrupt();
+                            throw new RuntimeException("Thread was interrupted during sleep.", ie);
+                        }
+                    }
+                }
+                System.out.println(customer.getProfilePicture());
+            } catch (Exception e) {
+                logger.error("An unexpected error occurred while sending profile picture to Kafka: {}", e.getMessage());
+                throw new RuntimeException("An unexpected error occurred while sending profile picture to Kafka.", e);
+            }
         }
+        System.out.println(customer.getProfilePicture());
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setUsername(customer.getUsername());
         userRepresentation.setFirstName(customer.getFirstName());

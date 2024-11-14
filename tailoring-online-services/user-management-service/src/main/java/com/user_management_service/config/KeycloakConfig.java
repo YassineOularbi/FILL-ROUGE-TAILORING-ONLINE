@@ -4,6 +4,7 @@ import org.keycloak.OAuth2Constants;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -22,7 +23,13 @@ public class KeycloakConfig {
     @Value("${keycloak.client-secret}")
     private String clientSecret;
 
-    public Keycloak getInstance(String username, String password){
+    @Value("${keycloak.username}")
+    private String username;
+
+    @Value("${keycloak.password}")
+    private String password;
+
+    public Keycloak getAdminInstance(){
         return KeycloakBuilder.builder()
                 .serverUrl(serverUrl)
                 .realm(realm)
@@ -32,6 +39,23 @@ public class KeycloakConfig {
                 .password(password)
                 .grantType(OAuth2Constants.PASSWORD)
                 .build();
+    }
+
+    public Keycloak getAuthenticationInstance(String username, String password){
+        return KeycloakBuilder.builder()
+                .serverUrl(serverUrl)
+                .realm(realm)
+                .clientId(clientId)
+                .clientSecret(clientSecret)
+                .username(username)
+                .password(password)
+                .grantType(OAuth2Constants.PASSWORD)
+                .build();
+    }
+
+    public RealmResource getRealmResource() {
+        Keycloak keycloak = getAdminInstance();
+        return keycloak.realm(realm);
     }
 
     public CredentialRepresentation createPasswordCredentials(String password) {

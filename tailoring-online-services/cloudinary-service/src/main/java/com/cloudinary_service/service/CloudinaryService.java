@@ -2,6 +2,7 @@ package com.cloudinary_service.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.cloudinary_service.messaging.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,17 @@ import java.util.Map;
 public class CloudinaryService {
 
     private final Cloudinary cloudinary;
+    private final KafkaProducer kafkaProducer;
 
     public void uploadProfilePicture(byte[] imageBytes) throws IOException {
-        String imageUrl = uploadFile(imageBytes);
-        System.out.println(imageUrl);
+        try {
+            String imageUrl = uploadFile(imageBytes);
+            kafkaProducer.sendProfilePictureUrl(imageUrl);
+        } catch (IOException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException("Unexpected error during profile picture upload", e);
+        }
     }
 
     public String uploadFile(byte[] file) throws IOException {
