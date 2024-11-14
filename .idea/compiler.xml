@@ -13,22 +13,24 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
         </processorPath>
-        <module name="store-management-service" />
-        <module name="loyalty-program-service" />
-        <module name="localization-shipping-service" />
-        <module name="cloudinary-service" />
-        <module name="eureka-server" />
-        <module name="payment-banking-service" />
-        <module name="notification-mailing-service" />
         <module name="config-server" />
+        <module name="cloudinary-service" />
         <module name="api-gateway-service" />
+        <module name="eureka-server" />
         <module name="user-management-service" />
-        <module name="order-management-service" />
-        <module name="review-management-service" />
-        <module name="promotion-management-service" />
-        <module name="social-management-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="localization-shipping-service" target="17" />
+      <module name="loyalty-program-service" target="17" />
+      <module name="notification-mailing-service" target="17" />
+      <module name="order-management-service" target="17" />
+      <module name="payment-banking-service" target="17" />
+      <module name="promotion-management-service" target="17" />
+      <module name="review-management-service" target="17" />
+      <module name="social-management-service" target="17" />
+      <module name="store-management-service" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

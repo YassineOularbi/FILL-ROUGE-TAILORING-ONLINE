@@ -23,17 +23,17 @@
     <module>config-server</module>
     <module>eureka-server</module>
     <module>api-gateway-service</module>
-    <module>localization-shipping-service</module>
-    <module>notification-mailing-service</module>
-    <module>order-management-service</module>
-    <module>payment-banking-service</module>
     <module>user-management-service</module>
-    <module>store-management-service</module>
-    <module>loyalty-program-service</module>
-    <module>promotion-management-service</module>
-    <module>review-management-service</module>
-    <module>social-management-service</module>
     <module>cloudinary-service</module>
+<!--    <module>notification-mailing-service</module>-->
+<!--    <module>localization-shipping-service</module>-->
+<!--    <module>order-management-service</module>-->
+<!--    <module>payment-banking-service</module>-->
+<!--    <module>store-management-service</module>-->
+<!--    <module>loyalty-program-service</module>-->
+<!--    <module>promotion-management-service</module>-->
+<!--    <module>review-management-service</module>-->
+<!--    <module>social-management-service</module>-->
   </modules>
 
   <properties>
@@ -66,7 +66,6 @@
 
   <dependencies>
 
-    <!-- Lombok for reducing boilerplate code -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -74,27 +73,12 @@
       <optional>true</optional>
     </dependency>
 
-    <!-- Swagger -->
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>${springdoc.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
-      <version>${springdoc.version}</version>
-    </dependency>
-
-    <!-- Spring Boot Test Dependencies -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
 
-    <!-- JUnit 5 Dependencies -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -130,11 +114,6 @@
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-openfeign</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-config-client</artifactId>
     </dependency>
 
@@ -149,42 +128,14 @@
     </dependency>
 
     <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-      <version>${springdoc.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
-      <version>${springdoc.version}</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/jakarta.json/jakarta.json-api -->
     <dependency>
       <groupId>jakarta.json</groupId>
       <artifactId>jakarta.json-api</artifactId>
       <version>2.1.3</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>io.github.resilience4j</groupId>
-      <artifactId>resilience4j-spring-boot3</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-aop</artifactId>
     </dependency>
 
   </dependencies>

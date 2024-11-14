@@ -40,6 +40,10 @@
           <option value="api-gateway-service" />
           <option value="api-gateway-service" />
           <option value="cloudinary-service" />
+          <option value="cloudinary-service" />
+          <option value="cloudinary-service" />
+          <option value="api-gateway-service" />
+          <option value="review-management-service" />
         </list>
       </option>
       <option name="ignoredPackages">
@@ -76,10 +80,18 @@
           <option value="org.springframework:spring-webflux:6.1.12" />
           <option value="com.thoughtworks.xstream:xstream:1.4.20" />
           <option value="com.fasterxml.woodstox:woodstox-core:6.2.1" />
+          <option value="com.thoughtworks.xstream:xstream:1.4.20" />
+          <option value="org.apache.httpcomponents:httpclient:4.5.3" />
+          <option value="org.springframework:spring-context:6.1.12" />
+          <option value="org.springframework:spring-context:6.1.12" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />

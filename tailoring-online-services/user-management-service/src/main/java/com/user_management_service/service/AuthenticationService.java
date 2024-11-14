@@ -42,7 +42,6 @@ public class AuthenticationService {
         }
     }
 
-
     public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto, MultipartFile profilePicture) throws IOException {
         var customer = customerMapper.toCreateEntity(createCustomerDto);
         passwordValidator(customer.getPassword(), customer.getUsername(), customer.getEmail());
@@ -60,40 +59,18 @@ public class AuthenticationService {
         }
         if (profilePicture != null && !profilePicture.isEmpty()) {
             try {
-                kafkaProducer.sendProfilePicture(profilePicture);
-                logger.info("Profile picture sent to Kafka for user {}", customer.getUsername());
-                boolean urlRetrieved = false;
-                int attempt = 0;
-                while (!urlRetrieved) {
-                    try {
-                        String profilePictureUrl = kafkaConsumer.getProfilePictureUrl();
-                        if (profilePictureUrl != null) {
-                            customer.setProfilePicture(profilePictureUrl);
-                            urlRetrieved = true;
-                            logger.info("Profile picture URL retrieved successfully on attempt {}", attempt + 1);
-                        } else {
-                            attempt++;
-                            logger.warn("Attempt {} to retrieve profile picture URL failed. Retrying...", attempt);
-                            Thread.sleep(2000);
-                        }
-                    } catch (Exception e) {
-                        attempt++;
-                        logger.error("Attempt {} resulted in an exception: {}", attempt, e.getMessage());
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException ie) {
-                            Thread.currentThread().interrupt();
-                            throw new RuntimeException("Thread was interrupted during sleep.", ie);
-                        }
-                    }
+                String profilePictureUrl = kafkaConsumer.getProfilePictureUrl();
+                if (profilePictureUrl != null) {
+                    customer.setProfilePicture(profilePictureUrl);
+                    logger.info("Profile picture URL retrieved successfully for user {}", customer.getUsername());
+                } else {
+                    throw new RuntimeException("Profile picture URL is null for user " + customer.getUsername());
                 }
-                System.out.println(customer.getProfilePicture());
             } catch (Exception e) {
-                logger.error("An unexpected error occurred while sending profile picture to Kafka: {}", e.getMessage());
-                throw new RuntimeException("An unexpected error occurred while sending profile picture to Kafka.", e);
+                logger.error("Attempt to retrieve profile picture URL resulted in an exception: {}", e.getMessage());
+                throw e;
             }
         }
-        System.out.println(customer.getProfilePicture());
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setUsername(customer.getUsername());
         userRepresentation.setFirstName(customer.getFirstName());
