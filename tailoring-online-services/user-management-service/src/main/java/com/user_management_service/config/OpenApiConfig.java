@@ -30,7 +30,7 @@ import java.util.List;
         ),
         security = @SecurityRequirement(name = "Bearer Authentication")
 )
-public class OpenApiConfigs {
+public class OpenApiConfig {
 
     @Bean
     public OpenAPI userOpenAPI(

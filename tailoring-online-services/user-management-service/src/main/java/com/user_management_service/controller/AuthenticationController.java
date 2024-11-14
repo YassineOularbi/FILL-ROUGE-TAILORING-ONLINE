@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping(path = "/api/v1/auth")
@@ -23,12 +25,12 @@ public class AuthenticationController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/register-customer")
+    @PostMapping(value = "/register-customer", consumes = {"multipart/form-data", "application/json"})
     public ResponseEntity<?> register(
-            @Valid @RequestBody CreateCustomerDto createCustomerDto,
-            @RequestParam(required = false, name = "profilePicture") MultipartFile profilePicture
-    ) {
-        authenticationService.registerCustomer(createCustomerDto,  profilePicture);
+            @Valid @RequestPart("createCustomerDto") CreateCustomerDto createCustomerDto,
+            @RequestPart(required = false, name = "profilePicture") MultipartFile profilePicture
+    ) throws IOException {
+        authenticationService.registerCustomer(createCustomerDto, profilePicture);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
