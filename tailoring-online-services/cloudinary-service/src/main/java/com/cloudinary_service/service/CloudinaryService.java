@@ -16,10 +16,10 @@ public class CloudinaryService {
     private final Cloudinary cloudinary;
     private final KafkaProducer kafkaProducer;
 
-    public void uploadProfilePicture(byte[] imageBytes) throws IOException {
+    public void uploadProfilePicture(byte[] imageBytes, String pictureId) throws IOException {
         try {
             String imageUrl = uploadFile(imageBytes);
-            kafkaProducer.sendProfilePictureUrl(imageUrl);
+            kafkaProducer.sendProfilePictureUrl(imageUrl, pictureId);
         } catch (IOException e) {
             throw e;
         } catch (Exception e) {

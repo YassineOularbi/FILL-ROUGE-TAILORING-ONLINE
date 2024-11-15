@@ -17,9 +17,11 @@ public class KafkaProducer {
 
     @CircuitBreaker(name = "cloudinary-service", fallbackMethod = "circuitBreakerFallback")
     @Retry(name = "cloudinary-service", fallbackMethod = "retryFallback")
-    public void sendProfilePictureUrl(String profilePictureUrl) {
+    public void sendProfilePictureUrl(String profilePictureUrl, String pictureId) {
         try {
-            Message<String> message = MessageBuilder.withPayload(profilePictureUrl).build();
+            Message<String> message = MessageBuilder.withPayload(profilePictureUrl)
+                    .setHeader("pictureId", pictureId)
+                    .build();
             boolean sentSuccessfully = streamBridge.send(TOPIC, message);
             if (!sentSuccessfully) {
                 throw new RuntimeException("Failed to send profile picture URL to Kafka.");
@@ -29,11 +31,11 @@ public class KafkaProducer {
         }
     }
 
-    private void circuitBreakerFallback(String profilePictureUrl, Throwable t) throws RuntimeException {
-        throw new RuntimeException("Circuit breaker opened for service user management for file : " + profilePictureUrl + " : " + t.getMessage(), t);
+    private void circuitBreakerFallback(String profilePictureUrl, String pictureId, Throwable t) {
+        throw new RuntimeException("Circuit breaker opened for service user management for URL: " + profilePictureUrl + " with ID: " + pictureId + " : " + t.getMessage(), t);
     }
 
-    private void retryFallback(String profilePictureUrl, Throwable t) throws RuntimeException {
-        throw new RuntimeException("Retry attempts failed for service user management for url : " + profilePictureUrl + " : " + t.getMessage(), t);
+    private void retryFallback(String profilePictureUrl, String pictureId, Throwable t) {
+        throw new RuntimeException("Retry attempts failed for service user management for URL: " + profilePictureUrl + " with ID: " + pictureId + " : " + t.getMessage(), t);
     }
 }

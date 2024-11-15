@@ -20,7 +20,7 @@ public class KafkaProducer {
 
     @CircuitBreaker(name = "user-management-service", fallbackMethod = "circuitBreakerFallback")
     @Retry(name = "user-management-service", fallbackMethod = "retryFallback")
-    public void sendProfilePicture(MultipartFile profilePicture) {
+    public void sendProfilePicture(MultipartFile profilePicture, String pictureId) {
         byte[] imageBytes;
         try {
             imageBytes = profilePicture.getBytes();
@@ -28,7 +28,9 @@ public class KafkaProducer {
             throw new RuntimeException("Failed to convert multipart file to bytes", e);
         }
         try {
-            Message<byte[]> message = MessageBuilder.withPayload(imageBytes).build();
+            Message<byte[]> message = MessageBuilder.withPayload(imageBytes)
+                    .setHeader("pictureId", pictureId)
+                    .build();
             boolean sentSuccessfully = streamBridge.send(TOPIC, message);
             if (!sentSuccessfully) {
                 throw new RuntimeException("Failed to send the photo to Kafka.");
@@ -38,11 +40,11 @@ public class KafkaProducer {
         }
     }
 
-    private void circuitBreakerFallback(MultipartFile profilePicture, Throwable t) {
-        throw new RuntimeException("Circuit breaker opened for service cloudinary for file: " + profilePicture.getOriginalFilename() + " : " + t.getMessage(), t);
+    private void circuitBreakerFallback(MultipartFile profilePicture, String pictureId, Throwable t) {
+        throw new RuntimeException("Circuit breaker opened for service cloudinary for file " + profilePicture.getOriginalFilename() + " with ID " + pictureId + " : " + t.getMessage(), t);
     }
 
-    private void retryFallback(MultipartFile profilePicture, Throwable t) {
-        throw new RuntimeException("Retry attempts failed for service cloudinary for file: " + profilePicture.getOriginalFilename() + " : " + t.getMessage(), t);
+    private void retryFallback(MultipartFile profilePicture, String pictureId, Throwable t) {
+        throw new RuntimeException("Retry attempts failed for service cloudinary for file " + profilePicture.getOriginalFilename() + " with ID " + pictureId + " : " + t.getMessage(), t);
     }
 }

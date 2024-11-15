@@ -59,19 +59,25 @@ public class AuthenticationService {
         }
         if (profilePicture != null && !profilePicture.isEmpty()) {
             try {
-                kafkaProducer.sendProfilePicture(profilePicture);
-                logger.info("Profile picture sent successfully for user {}", customer.getUsername());
-                try {
-                    String profilePictureUrl = kafkaConsumer.getProfilePictureUrl();
+                String pictureId = UUID.randomUUID().toString();
+                kafkaProducer.sendProfilePicture(profilePicture, pictureId);
+                logger.info("Profile picture sent successfully with ID {} for user {}", pictureId, customer.getUsername());
+                long startTime = System.currentTimeMillis();
+                long maxWaitTimeMs = 10000;
+                long pollIntervalMs = 500;
+                String profilePictureUrl = null;
+                while ((System.currentTimeMillis() - startTime) < maxWaitTimeMs) {
+                    profilePictureUrl = kafkaConsumer.getProfilePictureUrl(pictureId);
                     if (profilePictureUrl != null) {
-                        customer.setProfilePicture(profilePictureUrl);
-                        logger.info("Profile picture URL retrieved successfully for user {}", customer.getUsername());
-                    } else {
-                        throw new RuntimeException("Profile picture URL is null for user " + customer.getUsername());
+                        break;
                     }
-                } catch (Exception e) {
-                    logger.error("Attempt to retrieve profile picture URL resulted in an exception: {}", e.getMessage());
-                    throw e;
+                    Thread.sleep(pollIntervalMs);
+                }
+                if (profilePictureUrl != null) {
+                    customer.setProfilePicture(profilePictureUrl);
+                    logger.info("Profile picture URL retrieved successfully with ID {} for user {}", pictureId, customer.getUsername());
+                } else {
+                    throw new RuntimeException("Profile picture URL is null for ID " + pictureId + " and user " + customer.getUsername());
                 }
             } catch (Exception e) {
                 logger.error("Attempt to handle profile picture resulted in an exception: {}", e.getMessage());
