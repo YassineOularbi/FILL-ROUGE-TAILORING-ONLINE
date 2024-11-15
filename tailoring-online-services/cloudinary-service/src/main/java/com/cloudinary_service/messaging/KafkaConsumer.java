@@ -17,23 +17,25 @@ public class KafkaConsumer {
     private final CloudinaryService cloudinaryService;
 
     @Bean
+    public Consumer<byte[]> processProfilePicture() {
+        return this::handleProfilePicture;
+    }
+
     @CircuitBreaker(name = "cloudinary-service", fallbackMethod = "circuitBreakerFallback")
     @Retry(name = "cloudinary-service", fallbackMethod = "retryFallback")
-    public Consumer<byte[]> processProfilePicture() {
-        return (imageBytes) -> {
-            try {
-                cloudinaryService.uploadProfilePicture(imageBytes);
-            } catch (IOException | RuntimeException e) {
-                throw new RuntimeException("Failed to process the profile picture", e);
-            }
-        };
+    private void handleProfilePicture(byte[] imageBytes) {
+        try {
+            cloudinaryService.uploadProfilePicture(imageBytes);
+        } catch (IOException | RuntimeException e) {
+            throw new RuntimeException("Failed to process the profile picture", e);
+        }
     }
 
-    private void circuitBreakerFallback(Throwable t) throws RuntimeException {
-        throw new RuntimeException("Circuit breaker opened for service user management : " + t.getMessage(), t);
+    private void circuitBreakerFallback(byte[] imageBytes, Throwable t) {
+        throw new RuntimeException("Circuit breaker opened for service cloudinary: " + t.getMessage(), t);
     }
 
-    private void retryFallback(Throwable t) throws RuntimeException {
-        throw new RuntimeException("Retry attempts failed for service user management : " + t.getMessage(), t);
+    private void retryFallback(byte[] imageBytes, Throwable t) {
+        throw new RuntimeException("Retry attempts failed for service cloudinary: " + t.getMessage(), t);
     }
 }

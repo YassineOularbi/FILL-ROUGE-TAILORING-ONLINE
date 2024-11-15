@@ -59,16 +59,23 @@ public class AuthenticationService {
         }
         if (profilePicture != null && !profilePicture.isEmpty()) {
             try {
-                String profilePictureUrl = kafkaConsumer.getProfilePictureUrl();
-                if (profilePictureUrl != null) {
-                    customer.setProfilePicture(profilePictureUrl);
-                    logger.info("Profile picture URL retrieved successfully for user {}", customer.getUsername());
-                } else {
-                    throw new RuntimeException("Profile picture URL is null for user " + customer.getUsername());
+                kafkaProducer.sendProfilePicture(profilePicture);
+                logger.info("Profile picture sent successfully for user {}", customer.getUsername());
+                try {
+                    String profilePictureUrl = kafkaConsumer.getProfilePictureUrl();
+                    if (profilePictureUrl != null) {
+                        customer.setProfilePicture(profilePictureUrl);
+                        logger.info("Profile picture URL retrieved successfully for user {}", customer.getUsername());
+                    } else {
+                        throw new RuntimeException("Profile picture URL is null for user " + customer.getUsername());
+                    }
+                } catch (Exception e) {
+                    logger.error("Attempt to retrieve profile picture URL resulted in an exception: {}", e.getMessage());
+                    throw e;
                 }
             } catch (Exception e) {
-                logger.error("Attempt to retrieve profile picture URL resulted in an exception: {}", e.getMessage());
-                throw e;
+                logger.error("Attempt to handle profile picture resulted in an exception: {}", e.getMessage());
+                throw new RuntimeException("Failed to handle profile picture for user " + customer.getUsername(), e);
             }
         }
         UserRepresentation userRepresentation = new UserRepresentation();

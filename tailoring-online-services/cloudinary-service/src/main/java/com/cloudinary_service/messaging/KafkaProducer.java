@@ -29,11 +29,11 @@ public class KafkaProducer {
         }
     }
 
-    private void circuitBreakerFallback(Throwable t) throws RuntimeException {
-        throw new RuntimeException("Circuit breaker opened for service user management : " + t.getMessage(), t);
+    private void circuitBreakerFallback(String profilePictureUrl, Throwable t) throws RuntimeException {
+        throw new RuntimeException("Circuit breaker opened for service user management for file : " + profilePictureUrl + " : " + t.getMessage(), t);
     }
 
-    private void retryFallback(Throwable t) throws RuntimeException {
-        throw new RuntimeException("Retry attempts failed for service user management : " + t.getMessage(), t);
+    private void retryFallback(String profilePictureUrl, Throwable t) throws RuntimeException {
+        throw new RuntimeException("Retry attempts failed for service user management for url : " + profilePictureUrl + " : " + t.getMessage(), t);
     }
 }

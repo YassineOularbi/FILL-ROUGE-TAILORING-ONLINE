@@ -38,12 +38,11 @@ public class KafkaProducer {
         }
     }
 
-
-    private void circuitBreakerFallback(Throwable t) throws RuntimeException {
-        throw new RuntimeException("Circuit breaker opened for service cloudinary : " + t.getMessage(), t);
+    private void circuitBreakerFallback(MultipartFile profilePicture, Throwable t) {
+        throw new RuntimeException("Circuit breaker opened for service cloudinary for file: " + profilePicture.getOriginalFilename() + " : " + t.getMessage(), t);
     }
 
-    private void retryFallback(Throwable t) throws RuntimeException {
-        throw new RuntimeException("Retry attempts failed for service cloudinary : " + t.getMessage(), t);
+    private void retryFallback(MultipartFile profilePicture, Throwable t) {
+        throw new RuntimeException("Retry attempts failed for service cloudinary for file: " + profilePicture.getOriginalFilename() + " : " + t.getMessage(), t);
     }
 }
