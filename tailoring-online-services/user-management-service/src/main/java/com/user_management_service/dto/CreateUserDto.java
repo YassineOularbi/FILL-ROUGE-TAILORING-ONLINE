@@ -15,6 +15,9 @@ public record CreateUserDto(
         @NotBlank(message = "Password cannot be empty", groups = {CreateGroup.class})
         String password,
 
+        @NotBlank(message = "Confirm password cannot be empty", groups = {CreateGroup.class})
+        String confirmPassword,
+
         @NotBlank(message = "Email cannot be empty", groups = {CreateGroup.class})
         String email,
 

@@ -58,7 +58,7 @@ public class User implements Serializable {
 
     @NotNull(message = "Date of birth cannot be null", groups = {CreateGroup.class, UpdateGroup.class})
     @Past(message = "Date of birth must be in the past", groups = {CreateGroup.class, UpdateGroup.class})
-    @DateOfBirthValidation(message = "User must be at least 18 years old")
+    @DateOfBirthValidation(message = "User must be at least 18 years old", groups = {CreateGroup.class})
     private LocalDate dateOfBirth;
 
     @NotNull(message = "Last login cannot be null", groups = {UpdateGroup.class})

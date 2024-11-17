@@ -47,6 +47,11 @@ public class AuthenticationService {
         passwordValidator(customer.getPassword(), customer.getUsername(), customer.getEmail());
         logger.info("Starting to add user: {}", customer.getUsername());
         UsersResource usersResource = keycloakConfig.getRealmResource().users();
+        if (!createCustomerDto.createUserDto().password().equals(createCustomerDto.createUserDto().confirmPassword())) {
+            List<String> errors = new ArrayList<>();
+            errors.add("Password confirmation invalid !");
+            throw new RegistrationException("Password Invalid", errors);
+        }
         List<UserRepresentation> existingUsersByUsername = usersResource.search(customer.getUsername(), true);
         if (!existingUsersByUsername.isEmpty()) {
             List<String> details = List.of("User with username " + customer.getUsername() + " already exists.");
@@ -58,7 +63,7 @@ public class AuthenticationService {
             throw new UserAlreadyExistsException("User with email " + customer.getEmail() + " already exists.", details);
         }
         UserRepresentation userRepresentation = new UserRepresentation();
-        userRepresentation.setUsername(customer.getUsername());
+        userRepresentation.setUsername(customer.getUsername().toLowerCase());
         userRepresentation.setFirstName(customer.getFirstName());
         userRepresentation.setLastName(customer.getLastName());
         userRepresentation.setEmail(customer.getEmail());
