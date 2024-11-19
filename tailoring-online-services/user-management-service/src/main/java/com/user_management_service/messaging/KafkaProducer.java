@@ -1,5 +1,6 @@
 package com.user_management_service.messaging;
 
+import com.user_management_service.exception.KafkaProducerException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.messaging.Message;
@@ -10,40 +11,42 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 
 import java.io.IOException;
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
 public class KafkaProducer {
 
     private final StreamBridge streamBridge;
-    private static final String TOPIC = "cloudinary-upload-image-request-topic";
 
     @CircuitBreaker(name = "user-management-service", fallbackMethod = "circuitBreakerFallback")
     @Retry(name = "user-management-service", fallbackMethod = "retryFallback")
-    public void sendProfilePicture(MultipartFile profilePicture) {
+    public void sendProfilePicture(MultipartFile profilePicture, String pictureId) {
+        final String TOPIC = "cloudinary-upload-image-request-topic";
         byte[] imageBytes;
         try {
             imageBytes = profilePicture.getBytes();
         } catch (IOException e) {
-            throw new RuntimeException("Failed to convert multipart file to bytes", e);
+            throw new KafkaProducerException(e.getMessage(), Collections.singletonList("Failed to convert multipart file to bytes"));
         }
         try {
-            Message<byte[]> message = MessageBuilder.withPayload(imageBytes).build();
+            Message<byte[]> message = MessageBuilder.withPayload(imageBytes)
+                    .setHeader("pictureId", pictureId)
+                    .build();
             boolean sentSuccessfully = streamBridge.send(TOPIC, message);
             if (!sentSuccessfully) {
-                throw new RuntimeException("Failed to send the photo to Kafka.");
+                throw new KafkaProducerException("Failed to send the photo to Kafka.", Collections.singletonList("Failed to send the photo with ID " + pictureId + " to Kafka."));
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error occurred while sending the photo to Kafka.", e);
+            throw new KafkaProducerException(e.getMessage(), Collections.singletonList("Failed to send the photo with ID " + pictureId + " to Kafka."));
         }
     }
 
-
-    private void circuitBreakerFallback(Throwable t) throws RuntimeException {
-        throw new RuntimeException("Circuit breaker opened for service cloudinary : " + t.getMessage(), t);
+    private void circuitBreakerFallback(MultipartFile profilePicture, String pictureId, Throwable t) {
+        throw new KafkaProducerException(t.getMessage(), Collections.singletonList("Circuit breaker opened for service cloudinary for file " + profilePicture.getOriginalFilename() + " with ID " + pictureId + " : " + t.getMessage()));
     }
 
-    private void retryFallback(Throwable t) throws RuntimeException {
-        throw new RuntimeException("Retry attempts failed for service cloudinary : " + t.getMessage(), t);
+    private void retryFallback(MultipartFile profilePicture, String pictureId, Throwable t) {
+        throw new KafkaProducerException(t.getMessage(), Collections.singletonList("Retry attempts failed for service cloudinary for file " + profilePicture.getOriginalFilename() + " with ID " + pictureId + " : " + t.getMessage()));
     }
 }

@@ -4,8 +4,7 @@ import com.user_management_service.config.KeycloakConfig;
 import com.user_management_service.dto.*;
 import com.user_management_service.exception.*;
 import com.user_management_service.mapper.CustomerMapper;
-import com.user_management_service.messaging.KafkaConsumer;
-import com.user_management_service.messaging.KafkaProducer;
+import com.user_management_service.messaging.*;
 import com.user_management_service.validation.CreateGroup;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
@@ -42,11 +41,17 @@ public class AuthenticationService {
         }
     }
 
-    public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto, MultipartFile profilePicture) throws IOException {
+    public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto, MultipartFile profilePicture) throws IOException, UserAlreadyExistsException, KeycloakException {
         var customer = customerMapper.toCreateEntity(createCustomerDto);
         passwordValidator(customer.getPassword(), customer.getUsername(), customer.getEmail());
         logger.info("Starting to add user: {}", customer.getUsername());
         UsersResource usersResource = keycloakConfig.getRealmResource().users();
+        if (!createCustomerDto.createUserDto().password().equals(createCustomerDto.createUserDto().confirmPassword())) {
+            List<String> errors = new ArrayList<>();
+            errors.add("Password confirmation invalid !");
+            errors.add("Password doesn't match confirm password invalid !");
+            throw new RegistrationException("Password Invalid", errors);
+        }
         List<UserRepresentation> existingUsersByUsername = usersResource.search(customer.getUsername(), true);
         if (!existingUsersByUsername.isEmpty()) {
             List<String> details = List.of("User with username " + customer.getUsername() + " already exists.");
@@ -57,22 +62,8 @@ public class AuthenticationService {
             List<String> details = List.of("User with email " + customer.getEmail() + " already exists.");
             throw new UserAlreadyExistsException("User with email " + customer.getEmail() + " already exists.", details);
         }
-        if (profilePicture != null && !profilePicture.isEmpty()) {
-            try {
-                String profilePictureUrl = kafkaConsumer.getProfilePictureUrl();
-                if (profilePictureUrl != null) {
-                    customer.setProfilePicture(profilePictureUrl);
-                    logger.info("Profile picture URL retrieved successfully for user {}", customer.getUsername());
-                } else {
-                    throw new RuntimeException("Profile picture URL is null for user " + customer.getUsername());
-                }
-            } catch (Exception e) {
-                logger.error("Attempt to retrieve profile picture URL resulted in an exception: {}", e.getMessage());
-                throw e;
-            }
-        }
         UserRepresentation userRepresentation = new UserRepresentation();
-        userRepresentation.setUsername(customer.getUsername());
+        userRepresentation.setUsername(customer.getUsername().toLowerCase());
         userRepresentation.setFirstName(customer.getFirstName());
         userRepresentation.setLastName(customer.getLastName());
         userRepresentation.setEmail(customer.getEmail());
@@ -97,14 +88,53 @@ public class AuthenticationService {
             String responseBody = response.readEntity(String.class);
             if (response.getStatus() == Response.Status.CREATED.getStatusCode()) {
                 logger.info("User {} created successfully in Keycloak", customer.getUsername());
+                if (profilePicture != null && !profilePicture.isEmpty()) {
+                    try {
+                        String pictureId = UUID.randomUUID().toString();
+                        kafkaProducer.sendProfilePicture(profilePicture, pictureId);
+                        logger.info("Profile picture sent successfully with ID {} for user {}", pictureId, customer.getUsername());
+                        long startTime = System.currentTimeMillis();
+                        long maxWaitTimeMs = 10000;
+                        long pollIntervalMs = 500;
+                        String profilePictureUrl = null;
+                        try {
+                            while ((System.currentTimeMillis() - startTime) < maxWaitTimeMs) {
+                                profilePictureUrl = kafkaConsumer.getProfilePictureUrl(pictureId);
+                                if (profilePictureUrl != null) {
+                                    break;
+                                }
+                                Thread.sleep(pollIntervalMs);
+                            }
+                        } catch (InterruptedException e) {
+                            logger.error("Thread interruption while waiting for profile picture URL: {}", e.getMessage());
+                            throw new RegistrationException(e.getMessage(), Collections.singletonList("Thread interruption while waiting for profile picture URL for user " + customer.getUsername()));
+                        } catch (Exception e) {
+                            logger.error("Error while consuming profile picture URL: {}", e.getMessage());
+                            throw new RegistrationException(e.getMessage(), Collections.singletonList("Error while consuming profile picture URL for user " + customer.getUsername()));
+                        }
+                        if (profilePictureUrl != null) {
+                            customer.setProfilePicture(profilePictureUrl);
+                            UserRepresentation updatedUser = usersResource.search(customer.getUsername()).get(0);
+                            Map<String, List<String>> updatedAttributes = updatedUser.getAttributes();
+                            updatedAttributes.put("profilePicture", Collections.singletonList(profilePictureUrl));
+                            updatedUser.setAttributes(updatedAttributes);
+                            usersResource.get(updatedUser.getId()).update(updatedUser);
+                            logger.info("Profile picture URL retrieved successfully with ID {} for user {}", pictureId, customer.getUsername());
+                        } else {
+                            throw new RegistrationException("Profile picture URL is null", Collections.singletonList("Profile picture URL is null for ID " + pictureId + " and user " + customer.getUsername()));
+                        }
+                    } catch (Exception e) {
+                        logger.error("Attempt to handle profile picture resulted in an exception: {}", e.getMessage());
+                        throw new RegistrationException(e.getMessage(), Collections.singletonList("Failed to handle profile picture for user " + customer.getUsername()));
+                    }
+                }
             } else {
                 List<String> details = List.of(
                         "Status: " + response.getStatus(),
                         "Response: " + responseBody,
                         "Reason: " + response.getStatusInfo()
                 );
-                logger.error("Failed to create user {} in Keycloak. Status: {}, Response: {}, Reason {}",
-                        customer.getUsername(), response.getStatus(), responseBody, response.getStatusInfo());
+                logger.error("Failed to create user {} in Keycloak. Status: {}, Response: {}, Reason {}", customer.getUsername(), response.getStatus(), responseBody, response.getStatusInfo());
                 throw new KeycloakException("Failed to create user in Keycloak, status: " + response.getStatus() + ", reason: " + response.getStatusInfo(), details);
             }
         } catch (Exception e) {

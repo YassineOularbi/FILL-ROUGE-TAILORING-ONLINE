@@ -42,6 +42,16 @@ public class GlobalExceptionHandler {
         return createErrorResponse(HttpStatus.BAD_REQUEST, "Validation Error", ex.getMessage(), request, ex.getDetails());
     }
 
+    @ExceptionHandler(KafkaProducerException.class)
+    public ResponseEntity<ErrorResponse> handleKafkaProducerException(KafkaProducerException ex, WebRequest request) {
+        return createErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Kafka Producer Error", ex.getMessage(), request, ex.getDetails());
+    }
+
+    @ExceptionHandler(KafkaConsumerException.class)
+    public ResponseEntity<ErrorResponse> handleKafkaConsumerException(KafkaConsumerException ex, WebRequest request) {
+        return createErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Kafka Consumer Error", ex.getMessage(), request, ex.getDetails());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, WebRequest request) {
         List<String> validationErrors = ex.getBindingResult()
