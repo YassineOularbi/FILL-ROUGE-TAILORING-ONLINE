@@ -4,8 +4,7 @@ import com.user_management_service.config.KeycloakConfig;
 import com.user_management_service.dto.*;
 import com.user_management_service.exception.*;
 import com.user_management_service.mapper.CustomerMapper;
-import com.user_management_service.messaging.KafkaConsumer;
-import com.user_management_service.messaging.KafkaProducer;
+import com.user_management_service.messaging.*;
 import com.user_management_service.validation.CreateGroup;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +49,7 @@ public class AuthenticationService {
         if (!createCustomerDto.createUserDto().password().equals(createCustomerDto.createUserDto().confirmPassword())) {
             List<String> errors = new ArrayList<>();
             errors.add("Password confirmation invalid !");
+            errors.add("Password doesn't match confirm password invalid !");
             throw new RegistrationException("Password Invalid", errors);
         }
         List<UserRepresentation> existingUsersByUsername = usersResource.search(customer.getUsername(), true);
@@ -107,10 +107,10 @@ public class AuthenticationService {
                             }
                         } catch (InterruptedException e) {
                             logger.error("Thread interruption while waiting for profile picture URL: {}", e.getMessage());
-                            throw new RuntimeException("Thread interruption while waiting for profile picture URL for user " + customer.getUsername(), e);
+                            throw new RegistrationException(e.getMessage(), Collections.singletonList("Thread interruption while waiting for profile picture URL for user " + customer.getUsername()));
                         } catch (Exception e) {
                             logger.error("Error while consuming profile picture URL: {}", e.getMessage());
-                            throw new RuntimeException("Failed to consume profile picture URL for user " + customer.getUsername(), e);
+                            throw new RegistrationException(e.getMessage(), Collections.singletonList("Error while consuming profile picture URL for user " + customer.getUsername()));
                         }
                         if (profilePictureUrl != null) {
                             customer.setProfilePicture(profilePictureUrl);
@@ -121,11 +121,11 @@ public class AuthenticationService {
                             usersResource.get(updatedUser.getId()).update(updatedUser);
                             logger.info("Profile picture URL retrieved successfully with ID {} for user {}", pictureId, customer.getUsername());
                         } else {
-                            throw new RuntimeException("Profile picture URL is null for ID " + pictureId + " and user " + customer.getUsername());
+                            throw new RegistrationException("Profile picture URL is null", Collections.singletonList("Profile picture URL is null for ID " + pictureId + " and user " + customer.getUsername()));
                         }
                     } catch (Exception e) {
                         logger.error("Attempt to handle profile picture resulted in an exception: {}", e.getMessage());
-                        throw new RuntimeException("Failed to handle profile picture for user " + customer.getUsername(), e);
+                        throw new RegistrationException(e.getMessage(), Collections.singletonList("Failed to handle profile picture for user " + customer.getUsername()));
                     }
                 }
             } else {

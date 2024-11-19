@@ -1,5 +1,6 @@
 package com.cloudinary_service.messaging;
 
+import com.cloudinary_service.exception.KafkaConsumerException;
 import com.cloudinary_service.service.CloudinaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.function.Consumer;
 
 @Service
@@ -27,21 +29,22 @@ public class KafkaConsumer {
     private void handleProfilePicture(Message<byte[]> message) {
         byte[] imageBytes = message.getPayload();
         String pictureId = message.getHeaders().get("pictureId", String.class);
-
         try {
             cloudinaryService.uploadProfilePicture(imageBytes, pictureId);
-        } catch (IOException | RuntimeException e) {
-            throw new RuntimeException("Failed to process the profile picture with ID " + pictureId, e);
+        } catch (IOException e) {
+            throw new KafkaConsumerException("IO error occurred while processing profile picture with ID: " + pictureId, Collections.singletonList("Cause: " + e.getMessage()));
+        } catch (RuntimeException e) {
+            throw new KafkaConsumerException("Failed to process profile picture with ID: " + pictureId, Collections.singletonList("Cause: " + e.getMessage()));
         }
     }
 
     private void circuitBreakerFallback(Message<byte[]> message, Throwable t) {
         String pictureId = message.getHeaders().get("pictureId", String.class);
-        throw new RuntimeException("Circuit breaker opened for service cloudinary for picture ID " + pictureId + ": " + t.getMessage(), t);
+        throw new KafkaConsumerException("Circuit breaker opened for Cloudinary service.", Collections.singletonList("Reason: " + t.getMessage()));
     }
 
     private void retryFallback(Message<byte[]> message, Throwable t) {
         String pictureId = message.getHeaders().get("pictureId", String.class);
-        throw new RuntimeException("Retry attempts failed for service cloudinary for picture ID " + pictureId + ": " + t.getMessage(), t);
+        throw new KafkaConsumerException("Retry attempts failed for Cloudinary service.", Collections.singletonList("Reason: " + t.getMessage()));
     }
 }

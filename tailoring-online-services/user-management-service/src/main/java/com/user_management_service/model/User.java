@@ -97,11 +97,16 @@ public class User implements Serializable {
                 return true;
             }
 
-            int age = Period.between(dateOfBirth, LocalDate.now()).getYears();
+            LocalDate now = LocalDate.now();
+            Period period = Period.between(dateOfBirth, now);
+            int years = period.getYears();
+            int months = period.getMonths();
+            int days = period.getDays();
 
-            if (age < 18) {
+            if (years < 18 || (years == 18 && (months > 0 || (months == 0 && days > 0)))) {
                 context.disableDefaultConstraintViolation();
-                context.buildConstraintViolationWithTemplate(this.message).addConstraintViolation();
+                context.buildConstraintViolationWithTemplate(this.message)
+                        .addConstraintViolation();
                 return false;
             }
 

@@ -1,5 +1,6 @@
 package com.cloudinary_service.messaging;
 
+import com.cloudinary_service.exception.KafkaProducerException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.messaging.Message;
@@ -7,6 +8,8 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
+
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -24,18 +27,18 @@ public class KafkaProducer {
                     .build();
             boolean sentSuccessfully = streamBridge.send(TOPIC, message);
             if (!sentSuccessfully) {
-                throw new RuntimeException("Failed to send profile picture URL to Kafka.");
+                throw new KafkaProducerException("Failed to send profile picture URL to Kafka.", Collections.singletonList("Picture ID: " + pictureId));
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error occurred while sending the profile picture URL to Kafka.", e);
+            throw new KafkaProducerException("Error occurred while sending the profile picture URL to Kafka.", Collections.singletonList("Error: " + e.getMessage()));
         }
     }
 
     private void circuitBreakerFallback(String profilePictureUrl, String pictureId, Throwable t) {
-        throw new RuntimeException("Circuit breaker opened for service user management for URL: " + profilePictureUrl + " with ID: " + pictureId + " : " + t.getMessage(), t);
+        throw new KafkaProducerException("Circuit breaker opened for service user management.", Collections.singletonList("URL: " + profilePictureUrl + ", Picture ID: " + pictureId + ", Reason: " + t.getMessage()));
     }
 
     private void retryFallback(String profilePictureUrl, String pictureId, Throwable t) {
-        throw new RuntimeException("Retry attempts failed for service user management for URL: " + profilePictureUrl + " with ID: " + pictureId + " : " + t.getMessage(), t);
+        throw new KafkaProducerException("Retry attempts failed for service user management.", Collections.singletonList("URL: " + profilePictureUrl + ", Picture ID: " + pictureId + ", Reason: " + t.getMessage()));
     }
 }
