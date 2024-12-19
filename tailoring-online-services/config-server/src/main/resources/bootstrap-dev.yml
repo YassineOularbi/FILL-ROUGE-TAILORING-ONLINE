@@ -1,0 +1,31 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/realms/tailoring-online/protocol/openid-connect/certs
+      client:
+        registration:
+          config:
+            provider: keycloak
+            client-id: config-server-id
+            client-secret: Y51siYJ6ZJNIlx2CHgqnAiiMitnjqoar
+            authorization-grant-type: client_credentials
+            scope: openid, config.pull
+            redirect-uri: "http://localhost:8888/login/oauth2/code/{registrationId}"
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/tailoring-online
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.hostname}:${server.port}
+    prefer-ip-address: true
+    non-secure-port: ${server.port}
+    non-secure-port-enabled: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30

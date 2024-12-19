@@ -1,0 +1,18 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/realms/tailoring-online/protocol/openid-connect/certs
+      client:
+        registration:
+          eureka:
+            provider: keycloak
+            client-id: eureka-server-id
+            client-secret: 8dRSc1Sa4tne6BpFba13NYNKJ854T7Yr
+            authorization-grant-type: authorization_code
+            scope: openid, eureka.registry
+            redirect-uri: "http://localhost:8761/login/oauth2/code/{registrationId}"
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/tailoring-online
