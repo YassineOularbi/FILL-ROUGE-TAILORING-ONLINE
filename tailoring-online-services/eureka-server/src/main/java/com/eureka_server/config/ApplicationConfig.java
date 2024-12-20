@@ -21,7 +21,7 @@ public class ApplicationConfig {
 
     @Bean
     public JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withJwkSetUri(environment.getProperty("JWT_JWK_SET_URI")).build();
+        return NimbusJwtDecoder.withJwkSetUri(environment.getProperty("SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI")).build();
     }
 
     @Bean
