@@ -2,13 +2,24 @@ spring:
   application:
     name: eureka-server
   profiles:
-    active: local
+    active: dev
+  aop:
+    proxy-target-class: false
   cloud:
-    config:
-      enabled: true
-      uri: http://admin:admin@localhost:8888
-      failFast: true
-      retry:
-        maxAttempts: 20
-      profile: local
-      label: main
+    loadbalancer:
+      ribbon:
+        enabled: false
+server:
+  port: 8761
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+logging:
+  level:
+    com.netflix: DEBUG
+    org.springframework.cloud.netflix.eureka: DEBUG

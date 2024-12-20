@@ -1,7 +1,14 @@
 spring:
   application:
     name: config-server
+  profiles:
+    active: dev
+  aop:
+    proxy-target-class: false
   cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
     config:
       server:
         git:
@@ -10,14 +17,5 @@ spring:
           clone-on-start: true
           username: yassineoularbi
           password: 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
-  security:
-    user:
-      name: admin
-      password: admin
-      roles: ADMIN
 server:
   port: 8888
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false

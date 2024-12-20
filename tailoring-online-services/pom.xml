@@ -24,7 +24,7 @@
     <module>eureka-server</module>
     <module>api-gateway-service</module>
     <module>user-management-service</module>
-    <module>cloudinary-service</module>
+<!--    <module>cloudinary-service</module>-->
 <!--    <module>notification-mailing-service</module>-->
 <!--    <module>localization-shipping-service</module>-->
 <!--    <module>order-management-service</module>-->
@@ -114,23 +114,13 @@
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-config-client</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-config</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-bootstrap</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.boot</groupId>-->
+<!--      <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
+<!--    </dependency>-->
 
     <dependency>
       <groupId>jakarta.json</groupId>
