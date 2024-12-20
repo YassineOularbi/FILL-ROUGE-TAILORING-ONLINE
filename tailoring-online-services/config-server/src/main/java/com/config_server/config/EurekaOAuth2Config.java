@@ -16,11 +16,11 @@ public class EurekaOAuth2Config {
 
     private final Environment environment;
 
-    private String getPropertyAccessToken() {
+    private String getAccessToken() {
 
         OAuth2AuthorizeRequest authorizeRequest = OAuth2AuthorizeRequest
-                .withClientRegistrationId(environment.getProperty("eureka.oauth2.client"))
-                .principal(environment.getProperty("eureka.oauth2.client-id"))
+                .withClientRegistrationId(environment.getProperty("EUREKA_OAUTH2_CLIENT"))
+                .principal(environment.getProperty("EUREKA_OAUTH2_CLIENT_ID"))
                 .build();
 
         OAuth2AuthorizedClientManager authorizedClientManager = createAuthorizedClientManager();
@@ -36,11 +36,11 @@ public class EurekaOAuth2Config {
     private OAuth2AuthorizedClientManager createAuthorizedClientManager() {
 
         ClientRegistration clientRegistration = ClientRegistration
-                .withRegistrationId(environment.getProperty("eureka.oauth2.client"))
-                .clientId(environment.getProperty("eureka.oauth2.client-id"))
-                .clientSecret(environment.getProperty("eureka.oauth2.client-secret"))
+                .withRegistrationId(environment.getProperty("EUREKA_OAUTH2_CLIENT"))
+                .clientId(environment.getProperty("EUREKA_OAUTH2_CLIENT_ID"))
+                .clientSecret(environment.getProperty("EUREKA_OAUTH2_CLIENT_SECRET"))
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .tokenUri(environment.getProperty("eureka.oauth2.token-uri"))
+                .tokenUri(environment.getProperty("EUREKA_OAUTH2_TOKEN_URI"))
                 .build();
 
         ClientRegistrationRepository clientRegistrationRepository =
@@ -58,7 +58,7 @@ public class EurekaOAuth2Config {
         return new RestTemplateBuilder()
                 .customizers(restTemplate -> restTemplate.getInterceptors().add((request, body, execution) -> {
                     HttpHeaders headers = request.getHeaders();
-                    headers.add("Authorization", "Bearer " + getPropertyAccessToken());
+                    headers.add("Authorization", "Bearer " + getAccessToken());
                     return execution.execute(request, body);
                 }));
     }

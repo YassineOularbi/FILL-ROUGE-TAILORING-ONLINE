@@ -3,19 +3,3 @@ spring:
     name: config-server
   profiles:
     active: dev
-  aop:
-    proxy-target-class: false
-  cloud:
-    loadbalancer:
-      ribbon:
-        enabled: false
-    config:
-      server:
-        git:
-          uri: https://github.com/YassineOularbi/TAILORING-ONLINE-CONFIG-REPO.git
-          default-label: main
-          clone-on-start: true
-          username: yassineoularbi
-          password: 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
-server:
-  port: 8888
