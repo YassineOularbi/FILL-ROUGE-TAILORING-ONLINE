@@ -2,6 +2,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+src/main/resources/bootstrap-*.yml
+*/src/main/resources/bootstrap-*.yml
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -20,6 +22,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+*/.env
 
 ### NetBeans ###
 /nbproject/private/
