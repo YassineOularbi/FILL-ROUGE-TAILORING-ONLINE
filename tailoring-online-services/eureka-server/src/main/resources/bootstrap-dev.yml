@@ -1,4 +1,12 @@
+server:
+  port: 8761
 spring:
+  aop:
+    proxy-target-class: false
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
   security:
     oauth2:
       resourceserver:
@@ -16,7 +24,6 @@ spring:
         provider:
           keycloak:
             issuer-uri: ${KEYCLOAK_ISSUER_URI}
-
 oauth2:
   resource-access-key: ${OAUTH2_RESOURCE_ACCESS_KEY}
   client-id: ${OAUTH2_CLIENT_ID}
@@ -24,7 +31,6 @@ oauth2:
   logout-success-url: ${OAUTH2_LOGOUT_SUCCESS_URL}
   logout-url: ${OAUTH2_LOGOUT_URL}
   allowed-roles: ${OAUTH2_ALLOWED_ROLES}
-
 eureka:
   client:
     register-with-eureka: false

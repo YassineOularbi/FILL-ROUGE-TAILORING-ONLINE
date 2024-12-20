@@ -3,11 +3,3 @@ spring:
     name: eureka-server
   profiles:
     active: dev
-  aop:
-    proxy-target-class: false
-  cloud:
-    loadbalancer:
-      ribbon:
-        enabled: false
-server:
-  port: 8761
