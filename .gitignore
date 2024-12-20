@@ -1,0 +1,2 @@
+tailoring-online-services/*/src/main/resources/bootstrap-*.yml
+tailoring-online-services/*/.env
