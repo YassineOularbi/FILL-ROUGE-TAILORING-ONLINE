@@ -24,7 +24,7 @@
     <module>eureka-server</module>
     <module>api-gateway-service</module>
     <module>user-management-service</module>
-    <module>cloudinary-service</module>
+<!--    <module>cloudinary-service</module>-->
 <!--    <module>notification-mailing-service</module>-->
 <!--    <module>localization-shipping-service</module>-->
 <!--    <module>order-management-service</module>-->

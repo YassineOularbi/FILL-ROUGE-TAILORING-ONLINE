@@ -19,9 +19,10 @@ public class JwtKeycloakConverter implements Converter<Jwt, Collection<GrantedAu
         Map<String, Map<String, Collection<String>>> resourceAccess = jwt.getClaim("resource_access");
 
         if (resourceAccess != null && !resourceAccess.isEmpty()) {
+            Map<String, Collection<String>> eurekaResourceClaims = resourceAccess.get("eureka-server-id");
 
-            resourceAccess.forEach((resource, resourceClaims) -> {
-                Collection<String> roles = resourceClaims.get("roles");
+            if (eurekaResourceClaims != null) {
+                Collection<String> roles = eurekaResourceClaims.get("roles");
                 if (roles != null && !roles.isEmpty()) {
                     grantedAuthorities.addAll(
                             roles.stream()
@@ -29,7 +30,7 @@ public class JwtKeycloakConverter implements Converter<Jwt, Collection<GrantedAu
                                     .toList()
                     );
                 }
-            });
+            }
         }
 
         return grantedAuthorities;

@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/eureka/**", "/actuator/**").permitAll()
+                        .requestMatchers("/eureka/**").hasAuthority("eureka_registry")
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {
@@ -53,7 +53,7 @@ public class SecurityConfig {
                     jwt.jwtAuthenticationConverter(jwtAuthenticationConverter);
                 }))
                 .oauth2Login(Customizer.withDefaults())
-                .oauth2Client(Customizer.withDefaults())
+                .oauth2Client(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                         .maximumSessions(1)
@@ -66,6 +66,7 @@ public class SecurityConfig {
                         .accessDeniedHandler(((request, response, accessDeniedException) ->
                                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")))
                 )
+                .anonymous(AbstractHttpConfigurer::disable)
                 .build();
     }
 

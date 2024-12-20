@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Properties;
 
-public class ConfigServerOAuth2EnvironmentProcess implements EnvironmentPostProcessor {
+public class ConfigServerOAuth2 implements EnvironmentPostProcessor {
 
     private static final String CONFIG_URL_TEMPLATE = "%s/%s/%s";
 

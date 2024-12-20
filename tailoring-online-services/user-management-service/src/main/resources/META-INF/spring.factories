@@ -1,1 +1,1 @@
-org.springframework.boot.env.EnvironmentPostProcessor=com.user_management_service.config.ConfigServerOAuth2EnvironmentProcess
+org.springframework.boot.env.EnvironmentPostProcessor=com.user_management_service.config.ConfigServerOAuth2
