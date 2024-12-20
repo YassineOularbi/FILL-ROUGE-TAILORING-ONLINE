@@ -19,7 +19,3 @@ spring:
           password: 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
 server:
   port: 8888
-logging:
-  level:
-    com.netflix: DEBUG
-    org.springframework.cloud.netflix.eureka: DEBUG

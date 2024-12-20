@@ -16,8 +16,6 @@ import java.util.Properties;
 
 public class ConfigServerOAuth2 implements EnvironmentPostProcessor {
 
-    private static final String CONFIG_URL_TEMPLATE = "%s/%s/%s";
-
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         try {
@@ -53,7 +51,7 @@ public class ConfigServerOAuth2 implements EnvironmentPostProcessor {
                 HttpHeaders headers = new HttpHeaders();
                 headers.setBearerAuth(authorizedClient.getAccessToken().getTokenValue());
 
-                String configUrl = String.format(CONFIG_URL_TEMPLATE, configServerUrl, applicationName, profile);
+                String configUrl = String.format("%s/%s/%s", configServerUrl, applicationName, profile);
 
                 ResponseEntity<String> response = restTemplate.exchange(
                         configUrl,
