@@ -7,6 +7,7 @@ import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -29,6 +30,7 @@ public class SecurityConfig {
 
     private final JwtDecoder jwtDecoder;
     private final JwtAuthenticationConverter jwtAuthenticationConverter;
+    private final Environment environment;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -37,7 +39,7 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessHandler(keycloakLogoutHandler())
-                        .logoutSuccessUrl("http://localhost:8761/oauth2/authorization/eureka")
+                        .logoutSuccessUrl(environment.getProperty("OAUTH2_LOGOUT_SUCCESS_URL"))
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID", "KEYCLOAK_IDENTITY")
                 )
@@ -45,7 +47,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/eureka/**").hasAuthority("eureka_registry")
+                        .requestMatchers("/eureka/**").hasAuthority(environment.getProperty("OAUTH2_ALLOWED_ROLES"))
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {
@@ -73,7 +75,8 @@ public class SecurityConfig {
     @Bean
     public LogoutSuccessHandler keycloakLogoutHandler() {
         SimpleUrlLogoutSuccessHandler handler = new SimpleUrlLogoutSuccessHandler();
-        handler.setDefaultTargetUrl("http://localhost:8080/realms/tailoring-online/protocol/openid-connect/logout?redirect_uri=http://localhost:8761/oauth2/authorization/eureka");
+        handler.setDefaultTargetUrl(environment.getProperty("OAUTH2_LOGOUT_URL"));
+
         return (request, response, authentication) -> {
             if (authentication instanceof KeycloakAuthenticationToken) {
                 KeycloakSecurityContext securityContext =

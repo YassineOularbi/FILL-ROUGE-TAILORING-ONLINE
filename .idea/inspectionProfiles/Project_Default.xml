@@ -65,6 +65,8 @@
           <option value="config-server" />
           <option value="config-server" />
           <option value="config-server" />
+          <option value="eureka-server" />
+          <option value="eureka-server" />
         </list>
       </option>
       <option name="ignoredPackages">
@@ -126,10 +128,14 @@
           <option value="org.springframework:spring-beans:6.1.12" />
           <option value="org.springframework:spring-core:6.1.12" />
           <option value="org.springframework:spring-expression:6.1.12" />
+          <option value="org.bouncycastle:bcprov-jdk18on:1.74" />
+          <option value="org.keycloak:keycloak-core:25.0.3" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
