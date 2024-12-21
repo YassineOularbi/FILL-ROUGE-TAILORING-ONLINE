@@ -3,8 +3,3 @@ spring:
     name: user-management-service
   profiles:
     active: dev
-logging:
-  level:
-    org.springframework.cloud.config: DEBUG
-    org.springframework.cloud.config.server: DEBUG
-    org.springframework.cloud: DEBUG

@@ -1,1 +1,0 @@
-org.springframework.cloud.bootstrap.BootstrapConfiguration=\com.user_management_service.config.ConfigServerOAuth2

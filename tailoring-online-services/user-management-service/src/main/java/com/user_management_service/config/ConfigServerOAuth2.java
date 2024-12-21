@@ -1,10 +1,11 @@
 package com.user_management_service.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.bootstrap.BootstrapConfiguration;
 import org.springframework.cloud.config.client.ConfigClientProperties;
 import org.springframework.cloud.config.client.ConfigServicePropertySourceLocator;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.security.oauth2.client.*;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -14,7 +15,8 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 
 import java.util.Map;
 
-@Configuration
+@Order(0)
+@BootstrapConfiguration
 @RequiredArgsConstructor
 public class ConfigServerOAuth2 {
 
