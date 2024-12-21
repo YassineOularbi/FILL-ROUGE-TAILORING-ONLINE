@@ -22,13 +22,13 @@ public class JwtKeycloakConverter implements Converter<Jwt, Collection<GrantedAu
     public Collection<GrantedAuthority> convert(Jwt jwt) {
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        Map<String, Map<String, Collection<String>>> resourceAccess = jwt.getClaim(environment.getProperty("OAUTH2_RESOURCE_ACCESS_KEY"));
+        Map<String, Map<String, Collection<String>>> resourceAccess = jwt.getClaim(environment.getProperty("oauth2.resource-access-key"));
 
         if (resourceAccess != null && !resourceAccess.isEmpty()) {
-            Map<String, Collection<String>> clientResourceClaims = resourceAccess.get(environment.getProperty("OAUTH2_CLIENT_ID"));
+            Map<String, Collection<String>> clientResourceClaims = resourceAccess.get(environment.getProperty("oauth2.client-id"));
 
             if (clientResourceClaims != null) {
-                Collection<String> roles = clientResourceClaims.get(environment.getProperty("OAUTH2_ROLES_KEY"));
+                Collection<String> roles = clientResourceClaims.get(environment.getProperty("oauth2.roles-key"));
                 if (roles != null && !roles.isEmpty()) {
                     grantedAuthorities.addAll(
                             roles.stream()

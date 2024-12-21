@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().hasAuthority(environment.getProperty("OAUTH2_ALLOWED_ROLES"))
+                        .anyRequest().hasAuthority(environment.getProperty("oauth2.allowed-roles"))
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {
                     jwt.decoder(jwtDecoder);

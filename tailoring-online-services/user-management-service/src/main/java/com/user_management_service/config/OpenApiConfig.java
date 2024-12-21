@@ -9,9 +9,10 @@ import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ import java.util.List;
                 title = "User Management Service API",
                 version = "v1",
                 description = "API documentation for the User Management Service",
-                license = @License(name = "Apache 2.0", url = "http://springdoc.org"),
+                license = @License(name = "Portfolio", url = "https://yassineoularbi.github.io"),
                 contact = @Contact(
                             name = "Yassine Oularbi",
                             email = "yassineoularbi4@gmail.com",
@@ -30,18 +31,18 @@ import java.util.List;
         ),
         security = @SecurityRequirement(name = "Bearer Authentication")
 )
+@RequiredArgsConstructor
 public class OpenApiConfig {
 
+    private final Environment environment;
+
     @Bean
-    public OpenAPI userOpenAPI(
-            @Value("${openapi.service.title}") String serviceTitle,
-            @Value("${openapi.service.version}") String serviceVersion,
-            @Value("${openapi.service.url}") String url) {
+    public OpenAPI userOpenAPI() {
         return new OpenAPI()
-                .servers(List.of(new Server().url(url)))
+                .servers(List.of(new Server().url(environment.getProperty("openapi.service.url"))))
                 .info(new io.swagger.v3.oas.models.info.Info()
-                        .title(serviceTitle)
-                        .version(serviceVersion))
+                        .title(environment.getProperty("openapi.service.title"))
+                        .version(environment.getProperty("openapi.service.version")))
                 .components(new Components()
                         .addSecuritySchemes("Bearer Authentication", createAPIKeyScheme()))
                 .addSecurityItem(new io.swagger.v3.oas.models.security.SecurityRequirement()

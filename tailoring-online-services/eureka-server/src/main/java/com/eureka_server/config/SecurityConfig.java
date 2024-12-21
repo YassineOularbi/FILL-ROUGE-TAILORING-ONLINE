@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessHandler(keycloakLogoutHandler())
-                        .logoutSuccessUrl(environment.getProperty("OAUTH2_LOGOUT_SUCCESS_URL"))
+                        .logoutSuccessUrl(environment.getProperty("oauth2.logout-success-url"))
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID", "KEYCLOAK_IDENTITY")
                 )
@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/eureka/**").hasAuthority(environment.getProperty("OAUTH2_ALLOWED_ROLES"))
+                        .requestMatchers("/eureka/**").hasAuthority(environment.getProperty("oauth2.allowed-roles"))
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {
@@ -75,7 +75,7 @@ public class SecurityConfig {
     @Bean
     public LogoutSuccessHandler keycloakLogoutHandler() {
         SimpleUrlLogoutSuccessHandler handler = new SimpleUrlLogoutSuccessHandler();
-        handler.setDefaultTargetUrl(environment.getProperty("OAUTH2_LOGOUT_URL"));
+        handler.setDefaultTargetUrl(environment.getProperty("oauth2.logout-url"));
 
         return (request, response, authentication) -> {
             if (authentication instanceof KeycloakAuthenticationToken) {
