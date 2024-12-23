@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -22,20 +23,16 @@ public class JwtKeycloakConverter implements Converter<Jwt, Collection<GrantedAu
     public Collection<GrantedAuthority> convert(Jwt jwt) {
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        Map<String, Map<String, Collection<String>>> resourceAccess = jwt.getClaim(environment.getProperty("oauth2.resource-access-key"));
+        Map<String, List<String>> eurekaClaim = jwt.getClaim(environment.getProperty("oauth2.config-claim"));
 
-        if (resourceAccess != null && !resourceAccess.isEmpty()) {
-            Map<String, Collection<String>> clientResourceClaims = resourceAccess.get(environment.getProperty("oauth2.client-id"));
+        if (eurekaClaim != null) {
+            List<String> registryRoles = eurekaClaim.get(environment.getProperty("oauth2.fetch-roles"));
 
-            if (clientResourceClaims != null) {
-                Collection<String> roles = clientResourceClaims.get(environment.getProperty("oauth2.roles-key"));
-                if (roles != null && !roles.isEmpty()) {
-                    grantedAuthorities.addAll(
-                            roles.stream()
-                                    .map(SimpleGrantedAuthority::new)
-                                    .toList()
-                    );
-                }
+            if (registryRoles != null && !registryRoles.isEmpty()) {
+                registryRoles.stream()
+                        .filter(role -> role.equals(environment.getProperty("oauth2.allowed-roles")))
+                        .map(SimpleGrantedAuthority::new)
+                        .forEach(grantedAuthorities::add);
             }
         }
 

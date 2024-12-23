@@ -26,7 +26,7 @@ import java.util.List;
                 contact = @Contact(
                             name = "Yassine Oularbi",
                             email = "yassineoularbi4@gmail.com",
-                            url = "tel:+212610446080"
+                            url = "https://yassineoularbi.github.io"
                 )
         ),
         security = @SecurityRequirement(name = "Bearer Authentication")

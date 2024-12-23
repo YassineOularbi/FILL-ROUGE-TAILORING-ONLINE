@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .exceptionHandling(exceptions -> exceptions
                         .accessDeniedHandler((request, response, accessDeniedException) ->
                                 response.sendError(HttpServletResponse.SC_FORBIDDEN, "Forbidden"))
-                        .accessDeniedHandler(((request, response, accessDeniedException) ->
+                        .authenticationEntryPoint(((request, response, accessDeniedException) ->
                                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")))
                 )
                 .anonymous(AbstractHttpConfigurer::disable)
