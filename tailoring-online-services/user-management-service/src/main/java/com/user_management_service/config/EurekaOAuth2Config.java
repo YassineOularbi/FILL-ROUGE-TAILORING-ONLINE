@@ -1,4 +1,4 @@
-package com.config_server.config;
+package com.user_management_service.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;

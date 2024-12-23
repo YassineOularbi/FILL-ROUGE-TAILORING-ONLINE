@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().hasAuthority(environment.getProperty("OAUTH2_ALLOWED_ROLES"))
+                        .anyRequest().hasAuthority(environment.getProperty("oauth2.allowed-roles"))
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {
                     jwt.decoder(jwtDecoder);
@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .exceptionHandling(exceptions -> exceptions
                         .accessDeniedHandler((request, response, accessDeniedException) ->
                                 response.sendError(HttpServletResponse.SC_FORBIDDEN, "Forbidden"))
-                        .accessDeniedHandler(((request, response, accessDeniedException) ->
+                        .authenticationEntryPoint(((request, response, accessDeniedException) ->
                                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")))
                 )
                 .anonymous(AbstractHttpConfigurer::disable)

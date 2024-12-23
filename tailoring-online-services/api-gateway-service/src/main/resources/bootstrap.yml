@@ -1,17 +1,11 @@
 spring:
   main:
     web-application-type: reactive
-    allow-bean-definition-overriding: true
   application:
     name: api-gateway-service
   profiles:
-    active: local
-  cloud:
-    config:
-      enabled: true
-      uri: http://admin:admin@localhost:8888
-      failFast: true
-      retry:
-        maxAttempts: 20
-      profile: local
-      label: main
+    active: dev
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
