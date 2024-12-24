@@ -3,7 +3,3 @@ spring:
     name: config-server
   profiles:
     active: dev
-logging:
-  level:
-    org.springframework.security: DEBUG
-    org.springframework.security.oauth2: DEBUG

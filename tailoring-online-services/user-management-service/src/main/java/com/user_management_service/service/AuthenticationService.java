@@ -34,7 +34,7 @@ public class AuthenticationService {
 
     public AccessTokenResponse login(AuthenticationRequest authenticationRequest) {
         try {
-            var keycloak = keycloakConfig.getAuthenticationInstance(authenticationRequest.username(), authenticationRequest.password());
+            var keycloak = keycloakConfig.getAuthenticationInstance(authenticationRequest.username().toLowerCase(), authenticationRequest.password());
             return keycloak.tokenManager().getAccessToken();
         } catch (Exception e) {
             throw new AuthenticationException("Invalid credentials");
@@ -43,15 +43,8 @@ public class AuthenticationService {
 
     public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto, MultipartFile profilePicture) throws IOException, UserAlreadyExistsException, KeycloakException {
         var customer = customerMapper.toCreateEntity(createCustomerDto);
-        passwordValidator(customer.getPassword(), customer.getUsername(), customer.getEmail());
         logger.info("Starting to add user: {}", customer.getUsername());
         UsersResource usersResource = keycloakConfig.getRealmResource().users();
-        if (!createCustomerDto.createUserDto().password().equals(createCustomerDto.createUserDto().confirmPassword())) {
-            List<String> errors = new ArrayList<>();
-            errors.add("Password confirmation invalid !");
-            errors.add("Password doesn't match confirm password invalid !");
-            throw new RegistrationException("Password Invalid", errors);
-        }
         List<UserRepresentation> existingUsersByUsername = usersResource.search(customer.getUsername(), true);
         if (!existingUsersByUsername.isEmpty()) {
             List<String> details = List.of("User with username " + customer.getUsername() + " already exists.");
@@ -62,6 +55,21 @@ public class AuthenticationService {
             List<String> details = List.of("User with email " + customer.getEmail() + " already exists.");
             throw new UserAlreadyExistsException("User with email " + customer.getEmail() + " already exists.", details);
         }
+        if (!createCustomerDto.createUserDto().password().equals(createCustomerDto.createUserDto().confirmPassword())) {
+            List<String> errors = new ArrayList<>();
+            errors.add("Password confirmation invalid !");
+            errors.add("Password doesn't match confirm password invalid !");
+            throw new RegistrationException("Password Invalid", errors);
+        }
+        passwordValidator(
+                customer.getPassword().toLowerCase(),
+                customer.getUsername().toLowerCase(),
+                customer.getEmail().toLowerCase(),
+                customer.getFirstName().toLowerCase(),
+                customer.getLastName().toLowerCase(),
+                customer.getDateOfBirth().toString(),
+                customer.getPhoneNumber()
+        );
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setUsername(customer.getUsername().toLowerCase());
         userRepresentation.setFirstName(customer.getFirstName());
@@ -143,16 +151,53 @@ public class AuthenticationService {
         }
     }
 
-    private void passwordValidator(String password, String username, String email) {
+    private void passwordValidator(String password, String username, String email, String firstName, String lastName, String dateOfBirth, String phoneNumber) {
         List<String> errors = new ArrayList<>();
+
         if (password.contains(username)) {
             errors.add("Password cannot contain username.");
         }
+
         if (password.contains(email)) {
             errors.add("Password cannot contain email.");
         }
+
+        String emailPart = email.split("@")[0];
+        if (password.contains(emailPart)) {
+            errors.add("Password cannot contain part of the email.");
+        }
+
+        if (password.contains(firstName)) {
+            errors.add("Password cannot contain first name.");
+        }
+
+        if (password.contains(lastName)) {
+            errors.add("Password cannot contain last name.");
+        }
+
+        if (password.contains(dateOfBirth)) {
+            errors.add("Password cannot contain date of birth.");
+        }
+
+        if (password.contains(phoneNumber)) {
+            errors.add("Password cannot contain phone number.");
+        }
+
+        if (password.matches("(.)\\1{2,}")) {
+            errors.add("Password cannot contain repeated characters.");
+        }
+
+        if (password.matches(".*1234.*") || password.matches(".*abcdef.*")) {
+            errors.add("Password cannot contain simple sequences.");
+        }
+
+        if (password.contains(" ")) {
+            errors.add("Password cannot contain spaces.");
+        }
+
         if (!errors.isEmpty()) {
             throw new RegistrationException("Invalid input provided", errors);
         }
     }
+
 }
