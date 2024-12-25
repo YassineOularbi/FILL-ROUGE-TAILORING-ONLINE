@@ -8,6 +8,7 @@ import com.user_management_service.messaging.*;
 import com.user_management_service.validation.CreateGroup;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
+import org.apache.tika.Tika;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.*;
@@ -42,6 +43,11 @@ public class AuthenticationService {
     }
 
     public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto, MultipartFile profilePicture) throws IOException, UserAlreadyExistsException, KeycloakException {
+        if (profilePicture != null && !profilePicture.isEmpty()) {
+            if (!isValidImage(profilePicture)) {
+                throw new RegistrationException("Invalid input provided", List.of("Invalid image type. Only JPEG, JPG, PNG, WebP and ICO are allowed."));
+            }
+        }
         var customer = customerMapper.toCreateEntity(createCustomerDto);
         logger.info("Starting to add user: {}", customer.getUsername());
         UsersResource usersResource = keycloakConfig.getRealmResource().users();
@@ -151,53 +157,52 @@ public class AuthenticationService {
         }
     }
 
+    private boolean isValidImage(MultipartFile file) throws IOException {
+        Tika tika = new Tika();
+        String detectedType = tika.detect(file.getInputStream());
+        return detectedType.equals("image/jpeg") ||
+                detectedType.equals("image/jpg") ||
+                detectedType.equals("image/png") ||
+                detectedType.equals("image/webp") ||
+                detectedType.equals("image/x-icon");
+    }
+
+
     private void passwordValidator(String password, String username, String email, String firstName, String lastName, String dateOfBirth, String phoneNumber) {
         List<String> errors = new ArrayList<>();
-
         if (password.contains(username)) {
             errors.add("Password cannot contain username.");
         }
-
         if (password.contains(email)) {
             errors.add("Password cannot contain email.");
         }
-
         String emailPart = email.split("@")[0];
         if (password.contains(emailPart)) {
             errors.add("Password cannot contain part of the email.");
         }
-
         if (password.contains(firstName)) {
             errors.add("Password cannot contain first name.");
         }
-
         if (password.contains(lastName)) {
             errors.add("Password cannot contain last name.");
         }
-
         if (password.contains(dateOfBirth)) {
             errors.add("Password cannot contain date of birth.");
         }
-
         if (password.contains(phoneNumber)) {
             errors.add("Password cannot contain phone number.");
         }
-
         if (password.matches("(.)\\1{2,}")) {
             errors.add("Password cannot contain repeated characters.");
         }
-
         if (password.matches(".*1234.*") || password.matches(".*abcdef.*")) {
             errors.add("Password cannot contain simple sequences.");
         }
-
         if (password.contains(" ")) {
             errors.add("Password cannot contain spaces.");
         }
-
         if (!errors.isEmpty()) {
             throw new RegistrationException("Invalid input provided", errors);
         }
     }
-
 }
