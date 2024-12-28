@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { LoadingComponent } from "./shared/animations/loading/loading.component";
 import { CommonModule } from '@angular/common';
-import { KeycloakService } from './core/keycloak/keycloak.service';
 import { jwtDecode } from 'jwt-decode';
 import { KeycloakLogoutOptions } from 'keycloak-js';
 import { NotificationService } from './core/services/notification.service';
@@ -14,16 +13,16 @@ import { NotificationService } from './core/services/notification.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
   isLoading = false;
   private intervalId: any;
   private checkInterval = 1000;
 
-  constructor(private router: Router, private keycloakService: KeycloakService, private notificationService: NotificationService) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.notificationService.connect();  
+    // this.notificationService.connect();  
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         this.isLoading = true;
@@ -38,48 +37,48 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.startTokenCheck();
+    // this.startTokenCheck();
   }
 
-  ngOnDestroy(): void {
-    this.notificationService.disconnect();
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
-  }
+//   ngOnDestroy(): void {
+//     // this.notificationService.disconnect();
+//     // if (this.intervalId) {
+//     //   clearInterval(this.intervalId);
+//     // }
+//   }
 
-  startTokenCheck(): void {    
-    this.intervalId = setInterval(() => {
-      const response = localStorage.getItem('keycloak');
-      if (response) {
-        const parsedResponse = JSON.parse(response);
-        const decodedAccessToken: any = jwtDecode(parsedResponse.access_token);
-        const decodedRefreshToken: any = jwtDecode(parsedResponse.refresh_token);
-        const currentTime = Math.floor(Date.now() / 1000);
-        if (currentTime >= decodedAccessToken.exp) {
-          this.keycloakService.refreshToken(parsedResponse.refresh_token).subscribe({
-            next: (response) => {
-              localStorage.setItem('keycloak', JSON.stringify(response));
-            },
-            error: (err) => {
-              this.logoutUser()
-            }
-          });
-        }
+//   startTokenCheck(): void {    
+//     this.intervalId = setInterval(() => {
+//       const response = localStorage.getItem('keycloak');
+//       if (response) {
+//         const parsedResponse = JSON.parse(response);
+//         const decodedAccessToken: any = jwtDecode(parsedResponse.access_token);
+//         const decodedRefreshToken: any = jwtDecode(parsedResponse.refresh_token);
+//         const currentTime = Math.floor(Date.now() / 1000);
+//         if (currentTime >= decodedAccessToken.exp) {
+//           this.keycloakService.refreshToken(parsedResponse.refresh_token).subscribe({
+//             next: (response) => {
+//               localStorage.setItem('keycloak', JSON.stringify(response));
+//             },
+//             error: (err) => {
+//               this.logoutUser()
+//             }
+//           });
+//         }
 
-        if (currentTime >= decodedRefreshToken.exp) {
-          this.logoutUser()
-        }
-      }
-    }, this.checkInterval);
-  }
+//         if (currentTime >= decodedRefreshToken.exp) {
+//           this.logoutUser()
+//         }
+//       }
+//     }, this.checkInterval);
+//   }
 
-  logoutUser(): void {
-    const logoutOptions: KeycloakLogoutOptions = {
-      redirectUri: `${window.location.origin}/auth/signin?returnUrl=${encodeURIComponent(window.location.pathname)}`,
-      logoutMethod: 'GET'
-    };
-    this.keycloakService.logout(logoutOptions);
-}
+//   logoutUser(): void {
+//     const logoutOptions: KeycloakLogoutOptions = {
+//       redirectUri: `${window.location.origin}/auth/signin?returnUrl=${encodeURIComponent(window.location.pathname)}`,
+//       logoutMethod: 'GET'
+//     };
+//     this.keycloakService.logout(logoutOptions);
+// }
 
 }

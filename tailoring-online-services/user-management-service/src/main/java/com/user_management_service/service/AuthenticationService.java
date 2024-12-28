@@ -43,12 +43,35 @@ public class AuthenticationService {
     }
 
     public void registerCustomer(@Validated(CreateGroup.class) CreateCustomerDto createCustomerDto, MultipartFile profilePicture) throws IOException, UserAlreadyExistsException, KeycloakException {
+        var customer = customerMapper.toCreateEntity(createCustomerDto);
         if (profilePicture != null && !profilePicture.isEmpty()) {
             if (!isValidImage(profilePicture)) {
                 throw new RegistrationException("Invalid input provided", List.of("Invalid image type. Only JPEG, JPG, PNG, WebP and ICO are allowed."));
             }
+            try {
+                String pictureId = UUID.randomUUID().toString();
+                kafkaProducer.sendProfilePicture(profilePicture, pictureId);
+                logger.info("Profile picture sent successfully with ID {} for user {}", pictureId, customer.getUsername());
+                String profilePictureUrl = null;
+                while (profilePictureUrl == null) {
+                    try {
+                        profilePictureUrl = kafkaConsumer.getProfilePictureUrl(pictureId);
+                    } catch (Exception e) {
+                        logger.error("Error while consuming profile picture URL: {}", e.getMessage());
+                        throw new RegistrationException(e.getMessage(), Collections.singletonList("Error while consuming profile picture URL for user " + customer.getUsername()));
+                    }
+                }
+                if (profilePictureUrl != null) {
+                    customer.setProfilePicture(profilePictureUrl);
+                    logger.info("Profile picture URL retrieved successfully with ID {} for user {}", pictureId, customer.getUsername());
+                } else {
+                    throw new RegistrationException("Profile picture URL is null", Collections.singletonList("Profile picture URL is null for ID " + pictureId + " and user " + customer.getUsername()));
+                }
+            } catch (Exception e) {
+                logger.error("Attempt to handle profile picture resulted in an exception: {}", e.getMessage());
+                throw new RegistrationException(e.getMessage(), Collections.singletonList("Failed to handle profile picture for user " + customer.getUsername()));
+            }
         }
-        var customer = customerMapper.toCreateEntity(createCustomerDto);
         logger.info("Starting to add user: {}", customer.getUsername());
         UsersResource usersResource = keycloakConfig.getRealmResource().users();
         List<UserRepresentation> existingUsersByUsername = usersResource.search(customer.getUsername(), true);
@@ -102,45 +125,13 @@ public class AuthenticationService {
             String responseBody = response.readEntity(String.class);
             if (response.getStatus() == Response.Status.CREATED.getStatusCode()) {
                 logger.info("User {} created successfully in Keycloak", customer.getUsername());
-                if (profilePicture != null && !profilePicture.isEmpty()) {
-                    try {
-                        String pictureId = UUID.randomUUID().toString();
-                        kafkaProducer.sendProfilePicture(profilePicture, pictureId);
-                        logger.info("Profile picture sent successfully with ID {} for user {}", pictureId, customer.getUsername());
-                        long startTime = System.currentTimeMillis();
-                        long maxWaitTimeMs = 10000;
-                        long pollIntervalMs = 500;
-                        String profilePictureUrl = null;
-                        try {
-                            while ((System.currentTimeMillis() - startTime) < maxWaitTimeMs) {
-                                profilePictureUrl = kafkaConsumer.getProfilePictureUrl(pictureId);
-                                if (profilePictureUrl != null) {
-                                    break;
-                                }
-                                Thread.sleep(pollIntervalMs);
-                            }
-                        } catch (InterruptedException e) {
-                            logger.error("Thread interruption while waiting for profile picture URL: {}", e.getMessage());
-                            throw new RegistrationException(e.getMessage(), Collections.singletonList("Thread interruption while waiting for profile picture URL for user " + customer.getUsername()));
-                        } catch (Exception e) {
-                            logger.error("Error while consuming profile picture URL: {}", e.getMessage());
-                            throw new RegistrationException(e.getMessage(), Collections.singletonList("Error while consuming profile picture URL for user " + customer.getUsername()));
-                        }
-                        if (profilePictureUrl != null) {
-                            customer.setProfilePicture(profilePictureUrl);
-                            UserRepresentation updatedUser = usersResource.search(customer.getUsername()).get(0);
-                            Map<String, List<String>> updatedAttributes = updatedUser.getAttributes();
-                            updatedAttributes.put("profilePicture", Collections.singletonList(profilePictureUrl));
-                            updatedUser.setAttributes(updatedAttributes);
-                            usersResource.get(updatedUser.getId()).update(updatedUser);
-                            logger.info("Profile picture URL retrieved successfully with ID {} for user {}", pictureId, customer.getUsername());
-                        } else {
-                            throw new RegistrationException("Profile picture URL is null", Collections.singletonList("Profile picture URL is null for ID " + pictureId + " and user " + customer.getUsername()));
-                        }
-                    } catch (Exception e) {
-                        logger.error("Attempt to handle profile picture resulted in an exception: {}", e.getMessage());
-                        throw new RegistrationException(e.getMessage(), Collections.singletonList("Failed to handle profile picture for user " + customer.getUsername()));
-                    }
+                try {
+                    String emailConfirmationId = UUID.randomUUID().toString();
+                    kafkaProducer.sendEmailConfirmation(customer.getEmail(), emailConfirmationId);
+                    logger.info("Email confirmation sent successfully with ID {} for user {}", emailConfirmationId, customer.getUsername());
+                } catch (Exception e) {
+                    logger.error("Error while sending email confirmation: {}", e.getMessage());
+                    throw new RegistrationException(e.getMessage(), Collections.singletonList("Error while sending email confirmation for user " + customer.getUsername()));
                 }
             } else {
                 List<String> details = List.of(

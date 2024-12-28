@@ -16,7 +16,7 @@ public class OtpService {
 
     public OtpService() {
         this.otpCache = Caffeine.newBuilder()
-                .expireAfterWrite(1, TimeUnit.MINUTES)
+                .expireAfterWrite(10, TimeUnit.MINUTES)
                 .build();
     }
 

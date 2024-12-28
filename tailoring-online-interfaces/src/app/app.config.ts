@@ -6,7 +6,6 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
-import { KeycloakService } from './core/keycloak/keycloak.service';
 import { KeycloakAngularModule } from 'keycloak-angular';
 import { provideStoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { provideStore } from '@ngrx/store';
@@ -21,18 +20,18 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
-    provideStore<AppState>(),
-    provideEffects(appEffects),
+    // provideStore<AppState>(),
+    // provideEffects(appEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: false }),
-    importProvidersFrom(KeycloakAngularModule),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (keycloakService: KeycloakService) => {
-        return () => keycloakService.init();
-      },
-      multi: true,
-      deps: [KeycloakService]
-    },
+    // importProvidersFrom(KeycloakAngularModule),
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: (keycloakService: KeycloakService) => {
+    //     return () => keycloakService.init();
+    //   },
+    //   multi: true,
+    //   deps: [KeycloakService]
+    // },
     {
       provide: ENVIRONMENT_INITIALIZER,
       useFactory: () => () => {

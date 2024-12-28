@@ -3,3 +3,6 @@ spring:
     name: user-management-service
   profiles:
     active: dev
+logging:
+  level:
+    io.github.resilience4j: DEBUG

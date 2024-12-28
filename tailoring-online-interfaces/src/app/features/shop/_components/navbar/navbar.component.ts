@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { KeycloakService } from '../../../../core/keycloak/keycloak.service';
+// import { KeycloakService } from '../../../../core/keycloak/keycloak.service';
 import { ProductService } from '../../../../core/services/product.service';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { KeycloakLogoutOptions } from 'keycloak-js';
@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit {
   filteredResults: any[] = [];
   showSuggestions: boolean = false;
 
-  constructor(private keycloakService: KeycloakService, private productService: ProductService) {}
+  constructor( private productService: ProductService) {}
 
   ngOnInit() {
     this.initializeLanguages();
@@ -108,6 +108,6 @@ export class NavbarComponent implements OnInit {
       redirectUri: `${window.location.origin}/auth/signin?returnUrl=${returnUrl}`,
       logoutMethod: 'GET',
     };
-    this.keycloakService.logout(logoutOptions);
+    // this.keycloakService.logout(logoutOptions);
   }
 }

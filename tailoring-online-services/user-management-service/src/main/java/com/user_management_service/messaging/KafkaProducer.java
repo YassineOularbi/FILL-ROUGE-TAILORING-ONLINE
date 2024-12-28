@@ -42,6 +42,23 @@ public class KafkaProducer {
         }
     }
 
+    @CircuitBreaker(name = "user-management-service", fallbackMethod = "circuitBreakerFallback")
+    @Retry(name = "user-management-service", fallbackMethod = "retryFallback")
+    public void sendEmailConfirmation(String email, String emailConfirmationId) {
+        final String TOPIC = "notification-email-confirmation-request-topic";
+        try {
+            Message<String> message = MessageBuilder.withPayload(email)
+                    .setHeader("emailConfirmationId", emailConfirmationId)
+                    .build();
+            boolean sentSuccessfully = streamBridge.send(TOPIC, message);
+            if (!sentSuccessfully) {
+                throw new KafkaProducerException("Failed to send the email confirmation to Kafka.", Collections.singletonList("Failed to send the email confirmation with ID " + emailConfirmationId + " to Kafka."));
+            }
+        } catch (Exception e) {
+            throw new KafkaProducerException(e.getMessage(), Collections.singletonList("Failed to send the email confirmation with ID " + emailConfirmationId + " to Kafka."));
+        }
+    }
+
     private void circuitBreakerFallback(MultipartFile profilePicture, String pictureId, Throwable t) {
         throw new KafkaProducerException(t.getMessage(), Collections.singletonList("Circuit breaker opened for service cloudinary for file " + profilePicture.getOriginalFilename() + " with ID " + pictureId + " : " + t.getMessage()));
     }
